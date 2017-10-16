@@ -10,15 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171016032631) do
+ActiveRecord::Schema.define(version: 20171016210834) do
 
   create_table "teenagers", force: :cascade do |t|
-    t.string "lname"
-    t.string "fname"
-    t.text "homeaddress"
-    t.string "email"
-    t.string "phonenum"
-    t.integer "age"
+    t.string "name"
+    t.text "home_address"
+    t.string "home_phone"
+    t.string "cell_phone"
+    t.date "birth_date"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end

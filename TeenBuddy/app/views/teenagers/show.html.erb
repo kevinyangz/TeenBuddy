@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @teenager.name %>
+</p>
+
+<p>
+  <strong>Home address:</strong>
+  <%= @teenager.home_address %>
+</p>
+
+<p>
+  <strong>Home phone:</strong>
+  <%= @teenager.home_phone %>
+</p>
+
+<p>
+  <strong>Cell phone:</strong>
+  <%= @teenager.cell_phone %>
+</p>
+
+<p>
+  <strong>Birth date:</strong>
+  <%= @teenager.birth_date %>
+</p>
+
+<%= link_to 'Edit', edit_teenager_path(@teenager) %> |
+<%= link_to 'Back', teenagers_path %>

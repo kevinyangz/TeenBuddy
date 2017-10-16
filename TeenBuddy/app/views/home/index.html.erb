@@ -1,3 +1,9 @@
 
 <h1 align ="center">Welcome to TeenBuddy</h1>
 <p>a market place to hire local teenagers</p>
+
+<%= link_to("Teenagers",{
+    :controller => 'teenagers',
+    :action => 'index'}) %>
+
+<%= "total teenagers number is  #{@total_teenagers}" %>

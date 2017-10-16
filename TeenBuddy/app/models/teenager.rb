@@ -1,2 +1,2 @@
-class Teenager < ApplicationRecord::Base
+class Teenager < ApplicationRecord
 end
