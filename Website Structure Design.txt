@@ -1,0 +1,104 @@
+General Public
+* about information
+* home page
+    * brief introduction
+    * number of clients & teenager tasks & kind of tasks in an area (GTA)
+* have to register / log in if want to see tasks
+* contact us
+    * feedbacks to website
+    * developers
+    * put Michael Stumm
+* teenagers / clients log in using same page
+    * distinguished by our database
+* teenagers / clients register using same page, but with teenager/client option
+
+Teenagers
+* teenager register option / page
+* teenager register
+    * basic information
+        * email - username
+        * password (little eye to see password)
+        * age
+        * teenager / client option
+    * after registration
+        * let them select their tasks preference
+        * show recommended tasks and all tasks
+        * complete profile in order to apply
+        * legal agreement (optional)
+* check for qualification when applying tasks
+
+Clients
+* clients cannot apply tasks
+* credit card information in order to post tasks 
+* endorsement
+
+Admins
+* do everything
+
+Ratings, Reviews
+* after finishing tasks
+    * ratings / reviews for the clients / teenagers
+    * have top rated clients / teenagers
+* 1-5 stars
+* calculate average ratings for teenagers and clients based on all ratings
+* show average ratings after 10 ratings
+* ratings can be viewed by themselves, but raters are unknown
+* clients can write review / ratings for teenagers
+* can write review / ratings for clients, endorse the other teenagers
+
+Endorsements
+* similar to the like in the facebook
+* other teenagers can post endorsements for the new teenagers
+
+Matching Services
+* clients post tasks and then teenagers looking for tasks online
+* one tasks can be applied by multiple teenagers, clients choose the teenager that he wants to hire
+* clients post tasks
+    * name
+    * location
+    * price
+    * expected duration
+    * time
+    * required abilities
+    * extra description 
+* email communication service between clients and teenagers
+* first teenagers apply the tasks, then clients choose the teenager, and lastly teenager confirms
+* recommended based on the teenagers preference
+* special event notifications (snow)
+
+Billing
+* client deposit
+* teenagers send time sheet
+* clients confirm (7 day ddl)
+* after confirmation we charge the total amount from client
+
+Transactions
+* transaction happens
+* clients have to register their payment methods before posting tasks
+* charge will be applied when the time sheet is accepted 
+* teenagers have their money deposited with our website, they need to request for withdraw in order to get e-payment or cheque
+
+web pages
+* tasks page
+    * can only view after log in
+* log in / sign up button
+    * after log in, lead to profile page
+    * sign up page
+* home page
+    * introduce the TeenBuddy
+* about page
+    * detailed information about the web sites
+    * what we do 
+    * what we offer
+    * what you can do with it
+* terms of service, privacy policy
+    * something gg
+    * we protects your privacy,balabala
+* contact us
+    * our phone, email
+    * twitter, facebook, instagram
+    * site map
+* FAQ
+    * how to use it
+    * how to log in
+    * …
