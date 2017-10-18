@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171016230714) do
+ActiveRecord::Schema.define(version: 20171017191911) do
 
   create_table "clients", force: :cascade do |t|
     t.string "fname"
@@ -20,6 +20,15 @@ ActiveRecord::Schema.define(version: 20171016230714) do
     t.string "cell_phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.text "title"
+    t.integer "client_id"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_posts_on_client_id"
   end
 
   create_table "teenagers", force: :cascade do |t|
