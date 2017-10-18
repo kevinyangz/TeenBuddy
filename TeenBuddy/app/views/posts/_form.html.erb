@@ -17,8 +17,8 @@
   </div>
 
   <div class="field">
-    <%= form.label :client_id %>
-    <%= form.text_field :client_id, id: :post_client_id %>
+    <%= form.label :client %>
+    <%= collection_select(:post, :client_id, Client.all, :id, :fname) %>
   </div>
 
   <div class="field">
