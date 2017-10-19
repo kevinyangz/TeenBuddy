@@ -1,7 +1,8 @@
-# CSC444
-# This is the project for csc444
-# We are going to design a teenager hob service website.
-# this is just a test
+﻿# CSC444
+# This is the project for CSC444 Software Engineering I.
+# We are going to design a teenager web service website.
+# This project is coded in Ruby.
+#test test
 Group Members
 Ze Yang        kevinze.yang@mail.utoronto.ca
 Chengchen Yang alphonse.yang@mail.utoronto.ca
