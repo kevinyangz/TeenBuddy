@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   resources :posts
   resources :clients
   resources :teenagers
+  resources :services
 
   root 'posts#index'
   get  'home/index'
