@@ -74,7 +74,7 @@ class TeenagersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def teenager_params
       params.require(:teenager).permit(:fname,:lname, :home_address, 
-         :cell_phone, :birth_date,:email_address,  ,:email_address,:postal_code 
+         :cell_phone, :birth_date,:postal_code 
          )
     end
 end

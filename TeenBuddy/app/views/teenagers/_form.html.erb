@@ -11,10 +11,6 @@
         </div>
     <% end %>
 
-    <div class="field">
-      <%= form.label :email_address %>
-      <%= form.email_field :email_address, autofocus: true, id: :teenager_email_address %>
-    </div>
 
     <div class="field">
       <%= form.label :firstname %>
@@ -36,9 +32,15 @@
       <%= form.text_area :postal_code, id: :teenager_postal_code %>
     </div>
 
+  
     <div class="field">
       <%= form.label :cell_phone %>
       <%= form.telephone_field :cell_phone, id: :teenager_cell_phone %>
+    </div>
+
+    <div class="field">
+      <%= form.label :birth_date %>
+      <%= form.date_field :birth_date, id: :teenager_birth_date %>
     </div>
 
 
