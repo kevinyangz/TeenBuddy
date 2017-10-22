@@ -1,3 +1,7 @@
+# This class is being invoked after user successfully register using Email and password
+# Enter Detail information.
+# 
+
 class TeenagersController < ApplicationController
   before_action :set_teenager, only: [:show, :edit, :update, :destroy]
 
@@ -22,7 +26,7 @@ class TeenagersController < ApplicationController
   end
 
   # POST /teenagers
-  # POST /teenagers.json
+  # 
   def create
     @teenager = Teenager.new(teenager_params)
 
@@ -69,6 +73,8 @@ class TeenagersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def teenager_params
-      params.require(:teenager).permit(:fname,:lname, :home_address, :home_phone, :cell_phone, :birth_date)
+      params.require(:teenager).permit(:fname,:lname, :home_address, 
+         :cell_phone, :birth_date,:email_address, :age ,:email_address,:postal_code 
+         )
     end
 end
