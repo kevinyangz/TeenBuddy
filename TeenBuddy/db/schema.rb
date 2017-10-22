@@ -34,6 +34,17 @@ ActiveRecord::Schema.define(version: 20171022030740) do
     t.index ["client_id"], name: "index_posts_on_client_id"
   end
 
+  create_table "services", force: :cascade do |t|
+    t.integer "client_id"
+    t.integer "teenager_id"
+    t.integer "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["client_id"], name: "index_services_on_client_id"
+    t.index ["post_id"], name: "index_services_on_post_id"
+    t.index ["teenager_id"], name: "index_services_on_teenager_id"
+  end
+
   create_table "teenagers", force: :cascade do |t|
     t.text "home_address"
     t.string "home_phone"
