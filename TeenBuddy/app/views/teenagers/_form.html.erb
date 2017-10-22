@@ -12,6 +12,11 @@
     <% end %>
 
     <div class="field">
+      <%= form.label :email_address %>
+      <%= form.email_field :email_address, autofocus: true, id: :teenager_email_address %>
+    </div>
+
+    <div class="field">
       <%= form.label :firstname %>
       <%= form.text_field :fname, id: :teenager_fname %>
     </div>
@@ -27,18 +32,18 @@
     </div>
 
     <div class="field">
-      <%= form.label :home_phone %>
-      <%= form.text_field :home_phone, id: :teenager_home_phone %>
+      <%= form.label :postal_code %>
+      <%= form.text_area :postal_code, id: :teenager_postal_code %>
     </div>
 
     <div class="field">
       <%= form.label :cell_phone %>
-      <%= form.text_field :cell_phone, id: :teenager_cell_phone %>
+      <%= form.telephone_field :cell_phone, id: :teenager_cell_phone %>
     </div>
 
     <div class="field">
-      <%= form.label :birth_date %>
-      <%= form.date_select :birth_date, id: :teenager_birth_date %>
+      <%= form.label :age %>
+      <%= form.date_select :age, id: :teenager_age %>
     </div>
 
     <div class="actions">
