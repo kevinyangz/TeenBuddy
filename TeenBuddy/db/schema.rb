@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171022230437) do
+ActiveRecord::Schema.define(version: 20171023022852) do
 
   create_table "clients", force: :cascade do |t|
     t.string "fname"
@@ -40,6 +40,7 @@ ActiveRecord::Schema.define(version: 20171022230437) do
     t.string "work_address"
     t.string "pay"
     t.integer "number_of_teenager_needed"
+    t.integer "post_status"
     t.index ["client_id"], name: "index_posts_on_client_id"
   end
 
@@ -55,7 +56,6 @@ ActiveRecord::Schema.define(version: 20171022230437) do
   end
 
   create_table "teenagers", force: :cascade do |t|
-    t.text "email_address"
     t.text "home_address"
     t.string "cell_phone"
     t.date "birth_date"
@@ -63,6 +63,7 @@ ActiveRecord::Schema.define(version: 20171022230437) do
     t.datetime "updated_at", null: false
     t.string "fname"
     t.string "lname"
+    t.integer "age"
     t.string "postal_code"
   end
 
