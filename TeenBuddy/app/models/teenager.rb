@@ -10,5 +10,23 @@ class Teenager < ApplicationRecord
   validates :home_address,presence: true
   validates :cell_phone,presence: true
   validates :birth_date, presence:true
+  validate :age_requirement19, on: :create
+  #Age must be Greater than 19.
+  def age_requirement19
+  		if birth_date ==nil
+  			return
+  		elsif (birth_date >Date.today)
+  			 errors.add(:birth_date, "Invaild Date,")
+  		end	
+  		now = Time.now.utc.to_date
+ 		 age=now.year - birth_date.year 
+ 		 - ((now.month > birth_date.month ||
+ 		 	(now.month == birth_date.month && 
+ 		 		now.day >= birth_date.day)) ? 0 : 1)
+  		if age>19
+  			errors.add(:birth_date, "shoud less than 19")
+  		end
+  end
+
   #
 end

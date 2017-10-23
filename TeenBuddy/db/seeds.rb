@@ -12,4 +12,14 @@ many_clients = [{fname:"Yun", lname: "Ma", home_address: "123 Bay street", home_
                 {fname:"Jiacheng", lname: "Li", home_address: "523 Bay street", home_phone: "6475234567", cell_phone: "6472234567"}]
 many_clients.each do |c|
   Client.create(c)
+ end
+
+
+many_teenagers= [{fname:"Ian",lname:"JAMEs",home_address:"123 Yonge Street",postal_code:"M5G 2R2",birth_date:"#{Date.new(2000,02,03)}",cell_phone:"6478801214"},
+				 {fname:"Ian1",lname:"JAMES",home_address:"666 Yonge Street",postal_code:"M5G 2R2",birth_date:"#{Date.new(1999,02,03)}",cell_phone:"6478801214"},
+				 {fname:"Ian2",lname:"JAMES",home_address:"1232 Yonge Stree",postal_code:"M5G 2R2",birth_date:"#{Date.new(2003,02,03)}",cell_phone:"6478801214"},
+				 {fname:"Ian3",lname:"JAMES",home_address:"123 Yonge Stree",postal_code:"M5G 2R2",birth_date:"#{Date.new(2012,02,03)}",cell_phone:"6478801214"}
+]
+many_teenagers.each do |c|
+  Teenager.create(c)
 end
