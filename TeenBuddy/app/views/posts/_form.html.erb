@@ -27,6 +27,11 @@
   </div>
 
   <div class="field">
+    <%= form.label :service %>
+    <%= collection_select(:post, :service_id, Service.all, :id, :title) %>
+  </div>
+
+  <div class="field">
     <%= form.label :work_address %>
     <%= form.text_area :work_address, id: :post_work_address %>
   </div>
