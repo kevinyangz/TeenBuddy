@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171024172539) do
+ActiveRecord::Schema.define(version: 20171025203720) do
 
   create_table "clients", force: :cascade do |t|
     t.string "fname"
@@ -20,6 +20,8 @@ ActiveRecord::Schema.define(version: 20171024172539) do
     t.string "cell_phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.index ["user_id"], name: "index_clients_on_user_id"
   end
 
   create_table "job_applications", force: :cascade do |t|
@@ -58,6 +60,7 @@ ActiveRecord::Schema.define(version: 20171024172539) do
   end
 
   create_table "teenagers", force: :cascade do |t|
+    t.text "email_address"
     t.text "home_address"
     t.string "cell_phone"
     t.date "birth_date"
@@ -66,6 +69,7 @@ ActiveRecord::Schema.define(version: 20171024172539) do
     t.string "fname"
     t.string "lname"
     t.integer "age"
+    t.text "user_name"
     t.string "postal_code"
   end
 
@@ -82,6 +86,7 @@ ActiveRecord::Schema.define(version: 20171024172539) do
     t.string "last_sign_in_ip"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "role"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
