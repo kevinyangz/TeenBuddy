@@ -29,6 +29,8 @@ class TeenagersController < ApplicationController
   # 
   def create
     @teenager = Teenager.new(teenager_params)
+    @teenager.user_id = current_user.id
+
 
     respond_to do |format|
       if @teenager.save
