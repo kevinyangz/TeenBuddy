@@ -21,14 +21,6 @@
         <td><%= link_to 'Show', post %></td>
         <td><%= link_to 'Edit', edit_post_path(post) %></td>
         <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-        <div class="field">
-          <%= post.label :teeager %>
-          <%= collection_select(:post, :teenager_id, Teenager.all, :id, :fname) %>
-        </div>
-        
-        <div class="actions">
-          <%= post.submit %>
-        </div>
       </tr>
     <% end %>
   </tbody>
@@ -37,3 +29,4 @@
 <br>
 
 <%= link_to 'New Post', new_post_path %>
+<%= link_to 'Home Page', home_index_path %>

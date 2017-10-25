@@ -17,13 +17,33 @@
   </div>
 
   <div class="field">
+    <%= form.label :description %>
+    <%= form.text_area :description, id: :post_description %>
+  </div>
+
+  <div class="field">
     <%= form.label :client %>
     <%= collection_select(:post, :client_id, Client.all, :id, :fname) %>
   </div>
 
   <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description, id: :post_description %>
+    <%= form.label :service %>
+    <%= collection_select(:post, :service_id, Service.all, :id, :title) %>
+  </div>
+
+  <div class="field">
+    <%= form.label :work_address %>
+    <%= form.text_area :work_address, id: :post_work_address %>
+  </div>
+
+  <div class="field">
+    <%= form.label :pay %>
+    <%= form.text_area :pay, id: :post_pay %>
+  </div>
+
+  <div class="field">
+    <%= form.label :number_of_teenager_needed %>
+    <%= form.text_area :number_of_teenager_needed, id: :post_number_of_teenager_needed %>
   </div>
 
   <div class="actions">
