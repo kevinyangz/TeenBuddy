@@ -12,7 +12,7 @@ class HomeController < ApplicationController
         when 'teenager'
           redirect_to new_teenager_path if current_user.teenager == nil
         when 'client'
-          redirect_to new_client_path if current_user.client?  == nil
+          redirect_to new_client_path if current_user.client  == nil
         else
           redirect_to new_teenager_path
       end
