@@ -1,6 +1,7 @@
 class Teenager < ApplicationRecord
   has_many :services
   has_many :JobApplications
+  belongs_to :user
   
   #Validate Canadian Postal Code. Need to use gem if more countries need to be checked.
   canadian_postal_code = /\A[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}\z/
