@@ -9,6 +9,10 @@
   </head>
 
   <body>
+  <%= link_to 'Home Page', home_index_path %>
+  <div align = 'right'>
+    <%= current_user.email %>
+  </div>
     <%= yield %>
   </body>
 </html>
