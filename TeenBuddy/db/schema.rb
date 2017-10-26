@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171025232123) do
+ActiveRecord::Schema.define(version: 20171026211703) do
 
   create_table "clients", force: :cascade do |t|
     t.string "fname"
@@ -60,7 +60,6 @@ ActiveRecord::Schema.define(version: 20171025232123) do
   end
 
   create_table "teenagers", force: :cascade do |t|
-    t.text "email_address"
     t.text "home_address"
     t.string "cell_phone"
     t.date "birth_date"
@@ -69,7 +68,6 @@ ActiveRecord::Schema.define(version: 20171025232123) do
     t.string "fname"
     t.string "lname"
     t.integer "age"
-    t.text "user_name"
     t.string "postal_code"
     t.integer "user_id"
     t.index ["user_id"], name: "index_teenagers_on_user_id"
