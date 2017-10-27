@@ -20,16 +20,13 @@
     <%= form.label :description %>
     <%= form.text_area :description, id: :post_description %>
   </div>
-
-  <div class="field">
-    <%= form.label :client %>
-    <%= collection_select(:post, :client_id, Client.all, :id, :fname) %>
-  </div>
-
+  
+<!--
   <div class="field">
     <%= form.label :service %>
     <%= collection_select(:post, :service_id, Service.all, :id, :title) %>
   </div>
+-->
 
   <div class="field">
     <%= form.label :work_address %>

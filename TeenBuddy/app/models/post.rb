@@ -1,11 +1,11 @@
 class Post < ApplicationRecord
   # database tables associations
   belongs_to :client
-  belongs_to :service
+  #belongs_to :service
   has_many :JobApplications
   
   # action call backs
-  after_create :initialize_post_status
+  after_initialize :initialize_post_status
 
   # getter and setter
   attr_accessor :post_status

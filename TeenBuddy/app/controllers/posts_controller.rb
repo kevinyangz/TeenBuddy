@@ -16,7 +16,16 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
-    @clients = Client.all
+    @client = Client.new
+
+    respond_to do |format|
+      if current_user.client
+        @client = current_user.client
+      else
+        #error message if not a client
+        format.html { redirect_to posts_path, notice: 'Teenager cannot create new post.'}
+      end
+    end
   end
 
   # GET /posts/1/edit
@@ -28,6 +37,7 @@ class PostsController < ApplicationController
   # POST /posts.json
   def create
     @post = Post.new(post_params)
+    @post.client_id = current_user.client.id
 
     respond_to do |format|
       if @post.save
@@ -72,6 +82,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:client_id, :service_id, :title, :description, :work_address, :pay, :number_of_teenager_needed)
+      params.require(:post).permit(:title, :description, :work_address, :pay, :number_of_teenager_needed)
     end
 end
