@@ -23,12 +23,12 @@
 
   <div class="field">
     <%= form.label :service_category %>
-    <%= form.collection_select :service_category_id, ServiceCategory.order(:title), :id, :title, prompt:true %>
+    <%= collection_select(:post, :service_category_id, ServiceCategory.order(:title), :id, :title, prompt:true) %>
   </div>
 
   <div class="field">
     <%= form.label :service_type %>
-    <%= form.grouped_collection_select :service_type_id, ServiceCategory.order(:title), :service_types, :title, :id, :title, prompt:true %>
+    <%= grouped_collection_select(:post, :service_type_id, ServiceCategory.order(:title), :service_types, :title, :id, :title, prompt:true) %>
   </div>
 
   <div class="field">

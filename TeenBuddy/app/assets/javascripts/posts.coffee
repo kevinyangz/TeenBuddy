@@ -3,13 +3,11 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 jQuery ->
+  $('#post_service_type_id').parent().hide()
   types = $('#post_service_type_id').html()
-  $('#postservice_category_id').change -> 
-    console.log("gggggg")
+  $('#post_service_category_id').change -> 
     category = $('#post_service_category_id :selected').text()
-    console.log(category)
     options = $(types).filter("optgroup[label='#{category}']").html()
     if options
-      $('#service_type_id').html(options)
-    else
-      $('#service_type_id').empty()
+      $('#post_service_type_id').html(options)
+      $('#post_service_type_id').parent().show()
