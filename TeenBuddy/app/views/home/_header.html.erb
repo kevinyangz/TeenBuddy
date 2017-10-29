@@ -13,15 +13,32 @@
         <a class="logo" href="index.html"><img src="../assets/img/logo.png" alt="logo"></a>
         <a class="logo-alt" href="index.html"><img src="../assets/img/logo-alt.png" alt="logo-alt"></a>
       </div>
-
     </div>
     <!-- END Logo -->
+    <% if current_user %>
+        <div class="pull-right">
 
+          <div class="dropdown user-account">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+              <img src="assets/img/logo-envato.png" alt="avatar">
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li><a href="user-login.html">Login</a></li>
+              <li><a href="user-register.html">Register</a></li>
+              <li><a href="user-forget-pass.html">Forget pass</a></li>
+              <li><%= link_to('Logout', destroy_user_session_path, method: :delete) %></li>
+            </ul>
+          </div>
+        </div>
+
+    <% else %>
     <!-- User account -->
     <div class="pull-right user-login">
       <a class="btn btn-sm btn-primary" href="user-login.html">Login</a> or <a href="user-register.html">register</a>
     </div>
     <!-- END User account -->
+    <%end%>
 
     <!-- Navigation menu -->
     <ul class="nav-menu">
