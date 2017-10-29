@@ -3,6 +3,8 @@ class Post < ApplicationRecord
   belongs_to :client
   #belongs_to :service
   has_many :JobApplications
+  belongs_to :service_category
+  belongs_to :service_type
   
   # action call backs
   after_initialize :initialize_post_status

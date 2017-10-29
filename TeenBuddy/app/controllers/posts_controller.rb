@@ -18,13 +18,10 @@ class PostsController < ApplicationController
     @post = Post.new
     @client = Client.new
 
-    respond_to do |format|
-      if current_user.client
-        @client = current_user.client
-      else
-        #error message if not a client
-        format.html { redirect_to posts_path, notice: 'Teenager cannot create new post.'}
-      end
+    if current_user.client
+      @client = current_user.client
+    else
+      #error message if not a client
     end
   end
 
@@ -48,6 +45,7 @@ class PostsController < ApplicationController
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
+    puts @post.service_category_id
   end
 
   # PATCH/PUT /posts/1
@@ -82,6 +80,6 @@ class PostsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
-      params.require(:post).permit(:title, :description, :work_address, :pay, :number_of_teenager_needed)
+      params.require(:post).permit(:title, :description, :work_address, :pay, :number_of_teenager_needed, :service_category_id, :service_type_id)
     end
 end

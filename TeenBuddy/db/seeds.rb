@@ -23,3 +23,13 @@ many_teenagers= [{fname:"Ian",lname:"JAMEs",home_address:"123 Yonge Street",post
 many_teenagers.each do |c|
   Teenager.create(c)
 end
+
+ServiceCategory.delete_all
+ServiceType.delete_all
+
+many_service_categories = [{title: "babysitting"}, {title: "yard working"}]
+many_service_categories.each do |sc|
+	ServiceCategory.create!(sc)
+end
+
+ServiceType.create!(title: "babysitting", service_category_id: ServiceCategory.find_by(title: "babysitting").id)
