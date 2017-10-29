@@ -27,9 +27,31 @@ end
 ServiceCategory.delete_all
 ServiceType.delete_all
 
-many_service_categories = [{title: "babysitting"}, {title: "yard working"}]
+many_service_categories = [ {title: "Babysitting"}, 
+							{title: "Yard Work"},
+							{title: "Snow Shoveling"},
+							{title: "Furniture Moving"},
+							{title: "Simple Cleaning Tasks"},
+							{title: "Vacation Services"},
+							{title: "Dog Walking"},
+							{title: "Computer Help"},
+							{title: "Tutoring"},
+							{title: "Reading"} ]
 many_service_categories.each do |sc|
 	ServiceCategory.create!(sc)
 end
 
-ServiceType.create!(title: "babysitting", service_category_id: ServiceCategory.find_by(title: "babysitting").id)
+ServiceType.create!(title: "Babysitting", service_category_id: ServiceCategory.find_by(title: "Babysitting").id)
+ServiceType.create!(title: "Lawn Mowing", service_category_id: ServiceCategory.find_by(title: "Yard Work").id)
+ServiceType.create!(title: "Leaf Raking", service_category_id: ServiceCategory.find_by(title: "Yard Work").id)
+ServiceType.create!(title: "Weeding", service_category_id: ServiceCategory.find_by(title: "Yard Work").id)
+ServiceType.create!(title: "Snow Shoveling", service_category_id: ServiceCategory.find_by(title: "Snow Shoveling").id)
+ServiceType.create!(title: "Furniture Moving", service_category_id: ServiceCategory.find_by(title: "Furniture Moving").id)
+ServiceType.create!(title: "Simple Cleaning Tasks", service_category_id: ServiceCategory.find_by(title: "Simple Cleaning Tasks").id)
+ServiceType.create!(title: "Mail Pickup", service_category_id: ServiceCategory.find_by(title: "Vacation Services").id)
+ServiceType.create!(title: "Pet Feeding", service_category_id: ServiceCategory.find_by(title: "Vacation Services").id)
+ServiceType.create!(title: "Lawn Watering", service_category_id: ServiceCategory.find_by(title: "Vacation Services").id)
+ServiceType.create!(title: "Dog Walking", service_category_id: ServiceCategory.find_by(title: "Dog Walking").id)
+ServiceType.create!(title: "Computer Help", service_category_id: ServiceCategory.find_by(title: "Computer Help").id)
+ServiceType.create!(title: "Tutoring", service_category_id: ServiceCategory.find_by(title: "Tutoring").id)
+ServiceType.create!(title: "Reading", service_category_id: ServiceCategory.find_by(title: "Reading").id)
