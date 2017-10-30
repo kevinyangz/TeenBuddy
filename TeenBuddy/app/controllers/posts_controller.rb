@@ -4,7 +4,12 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    @posts = Post.all
+    if current_user.client
+      @posts = Post.where(client_id: current_user.client.id)
+      @state = 'client_posts'
+    else
+      @posts = Post.all
+    end
   end
 
   # GET /posts/1
@@ -16,7 +21,6 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
-    @client = Client.new
 
     if current_user.client
       @client = current_user.client

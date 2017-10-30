@@ -10,8 +10,8 @@
       <a class="navbar-toggle" href="#" data-toggle="offcanvas"><i class="ti-menu"></i></a>
 
       <div class="logo-wrapper">
-        <a class="logo" href="index.html"><img src="../assets/img/logo.png" alt="logo"></a>
-        <a class="logo-alt" href="index.html"><img src="../assets/img/logo-alt.png" alt="logo-alt"></a>
+        <a class="logo" href="index.html"><img src="/assets/img/logo.png" alt="logo"></a>
+        <a class="logo-alt" href="index.html"><img src="/assets/img/logo-alt.png" alt="logo-alt"></a>
       </div>
     </div>
     <!-- END Logo -->
@@ -20,7 +20,7 @@
 
           <div class="dropdown user-account">
             <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-              <img src="assets/img/logo-envato.png" alt="avatar">
+              <img src="/assets/img/logo-envato.png" alt="avatar">
             </a>
 
             <ul class="dropdown-menu dropdown-menu-right">
@@ -32,15 +32,13 @@
           </div>
         </div>
 
-
-
     <!-- Navigation menu -->
     <ul class="nav-menu">
       <li>
         <a href="index.html">Services</a>
         <ul>
-          <li><%= link_to 'Services Posted' ,posts_path %></li>
-          <li><%= link_to 'Post a Service' ,new_post_path %></li>
+          <li><%= link_to 'My Services' , posts_path  %></li>
+          <li><%= link_to 'Post a Service' , new_post_path%></li>
         </ul>
       </li>
       <li>

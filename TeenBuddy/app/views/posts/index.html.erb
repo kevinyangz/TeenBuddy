@@ -1,40 +1,6 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Posts</h1>
- <%= link_to('Logout', destroy_user_session_path, method: :delete) %> 
-<table>
-  <thead>
-    <tr>
-      <th>Title</th>
-      <th>Client</th>
-      <th>Description</th>
-      <th>Work Address</th>
-      <th>Pay</th>
-      <th>Teenager Needed</th>
-      <th>Post Status</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<%if @state == 'client_posts' %>
 
-  <tbody>
-    <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.title %></td>
-        <td><%= "#{post.client.fname} #{post.client.lname}" %></td>
-        <td><%= post.description %></td>
-        <td><%= post.work_address %></td>
-        <td><a>$</a><%= post.pay %></td>
-        <td><%= post.number_of_teenager_needed %></td>
-        <td><%= post.post_status %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<%= render 'client_posts' %>
 
-<br>
-
-<%= link_to 'New Post', new_post_path %>
-<%= link_to 'Home Page', home_index_path %>
+<% end %>
