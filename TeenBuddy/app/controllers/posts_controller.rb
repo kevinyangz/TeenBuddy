@@ -9,6 +9,7 @@ class PostsController < ApplicationController
       @state = 'client_posts'
     else
       @posts = Post.all
+      @state = 'all'
     end
   end
 
@@ -71,7 +72,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_url, notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to posts_path, notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

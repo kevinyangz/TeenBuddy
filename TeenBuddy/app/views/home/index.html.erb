@@ -3,9 +3,11 @@
 
 
 <% if current_user == nil %>
-    <%= render "home/header" %>
-<% else %>
-    <%= render "home/header_client" %>
+    <%= render 'home/header' %>
+<% elsif current_user.client %>
+    <%= render 'home/header_client' %>
+<% elsif current_user.teenager %>
+    <%= render 'home/header_teenager' %>
 <% end %>
 
 <header class="site-header size-lg text-center" style="background-image: url(/assets/img/bg-banner1.jpg)">

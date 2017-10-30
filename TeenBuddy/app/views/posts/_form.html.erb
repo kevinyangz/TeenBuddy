@@ -29,29 +29,38 @@
           </div>
 
           <div class="form-group col-xs-12 col-sm-12">
-            <%= form.text_area :description, placeholder: 'Some description.', class: 'form-control input-lg' %>
+            <%= form.text_area :description, placeholder: 'Detailed description about your service request.', class: 'form-control input-lg' %>
           </div>
 
           <div class="form-group col-xs-12 col-sm-6">
-            <%= collection_select(:post, :service_category_id, ServiceCategory.order(:title), :id, :title, {prompt: true}, {class: 'selectpicker'}) %>
+            <%= collection_select(:post, :service_category_id, ServiceCategory.order(:title), :id, :title, {:prompt => 'Please select service category'}, {class: 'form-control selectpicker'}) %>
           </div>
 
           <div class="form-group col-xs-12 col-sm-6">
-            <%= grouped_collection_select(:post, :service_type_id, ServiceCategory.order(:title), :service_types, :title, :id, :title, {prompt: true}, {class: 'selectpicker'}) %>
+            <%= grouped_collection_select(:post, :service_type_id, ServiceCategory.order(:title), :service_types, :title, :id, :title, {:prompt => 'Please select service type'}, {class: 'form-control selectpicker'}) %>
           </div>
+
           <div class="form-group col-xs-12 col-sm-12">
-            <%= form.text_area :work_address, id: :post_work_address, placeholder: 'Work address', class: 'form-control input-lg' %>
+            <div class="input-group input-group-sm">
+              <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+              <%= form.text_field :work_address, id: :post_work_address, placeholder: 'Work address', class: 'form-control inpu-lg' %>
+            </div>
           </div>
+
           <div class="form-group col-xs-12 col-sm-6">
-
-            <%= form.number_field :pay, id: :post_pay, placeholder: 'Pay', class: 'form-control input-lg' %>
+            <div class="input-group input-group-sm">
+              <span class="input-group-addon"><i class="fa fa-money"></i></span>
+              <%= form.number_field :pay, id: :post_pay, placeholder: 'Pay', class: 'form-control input-lg' %>
+            </div>
           </div>
-
+          
           <div class="form-group col-xs-12 col-sm-6">
-
-            <%= form.number_field :number_of_teenager_needed, id: :post_number_of_teenager_needed, placeholder: 'Number of People', class: 'form-control input-lg' %>
-
+            <div class="input-group input-group-sm">
+              <span class="input-group-addon"><i class="fa fa-male"></i></span>
+              <%= form.number_field :number_of_teenager_needed, id: :post_number_of_teenager_needed, placeholder: 'Number of People', class: 'form-control input-lg' %>
+            </div>
           </div>
+
         </div>
       </div>
     </header>

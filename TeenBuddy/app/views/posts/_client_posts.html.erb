@@ -1,6 +1,4 @@
 
-<%= render 'home/header_client' %>
-
 <header class="page-header bg-img size-lg" style="background-image: url(／assets/img/bg-banner1.jpg)">
   <div class="container no-shadow">
     <h1 class="text-center">Manage jobs</h1>
@@ -53,38 +51,34 @@
           <%= link_to 'Post a Service' , new_post_path, class: 'btn btn-primary btn-sm' %>
         </div>
 
-        <% @posts.each do |post| %>
+        <% @posts.order(:updated_at).reverse.each do |post| %>
             <div class="col-xs-12">
               <div class="item-block">
                 <header>
                   <a href="company-detail.html"><img src="assets/img/logo-google.jpg" alt=""></a>
                   <div class="hgroup">
                     <h4><%= post.title %></h4>
-                    <h5><a href="company-detail.html">Google</a></h5>
+                    <h5><%= post.description %></h5>
                   </div>
                   <div class="header-meta">
-                    <span class="location">Menlo park, CA</span>
-                    <time datetime="2016-03-10 20:00">34 min ago</time>
+                    <span class="location"><%= post.work_address %></span>
+                    <time datetime=<%= post.created_at %>>Updated at <%= post.created_at %></time>
                   </div>
                 </header>
 
                 <footer>
-                  <p class="status"><strong>Status:</strong> Pending approval</p>
+                  <p class="status"><strong>Status: </strong><%= post.post_status %></p>
 
                   <div class="action-btn">
-                    <a class="btn btn-xs btn-gray" href="#">Edit</a>
-                    <a class="btn btn-xs btn-danger" href="#">Delete</a>
+                    <%= link_to 'Edit', edit_post_path(post), class: 'btn btn-xs btn-gray'%>
+                    <%= link_to 'Destroy', { action: :destroy, id: post.id }, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger'  %>
                   </div>
                 </footer>
               </div>
             </div>
         <% end %>
-        <!-- Job detail -->
-
-        <!-- END Job detail -->
         
       </div>
     </div>
   </section>
 </main>
-<!-- END Main container -->

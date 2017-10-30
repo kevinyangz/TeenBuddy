@@ -9,5 +9,9 @@ jQuery ->
     category = $('#post_service_category_id :selected').text()
     options = $(types).filter("optgroup[label='#{category}']").html()
     if options
+      #below line changes html but the new html is not rendered, need help
       $('#post_service_type_id').html(options)
+      console.log($('#post_service_type_id').html())
       $('#post_service_type_id').parent().show()
+  $('#post_service_type_id').change -> 
+    console.log("type change")
