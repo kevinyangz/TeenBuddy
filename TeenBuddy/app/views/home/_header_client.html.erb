@@ -15,7 +15,6 @@
       </div>
     </div>
     <!-- END Logo -->
-
         <div class="pull-right">
 
           <div class="dropdown user-account">
@@ -35,46 +34,36 @@
     <!-- Navigation menu -->
     <ul class="nav-menu">
       <li>
-        <%= link_to 'Services' , posts_path%>
+        <%= link_to 'Posts' , posts_path%>
         <ul>
-          <li><%= link_to 'My Services' , posts_path  %></li>
-          <li><%= link_to 'Post a Service' , new_post_path%></li>
+          <li><%= link_to 'View All Posts' , posts_path  %></li>
+          <li><%= link_to 'My Posts' ,  posts_path, {client_id: current_user.client.id}  %></li>
+          <li><%= link_to 'Write a new Post' , new_post_path%></li>
         </ul>
       </li>
       <li>
         <%= link_to 'Teenagers' , teenagers_path%>
-      </li>
-      <li>
-        <a href="#">Resume</a>
         <ul>
-          <li><a href="resume-list.html">Browse resumes</a></li>
-          <li><a href="resume-detail.html">Resume detail</a></li>
-          <li><a href="resume-add.html">Create a resume</a></li>
-          <li><a href="resume-manage.html">Manage resumes</a></li>
+          <li><%= link_to 'View All Teenagers' , teenagers_path  %></li>
+          <li><%= link_to 'Candidates' ,  teenagers_path, {client_id: current_user.client.id}  %></li>
+          <li><%= link_to 'Invitations' , new_post_path, %></li>
         </ul>
       </li>
       <li>
-        <a href="#">Company</a>
-        <ul>
-          <li><a href="company-list.html">Browse companies</a></li>
-          <li><a href="company-detail.html">Company detail</a></li>
-          <li><a href="company-add.html">Create a company</a></li>
-          <li><a href="company-manage.html">Manage companies</a></li>
-        </ul>
+        <a>About </a>
       </li>
       <li>
-        <a href="#">Pages</a>
+        <a>Contact Us </a>
+      </li>
+      <li>
+        <a>My Account</a>
         <ul>
-          <li><a href="page-blog.html">Blog</a></li>
-          <li><a href="page-post.html">Blog-post</a></li>
-          <li><a href="page-about.html">About</a></li>
-          <li><a href="page-contact.html">Contact</a></li>
-          <li><a href="page-faq.html">FAQ</a></li>
-          <li><a href="page-pricing.html">Pricing</a></li>
-          <li><a href="page-typography.html">Typography</a></li>
-          <li><a href="page-ui-elements.html">UI elements</a></li>
+          <li><a>Profile</a></li>
+          <li><a>Messages</a></li>
+          <li><a>Credit</a></li>
         </ul>
       </li>
+
     </ul>
     <!-- END Navigation menu -->
 
