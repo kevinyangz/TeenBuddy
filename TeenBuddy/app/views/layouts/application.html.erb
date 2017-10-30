@@ -27,6 +27,19 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-   <%= yield %>
+
+
+
+  <% if current_page?('/users/sign_up') & current_page?('/users/sign_in')    %>
+    <% if current_user == nil %>
+        <%= render 'home/header' %>
+    <% elsif current_user.client %>
+        <%= render 'home/header_client' %>
+    <% elsif current_user.teenager %>
+        <%= render 'home/header_teenager' %>
+    <% end %>
+<% end %>
+<%= yield %>
+
   <script src="/assets/js/app.min.js"></script>
 </html>

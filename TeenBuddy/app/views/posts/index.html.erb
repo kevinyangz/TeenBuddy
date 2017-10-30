@@ -1,9 +1,3 @@
-<% if current_user.client %>
-    <%= render 'home/header_client' %>
-<% elsif current_user.teenager %>
-    <%= render 'home/header_teenager' %>
-<% end %>
-
 
 <% if @state == 'client_posts' %>
     <%= render 'client_posts' %>
