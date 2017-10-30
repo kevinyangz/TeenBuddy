@@ -1,36 +1,63 @@
-<h2>Sign up</h2>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=5">
+    <meta name="description" content="Post a job position or create your online resume by TheJobs!">
+    <meta name="keywords" content="">
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+    <title>TheJobs - Register</title>
 
-    <div class="form-group col-xs-12 col-sm-6">
-    <div class="field">
-      <%= f.label :role %>
-      <%= f.select(:role, options_for_select(['teenager','client','admin']), {}, class: 'selectpicker') %>
+    <!-- Styles -->
+    <link href="assets/css/app.min.css" rel="stylesheet">
+    <link href="assets/css/custom.css" rel="stylesheet">
 
-    </div>
-    </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+    <!-- Fonts -->
+    <link href='http://fonts.googleapis.com/css?family=Oswald:100,300,400,500,600,800%7COpen+Sans:300,400,500,600,700,800%7CMontserrat:400,700' rel='stylesheet' type='text/css'>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+    <!-- Favicons -->
+    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+    <link rel="icon" href="assets/img/favicon.ico">
+  </head>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
+  <body class="login-page">
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
 
-<%= render "devise/shared/links" %>
+    <main>
+
+      <div class="login-block">
+        <img src="assets/img/logo.png" alt="">
+        <h1>Choose type of your account</h1>
+        <p class="lead text-center">If you are looking for tasks</p>
+          <%= (link_to 'Teenager', new_teenager_path, class: 'btn btn-primary btn-block') %>
+          <p class="lead text-center"></p>
+          <p class="lead text-center">If you want to post tasks</p>
+          <%= (link_to 'Client', new_client_path, class: 'btn btn-primary btn-block') %>
+
+
+          <div class="login-footer">
+            <h6>Or register with</h6>
+            <ul class="social-icons">
+              <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
+          </div>
+
+        </form>
+      </div>
+
+      <div class="login-links">
+        <p class="text-center">Already have an account? <a class="txt-brand" href="user-login.html">Login</a></p>
+      </div>
+
+    </main>
+
+
+    <!-- Scripts -->
+    <script src="assets/js/app.min.js"></script>
+    <script src="assets/js/custom.js"></script>
+
+  </body>
+</html>
