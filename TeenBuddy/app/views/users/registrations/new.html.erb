@@ -3,12 +3,13 @@
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
 
-
+    <div class="form-group col-xs-12 col-sm-6">
     <div class="field">
       <%= f.label :role %>
-      <%= f.select(:role, options_for_select(['teenager','client','admin'])) %>
-    </div>
+      <%= f.select(:role, options_for_select(['teenager','client','admin']), {}, class: 'selectpicker') %>
 
+    </div>
+    </div>
   <div class="field">
     <%= f.label :email %><br />
     <%= f.email_field :email, autofocus: true %>

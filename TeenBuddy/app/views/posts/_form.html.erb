@@ -1,52 +1,73 @@
 <%= form_with(model: post, local: true) do |form| %>
-  <% if post.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
-      <ul>
-      <% post.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
 
-  <div class="field">
-    <%= form.label :title %>
-    <%= form.text_area :title, id: :post_title %>
-  </div>
+    <header class="page-header bg-img size-lg" style="background-image: url(../assets/img/bg-banner1.jpg)">
+      <div class="container page-name">
+        <h1 class="text-center">Post a new service</h1>
+        <p class="lead text-center">Create a new vacancy for your company and put it online.</p>
+      </div>
+      <div class="container">
 
-  <div class="field">
-    <%= form.label :description %>
-    <%= form.text_area :description, id: :post_description %>
-  </div>
 
-  <div class="field">
-    <%= form.label :service_category %>
-    <%= collection_select(:post, :service_category_id, ServiceCategory.order(:title), :id, :title, prompt:true) %>
-  </div>
+        <div class="row">
 
-  <div class="field">
-    <%= form.label :service_type %>
-    <%= grouped_collection_select(:post, :service_type_id, ServiceCategory.order(:title), :service_types, :title, :id, :title, prompt:true) %>
-  </div>
 
-  <div class="field">
-    <%= form.label :work_address %>
-    <%= form.text_area :work_address, id: :post_work_address %>
-  </div>
+          <% if post.errors.any? %>
+              <div id="error_explanation">
+                <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
 
-  <div class="field">
-    <%= form.label :pay %>
-    <%= form.text_area :pay, id: :post_pay %>
-  </div>
+                <ul>
+                  <% post.errors.full_messages.each do |message| %>
+                      <li><%= message %></li>
+                  <% end %>
+                </ul>
+              </div>
+          <% end %>
 
-  <div class="field">
-    <%= form.label :number_of_teenager_needed %>
-    <%= form.text_area :number_of_teenager_needed, id: :post_number_of_teenager_needed %>
-  </div>
+          <div class="form-group col-xs-12 col-sm-12">
+            <%= form.text_field :title, placeholder: 'Post title, e.g. Need help on cleaning garden.', class: 'form-control input-lg' %>
+          </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+          <div class="form-group col-xs-12 col-sm-12">
+            <%= form.text_area :description, placeholder: 'Some description.', class: 'form-control input-lg' %>
+          </div>
+
+          <div class="form-group col-xs-12 col-sm-6">
+            <%= collection_select(:post, :service_category_id, ServiceCategory.order(:title), :id, :title, {prompt: true}, {class: 'selectpicker'}) %>
+          </div>
+
+          <div class="form-group col-xs-12 col-sm-6">
+            <%= grouped_collection_select(:post, :service_type_id, ServiceCategory.order(:title), :service_types, :title, :id, :title, {prompt: true}, {class: 'selectpicker'}) %>
+          </div>
+          <div class="form-group col-xs-12 col-sm-12">
+            <%= form.text_area :work_address, id: :post_work_address, placeholder: 'Work address', class: 'form-control input-lg' %>
+          </div>
+          <div class="form-group col-xs-12 col-sm-6">
+
+            <%= form.number_field :pay, id: :post_pay, placeholder: 'Pay', class: 'form-control input-lg' %>
+          </div>
+
+          <div class="form-group col-xs-12 col-sm-6">
+
+            <%= form.number_field :number_of_teenager_needed, id: :post_number_of_teenager_needed, placeholder: 'Number of People', class: 'form-control input-lg' %>
+
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <section class="bg-alt">
+      <div class="container">
+        <header class="section-header">
+          <span>Are you done?</span>
+          <h2>Submit Job</h2>
+          <p>Please review your information once more and press the below button to put your job online.</p>
+        </header>
+        <div class="actions">
+          <p class="text-center">
+            <%= form.submit 'Submit your Post', class: 'btn btn-success btn-xl btn-round' %>
+          </p>
+        </div>
+      </div>
+    </section>
 <% end %>

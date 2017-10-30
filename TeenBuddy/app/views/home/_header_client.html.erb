@@ -16,20 +16,31 @@
     </div>
     <!-- END Logo -->
 
-    <!-- User account -->
-    <div class="pull-right user-login">
-      <%= link_to('Login', new_user_session_path, class: 'btn btn-sm btn-primary')%> or <%= link_to('Register', new_user_registration_path)%>
-    </div>
-    <!-- END User account -->
+        <div class="pull-right">
+
+          <div class="dropdown user-account">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+              <img src="assets/img/logo-envato.png" alt="avatar">
+            </a>
+
+            <ul class="dropdown-menu dropdown-menu-right">
+              <li><a href="user-login.html">Login</a></li>
+              <li><a href="user-register.html">Register</a></li>
+              <li><a href="user-forget-pass.html">Forget pass</a></li>
+              <li><%= link_to('Logout', destroy_user_session_path, method: :delete) %></li>
+            </ul>
+          </div>
+        </div>
+
 
 
     <!-- Navigation menu -->
     <ul class="nav-menu">
       <li>
-        <a class="active" href="index.html">Home</a>
+        <a href="index.html">Services</a>
         <ul>
-          <li><a class="active" href="index.html">Version 1</a></li>
-          <li><a href="index-2.html">Version 2</a></li>
+          <li><%= link_to 'Services Posted' ,posts_path %></li>
+          <li><%= link_to 'Post a Service' ,new_post_path %></li>
         </ul>
       </li>
       <li>
