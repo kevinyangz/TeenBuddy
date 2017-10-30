@@ -8,39 +8,6 @@
 
 <p id="notice"><%= notice %></p>
 
-
-<table>
-  <thead>
-  <tr>
-    <th>Title</th>
-    <th>Client</th>
-    <th>Description</th>
-    <th>Work Address</th>
-    <th>Pay</th>
-    <th>Teenager Needed</th>
-    <th>Post Status</th>
-    <th colspan="3"></th>
-  </tr>
-  </thead>
-
-  <tbody>
-  <% @posts.each do |post| %>
-      <tr>
-        <td><%= post.title %></td>
-        <td><%= "#{post.client.fname} #{post.client.lname}" %></td>
-        <td><%= post.description %></td>
-        <td><%= post.work_address %></td>
-        <td><a>$</a><%= post.pay %></td>
-        <td><%= post.number_of_teenager_needed %></td>
-        <td><%= post.post_status %></td>
-        <td><%= link_to 'Show', post %></td>
-        <td><%= link_to 'Edit', edit_post_path(post) %></td>
-        <td><%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-  <% end %>
-  </tbody>
-</table>
-
 <main>
   <section class="no-padding-top bg-alt">
     <div class="container">

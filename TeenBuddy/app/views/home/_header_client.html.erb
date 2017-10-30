@@ -35,7 +35,7 @@
     <!-- Navigation menu -->
     <ul class="nav-menu">
       <li>
-        <a href="index.html">Services</a>
+        <%= link_to 'Services' , posts_path%>
         <ul>
           <li><%= link_to 'My Services' , posts_path  %></li>
           <li><%= link_to 'Post a Service' , new_post_path%></li>
