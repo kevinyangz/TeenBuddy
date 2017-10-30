@@ -9,6 +9,7 @@ class PostsController < ApplicationController
       @state = 'client_posts'
     else
       @posts = Post.all
+      @state = 'all'
     end
   end
 
