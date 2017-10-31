@@ -37,7 +37,7 @@
         <%= link_to 'Posts' , posts_path%>
         <ul>
           <li><%= link_to 'View All Posts' , posts_path  %></li>
-          <li><%= link_to 'My Posts' ,  posts_path, {client_id: current_user.client.id}  %></li>
+          <li><%= link_to 'My Posts' ,  posts_path(client_id: current_user.client.id) %></li>
           <li><%= link_to 'Write a new Post' , new_post_path%></li>
         </ul>
       </li>
@@ -45,7 +45,7 @@
         <%= link_to 'Teenagers' , teenagers_path%>
         <ul>
           <li><%= link_to 'View All Teenagers' , teenagers_path  %></li>
-          <li><%= link_to 'Candidates' ,  teenagers_path, {client_id: current_user.client.id}  %></li>
+          <li><%= link_to 'Candidates' ,  teenagers_path(client_id: current_user.client.id) %></li>
           <li><%= link_to 'Invitations' , new_post_path %></li>
         </ul>
       </li>

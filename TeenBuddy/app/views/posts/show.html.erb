@@ -73,8 +73,9 @@
         </ul>
 
         <div class="action-buttons">
-          <a class="btn btn-primary" href="#">Apply with linkedin</a>
-          <a class="btn btn-success" href="job-apply.html">Apply now</a>
+          <% if current_user.teenager %>
+          <%= link_to 'Apply now', new_post_application_path(post_id: @post.id), class: 'btn btn-success' %>
+              <% end %>
         </div>
       </div>
 

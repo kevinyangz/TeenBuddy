@@ -4,8 +4,8 @@ class PostsController < ApplicationController
   # GET /posts
   # GET /posts.json
   def index
-    if current_user.client
-      @posts = Post.where(client_id: current_user.client.id)
+    if params[:client_id].presence
+      @posts = Post.where(client_id: params[:client_id])
       @state = 'client_posts'
     else
       @posts = Post.all
