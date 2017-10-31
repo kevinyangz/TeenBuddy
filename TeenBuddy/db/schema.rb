@@ -10,11 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20171031013326) do
-=======
-ActiveRecord::Schema.define(version: 20171031015644) do
->>>>>>> 4456f0f1f421ae5fcdb99b549a0dcb672aedc872
 
   create_table "clients", force: :cascade do |t|
     t.string "fname"
@@ -25,7 +21,6 @@ ActiveRecord::Schema.define(version: 20171031015644) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
-    t.string "description"
     t.index ["user_id"], name: "index_clients_on_user_id"
   end
 
@@ -58,6 +53,7 @@ ActiveRecord::Schema.define(version: 20171031015644) do
     t.integer "number_of_teenager_needed"
     t.integer "post_status"
     t.integer "service_id"
+    t.string "service_title"
     t.integer "service_category_id"
     t.integer "service_type_id"
     t.index ["client_id"], name: "index_posts_on_client_id"
@@ -97,7 +93,6 @@ ActiveRecord::Schema.define(version: 20171031015644) do
   end
 
   create_table "teenagers", force: :cascade do |t|
-    t.text "email_address"
     t.text "home_address"
     t.string "cell_phone"
     t.date "birth_date"
@@ -105,6 +100,7 @@ ActiveRecord::Schema.define(version: 20171031015644) do
     t.datetime "updated_at", null: false
     t.string "fname"
     t.string "lname"
+    t.integer "age"
     t.string "postal_code"
     t.integer "user_id"
     t.index ["user_id"], name: "index_teenagers_on_user_id"
