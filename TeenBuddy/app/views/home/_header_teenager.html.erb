@@ -24,9 +24,7 @@
         </a>
 
         <ul class="dropdown-menu dropdown-menu-right">
-          <li><a href="user-login.html">Login</a></li>
-          <li><a href="user-register.html">Register</a></li>
-          <li><a href="user-forget-pass.html">Forget pass</a></li>
+          <li><%= "#{current_user.teenager.fname} #{current_user.teenager.lname}" %></li>
           <li><%= link_to('Logout', destroy_user_session_path, method: :delete) %></li>
         </ul>
       </div>
