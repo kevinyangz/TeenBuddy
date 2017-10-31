@@ -37,6 +37,7 @@
         <%= link_to 'Posts' , posts_path%>
         <ul>
           <li><%= link_to 'View All Posts' , posts_path  %></li>
+          <li><%= link_to 'Applied Posts' , posts_path  %></li>
           <li><%= link_to 'Enrolled Posts' ,  posts_path, {teenager_id: current_user.teenager.id}  %></li>
         </ul>
       </li>
