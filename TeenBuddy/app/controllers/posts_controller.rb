@@ -22,6 +22,9 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
+    @post_form_header_title = "Post a new service"
+    @post_form_header_description = "Create a new post for yourself and put it online."
+    @post_form_submit_title = "Submit your Post"
 
     if current_user.client
       @client = current_user.client
@@ -33,6 +36,9 @@ class PostsController < ApplicationController
   # GET /posts/1/edit
   def edit
     @post = Post.find(params[:id])
+    @post_form_header_title = "Update your service"
+    @post_form_header_description = "Update your post information."
+    @post_form_submit_title = "Update your Post"
   end
 
   # POST /posts

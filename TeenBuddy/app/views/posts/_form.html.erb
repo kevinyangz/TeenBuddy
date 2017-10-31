@@ -3,8 +3,8 @@
 
     <header class="page-header bg-img size-lg" style="background-image: url(/assets/img/bg-banner1.jpg)">
       <div class="container page-name">
-        <h1 class="text-center">Post a new service</h1>
-        <p class="lead text-center">Create a new vacancy for your company and put it online.</p>
+        <h1 class="text-center"><%= @post_form_header_title %></h1>
+        <p class="lead text-center"><%= @post_form_header_description %></p>
       </div>
       <div class="container">
 
@@ -68,13 +68,12 @@
     <section class="bg-alt">
       <div class="container">
         <header class="section-header">
-          <span>Are you done?</span>
-          <h2>Submit Job</h2>
-          <p>Please review your information once more and press the below button to put your job online.</p>
+          <h1>Are you done?</h1>
+          <p>Please review your information once more and press the below button to put your post online.</p>
         </header>
         <div class="actions">
           <p class="text-center">
-            <%= form.submit 'Submit your Post', class: 'btn btn-success btn-xl btn-round' %>
+            <%= form.submit @post_form_submit_title, class: 'btn btn-success btn-xl btn-round' %>
           </p>
         </div>
       </div>

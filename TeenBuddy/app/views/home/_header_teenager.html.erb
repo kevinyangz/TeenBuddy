@@ -37,9 +37,16 @@
         <%= link_to 'Posts' , posts_path%>
         <ul>
           <li><%= link_to 'View All Posts' , posts_path  %></li>
+          <li><%= link_to 'Enrolled Posts' ,  posts_path, {teenager_id: current_user.teenager.id}  %></li>
         </ul>
       </li>
-      <
+      <li>
+        <%= link_to 'Clients' , posts_path%>
+        <ul>
+          <li><%= link_to 'View All Clients' , posts_path  %></li>
+          <li><%= link_to 'Invitations' ,  posts_path, {teenager_id: current_user.teenager.id}  %></li>
+        </ul>
+      </li>
       <li>
         <a>About </a>
       </li>

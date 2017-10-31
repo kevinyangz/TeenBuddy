@@ -157,43 +157,47 @@
 
       <div class="row">
         <% @teenagers.each do |teenager| %>
-        <!-- Resume detail -->
-        <div class="col-sm-12 col-md-6">
-          <a class="item-block" href="resume-detail.html">
-            <header>
-              <img class="resume-avatar" src="assets/img/avatar-1.jpg" alt="">
-              <div class="hgroup">
-                <h4><%= teenager.fname%></h4>
-                <h5>Java developer</h5>
-              </div>
-            </header>
+            <div class="col-xs-12">
+              <a class="item-block" href="resume-detail.html">
+                <header>
+                  <img class="resume-avatar" src="assets/img/avatar.jpg" alt="">
+                  <div class="hgroup">
+                    <h4><%= teenager.fname %></h4>
+                    <h5>Front-end developer</h5>
+                  </div>
+                </header>
 
-            <div class="item-body">
-              <p>I develop well-designed, accessible, and standards-based web sites and applications. Highly effective communicator and team leader with a proven track record of delivering quality work on time and within budget working as a remote employee.</p>
+                <div class="item-body">
+                  <p>20+ years of experience working on front-end development for major companies. I develop well-designed, accessible, and standards-based web sites and applications. Highly effective communicator and team leader with a proven track record of delivering quality work on time and within budget working as a remote employee. Experience and success in both agency and major corporate environments.</p>
 
-              <div class="tag-list">
-                <span>J2EE</span>
-                <span>J2SE</span>
-                <span>Android</span>
-              </div>
+                  <div class="tag-list">
+                    <span>HTML5</span>
+                    <span>CSS3</span>
+                    <span>Bootstrap</span>
+                    <span>Wordpress</span>
+                  </div>
+                </div>
+
+                <footer>
+                  <ul class="details cols-3">
+                    <li>
+                      <i class="fa fa-map-marker"></i>
+                      <span>Menlo Park, CA</span>
+                    </li>
+
+                    <li>
+                      <i class="fa fa-money"></i>
+                      <span>$55 / hour</span>
+                    </li>
+
+                    <li>
+                      <i class="fa fa-certificate"></i>
+                      <span>Master of Computer Science</span>
+                    </li>
+                  </ul>
+                </footer>
+              </a>
             </div>
-
-            <footer>
-              <ul class="details cols-2">
-                <li>
-                  <i class="fa fa-map-marker"></i>
-                  <span>Fairfield, IA</span>
-                </li>
-
-                <li>
-                  <i class="fa fa-money"></i>
-                  <span>$60 / hour</span>
-                </li>
-              </ul>
-            </footer>
-          </a>
-        </div>
-        <!-- END Resume detail -->
 
         <% end %>
       </div>
