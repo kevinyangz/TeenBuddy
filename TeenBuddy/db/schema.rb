@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 20171031015644) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "clients", force: :cascade do |t|
     t.string "fname"
     t.string "lname"
@@ -20,14 +23,14 @@ ActiveRecord::Schema.define(version: 20171031015644) do
     t.string "cell_phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "user_id"
+    t.bigint "user_id"
     t.string "description"
     t.index ["user_id"], name: "index_clients_on_user_id"
   end
 
   create_table "post_applications", force: :cascade do |t|
-    t.integer "post_id"
-    t.integer "teenager_id"
+    t.bigint "post_id"
+    t.bigint "teenager_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_post_applications_on_post_id"
@@ -35,8 +38,8 @@ ActiveRecord::Schema.define(version: 20171031015644) do
   end
 
   create_table "post_invitations", force: :cascade do |t|
-    t.integer "post_id"
-    t.integer "teenager_id"
+    t.bigint "post_id"
+    t.bigint "teenager_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["post_id"], name: "index_post_invitations_on_post_id"
@@ -45,7 +48,7 @@ ActiveRecord::Schema.define(version: 20171031015644) do
 
   create_table "posts", force: :cascade do |t|
     t.text "title"
-    t.integer "client_id"
+    t.bigint "client_id"
     t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
@@ -53,7 +56,7 @@ ActiveRecord::Schema.define(version: 20171031015644) do
     t.string "pay"
     t.integer "number_of_teenager_needed"
     t.integer "post_status"
-    t.integer "service_id"
+    t.bigint "service_id"
     t.integer "service_category_id"
     t.integer "service_type_id"
     t.index ["client_id"], name: "index_posts_on_client_id"
@@ -75,9 +78,9 @@ ActiveRecord::Schema.define(version: 20171031015644) do
   end
 
   create_table "services", force: :cascade do |t|
-    t.integer "client_id"
-    t.integer "teenager_id"
-    t.integer "post_id"
+    t.bigint "client_id"
+    t.bigint "teenager_id"
+    t.bigint "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["client_id"], name: "index_services_on_client_id"
@@ -102,7 +105,7 @@ ActiveRecord::Schema.define(version: 20171031015644) do
     t.string "fname"
     t.string "lname"
     t.string "postal_code"
-    t.integer "user_id"
+    t.bigint "user_id"
     t.index ["user_id"], name: "index_teenagers_on_user_id"
   end
 
@@ -124,4 +127,12 @@ ActiveRecord::Schema.define(version: 20171031015644) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "post_applications", "posts"
+  add_foreign_key "post_applications", "teenagers"
+  add_foreign_key "post_invitations", "posts"
+  add_foreign_key "post_invitations", "teenagers"
+  add_foreign_key "posts", "clients"
+  add_foreign_key "services", "clients"
+  add_foreign_key "services", "posts"
+  add_foreign_key "services", "teenagers"
 end
