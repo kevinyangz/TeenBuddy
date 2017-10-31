@@ -22,9 +22,9 @@ class PostsController < ApplicationController
   # GET /posts/new
   def new
     @post = Post.new
-    @post_form_header_title = "Post a new service"
+    @post_form_header_title = "Create a New Job Post"
     @post_form_header_description = "Create a new post for yourself and put it online."
-    @post_form_submit_title = "Submit your Post"
+    @post_form_submit_title = "Submit Your Job Post"
 
     if current_user.client
       @client = current_user.client
@@ -36,9 +36,9 @@ class PostsController < ApplicationController
   # GET /posts/1/edit
   def edit
     @post = Post.find(params[:id])
-    @post_form_header_title = "Update your service"
-    @post_form_header_description = "Update your post information."
-    @post_form_submit_title = "Update your Post"
+    @post_form_header_title = "Update Your Job Post"
+    @post_form_header_description = "Update your job post information."
+    @post_form_submit_title = "Update Your Job Post"
   end
 
   # POST /posts
@@ -64,7 +64,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
+        format.html { redirect_to posts_path, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit }

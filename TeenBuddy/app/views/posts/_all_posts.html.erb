@@ -167,7 +167,7 @@
                 </div>
 
                 <footer>
-                  <ul class="details cols-3">
+                  <ul class="details cols-2">
                     <li>
                       <i class="fa fa-map-marker"></i>
                       <span><%= post.work_address %></span>
@@ -175,12 +175,17 @@
 
                     <li>
                       <i class="fa fa-money"></i>
-                      <span><%= post.pay %></span>
+                      <span><%= "$#{post.pay}" %></span>
                     </li>
 
                     <li>
                       <i class="fa fa-certificate"></i>
                       <span><%= post.post_status %></span>
+                    </li>
+
+                    <li>
+                      <i class="fa fa-list-alt"></i>
+                      <span><%= "#{post.service_category.title} - #{post.service_type.title}" %></span>
                     </li>
                   </ul>
                 </footer>
