@@ -1,37 +1,4 @@
-<<<<<<< HEAD
- <body class="login-page">
-    <main>
-      <div class="login-block">
-        <img src="/assets/img/logo.png" alt="">
-        <h1>Choose type of your account</h1>
-        <p class="lead text-center">If you are looking for tasks</p>
-          <%= (link_to 'Teenager', new_teenager_path, class: 'btn btn-primary btn-block') %>
-          <p class="lead text-center"></p>
-          <p class="lead text-center">If you want to post tasks</p>
-          <%= (link_to 'Client', new_client_path, class: 'btn btn-primary btn-block') %>
 
-
-          <div class="login-footer">
-            <h6>Or register with</h6>
-            <ul class="social-icons">
-              <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-              <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-            </ul>
-          </div>
-
-        </form>
-      </div>
-
-      <div class="login-links">
-        <p class="text-center">Already have an account? <a class="txt-brand" href="user-login.html">Login</a></p>
-      </div>
-
-    </main>
-
-  </body>
-
-=======
 <h2>Sign up</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
@@ -68,4 +35,3 @@
 <% end %>
 
 <%= render "devise/shared/links" %>
->>>>>>> parent of aa2c339... add client and teen UI support in sign up page
