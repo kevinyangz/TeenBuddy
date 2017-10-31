@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171031003814) do
+ActiveRecord::Schema.define(version: 20171031013326) do
 
   create_table "clients", force: :cascade do |t|
     t.string "fname"
@@ -22,6 +22,24 @@ ActiveRecord::Schema.define(version: 20171031003814) do
     t.datetime "updated_at", null: false
     t.integer "user_id"
     t.index ["user_id"], name: "index_clients_on_user_id"
+  end
+
+  create_table "post_applications", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "teenager_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_post_applications_on_post_id"
+    t.index ["teenager_id"], name: "index_post_applications_on_teenager_id"
+  end
+
+  create_table "post_invitations", force: :cascade do |t|
+    t.integer "post_id"
+    t.integer "teenager_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_post_invitations_on_post_id"
+    t.index ["teenager_id"], name: "index_post_invitations_on_teenager_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -64,6 +82,13 @@ ActiveRecord::Schema.define(version: 20171031003814) do
     t.index ["client_id"], name: "index_services_on_client_id"
     t.index ["post_id"], name: "index_services_on_post_id"
     t.index ["teenager_id"], name: "index_services_on_teenager_id"
+  end
+
+  create_table "teenager_interests", force: :cascade do |t|
+    t.integer "teenager_id"
+    t.integer "service_category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "teenagers", force: :cascade do |t|
