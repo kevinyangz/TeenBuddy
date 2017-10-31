@@ -66,6 +66,13 @@ ActiveRecord::Schema.define(version: 20171031003814) do
     t.index ["teenager_id"], name: "index_services_on_teenager_id"
   end
 
+  create_table "teenager_interests", force: :cascade do |t|
+    t.integer "teenager_id"
+    t.integer "service_category_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "teenagers", force: :cascade do |t|
     t.text "email_address"
     t.text "home_address"

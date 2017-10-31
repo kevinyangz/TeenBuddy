@@ -40,11 +40,8 @@ class TeenagersController < ApplicationController
       if @teenager.save
     @teenager.service_category_ids.each do |categories|
      teenagernterests = TeenagerInterest.new(:teenager_id => categories, :service_category_id => @teenager.id)
-     if teenagernterests.valid?
        teenagernterests.save
-     else
-       @errors += teenagernterests.errors
-     end
+
     end
         format.html { redirect_to @teenager, notice: 'Teenager was successfully created.' }
         format.json { render :show, status: :created, location: @teenager }
