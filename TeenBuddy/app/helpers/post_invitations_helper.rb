@@ -1,0 +1,2 @@
+module PostInvitationsHelper
+end
