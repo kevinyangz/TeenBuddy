@@ -1,0 +1,2 @@
+module PostApplicationsHelper
+end

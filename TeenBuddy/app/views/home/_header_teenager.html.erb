@@ -31,24 +31,32 @@
         </ul>
       </div>
     </div>
-
-    <!-- Navigation menu -->
+<!-- Navigation menu -->
     <ul class="nav-menu">
       <li>
         <%= link_to 'Posts' , posts_path%>
+        <ul>
+          <li><%= link_to 'View All Posts' , posts_path  %></li>
+        </ul>
+      </li>
+      <
+      <li>
+        <a>About </a>
       </li>
       <li>
-        <a href="index.html">My Account</a>
+        <a>Contact Us </a>
+      </li>
+      <li>
+        <a>My Account</a>
         <ul>
-          <li><%= link_to 'My Services' , posts_path  %></li>
-          <li><%= link_to 'Post a Service' , new_post_path%></li>
+          <li><%= link_to 'Profile', current_user.teenager %></li>
+          <li><a>Messages</a></li>
+          <li><a>Credit</a></li>
         </ul>
       </li>
 
-
     </ul>
     <!-- END Navigation menu -->
-
   </div>
 </nav>
 <!-- END Site header -->

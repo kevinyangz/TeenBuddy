@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Post:</strong>
+  <%= @post_invitation.post %>
+</p>
+
+<p>
+  <strong>Teenager:</strong>
+  <%= @post_invitation.teenager %>
+</p>
+
+<%= link_to 'Edit', edit_post_invitation_path(@post_invitation) %> |
+<%= link_to 'Back', post_invitations_path %>

@@ -1,0 +1,27 @@
+<%= form_with(model: post_application, local: true) do |form| %>
+  <% if post_application.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(post_application.errors.count, "error") %> prohibited this post_application from being saved:</h2>
+
+      <ul>
+      <% post_application.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :post_id %>
+    <%= form.text_field :post_id, id: :post_application_post_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :teenager_id %>
+    <%= form.text_field :teenager_id, id: :post_application_teenager_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

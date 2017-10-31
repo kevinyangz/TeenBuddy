@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :post_invitations
+  resources :post_applications
   devise_for :users, controllers: { registrations: 'users/registrations'}
   resources :posts
   resources :clients
