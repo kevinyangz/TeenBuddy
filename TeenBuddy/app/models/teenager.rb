@@ -1,6 +1,6 @@
 class Teenager < ApplicationRecord
   has_many :services
-  has_many :JobApplications
+  has_many :post_applications
   belongs_to :user
 
   has_many :teenager_interests
