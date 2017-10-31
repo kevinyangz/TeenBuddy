@@ -1,29 +1,3 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Fname:</strong>
-  <%= @client.fname %>
-</p>
-
-<p>
-  <strong>Lname:</strong>
-  <%= @client.lname %>
-</p>
-
-<p>
-  <strong>Home address:</strong>
-  <%= @client.home_address %>
-</p>
-
-<p>
-  <strong>Home phone:</strong>
-  <%= @client.home_phone %>
-</p>
-
-<p>
-  <strong>Cell phone:</strong>
-  <%= @client.cell_phone %>
-</p>
 
 
 <!-- Page header -->
@@ -32,41 +6,33 @@
     <div class="header-detail">
       <img class="logo" src="assets/img/logo-google.jpg" alt="">
       <div class="hgroup">
-        <h1>Google</h1>
+        <h1><%= @client.fname %> <%= @client.lname %></h1>
         <h3>Internet and computer software</h3>
       </div>
       <hr>
-      <p class="lead">Google Inc. is an American multinational technology company specializing in Internet-related services and products. These include online advertising technologies, search, cloud computing, and software. Most of its profits are derived from AdWords, an online advertising service that places advertising near the list of search results.</p>
+      <p class="lead">This client is very lazy. He do not have description of himself yet... </p>
 
       <ul class="details cols-3">
         <li>
           <i class="fa fa-map-marker"></i>
-          <span>Menlo Park, CA</span>
+          <span><%= @client.home_address %></span>
         </li>
 
         <li>
-          <i class="fa fa-globe"></i>
-          <a href="#">Google.com</a>
+          <i class="fa fa-mobile"></i>
+          <span><%= @client.cell_phone %></span>
         </li>
 
-        <li>
-          <i class="fa fa-users"></i>
-          <span>50,000 - 70,000 employer</span>
-        </li>
 
-        <li>
-          <i class="fa fa-birthday-cake"></i>
-          <span>From 1998</span>
-        </li>
 
         <li>
           <i class="fa fa-phone"></i>
-          <span>(+1) 123 456 7890</span>
+          <span><%= @client.home_phone %></span>
         </li>
 
         <li>
           <i class="fa fa-envelope"></i>
-          <a href="#">info@google.com</a>
+          <a href="#"><%= @client.user.email %></a>
         </li>
       </ul>
 
