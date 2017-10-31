@@ -4,11 +4,6 @@ class PostApplicationsController < ApplicationController
   # GET /post_applications
   # GET /post_applications.json
   def index
-    if current_user.client
-
-
-
-    end
     @post_applications = PostApplication.all
   end
 
