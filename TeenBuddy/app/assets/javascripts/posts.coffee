@@ -11,7 +11,7 @@ jQuery ->
     if options
       #below line changes html but the new html is not rendered, need help
       $('#post_service_type_id').html(options)
-      console.log($('#post_service_type_id').html())
+      $('#post_service_type_id').selectpicker('refresh')
       $('#post_service_type_id').parent().show()
-  $('#post_service_type_id').change -> 
-    console.log("type change")
+    else
+      $('#post_service_type_id').parent().hide()
