@@ -29,7 +29,7 @@
   <%= @teenager.birth_date %>
 </p>
 
-<p>
+<!--<p>
 <% TeenagerInterest.all.each do |user| %>
   <%= "ID#{user.id}" %><br>
     <%= "TeenagerID #{user.teenager_id}"%><br>
@@ -39,6 +39,7 @@
  
 <% end %>
 </p>
+<-->
 <%= link_to 'Edit', edit_teenager_path(@teenager) %> |
 <%= link_to 'Back', teenagers_path %>
 
