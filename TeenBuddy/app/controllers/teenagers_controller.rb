@@ -14,6 +14,9 @@ class TeenagersController < ApplicationController
   # GET /teenagers/1
   # GET /teenagers/1.json
   def show
+
+     #TeenagerInterest.find :all 
+    #TeenagerInterest
   end
 
   # GET /teenagers/new
@@ -32,8 +35,17 @@ class TeenagersController < ApplicationController
     @teenager.user_id = current_user.id
 
 
+
     respond_to do |format|
       if @teenager.save
+    @teenager.service_category_ids.each do |categories|
+     teenagernterests = TeenagerInterest.new(:teenager_id => categories, :service_category_id => @teenager.id)
+     if teenagernterests.valid?
+       teenagernterests.save
+     else
+       @errors += teenagernterests.errors
+     end
+    end
         format.html { redirect_to @teenager, notice: 'Teenager was successfully created.' }
         format.json { render :show, status: :created, location: @teenager }
       else
@@ -76,7 +88,7 @@ class TeenagersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def teenager_params
       params.require(:teenager).permit(:fname,:lname, :home_address, 
-         :cell_phone, :birth_date,:postal_code 
+         :cell_phone, :birth_date,:postal_code,service_category_ids: []
          )
     end
 end

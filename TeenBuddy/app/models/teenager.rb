@@ -2,6 +2,10 @@ class Teenager < ApplicationRecord
   has_many :services
   has_many :JobApplications
   belongs_to :user
+
+  has_many :teenager_interests
+  has_many :service_categories, through: :teenager_interests #Not sure about this relationship
+
   
   #Validate Canadian Postal Code. Need to use gem if more countries need to be checked.
   canadian_postal_code = /\A[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}\z/
