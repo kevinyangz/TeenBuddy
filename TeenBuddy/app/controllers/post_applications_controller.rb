@@ -4,6 +4,8 @@ class PostApplicationsController < ApplicationController
   # GET /post_applications
   # GET /post_applications.json
   def index
+
+    
     @post_applications = PostApplication.all
   end
 
