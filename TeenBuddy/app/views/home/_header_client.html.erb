@@ -58,7 +58,7 @@
       <li>
         <a>My Account</a>
         <ul>
-          <li><%= link_to 'Profile', client_path, (id: current_user.client) %></li>
+          <li><%= link_to 'Profile', current_user.client %></li>
           <li><a>Messages</a></li>
           <li><a>Credit</a></li>
         </ul>
