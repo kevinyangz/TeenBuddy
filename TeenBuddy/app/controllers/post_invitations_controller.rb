@@ -15,6 +15,9 @@ class PostInvitationsController < ApplicationController
   # GET /post_invitations/new
   def new
     @post_invitation = PostInvitation.new
+    @post_invitation.post_id=params[:post_id]
+    @post_invitation.teenager_id=params[:teenager_id]
+    @post_invitation.message=params[:message]
   end
 
   # GET /post_invitations/1/edit
@@ -69,6 +72,6 @@ class PostInvitationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_invitation_params
-      params.require(:post_invitation).permit(:post_id, :teenager_id)
+      params.require(:post_invitation).permit(:message, :post_id, :teenager_id)
     end
 end
