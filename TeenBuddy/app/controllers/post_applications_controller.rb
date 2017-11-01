@@ -4,9 +4,13 @@ class PostApplicationsController < ApplicationController
   # GET /post_applications
   # GET /post_applications.json
   def index
-
-    
-    @post_applications = PostApplication.all
+    if params[:client_id].presence
+      @post_applications = PostApplication.joins(:post).where(['posts.client_id= ?',params[:client_id]])
+      @state ='client_applications'
+    elsif params[:teenager_id].presence
+      @post_applications=PostApplication.find_by_teenager_id(params[:teenager_id])
+      @state ='teenager_applications'
+    end
   end
 
   # GET /post_applications/1
