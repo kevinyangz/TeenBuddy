@@ -114,15 +114,41 @@
         <li><a class="instagram" href="#"><i class="fa fa-instagram"></i></a></li>
       </ul>
 
+      <% if current_user.client %>
       <div class="action-buttons">
-        <a class="btn btn-gray" href="#">Download CV</a>
-        <a class="btn btn-success" data-toggle="modal" data-target="#modal-contact" href="#">Contact me</a>
+        <%= link_to 'Invite me', '#', :class => 'btn btn-success', 'data-toggle' => 'modal','data-target'=>'#inviteModal' %>
       </div>
+
+
+
+          <!-- Trigger the modal with a button -->
+
+          <!-- Modal -->
+
+          <% end %>
     </div>
   </div>
 </header>
 <!-- END Page header -->
+<div id="inviteModal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
 
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title">My Open Jobs</h4>
+      </div>
+      <div class="modal-body">
+        <p>Some text in the modal.</p>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+      </div>
+    </div>
+
+  </div>
+</div>
 
 <!-- Main container -->
 <main>
@@ -349,4 +375,5 @@
 
 
 </main>
+
 <!-- END Main container -->

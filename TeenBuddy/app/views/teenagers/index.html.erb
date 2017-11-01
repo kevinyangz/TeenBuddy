@@ -158,7 +158,8 @@
       <div class="row">
         <% @teenagers.each do |teenager| %>
             <div class="col-xs-12">
-              <a class="item-block" href="resume-detail.html">
+
+                <%= link_to teenager, class: 'item-block' do %>
                 <header>
                   <img class="resume-avatar" src="assets/img/avatar.jpg" alt="">
                   <div class="hgroup">
@@ -196,7 +197,8 @@
                     </li>
                   </ul>
                 </footer>
-              </a>
+
+                <% end %>
             </div>
 
         <% end %>
