@@ -1,8 +1,7 @@
 class Teenager < ApplicationRecord
   has_many :services
-  has_many :JobApplications
+  has_many :post_applications
   belongs_to :user
-
   has_many :teenager_interests
   has_many :service_categories, through: :teenager_interests #Not sure about this relationship
 
