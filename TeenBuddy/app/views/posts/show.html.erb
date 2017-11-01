@@ -1,65 +1,34 @@
-<p id="notice"><%= notice %></p>
-
-<p>
-  <strong>Title:</strong>
-  <%= @post.title %>
-</p>
-
-<p>
-  <strong>Client:</strong>
-  <%= @post.client.fname %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @post.description %>
-</p>
-
-<%= link_to 'Edit', edit_post_path(@post) %> |
-<%= link_to 'Back', posts_path %>
-
-<!-- Page header -->
 <header class="page-header bg-img size-lg" style="background-image: url(assets/img/bg-banner2.jpg)">
   <div class="container">
     <div class="header-detail">
       <img class="logo" src="assets/img/logo-google.jpg" alt="">
       <div class="hgroup">
-        <h1>Senior front-end developer</h1>
-        <h3><a href="#">Google</a></h3>
+        <h1><%= @post.title %></h1>
+        <h3><a href="#"><%= "#{@post.client.fname} #{@post.client.lname}" %></a></h3>
       </div>
-      <time datetime="2016-03-03 20:00">2 days ago</time>
+      <time datetime=<%= @post.created_at %>>Updated at <%= @post.created_at %></time>
       <hr>
-      <p class="lead">You will help Google build next-generation web applications like Gmail, Google Docs, Google Analytics, and the Google eBookstore and eBook readers. As a Front End Engineer at Google, you will specialize in building responsive and elegant web UIs with AJAX and similar technologies. You may design or work on frameworks for building scalable frontend applications. We are looking for engineers who are passionate about and have experience building leading-edge user experience, including dynamic consumer experiences.</p>
+      <p class="lead"><%= @post.description %></p>
 
       <ul class="details cols-3">
         <li>
           <i class="fa fa-map-marker"></i>
-          <span>Menlo Park, CA</span>
+          <span><%= @post.work_address %></span>
         </li>
 
         <li>
-          <i class="fa fa-briefcase"></i>
-          <span>Full time</span>
+          <i class="fa fa-list-alt"></i>
+          <span><%= "#{@post.service_category.title} - #{@post.service_type.title}" %></span>
         </li>
 
         <li>
           <i class="fa fa-money"></i>
-          <span>$90,000 - $110,000 / year</span>
-        </li>
-
-        <li>
-          <i class="fa fa-clock-o"></i>
-          <span>40h / week</span>
-        </li>
-
-        <li>
-          <i class="fa fa-flask"></i>
-          <span>2+ years experience</span>
+          <span><%= @post.pay %></span>
         </li>
 
         <li>
           <i class="fa fa-certificate"></i>
-          <a href="#">Master or Bachelor</a>
+          <span><%= @post.post_status %></span>
         </li>
       </ul>
 
@@ -74,58 +43,13 @@
 
         <div class="action-buttons">
           <% if current_user.teenager %>
-          <%= link_to 'Apply now', new_post_application_path(post_id: @post.id), class: 'btn btn-success' %>
-              <% end %>
+            <%= link_to 'Apply now', new_post_application_path(post_id: @post.id), class: 'btn btn-success' %>
+          <% elsif current_user.client == @post.client %>
+            <%= link_to 'Edit', edit_post_path(post_id: @post.id), class: 'btn btn-gray' %> 
+          <% end %>
         </div>
       </div>
 
     </div>
   </div>
 </header>
-<!-- END Page header -->
-
-
-<!-- Main container -->
-<main>
-
-  <!-- Job detail -->
-  <section>
-    <div class="container">
-
-      <p>Google is and always will be an engineering company. We hire people with a broad set of technical skills who are ready to tackle some of technology's greatest challenges and make an impact on millions, if not billions, of users. At Google, engineers not only revolutionize search, they routinely work on massive scalability and storage solutions, large-scale applications and entirely new platforms for developers around the world. From AdWords to Chrome, Android to YouTube, Social to Local, Google engineers are changing the world one technological achievement after another.</p>
-
-      <br>
-      <h4>Responsibilities</h4>
-      <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec odio. Quisque volutpat mattis eros. Nullam malesuada erat ut turpis. Suspendisse urna nibh, viverra non.</p>
-      <ul>
-        <li>Build next-generation web applications with a focus on the client side.</li>
-        <li>Redesign UI's, implement new UI's, and pick up Java as necessary.</li>
-        <li>Explore and design dynamic and compelling consumer experiences.</li>
-        <li>Design and build scalable framework for web applications.</li>
-      </ul>
-
-      <br>
-      <h4>Minimum qualifications</h4>
-      <ul>
-        <li>BA/BS degree in a technical field or equivalent practical experience.  </li>
-        <li>2 years of relevant work experience in software development.</li>
-        <li>Programming experience in C, C++ or Java.</li>
-        <li>Experience with AJAX, HTML and CSS.</li>
-      </ul>
-
-      <br>
-      <h4>Preferred qualifications</h4>
-      <ul>
-        <li>Interest in user interface design.</li>
-        <li>Web application development experience.</li>
-        <li>Experience working on cross-browser platforms.</li>
-        <li>Development experience designing object-oriented JavaScript.</li>
-        <li>Experience with user interface frameworks such as XUL, Flex and XAML.</li>
-        <li>Knowledge of user interface design.</li>
-      </ul>
-
-    </div>
-  </section>
-  <!-- END Job detail -->
-
-</main>

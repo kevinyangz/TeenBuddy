@@ -2,7 +2,7 @@ class Post < ApplicationRecord
   # database tables associations
   belongs_to :client
   #belongs_to :service
-  has_many :JobApplications
+  has_many :post_applications
   belongs_to :service_category
   belongs_to :service_type
   
