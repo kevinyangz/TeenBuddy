@@ -11,7 +11,7 @@
 
 <header class="page-header bg-img" style="background-image: url(/assets/img/bg-banner1.jpg);">
   <div class="container page-name">
-    <h1 class="text-center">Browse resumes</h1>
+    <h1 class="text-center">Browse Teenagers</h1>
     <p class="lead text-center">Use following search box to find resumes that fits your position better</p>
   </div>
 
@@ -170,37 +170,38 @@
                 <header>
                   <img class="resume-avatar" src="assets/img/avatar.jpg" alt="">
                   <div class="hgroup">
-                    <h4><%= teenager.fname %></h4>
-                    <h5>Front-end developer</h5>
+                    <h4><%= teenager.fname%> <%= teenager.lname%></h4>
                   </div>
                 </header>
 
                 <div class="item-body">
-                  <p>20+ years of experience working on front-end development for major companies. I develop well-designed, accessible, and standards-based web sites and applications. Highly effective communicator and team leader with a proven track record of delivering quality work on time and within budget working as a remote employee. Experience and success in both agency and major corporate environments.</p>
+                  <p>Teenager Self Introduction: Coming Soon!!!.</p>
 
                   <div class="tag-list">
-                    <span>HTML5</span>
-                    <span>CSS3</span>
-                    <span>Bootstrap</span>
-                    <span>Wordpress</span>
-                  </div>
+           <%@current_teenager_interest= TeenagerInterest.where(teenager_id:teenager.id).all%>
+           <%@current_teenager_interest.all.each do |interest| %>
+            <span>
+              <%=ServiceCategory.find(interest.service_category_id).title%> <%="   "%>
+            </span>
+            <% end %>
+             </div>
                 </div>
 
                 <footer>
                   <ul class="details cols-3">
                     <li>
-                      <i class="fa fa-map-marker"></i>
-                      <span>Menlo Park, CA</span>
+                      <i class="fa fa-home"></i>
+                      <span><%=teenager.home_address%></span>
                     </li>
 
                     <li>
-                      <i class="fa fa-money"></i>
-                      <span>$55 / hour</span>
+                      <i class="fa fa-map-marker"></i>
+                      <span><%=teenager.postal_code%></span>
                     </li>
 
                     <li>
                       <i class="fa fa-certificate"></i>
-                      <span>Master of Computer Science</span>
+                      <span><%=User.find(teenager.user_id).email%></span>
                     </li>
                   </ul>
                 </footer>

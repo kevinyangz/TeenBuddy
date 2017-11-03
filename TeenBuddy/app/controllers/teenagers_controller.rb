@@ -9,13 +9,15 @@ class TeenagersController < ApplicationController
   # GET /teenagers.json
   def index
     @teenagers = Teenager.all
+
   end
 
   # GET /teenagers/1
   # GET /teenagers/1.json
   def show
-     #TeenagerInterest.find :all 
-    #TeenagerInterest
+    @current_teenager_interest= TeenagerInterest.where(teenager_id:params[:id]).all
+    @age= Teenager.get_age(@teenager.birth_date)
+
   end
 
   # GET /teenagers/new
@@ -33,14 +35,13 @@ class TeenagersController < ApplicationController
     @teenager = Teenager.new(teenager_params)
     @teenager.user_id = current_user.id
 
-
-
     respond_to do |format|
     if @teenager.save
-    @teenager.service_category_ids.each do |categories|
-     teenagernterests = TeenagerInterest.new(:teenager_id => @teenager.id, :service_category_id => categories)
-    teenagernterests.save
-    end
+    #@age= Teenager.get_age(@teenager.birth_date)
+
+    #@teenager.service_category_ids.each do |categories|
+    #TeenagerInterest.create!(:teenager_id => @teenager.id, :service_category_id => categories)
+   # end
         format.html { redirect_to @teenager, notice: 'Teenager was successfully created.' }
         format.json { render :show, status: :created, location: @teenager }
       else
