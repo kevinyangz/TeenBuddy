@@ -54,30 +54,32 @@
   </div>
 </header>
 
-<div id="applyModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+<% if current_user.teenager %>
+  <div id="applyModal" class="modal fade" role="dialog">
+    <div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <%= form_for(:post_application, url: post_applications_url, method: :post) do |form| %>
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Apply this job.</h4>
-      </div>
-      <div class="modal-body">
-                  <%= form.hidden_field :post_id, value: @post.id %>
-                  <%= form.hidden_field :teenager_id, value: current_user.teenager.id %>
+      <!-- Modal content-->
+      <div class="modal-content">
+        <%= form_for(:post_application, url: post_applications_url, method: :post) do |form| %>
+        <div class="modal-header">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h4 class="modal-title">Apply this job.</h4>
+        </div>
+        <div class="modal-body">
+          <%= form.hidden_field :post_id, value: @post.id %>
+          <%= form.hidden_field :teenager_id, value: current_user.teenager.id %>
 
-                  <div class="form-group">
-                    <%= form.text_area :message, class: "form-control", placeholder: "Leave some Message to show yourself." %>
-                  </div>
+          <div class="form-group">
+            <%= form.text_area :message, class: "form-control", placeholder: "Leave some Message to show yourself." %>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <%= form.submit 'Submit', :class => "btn btn-success"%>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+        <% end %>
       </div>
-      <div class="modal-footer">
-        <%= form.submit 'Submit', :class => "btn btn-success"%>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-      <% end %>
+
     </div>
-
   </div>
-</div>
+<% end %>
