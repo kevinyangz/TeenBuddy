@@ -15,6 +15,9 @@ class ClientsController < ApplicationController
   # GET /clients/new
   def new
     @client = Client.new
+    @client_form_header_title = "Create a New Client"
+    @client_form_header_description = "Please tel us a little more about yourself."
+    @client_form_submit_title = "Register"
   end
 
   # GET /clients/1/edit
