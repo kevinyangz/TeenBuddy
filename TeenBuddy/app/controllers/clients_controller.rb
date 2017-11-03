@@ -22,6 +22,10 @@ class ClientsController < ApplicationController
 
   # GET /clients/1/edit
   def edit
+    @client = Client.find(params[:id])
+    @client_form_header_title = "Edit Your Information"
+    @client_form_header_description = "Edit your phone number, address, description, etc."
+    @client_form_submit_title = "Update Your Profile"
   end
 
   # POST /clients

@@ -10,7 +10,7 @@
 
       </div>
       <hr>
-      <p class="lead"><%= @client.description %></p>
+      <p class="lead">This client is very lazy. He do not have description of himself yet... </p>
 
       <ul class="details cols-3">
         <li>
@@ -46,8 +46,9 @@
         </ul>
 
         <div class="action-buttons">
-          <a class="btn btn-gray" href="#">Favorite</a>
-          <a class="btn btn-success" href="#">Contact</a>
+
+          <%= link_to 'Edit', edit_client_path(@client), class: 'btn btn-xs btn-gray'%>
+
         </div>
       </div>
 
