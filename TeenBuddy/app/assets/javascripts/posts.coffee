@@ -5,10 +5,10 @@
 jQuery ->
   # dynamic select menu for new job posts
   $('#post_service_type_id').parent().hide()
-  types = $('#post_service_type_id').html()
+  types_1 = $('#post_service_type_id').html()
   $('#post_service_category_id').change -> 
     category = $('#post_service_category_id :selected').text()
-    options = $(types).filter("optgroup[label='#{category}']").html()
+    options = $(types_1).filter("optgroup[label='#{category}']").html()
     if options
       #below line changes html but the new html is not rendered, need help
       $('#post_service_type_id').html(options)
@@ -18,12 +18,46 @@ jQuery ->
       $('#post_service_type_id').parent().hide()
 
 
+  $('#post_service_type_ids').parent().hide()
+  types_2 = $('#post_service_type_ids').html()
+  $('#post_service_category_ids').change -> 
+    categories = $('#post_service_category_ids :selected')
+    total = $('#post_service_type_ids')
+    options = null
+    if categories.length > 0
+      options = "<option>All types</option>"
+    i = 0
+    while i < categories.length
+      category = categories[i].text
+      option = $(types_2).filter("optgroup[label='#{category}']").html()
+      options = options + option
+      i++
+    if options
+      $('#post_service_type_ids').html(options)
+      $('#post_service_type_ids').selectpicker('refresh')
+      $('#post_service_type_ids').parent().show()
+    else
+      $('#post_service_type_ids').parent().hide()
+
+
+
+
+
+
+
+
+
+
+
+
+
   # track check box of service_catories
   $(":checkbox[name='service_type']").parent().hide()
   $(":checkbox[id='service_type_all']").parent().show()
-
+  c = document.getElementById('service_category_babysitting')
   $(":checkbox[name='service_category'][id!='service_category_all']").change ->
     categories_check = document.getElementsByName('service_category')
+    console.log(categories_check)
     i = 0
 
     while i < categories_check.length
