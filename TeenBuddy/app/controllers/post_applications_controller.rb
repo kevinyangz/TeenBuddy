@@ -8,7 +8,7 @@ class PostApplicationsController < ApplicationController
       @post_applications = PostApplication.joins(:post).where(['posts.client_id= ?',params[:client_id]])
       @state ='client_applications'
     elsif params[:teenager_id].presence
-      @post_applications=PostApplication.find_by_teenager_id(params[:teenager_id])
+      @post_applications=PostApplication.where(teenager_id: params[:teenager_id])
       @state ='teenager_applications'
     end
   end
@@ -53,7 +53,6 @@ class PostApplicationsController < ApplicationController
   def update
     respond_to do |format|
       if @post_application.update(post_application_params)
-        puts post_application_params
         format.html { redirect_to @post_application, notice: 'Post application was successfully updated.' }
         format.json { render :show, status: :ok, location: @post_application }
       else
