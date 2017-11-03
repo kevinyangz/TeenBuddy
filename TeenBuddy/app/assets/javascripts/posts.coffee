@@ -34,8 +34,7 @@ jQuery ->
         # do not uncheck the other types fileds because otherwise user cannot select
 
         if i == 0
-          $(":checkbox[name='service_type']").parent().hide()
-          $(":checkbox[id='service_type_all']").parent().show()
+          $(":checkbox[name='service_type'][id!='service_type_all']").parent().hide()
         else if categories_check[0].checked == false
           $(":checkbox[value='#{categories_check[i].value}'][name='service_type']").parent().show()
 
@@ -44,14 +43,25 @@ jQuery ->
 
       i++
 
+
   # track all_types checkbox only, remove all the checked boxes
   $(":checkbox[id='service_category_all']").change ->
     category_all_types = document.getElementById('service_category_all')
     categories_check = document.getElementsByName('service_category')
     if category_all_types.checked
-      i = 1
+      i = 0
       while i < categories_check.length
-        $(":checkbox[id=#{categories_check[i].id}]").prop 'checked', false
-        $(":checkbox[value='#{categories_check[i].value}'][name='service_type']").parent().hide()
+        if categories_check[i].id != 'service_category_all'
+          $(":checkbox[id=#{categories_check[i].id}]").prop 'checked', false
+          $(":checkbox[value='#{categories_check[i].value}'][name='service_type']").parent().hide()
         i++
 
+    # clear the checkboxes of service types
+    categories_check = document.getElementsByName('service_category')
+    i = 0
+    while i < categories_check.length
+      if categories_check[i].id != 'service_category_all' and categories_check[i].checked == false
+        $(":checkbox[value='#{categories_check[i].value}'][name='service_type']").prop 'checked', false
+      else if categories_check[i].id == 'service_category_all' and categories_check[i].checked == true
+        $(":checkbox[id='service_type_all']").prop 'checked', true
+      i++
