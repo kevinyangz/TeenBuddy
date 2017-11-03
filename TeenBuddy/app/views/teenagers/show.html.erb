@@ -1,33 +1,3 @@
-<p id="notice"><%= notice %></p>
-<p>
-  <strong>First Name:</strong>
-  <%= @teenager.fname %>
-</p>
-
-<p>
-  <strong>Last Name:</strong>
-  <%= @teenager.lname %>
-</p>
-
-<p>
-  <strong>Home address:</strong>
-  <%= @teenager.home_address %>
-</p>
-
-<p>
-  <strong>Home address:</strong>
-  <%= @teenager.postal_code %>
-</p>
-
-<p>
-  <strong>Cell phone:</strong>
-  <%= @teenager.cell_phone %>
-</p>
-
-<p>
-  <strong>Birth date:</strong>
-  <%= @teenager.birth_date %>
-</p>
 
 <p>
 <% TeenagerInterest.all.each do |user| %>
@@ -35,15 +5,8 @@
     <%= "TeenagerID #{user.teenager_id}"%><br>
     <%= "ServiceCategoryID #{user.service_category_id}"%><br>
    <%= ServiceCategory.find(user.service_category_id).title%><br>
-
- 
 <% end %>
 </p>
-
-<%= link_to 'Edit', edit_teenager_path(@teenager) %> |
-<%= link_to 'Back', teenagers_path %>
-
-
 
 <!-- Page header -->
 <header class="page-header bg-img" style="background-image: url(assets/img/bg-banner1.jpg)">
@@ -128,25 +91,40 @@
   </div>
 </header>
 <!-- END Page header -->
+<% if current_user.client %>
 <div id="inviteModal" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
     <div class="modal-content">
+      <%= form_for(:post_invitation, url: post_invitations_url, method: :post) do |form| %>
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">My Open Jobs</h4>
+        <h4 class="modal-title">Invite teenager to your jobs.</h4>
       </div>
       <div class="modal-body">
-        <p>Some text in the modal.</p>
+        <div class="form-group">
+          <h6>My open jobs</h6>
+          <%= collection_select(:post_invitation, :post_id, Post.where(:client_id => current_user.client.id), :id, :title, {:prompt => 'Please select a job for teenager.'}, {class: 'form-control selectpicker'}) %>
+        </div>
+
+        <%= form.hidden_field :client_id, value: current_user.client.id %>
+
+        <div class="form-group">
+          <h6>Message</h6>
+          <%= form.text_area :message, class: "form-control", placeholder: "Leave some Message to show yourself." %>
+        </div>
       </div>
       <div class="modal-footer">
+        <%= form.submit 'Submit', :class => "btn btn-success"%>
         <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
       </div>
+      <% end %>
     </div>
 
   </div>
 </div>
+<%end%>
 
 <!-- Main container -->
 <main>
