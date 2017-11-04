@@ -21,9 +21,6 @@ class PostApplicationsController < ApplicationController
   # GET /post_applications/new
   def new
     @post_application = PostApplication.new
-    @post_application.teenager_id = current_user.teenager.id
-    @post_application.post_id = params[:post_id]
-    @post_application.message = params[:message]
   end
 
   # GET /post_applications/1/edit
@@ -52,7 +49,7 @@ class PostApplicationsController < ApplicationController
   # PATCH/PUT /post_applications/1.json
   def update
     respond_to do |format|
-      if @post_application.update(post_application_params)
+      if @post_application.update(status: params[:status])
         format.html { redirect_to @post_application, notice: 'Post application was successfully updated.' }
         format.json { render :show, status: :ok, location: @post_application }
       else
@@ -80,6 +77,6 @@ class PostApplicationsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_application_params
-      params.require(:post_application).permit(:message, :post_id, :teenager_id)
+      params.require(:post_application).permit(:message, :post_id, :teenager_id,:status)
     end
 end

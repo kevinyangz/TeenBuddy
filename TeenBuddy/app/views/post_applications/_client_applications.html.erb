@@ -60,20 +60,23 @@
         <!-- Candidate item -->
         <div class="col-xs-12">
           <div class="item-block">
+
             <header>
+              <h3><%=post_application.post.title%></h3>
               <a href="resume-detail.html"><img class="resume-avatar" src="assets/img/avatar-3.jpg" alt=""></a>
               <div class="hgroup">
                 <h4>
                   <a href="resume-detail.html"><%=post_application.teenager.fname%></a>
-                  <select class="form-control selectpicker label-style">
-                    <option data-content="<span class='label label-default'>New</span>">New</option>
-                    <option data-content="<span class='label label-warning'>Contacted</span>">Contacted</option>
-                    <option data-content="<span class='label label-info'>Interviewed</span>">Interviewed</option>
-                    <option data-content="<span class='label label-success'>Hired</span>" selected>Hired</option>
-                    <option data-content="<span class='label label-danger'>Archived</span>">Archived</option>
-                  </select>
+
+                  <%if post_application.status == 'Approved'%>
+                      <label class="btn btn-xs btn-success"> <%= post_application.status%> </label>
+                  <%elsif post_application.status == 'Rejected'%>
+                      <label class="btn btn-xs btn-danger"> <%= post_application.status%> </label>
+                  <%else%>
+                      <label class="btn btn-xs btn-warning"> <%= post_application.status%> </label>
+                  <%end%>
                 </h4>
-                <h5>Javascript developer</h5>
+                <h5><%= post_application.message %></h5>
               </div>
               <div class="header-meta">
                 <span class="location">Fremont, CA</span>
@@ -83,11 +86,9 @@
 
             <footer>
               <div class="status"><strong>Applied on:</strong> July 16, 2016</div>
-
               <div class="action-btn">
-                <a class="btn btn-xs btn-gray" href="#">Download CV</a>
-                <a class="btn btn-xs btn-gray" data-toggle="modal" data-target="#modal-contact" href="#">Contact</a>
-                <a class="btn btn-xs btn-danger" href="#">Delete</a>
+                <%=link_to('Approve', post_application_path(post_application, :status => 'Approved'), :method => :put, :confirm => "Are you sure?", class: 'btn btn-xs btn-success')%>
+                <%=link_to('Reject',  post_application_path(post_application, :status => 'Rejected'), :method => :put, :confirm => "Are you sure?", class: 'btn btn-xs btn-danger')%>
               </div>
             </footer>
           </div>

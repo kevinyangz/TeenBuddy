@@ -4,7 +4,13 @@ class PostInvitationsController < ApplicationController
   # GET /post_invitations
   # GET /post_invitations.json
   def index
-    @post_invitations = PostInvitation.all
+    if params[:client_id].presence
+      @post_invitations = PostInvitation.joins(:post).where(['posts.client_id= ?',params[:client_id]])
+      @state ='client_invitations'
+    elsif params[:teenager_id].presence
+      @post_invitations=PostInvitation.where(teenager_id: params[:teenager_id])
+      @state ='teenager_invitations'
+    end
   end
 
   # GET /post_invitations/1

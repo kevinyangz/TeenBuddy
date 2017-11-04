@@ -1,29 +1,5 @@
-<p id="notice"><%= notice %></p>
-
-<h1>Post Invitations</h1>
-
-<table>
-  <thead>
-    <tr>
-      <th>Post</th>
-      <th>Teenager</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
-
-  <tbody>
-    <% @post_invitations.each do |post_invitation| %>
-      <tr>
-        <td><%= post_invitation.post %></td>
-        <td><%= post_invitation.teenager %></td>
-        <td><%= link_to 'Show', post_invitation %></td>
-        <td><%= link_to 'Edit', edit_post_invitation_path(post_invitation) %></td>
-        <td><%= link_to 'Destroy', post_invitation, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-
-<br>
-
-<%= link_to 'New Post Invitation', new_post_invitation_path %>
+<% if @state == 'client_invitations' %>
+    <%= render 'client_invitations' %>
+<% elsif @state == 'teenager_invitations' %>
+    <%= render 'teenager_invitations' %>
+<% end %>

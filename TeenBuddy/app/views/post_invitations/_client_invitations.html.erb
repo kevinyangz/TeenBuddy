@@ -55,28 +55,25 @@
   <section class="no-padding-top bg-alt">
     <div class="container">
 
-      <%@post_applications.each do |post_application| %>
+      <%@post_invitations.each do |post_invitation| %>
           <div class="row">
             <!-- Candidate item -->
             <div class="col-xs-12">
               <div class="item-block">
-
                 <header>
-                  <h3><%=post_application.post.title%></h3>
                   <a href="resume-detail.html"><img class="resume-avatar" src="assets/img/avatar-3.jpg" alt=""></a>
                   <div class="hgroup">
                     <h4>
-                      <a href="resume-detail.html"><%=post_application.teenager.fname%></a>
-
-                      <%if post_application.status == 'Approved'%>
-                          <label class="btn btn-xs btn-success"> <%= post_application.status%> </label>
-                      <%elsif post_application.status == 'Rejected'%>
-                          <label class="btn btn-xs btn-danger"> <%= post_application.status%> </label>
-                      <%else%>
-                          <label class="btn btn-xs btn-warning"> <%= post_application.status%> </label>
-                      <%end%>
+                      <a href="resume-detail.html"><%=post_invitation.teenager.fname%></a>
+                      <select class="form-control selectpicker label-style">
+                        <option data-content="<span class='label label-default'>New</span>">New</option>
+                        <option data-content="<span class='label label-warning'>Contacted</span>">Contacted</option>
+                        <option data-content="<span class='label label-info'>Interviewed</span>">Interviewed</option>
+                        <option data-content="<span class='label label-success'>Hired</span>" selected>Hired</option>
+                        <option data-content="<span class='label label-danger'>Archived</span>">Archived</option>
+                      </select>
                     </h4>
-                    <h5><%= post_application.message %></h5>
+                    <h5>Javascript developer</h5>
                   </div>
                   <div class="header-meta">
                     <span class="location">Fremont, CA</span>
@@ -88,14 +85,10 @@
                   <div class="status"><strong>Applied on:</strong> July 16, 2016</div>
 
                   <div class="action-btn">
-                    <%if current_user.client && post_application.post.client_id == current_user.client.id %>
-                    <%=link_to('Approve', post_application_path(post_application, :status => 'Approved'), :method => :put, :confirm => "Are you sure?", class: 'btn btn-xs btn-success')%>
-                    <%=link_to('Reject',  post_application_path(post_application, :status => 'Rejected'), :method => :put, :confirm => "Are you sure?", class: 'btn btn-xs btn-danger')%>
-
-                    <%elsif current_user.teenager && post_application.teenager_id == current_user.teenager.id %>
-                      <%=link_to('Delete',  post_application_path(post_application), :method => :delete, :confirm => "Are you sure?", class: 'btn btn-xs btn-danger')%>
-                  <%end%>
-                      </div>
+                    <a class="btn btn-xs btn-gray" href="#">Download CV</a>
+                    <a class="btn btn-xs btn-gray" data-toggle="modal" data-target="#modal-contact" href="#">Contact</a>
+                    <a class="btn btn-xs btn-danger" href="#">Delete</a>
+                  </div>
                 </footer>
               </div>
             </div>

@@ -44,7 +44,7 @@
         <ul>
           <li><%= link_to 'View All Teenagers' , teenagers_path  %></li>
           <li><%= link_to 'Candidates' ,  post_applications_path(client_id: current_user.client.id) %></li>
-          <li><%= link_to 'Invitations' , new_post_path %></li>
+          <li><%= link_to 'Invitations' , post_invitations_path(client_id: current_user.client.id) %></li>
         </ul>
       </li>
       <li>
