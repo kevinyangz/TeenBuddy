@@ -47,7 +47,7 @@
 
         <div class="action-buttons">
 
-          <%= link_to 'Edit', edit_client_path(@client), class: 'btn btn-xs btn-gray'%>
+          <%= link_to 'Edit', edit_client_path(@client), class: 'btn btn-gray'%>
 
         </div>
       </div>
@@ -80,7 +80,6 @@
                 <a href="company-detail.html"><img src="assets/img/logo-google.jpg" alt=""></a>
                 <div class="hgroup">
                   <h4><%= post.title %></h4>
-                  <h5><%= post.description %></h5>
                 </div>
                 <div class="header-meta">
 
@@ -92,6 +91,11 @@
 
                   </div>
               </header>
+
+              <div class="item-body">
+                <p><%= post.description %></p>
+              </div>
+
 
               <footer>
                 <p class="status"><strong>Status: </strong><%= post.post_status %></p>
@@ -105,50 +109,7 @@
           </div>
       <% end %>
 
-      <div class="row">
-
-        <!-- Job item -->
-        <div class="col-xs-12">
-          <a class="item-block" href="job-detail.html">
-            <header>
-              <img src="assets/img/logo-google.jpg" alt="">
-              <div class="hgroup">
-                <h4>Senior front-end developer</h4>
-                <h5>Google <span class="label label-success">Full-time</span></h5>
-              </div>
-              <time datetime="2016-03-10 20:00">34 min ago</time>
-            </header>
-
-            <div class="item-body">
-              <p>A rapidly growing, well established marketing firm is looking for an experienced web developer for a full-time position. In this role, you will develop websites, apps, emails and other forms of digital electronic media, all while maintaining brand standards across design projects and other marketing communication materials.</p>
-            </div>
-
-            <footer>
-              <ul class="details cols-3">
-                <li>
-                  <i class="fa fa-map-marker"></i>
-                  <span>Menlo Park, CA</span>
-                </li>
-
-                <li>
-                  <i class="fa fa-money"></i>
-                  <span>$90,000 - $110,000 / year</span>
-                </li>
-
-                <li>
-                  <i class="fa fa-certificate"></i>
-                  <span>Master or Bachelor</span>
-                </li>
-              </ul>
-            </footer>
-          </a>
-        </div>
-        <!-- END Job item -->
-
-
-        
-
-      </div>
+     
 
     </div>
   </section>
