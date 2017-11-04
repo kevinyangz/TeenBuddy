@@ -97,7 +97,7 @@
           <%= collection_select(:post_invitation, :post_id, Post.where(:client_id => current_user.client.id), :id, :title, {:prompt => 'Please select a job for teenager.'}, {class: 'form-control selectpicker'}) %>
         </div>
 
-        <%= form.hidden_field :client_id, value: current_user.client.id %>
+        <%= form.hidden_field :teenager_id, value: @teenager.id %>
 
         <div class="form-group">
           <h6>Message</h6>
