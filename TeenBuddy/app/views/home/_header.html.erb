@@ -25,16 +25,12 @@
     <!-- Navigation menu -->
     <ul class="nav-menu">
       <li>
-        <a class="active" href="index.html">Home</a>
-        <ul>
-          <li><a class="active" href="index.html">Version 1</a></li>
-          <li><a href="index-2.html">Version 2</a></li>
-        </ul>
+          <li><%= link_to 'Home' , home_index_path  %></li>
       </li>
       <li>
         <a href="#">Position</a>
         <ul>
-          <li><a href="job-list-1.html">Browse jobs - 1</a></li>
+          <li><%= link_to 'View All Posts' , posts_path  %></li>
           <li><a href="job-list-2.html">Browse jobs - 2</a></li>
           <li><a href="job-list-3.html">Browse jobs - 3</a></li>
           <li><a href="job-detail.html">Job detail</a></li>
@@ -45,9 +41,9 @@
         </ul>
       </li>
       <li>
-        <a href="#">Resume</a>
+        <a href="#">Teenagers</a>
         <ul>
-          <li><a href="resume-list.html">Browse resumes</a></li>
+          <li><%= link_to 'View All Teenagers' , teenagers_path  %></li>
           <li><a href="resume-detail.html">Resume detail</a></li>
           <li><a href="resume-add.html">Create a resume</a></li>
           <li><a href="resume-manage.html">Manage resumes</a></li>

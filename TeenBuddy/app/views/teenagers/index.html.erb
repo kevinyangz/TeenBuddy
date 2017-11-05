@@ -1,5 +1,7 @@
 
-<% if current_user.teenager %>
+<%if current_user==nil%>
+<%= render 'home/header' %>
+<% elsif current_user.teenager %>
 <%= render 'home/header_teenager' %>
 <% elsif current_user.client %>
 <%= render 'home/header_client' %>
