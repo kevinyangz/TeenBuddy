@@ -38,7 +38,7 @@
 
                   <div class="action-btn">
                     <%= link_to 'Edit', edit_post_path(post), class: 'btn btn-xs btn-gray'%>
-                    <%= link_to 'Destroy', { action: :destroy, id: post.id }, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger'  %>
+                    <%= link_to 'Delete', { action: :destroy, id: post.id }, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-xs btn-danger'  %>
                   </div>
                 </footer>
               </div>
