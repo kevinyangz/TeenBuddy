@@ -3,8 +3,9 @@ Rails.application.routes.draw do
   resources :post_applications
   devise_for :users, controllers: { registrations: 'users/registrations'}
   resources :posts
-  resources :clients
-  resources :client_reviews
+  resources :clients do
+    resources :client_reviews
+  end
   resources :teenagers
   resources :services
 
