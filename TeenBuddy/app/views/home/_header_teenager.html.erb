@@ -10,8 +10,7 @@
       <a class="navbar-toggle" href="#" data-toggle="offcanvas"><i class="ti-menu"></i></a>
 
       <div class="logo-wrapper">
-        <a class="logo" href="home\index"><img src="/assets/img/logo.png" alt="logo"></a>
-        <a class="logo-alt" href='home\index'><img src="/assets/img/logo-alt.png" alt="logo-alt"></a>
+        <%= link_to image_tag("/assets/img/logo-alt.png", border: 0), home_index_path, class: 'logo-alt', method: :get %>
       </div>
     </div>
     <!-- END Logo -->
