@@ -4,8 +4,9 @@
 
 jQuery ->
   # dynamic select menu for new job posts
-  $('#post_service_type_id').parent().hide()
   types_1 = $('#post_service_type_id').html()
+  $('#post_service_type_id').empty()
+  $('#post_service_type_id').selectpicker('refresh')
   $('#post_service_category_id').change -> 
     category = $('#post_service_category_id :selected').text()
     options = $(types_1).filter("optgroup[label='#{category}']").html()
@@ -13,11 +14,13 @@ jQuery ->
       #below line changes html but the new html is not rendered, need help
       $('#post_service_type_id').html(options)
       $('#post_service_type_id').selectpicker('refresh')
-      $('#post_service_type_id').parent().show()
     else
-      $('#post_service_type_id').parent().hide()
+      $('#post_service_type_id').empty()
+      $('#post_service_type_id').selectpicker('refresh')
 
 
+
+  #dynamic select menu for filters
   $('#post_service_type_ids').parent().hide()
   types_2 = $('#post_service_type_ids').html()
   $('#post_service_category_ids').change -> 
@@ -41,17 +44,7 @@ jQuery ->
 
 
 
-
-
-
-
-
-
-
-
-
-
-  # track check box of service_catories
+  # dynamic checkboxes for filters
   $(":checkbox[name='service_type']").parent().hide()
   $(":checkbox[id='service_type_all']").parent().show()
   c = document.getElementById('service_category_babysitting')
@@ -77,7 +70,6 @@ jQuery ->
 
       i++
 
-
   # track all_types checkbox only, remove all the checked boxes
   $(":checkbox[id='service_category_all']").change ->
     category_all_types = document.getElementById('service_category_all')
@@ -99,3 +91,12 @@ jQuery ->
       else if categories_check[i].id == 'service_category_all' and categories_check[i].checked == true
         $(":checkbox[id='service_type_all']").prop 'checked', true
       i++
+
+
+
+  #auto complete API javascripts
+  initialize = ->
+    input = document.getElementById('post_work_address')
+    autocomplete = new (google.maps.places.Autocomplete)(input)
+
+  google.maps.event.addDomListener window, 'load', initialize
