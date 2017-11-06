@@ -8,7 +8,7 @@ class PostsController < ApplicationController
       @posts = Post.where(client_id: params[:client_id])
       @state = 'client_posts'
     else
-      @posts = Post.all
+      @posts = Post.search(params[:description])
       @state = 'all'
     end
   end

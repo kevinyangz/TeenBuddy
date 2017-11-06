@@ -25,4 +25,12 @@ class Post < ApplicationRecord
   	self.post_status = :decision_pending
   end
 
+  def self.search(description)
+    if description
+      where('description LIKE ? or title LIKE ?', "%#{description}%", "%#{description}%")
+    else
+      all
+    end
+  end
+
 end
