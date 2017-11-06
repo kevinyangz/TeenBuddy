@@ -21,8 +21,8 @@ jQuery ->
 
 
   #dynamic select menu for filters
-  $('#post_service_type_ids').parent().hide()
   types_2 = $('#post_service_type_ids').html()
+  $('#post_service_type_ids').empty()
   $('#post_service_category_ids').change -> 
     categories = $('#post_service_category_ids :selected')
     total = $('#post_service_type_ids')
@@ -40,7 +40,9 @@ jQuery ->
       $('#post_service_type_ids').selectpicker('refresh')
       $('#post_service_type_ids').parent().show()
     else
-      $('#post_service_type_ids').parent().hide()
+      $('#post_service_type_ids').empty()
+      $('#post_service_type_ids').selectpicker('refresh')
+
 
 
 
