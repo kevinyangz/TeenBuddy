@@ -27,8 +27,8 @@ jQuery ->
     categories = $('#post_service_category_ids :selected')
     total = $('#post_service_type_ids')
     options = null
-    if categories.length > 0
-      options = "<option>All types</option>"
+    #if categories.length > 0
+      #options = "<option>All types</option>"
     i = 0
     while i < categories.length
       category = categories[i].text
@@ -42,6 +42,7 @@ jQuery ->
     else
       $('#post_service_type_ids').empty()
       $('#post_service_type_ids').selectpicker('refresh')
+
 
 
 
@@ -94,6 +95,7 @@ jQuery ->
         $(":checkbox[id='service_type_all']").prop 'checked', true
       i++
 
+  $(":checkbox").parent().hide()
 
 
   #auto complete API javascripts
