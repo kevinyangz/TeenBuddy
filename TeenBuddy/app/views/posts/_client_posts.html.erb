@@ -34,7 +34,7 @@
                   </div>
                   <div class="header-meta">
                     <span class="location"><%= post.work_address %></span>
-                    <time datetime=<%= post.updated_at %>>Updated at <%= post.updated_at.in_time_zone(Time.now.getlocal.zone).strftime("%b %d %Y %H:%M") %></time>
+                    <time datetime=<%= post.updated_at %>>Updated at <%= post.updated_at.in_time_zone('Eastern Time (US & Canada)').strftime("%b %d %Y %H:%M") %></time>
                   </div>
                 </header>
 
