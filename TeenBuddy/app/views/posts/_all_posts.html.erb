@@ -97,7 +97,7 @@
                     <h4><%= post.title %></h4>
                     <h5><%= "#{post.client.fname} #{post.client.lname}" %></h5>
                   </div>
-                  <time datetime=<%= post.updated_at %>>Updated at <%= post.updated_at %></time>
+                  <time datetime=<%= post.updated_at %>>Updated at <%= post.updated_at.in_time_zone(Time.now.getlocal.zone).strftime("%b %d %Y %H:%M") %></time>
                 </header>
 
                 <div class="item-body">
