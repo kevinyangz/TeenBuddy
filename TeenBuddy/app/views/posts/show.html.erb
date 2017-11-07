@@ -72,7 +72,7 @@
         <div class="modal-body">
           <%= form.hidden_field :post_id, value: @post.id %>
           <%= form.hidden_field :teenager_id, value: current_user.teenager.id %>
-          <%= form.hidden_field :status, value:'pending' %>
+          <%= form.hidden_field :status, value:'Pending' %>
           <div class="form-group">
             <%= form.text_area :message, class: "form-control", placeholder: "Leave some Message to show yourself." %>
           </div>

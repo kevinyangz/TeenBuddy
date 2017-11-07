@@ -68,13 +68,8 @@
                     <h4>
                       <a href="resume-detail.html"><%=post_application.teenager.fname%></a>
 
-                      <%if post_application.status == 'Approved'%>
-                          <label class="btn btn-xs btn-success"> <%= post_application.status%> </label>
-                      <%elsif post_application.status == 'Rejected'%>
-                          <label class="btn btn-xs btn-danger"> <%= post_application.status%> </label>
-                      <%else%>
-                          <label class="btn btn-xs btn-warning"> <%= post_application.status%> </label>
-                      <%end%>
+                      <label class= "btn btn-xs <%=app_inv_status_style(post_application.status)%>"> <%= post_application.status %> </label>
+
                     </h4>
                     <h5><%= post_application.message %></h5>
                   </div>
@@ -88,11 +83,10 @@
                   <div class="status"><strong>Applied on:</strong> July 16, 2016</div>
 
                   <div class="action-btn">
-                    <%if current_user.client && post_application.post.client_id == current_user.client.id %>
+                    <%if current_user.client && post_application.post.client_id == current_user.client.id && post_application.status == 'Pending' %>
                     <%=link_to('Approve', post_application_path(post_application, :status => 'Approved'), :method => :put, :confirm => "Are you sure?", class: 'btn btn-xs btn-success')%>
                     <%=link_to('Reject',  post_application_path(post_application, :status => 'Rejected'), :method => :put, :confirm => "Are you sure?", class: 'btn btn-xs btn-danger')%>
-
-                    <%elsif current_user.teenager && post_application.teenager_id == current_user.teenager.id %>
+                    <%elsif current_user.teenager && post_application.teenager_id == current_user.teenager.id && post_application.status == 'Pending' %>
                       <%=link_to('Delete',  post_application_path(post_application), :method => :delete, :confirm => "Are you sure?", class: 'btn btn-xs btn-danger')%>
                   <%end%>
                       </div>
