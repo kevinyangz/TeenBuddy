@@ -35,11 +35,12 @@
 
 
           <div class="form-group col-xs-12 col-sm-12">
-            <div class="input-group input-group-sm">
-              <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-              <%= form.text_field :home_address, id: :client_home_address, placeholder: 'Your home address including postal code', class: 'form-control input-lg' %>
-            </div>
+
+              <%= form.text_field :home_address, id: :client_home_address, placeholder: 'Home address', class: 'form-control input-lg' %>
+
           </div>
+
+
 
           <div class="form-group col-xs-12 col-sm-12">
             <%= form.text_area :description, id: :client_description, placeholder: 'Tell us a bit more about yourself', class: 'form-control input-lg' %>
