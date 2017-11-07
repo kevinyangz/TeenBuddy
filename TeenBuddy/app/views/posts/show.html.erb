@@ -43,7 +43,11 @@
 
         <div class="action-buttons">
           <% if current_user.teenager %>
+              <% if (result_application = @post.post_applications.find_by_teenager_id(current_user.teenager.id)) == nil %>
               <%= link_to 'Apply now', '#', :class => 'btn btn-success', 'data-toggle' => 'modal','data-target'=>'#applyModal' %>
+                  <%else%>
+                  <b>Application Status</b> <label class= "btn <%=app_inv_status_style(result_application.status)%>"> <%= result_application.status %> </label>
+                  <%end%>
           <% elsif current_user.client == @post.client %>
             <%= link_to 'Edit', edit_post_path(post_id: @post.id), class: 'btn btn-gray' %> 
           <% end %>
@@ -75,6 +79,7 @@
         </div>
         <div class="modal-footer">
           <%= form.submit 'Submit', :class => "btn btn-success"%>
+
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
         </div>
         <% end %>
