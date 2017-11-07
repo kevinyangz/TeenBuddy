@@ -27,7 +27,7 @@ class Post < ApplicationRecord
 
   def self.search(description)
     if description
-      where('description LIKE ? or title LIKE ?', "%#{description}%", "%#{description}%")
+      where('description LIKE ? or title LIKE ? or requirements LIKE ?', "%#{description}%", "%#{description}%", "%#{description}%")
     else
       all
     end
