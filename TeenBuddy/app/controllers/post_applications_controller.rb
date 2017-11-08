@@ -31,7 +31,7 @@ class PostApplicationsController < ApplicationController
   # POST /post_applications.json
   def create
     @post_application = PostApplication.new(post_application_params)
-    
+
     respond_to do |format|
       if @post_application.save
 
