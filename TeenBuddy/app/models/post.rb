@@ -3,6 +3,7 @@ class Post < ApplicationRecord
   belongs_to :client
   #belongs_to :service
   has_many :post_applications
+  has_many :services
   belongs_to :service_category
   belongs_to :service_type
   

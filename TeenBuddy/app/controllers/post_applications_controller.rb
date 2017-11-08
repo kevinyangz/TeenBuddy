@@ -31,11 +31,10 @@ class PostApplicationsController < ApplicationController
   # POST /post_applications.json
   def create
     @post_application = PostApplication.new(post_application_params)
-
-
-
+    
     respond_to do |format|
       if @post_application.save
+
         format.html { redirect_to post_applications_path, notice: 'Post application was successfully created.' }
         format.json { render :show, status: :created, location: @post_application }
       else
@@ -50,7 +49,7 @@ class PostApplicationsController < ApplicationController
   def update
     respond_to do |format|
       if @post_application.update(status: params[:status])
-        format.html { redirect_to @post_applications, notice: 'Post application was successfully updated.' }
+        format.html { redirect_to post_applications_path, notice: 'Post application was successfully updated.' }
         format.json { render :show, status: :ok, location: @post_application }
       else
         format.html { render :edit }
