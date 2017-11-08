@@ -4,11 +4,11 @@ class PostApplicationsController < ApplicationController
   # GET /post_applications
   # GET /post_applications.json
   def index
-    if params[:client_id].presence
-      @post_applications = PostApplication.joins(:post).where(['posts.client_id= ?',params[:client_id]])
+    if current_user.client
+      @post_applications = PostApplication.joins(:post).where(['posts.client_id= ?',current_user.client.id])
       @state ='client_applications'
-    elsif params[:teenager_id].presence
-      @post_applications=PostApplication.where(teenager_id: params[:teenager_id])
+    elsif current_user.teenager
+      @post_applications=PostApplication.where(teenager_id: current_user.teenager.id)
       @state ='teenager_applications'
     end
   end
@@ -36,7 +36,7 @@ class PostApplicationsController < ApplicationController
 
     respond_to do |format|
       if @post_application.save
-        format.html { redirect_to @post_application, notice: 'Post application was successfully created.' }
+        format.html { redirect_to post_applications_path, notice: 'Post application was successfully created.' }
         format.json { render :show, status: :created, location: @post_application }
       else
         format.html { render :new }
@@ -50,7 +50,7 @@ class PostApplicationsController < ApplicationController
   def update
     respond_to do |format|
       if @post_application.update(status: params[:status])
-        format.html { redirect_to @post_application, notice: 'Post application was successfully updated.' }
+        format.html { redirect_to @post_applications, notice: 'Post application was successfully updated.' }
         format.json { render :show, status: :ok, location: @post_application }
       else
         format.html { render :edit }

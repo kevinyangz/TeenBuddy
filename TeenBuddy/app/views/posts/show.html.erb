@@ -88,3 +88,35 @@
     </div>
   </div>
 <% end %>
+
+<main>
+  <% if current_user.client == @post.client %>
+  <section class="no-padding-top bg-alt">
+    <header class="section-header">
+      <h2>On Service Teenagers</h2>
+    </header>
+    <div class="container">
+      <div class="row item-blocks-condensed">
+
+        <!-- Job item -->
+        <div class="col-xs-12">
+          <a class="item-block" href="job-detail.html">
+            <header>
+              <img src="assets/img/logo-google.jpg" alt="">
+              <div class="hgroup">
+                <h4>Senior front-end developer</h4>
+                <h5>Google</h5>
+              </div>
+              <div class="header-meta">
+                <span class="location">Menlo park, CA</span>
+                <span class="label label-success">Full-time</span>
+              </div>
+            </header>
+          </a>
+        </div>
+        <!-- END Job item -->
+      </div>
+    </div>
+  </section>
+  <%end%>
+</main>
