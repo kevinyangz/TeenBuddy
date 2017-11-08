@@ -1,5 +1,10 @@
 class ChargesController < ApplicationController
+  def index
+    @amount = 420
+  end
+
   def new
+    @amount = 0
   end
 
   def create
