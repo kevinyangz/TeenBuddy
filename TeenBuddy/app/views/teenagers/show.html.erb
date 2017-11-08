@@ -51,6 +51,15 @@
           </li>
         </ul>
 
+          <div class="tag-list">
+           <%@current_teenager_interest= TeenagerInterest.where(teenager_id:@teenager.id).all%>
+           <%@current_teenager_interest.all.each do |interest| %>
+            <span>
+              <%=ServiceCategory.find(interest.service_category_id).title%> <%="   "%>
+            </span>
+            <% end %>
+             </div>
+
         
       </div>
     </div>

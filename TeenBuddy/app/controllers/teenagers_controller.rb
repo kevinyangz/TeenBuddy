@@ -38,10 +38,12 @@ class TeenagersController < ApplicationController
     respond_to do |format|
     if @teenager.save
     #@age= Teenager.get_age(@teenager.birth_date)
-
-    #@teenager.service_category_ids.each do |categories|
+    #Comment below lines because Ruby save the service categories_ID 
+    #and teenager ID automatically when it create the database
+    #So smart...
+   # @teenager.service_category_ids.each do |categories| 
     #TeenagerInterest.create!(:teenager_id => @teenager.id, :service_category_id => categories)
-   # end
+   #end
         format.html { redirect_to @teenager, notice: 'Teenager was successfully created.' }
         format.json { render :show, status: :created, location: @teenager }
       else
@@ -84,7 +86,7 @@ class TeenagersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def teenager_params
       params.require(:teenager).permit(:fname,:lname, :home_address, 
-         :cell_phone, :birth_date,:postal_code,service_category_ids: []
+         :cell_phone, :birth_date,:postal_code,service_category_ids: [] 
          )
     end
 end
