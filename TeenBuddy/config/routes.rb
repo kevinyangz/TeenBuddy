@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   end
   resources :teenagers
   resources :services
+  resources :charges
 
   root 'home#index'
   get  'home/index'
