@@ -42,7 +42,7 @@
         </ul>
 
         <div class="action-buttons">
-          <% if current_user.teenager %>
+          <% if current_user.teenager && @post.post_status == :open %>
               <% if (result_application = @post.post_applications.find_by_teenager_id(current_user.teenager.id)) == nil %>
               <%= link_to 'Apply now', '#', :class => 'btn btn-success', 'data-toggle' => 'modal','data-target'=>'#applyModal' %>
                   <%else%>

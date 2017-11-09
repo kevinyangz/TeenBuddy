@@ -13,7 +13,7 @@ class Post < ApplicationRecord
   # getter and setter
   attr_accessor :post_status
 
-  enum post_status: [:decision_pending, :work_in_progress, :work_completed]
+  enum post_status: [:open, :close]
 
   # validations
   validates :title, :description, :work_address, :pay, presence:true
@@ -23,7 +23,7 @@ class Post < ApplicationRecord
   # functions
   # initialize the post status to decision_pending
   def initialize_post_status
-  	self.post_status = :decision_pending
+  	self.post_status = :open
   end
 
   def self.search(description)
