@@ -81,12 +81,11 @@
 
                 <footer>
                   <div class="status"><strong>Applied on:</strong> July 16, 2016</div>
-
                   <div class="action-btn">
                     <%if can? :update, post_application %>
                     <%=link_to('Approve', post_application_path(post_application, :status => 'Approved'), :method => :put, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-success')%>
                     <%=link_to('Reject',  post_application_path(post_application, :status => 'Rejected'), :method => :put, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-danger')%>
-                    <%elsif current_user.teenager && post_application.teenager_id == current_user.teenager.id && post_application.status == 'Pending' %>
+                    <%elsif can? :destroy, post_application %>
                       <%=link_to('Delete',  post_application_path(post_application), :method => :delete, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-danger')%>
                   <%end%>
                       </div>

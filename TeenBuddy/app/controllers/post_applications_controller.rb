@@ -34,7 +34,6 @@ class PostApplicationsController < ApplicationController
 
     respond_to do |format|
       if @post_application.save
-
         format.html { redirect_to post_applications_path, notice: 'Post application was successfully created.' }
         format.json { render :show, status: :created, location: @post_application }
       else

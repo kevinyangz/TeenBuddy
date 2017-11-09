@@ -8,43 +8,34 @@
       </div>
       <div class="container">
 
-
         <div class="row">
 
-
           <% if post.errors.any? %>
-              <div id="error_explanation">
-                <h2><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
-
-                <ul>
-                  <% post.errors.full_messages.each do |message| %>
-                      <li><%= message %></li>
-                  <% end %>
-                </ul>
+              <div class="form-group col-xs-12 col-sm-12">
+                <div class="alert alert-danger">
+                  <strong>Oh snap!</strong> <%= post.errors.full_messages.first %>
+                </div>
               </div>
           <% end %>
 
           <div class="form-group col-xs-12 col-sm-12">
+            <h6>Title</h6>
             <%= form.text_field :title, placeholder: 'Post title, e.g. Need help on cleaning garden.', class: 'form-control input-lg' %>
           </div>
 
-          <div class="form-group col-xs-12 col-sm-12">
-            <%= form.text_area :description, placeholder: 'Detailed description about your service request.', class: 'form-control input-lg' %>
-          </div>
-
-          <div class="form-group col-xs-12 col-sm-12">
-            <%= form.text_area :requirements, placeholder: 'Please enter your specific requirements here. - optional', class: 'form-control input-lg' %>
-          </div>
 
           <div class="form-group col-xs-12 col-sm-6">
+            <h6>Service Category</h6>
             <%= collection_select(:post, :service_category_id, ServiceCategory.order(:title), :id, :title, {:prompt => 'Please select service category'}, {class: 'form-control selectpicker'}) %>
           </div>
 
           <div class="form-group col-xs-12 col-sm-6">
+            <h6>Service Type</h6>
             <%= grouped_collection_select(:post, :service_type_id, ServiceCategory.order(:title), :service_types, :title, :id, :title, {:prompt => 'Please select service type'}, {class: 'form-control selectpicker'}) %>
           </div>
 
           <div class="form-group col-xs-12 col-sm-12">
+            <h6>Work Address</h6>
             <div class="input-group input-group-sm">
               <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
               <%= form.text_field :work_address, id: :post_work_address, placeholder: 'Work address', class: 'form-control inpu-lg' %>
@@ -52,22 +43,62 @@
           </div>
 
           <div class="form-group col-xs-12 col-sm-6">
+            <h6>Wage</h6>
             <div class="input-group input-group-sm">
               <span class="input-group-addon"><i class="fa fa-money"></i></span>
-              <%= form.number_field :pay, id: :post_pay, placeholder: 'Salary', class: 'form-control input-lg' %>
+              <%= form.number_field :pay, id: :post_pay, placeholder: 'Pay', class: 'form-control input-lg' %>
             </div>
           </div>
-          
+
           <div class="form-group col-xs-12 col-sm-6">
+            <h6>Number of Teenager needed</h6>
             <div class="input-group input-group-sm">
               <span class="input-group-addon"><i class="fa fa-male"></i></span>
               <%= form.number_field :number_of_teenager_needed, id: :post_number_of_teenager_needed, placeholder: 'Number of People', class: 'form-control input-lg' %>
             </div>
           </div>
 
+
         </div>
       </div>
     </header>
+
+
+
+    <section>
+      <div class="container">
+
+        <header class="section-header">
+          <h2>Job detail</h2>
+          <p>Write about the job, brief description about the job.</p>
+        </header>
+
+        <div class="form-group col-xs-12 col-sm-12">
+          <h6>Description</h6>
+          <%= form.text_area :description, placeholder: 'Detailed description about the job you are going to post.', class: 'form-control input-lg',rows: "5" %>
+        </div>
+
+      </div>
+    </section>
+
+    <section>
+      <div class="container">
+        <header class="section-header">
+          <h2>Requirement</h2>
+          <p>Write about the requirement, help us to match the most suitable teenage for you.</p>
+        </header>
+        <div class="form-group col-xs-12 col-sm-12">
+          <h6>Requirements</h6>
+          <%= form.text_area :requirements, placeholder: 'Please enter your specific requirements here. - optional', class: 'form-control input-lg',rows: "5" %>
+        </div>
+      </div>
+    </section>
+
+
+
+
+
+
 
     <section class="bg-alt">
       <div class="container">
