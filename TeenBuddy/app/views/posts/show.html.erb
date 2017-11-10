@@ -42,14 +42,14 @@
         </ul>
 
         <div class="action-buttons">
-          <% if current_user.teenager && @post.post_status == :open %>
-              <% if (result_application = @post.post_applications.find_by_teenager_id(current_user.teenager.id)) == nil %>
-              <%= link_to 'Apply now', '#', :class => 'btn btn-success', 'data-toggle' => 'modal','data-target'=>'#applyModal' %>
-                  <%else%>
-                  <b>Application Status</b> <label class= "btn <%=app_inv_status_style(result_application.status)%>"> <%= result_application.status %> </label>
-                  <%end%>
+          <% if current_user.teenager %>
+              <% if (teenager_applicable=@post.applicable(current_user.teenager)) == 'applicable' %>
+                  <%= link_to 'Apply now', '#', :class => 'btn btn-success', 'data-toggle' => 'modal', 'data-target' => '#applyModal' %>
+              <% else %>
+                  <button type="button" class="btn btn-primary"><%=teenager_applicable%></button>
+              <% end %>
           <% elsif current_user.client == @post.client %>
-            <%= link_to 'Edit', edit_post_path(post_id: @post.id), class: 'btn btn-gray' %> 
+              <%= link_to 'Edit', edit_post_path(@post), class: 'btn btn-gray' %>
           <% end %>
         </div>
       </div>
@@ -59,64 +59,64 @@
 </header>
 
 <% if current_user.teenager %>
-  <div id="applyModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
+    <div id="applyModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
 
-      <!-- Modal content-->
-      <div class="modal-content">
-        <%= form_for(:post_application, url: post_applications_url, method: :post) do |form| %>
-        <div class="modal-header">
-          <button type="button" class="close" data-dismiss="modal">&times;</button>
-          <h4 class="modal-title">Apply this job.</h4>
-        </div>
-        <div class="modal-body">
-          <%= form.hidden_field :post_id, value: @post.id %>
-          <%= form.hidden_field :teenager_id, value: current_user.teenager.id %>
-          <%= form.hidden_field :status, value:'Pending' %>
-          <div class="form-group">
-            <%= form.text_area :message, class: "form-control", placeholder: "Leave some Message to show yourself." %>
-          </div>
-        </div>
-        <div class="modal-footer">
-          <%= form.submit 'Submit', :class => "btn btn-success"%>
+        <!-- Modal content-->
+        <div class="modal-content">
+          <%= form_for(:post_application, url: post_applications_url, method: :post) do |form| %>
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Apply this job.</h4>
+              </div>
+              <div class="modal-body">
+                <%= form.hidden_field :post_id, value: @post.id %>
+                <%= form.hidden_field :teenager_id, value: current_user.teenager.id %>
+                <%= form.hidden_field :status, value: 'Pending' %>
+                <div class="form-group">
+                  <%= form.text_area :message, class: "form-control", placeholder: "Leave some Message to show yourself." %>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <%= form.submit 'Submit', :class => "btn btn-success" %>
 
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+          <% end %>
         </div>
-        <% end %>
+
       </div>
-
     </div>
-  </div>
 <% end %>
 
 <main>
   <% if current_user.client == @post.client %>
-  <section class="no-padding-top bg-alt">
-    <header class="section-header">
-      <h2>On Service Teenagers</h2>
-    </header>
-    <div class="container">
-      <div class="row item-blocks-condensed">
+      <section class="no-padding-top bg-alt">
+        <header class="section-header">
+          <h2>On Service Teenagers</h2>
+        </header>
+        <div class="container">
+          <div class="row item-blocks-condensed">
 
-        <!-- Job item -->
-        <div class="col-xs-12">
-          <a class="item-block" href="job-detail.html">
-            <header>
-              <img src="assets/img/logo-google.jpg" alt="">
-              <div class="hgroup">
-                <h4>Senior front-end developer</h4>
-                <h5>Google</h5>
-              </div>
-              <div class="header-meta">
-                <span class="location">Menlo park, CA</span>
-                <span class="label label-success">Full-time</span>
-              </div>
-            </header>
-          </a>
+            <!-- Job item -->
+            <div class="col-xs-12">
+              <a class="item-block" href="job-detail.html">
+                <header>
+                  <img src="assets/img/logo-google.jpg" alt="">
+                  <div class="hgroup">
+                    <h4>Senior front-end developer</h4>
+                    <h5>Google</h5>
+                  </div>
+                  <div class="header-meta">
+                    <span class="location">Menlo park, CA</span>
+                    <span class="label label-success">Full-time</span>
+                  </div>
+                </header>
+              </a>
+            </div>
+            <!-- END Job item -->
+          </div>
         </div>
-        <!-- END Job item -->
-      </div>
-    </div>
-  </section>
-  <%end%>
+      </section>
+  <% end %>
 </main>

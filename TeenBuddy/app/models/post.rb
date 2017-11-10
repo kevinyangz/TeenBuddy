@@ -26,6 +26,23 @@ class Post < ApplicationRecord
   	self.post_status = :open
   end
 
+
+  def applicable teenager
+
+    if Service.where(:teenager_id => teenager.id, :post_id => self.id).any?
+      'Enrolled, In progress'
+    elsif PostApplication.where(:teenager_id => teenager.id, :post_id => self.id).any?
+      'You have applied this job.'
+    elsif self.post_status != :open
+      'This post has been closed.'
+    elsif PostInvitation.where(:teenager_id => teenager.id, :post_id => self.id).any?
+      'You have been invited for this job, please check the Invitations.'
+    else
+      'applicable'
+    end
+
+  end
+
   def self.search(description)
     if description
       where('description LIKE ? or title LIKE ? or requirements LIKE ?', "%#{description}%", "%#{description}%", "%#{description}%")
