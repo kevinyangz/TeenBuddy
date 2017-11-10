@@ -46,6 +46,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.client_id = current_user.client.id
+    @post.status = "open"
 
     respond_to do |format|
       if @post.save
@@ -56,7 +57,6 @@ class PostsController < ApplicationController
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
-    puts @post.service_category_id
   end
 
   # PATCH/PUT /posts/1
@@ -64,7 +64,6 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        @post.update(:status => "close")
         format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
