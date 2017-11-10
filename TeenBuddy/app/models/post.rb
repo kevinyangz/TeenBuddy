@@ -8,8 +8,8 @@ class Post < ApplicationRecord
   belongs_to :service_type
   
   # action call backs
-  #after_initialize :initialize_post_status
-  after_initialize :close_post_status
+  after_initialize :initialize_post_status
+  #after_initialize :close_post_status
 
   # getter and setter
   attr_accessor :status
