@@ -90,7 +90,7 @@
 <% end %>
 
 <main>
-  <% if current_user.client == @post.client %>
+  <% if current_user.client == @post.client && (post_service = Service.where(:client_id => current_user.client, :post_id => @post.id)).any? %>
       <section class="no-padding-top bg-alt">
         <header class="section-header">
           <h2>On Service Teenagers</h2>
@@ -98,13 +98,13 @@
         <div class="container">
           <div class="row item-blocks-condensed">
 
-            <!-- Job item -->
+ <% post_service.each do |service| %>
             <div class="col-xs-12">
               <a class="item-block" href="job-detail.html">
                 <header>
                   <img src="assets/img/logo-google.jpg" alt="">
                   <div class="hgroup">
-                    <h4>Senior front-end developer</h4>
+                    <h4><%= service.teenager.fname %></h4>
                     <h5>Google</h5>
                   </div>
                   <div class="header-meta">
@@ -114,6 +114,7 @@
                 </header>
               </a>
             </div>
+            <%end %>
             <!-- END Job item -->
           </div>
         </div>
