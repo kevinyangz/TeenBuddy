@@ -46,10 +46,10 @@
               <% if (teenager_applicable=@post.applicable(current_user.teenager)) == 'applicable' %>
                   <%= link_to 'Apply now', '#', :class => 'btn btn-success', 'data-toggle' => 'modal', 'data-target' => '#applyModal' %>
               <% else %>
-                  <b><%=teenager_applicable%>></b>
+                  <button type="button" class="btn btn-primary"><%=teenager_applicable%></button>
               <% end %>
           <% elsif current_user.client == @post.client %>
-              <%= link_to 'Edit', edit_post_path(post_id: @post.id), class: 'btn btn-gray' %>
+              <%= link_to 'Edit', edit_post_path(@post), class: 'btn btn-gray' %>
           <% end %>
         </div>
       </div>
