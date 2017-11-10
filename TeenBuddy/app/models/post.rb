@@ -9,11 +9,10 @@ class Post < ApplicationRecord
   
   # action call backs
   after_initialize :initialize_post_status
+  #after_initialize :close_post_status
 
   # getter and setter
-  attr_accessor :post_status
-
-  enum post_status: [:open, :close]
+  attr_accessor :status
 
   # validations
   validates :title, :description, :work_address, :pay, presence:true
@@ -21,11 +20,14 @@ class Post < ApplicationRecord
   validates :number_of_teenager_needed, format:{with: /[0-9]+/}
 
   # functions
-  # initialize the post status to decision_pending
+  # initialize the post status to open
   def initialize_post_status
-  	self.post_status = :open
+  	self.status = "open"
   end
 
+  def close_post_status
+    self.status = "close"
+  end
 
   def applicable teenager
 
@@ -33,7 +35,7 @@ class Post < ApplicationRecord
       'Enrolled, In progress'
     elsif PostApplication.where(:teenager_id => teenager.id, :post_id => self.id).any?
       'You have applied this job.'
-    elsif self.post_status != :open
+    elsif self.status != :open
       'This post has been closed.'
     elsif PostInvitation.where(:teenager_id => teenager.id, :post_id => self.id).any?
       'You have been invited for this job, please check the Invitations.'

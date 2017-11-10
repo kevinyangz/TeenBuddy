@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171110163409) do
+ActiveRecord::Schema.define(version: 20171110183356) do
 
   create_table "client_reviews", force: :cascade do |t|
     t.integer "client_id"
@@ -71,6 +71,7 @@ ActiveRecord::Schema.define(version: 20171110163409) do
     t.integer "service_category_id"
     t.integer "service_type_id"
     t.text "requirements"
+    t.string "status"
     t.index ["client_id"], name: "index_posts_on_client_id"
     t.index ["service_id"], name: "index_posts_on_service_id"
   end
@@ -112,6 +113,7 @@ ActiveRecord::Schema.define(version: 20171110163409) do
   end
 
   create_table "teenagers", force: :cascade do |t|
+    t.text "email_address"
     t.text "home_address"
     t.string "cell_phone"
     t.date "birth_date"
