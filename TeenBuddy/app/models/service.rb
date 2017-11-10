@@ -1,4 +1,5 @@
 class Service < ApplicationRecord
+  belongs_to :client
   belongs_to :teenager
   belongs_to :post
   after_save :set_post_status
