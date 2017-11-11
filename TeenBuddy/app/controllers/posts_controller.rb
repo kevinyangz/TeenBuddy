@@ -6,10 +6,10 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     if params[:client_id].presence
-      @posts = Post.where(client_id: params[:client_id])
+      @posts = Post.where(client_id: params[:client_id]).order(params[:sort]).reverse.paginate(:page => params[:page], :per_page => 5)
       @state = 'client_posts'
     else
-      @posts = Post.search(params[:description]).paginate(:page => params[:page], :per_page => 5)
+      @posts = Post.search(params[:description]).order(params[:sort]).reverse.paginate(:page => params[:page], :per_page => 5)
       @state = 'all'
     end
   end

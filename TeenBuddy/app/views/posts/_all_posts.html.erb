@@ -85,7 +85,7 @@
           <h5>We found <strong><%= @posts.count %></strong> matches</h5>
         </div>
 
-        <% @posts.order(:updated_at).reverse.each do |post| %>
+        <% @posts.each do |post| %>
             <div class="col-xs-12">
 
               <%= link_to post, class: 'item-block' do %>
@@ -142,6 +142,17 @@
       <nav class="text-center">
         <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
       </nav>
+      <div id="order-by">
+        <form>
+          <select name="sort">
+            <option value="updated_at">Update Time</option>
+            <option value="created_at">Create Time</option>
+            <option value="title">Title</option>
+          </select>
+
+          <input type="submit" value="Sort"/>
+        </form>
+      </div>
       <!-- END Page navigation -->
 
     </div>
