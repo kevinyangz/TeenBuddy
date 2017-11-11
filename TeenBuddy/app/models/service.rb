@@ -8,11 +8,13 @@ class Service < ApplicationRecord
 
   def set_post_status
     my_post = Post.find(self.post_id)
+    puts my_post.services.count
+    puts my_post.number_of_teenager_needed
+
     if my_post.services.count >= my_post.number_of_teenager_needed
-      my_post.status = :close
+      my_post.update(status:'close')
     else
-      my_post.status = :open
+      my_post.update(status:'close')
     end
-    my_post.save
   end
 end

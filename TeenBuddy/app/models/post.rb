@@ -35,7 +35,7 @@ class Post < ApplicationRecord
       'Enrolled, In progress'
     elsif PostApplication.where(:teenager_id => teenager.id, :post_id => self.id).any?
       'You have applied this job.'
-    elsif self.status != :open
+    elsif self.status != 'open'
       'This post has been closed.'
     elsif PostInvitation.where(:teenager_id => teenager.id, :post_id => self.id).any?
       'You have been invited for this job, please check the Invitations.'
