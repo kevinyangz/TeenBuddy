@@ -6,7 +6,7 @@ class PostInvitationsController < ApplicationController
   def index
     if  current_user.client
       @post_invitations = PostInvitation.joins(:post).where(['posts.client_id= ?', current_user.client.id])
-    elsif  current_user.client
+    elsif  current_user.teenager
       @post_invitations=PostInvitation.where(teenager_id:  current_user.teenager.id)
     end
   end

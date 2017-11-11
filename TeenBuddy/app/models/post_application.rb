@@ -9,6 +9,4 @@ class PostApplication < ApplicationRecord
       new_service.save
     end
   end
-
-
 end
