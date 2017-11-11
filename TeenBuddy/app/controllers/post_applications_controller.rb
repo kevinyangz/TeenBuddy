@@ -6,6 +6,7 @@ class PostApplicationsController < ApplicationController
   def index
     if current_user.client
       @post_applications = PostApplication.joins(:post).where(['posts.client_id= ?',current_user.client.id])
+      @post_applications = @post_applications.filter(params.slice(:status))
     elsif current_user.teenager
       @post_applications=PostApplication.where(teenager_id: current_user.teenager.id)
     end

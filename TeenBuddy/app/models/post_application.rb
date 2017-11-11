@@ -2,6 +2,10 @@ class PostApplication < ApplicationRecord
   belongs_to :post
   belongs_to :teenager
   after_update :initialize_service
+  include Filterable
+
+  scope :status, -> (status) { where status: status }
+
 
   def initialize_service
     if self.status == 'Approved'

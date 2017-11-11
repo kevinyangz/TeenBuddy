@@ -6,8 +6,9 @@
   </div>
 
   <div class="container">
+    <%= form_tag(posts_path, method: :get) do %>
     <h5>Search</h5>
-    <form action="#">
+
 
       <div class="row">
         <div class="form-group col-xs-12 col-sm-4">
@@ -15,15 +16,11 @@
         </div>
 
         <div class="form-group col-xs-12 col-sm-4">
-          <select class="form-control selectpicker" multiple>
-            <option selected>All statuses</option>
-            <option>New</option>
-            <option>Contacted</option>
-            <option>Interviewed</option>
-            <option>Hired</option>
-            <option>Archived</option>
-          </select>
+          <%= select(:status, options_for_select(['Pending','Approved','Rejected']), {}, class: 'selectpicker') %>
         </div>
+
+
+
 
         <div class="form-group col-xs-12 col-sm-4">
           <select class="form-control selectpicker">
@@ -39,12 +36,11 @@
 
       <div class="button-group">
         <div class="action-buttons">
-          <button class="btn btn-success">Download CSV</button>
           <button class="btn btn-primary">Apply filter</button>
         </div>
       </div>
 
-    </form>
+    <%end%>
   </div>
 </header>
 <!-- END Page header -->
