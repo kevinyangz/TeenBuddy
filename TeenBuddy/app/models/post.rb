@@ -15,7 +15,7 @@ class Post < ApplicationRecord
 
   include Filterable
 
-  scope :title, -> (title) { where title: title }
+  scope :title, -> (title) { where('title LIKE ? ', "%#{title}%") }
 
 
 
@@ -36,12 +36,5 @@ class Post < ApplicationRecord
 
   end
 
-  def self.search(description)
-    if description
-      where('description LIKE ? or title LIKE ? or requirements LIKE ?', "%#{description}%", "%#{description}%", "%#{description}%")
-    else
-      all
-    end
-  end
 
 end
