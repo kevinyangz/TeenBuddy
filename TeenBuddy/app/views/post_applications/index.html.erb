@@ -6,7 +6,7 @@
   </div>
 
   <div class="container">
-    <%= form_tag(posts_path, method: :get) do %>
+    <%= form_tag(post_applications_path, method: :get) do %>
     <h5>Search</h5>
 
 
@@ -16,7 +16,7 @@
         </div>
 
         <div class="form-group col-xs-12 col-sm-4">
-          <%= select(:status, options_for_select(['Pending','Approved','Rejected']), {}, class: 'selectpicker') %>
+          <%= select_tag(:status, options_for_select(['Pending','Approved','Rejected']), {class: 'form-control selectpicker'}) %>
         </div>
 
 
@@ -36,7 +36,7 @@
 
       <div class="button-group">
         <div class="action-buttons">
-          <button class="btn btn-primary">Apply filter</button>
+          <%= submit_tag("Apply filter", class: 'btn btn-primary') %>
         </div>
       </div>
 
