@@ -16,7 +16,7 @@
         </div>
 
         <div class="form-group col-xs-12 col-sm-4">
-          <%= select_tag(:status, options_for_select(['Pending','Approved','Rejected']), {class: 'form-control selectpicker'}) %>
+          <%= select_tag :status, params[:status], options_for_select(['Pending','Approved','Rejected']), {class: 'form-control selectpicker'} %>
         </div>
 
 
