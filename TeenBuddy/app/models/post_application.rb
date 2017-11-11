@@ -5,6 +5,10 @@ class PostApplication < ApplicationRecord
   include Filterable
 
   scope :status, -> (status) { where status: status }
+  scope :post, -> (post) { where post_id: post }
+
+
+
 
 
   def initialize_service
@@ -12,5 +16,9 @@ class PostApplication < ApplicationRecord
       new_service = Service.new(teenager_id: self.teenager_id, post_id: self.post_id, client_id: self.post.client_id)
       new_service.save
     end
+  end
+
+  def post_title
+    post.title
   end
 end

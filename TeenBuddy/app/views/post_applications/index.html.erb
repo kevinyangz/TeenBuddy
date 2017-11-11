@@ -7,30 +7,33 @@
 
   <div class="container">
     <%= form_tag(post_applications_path, method: :get) do %>
-    <h5>Search</h5>
+
 
 
       <div class="row">
-        <div class="form-group col-xs-12 col-sm-4">
-          <input type="text" class="form-control" placeholder="Keyword">
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-4">
-          <%= select_tag :status, params[:status], options_for_select(['Pending','Approved','Rejected']), {class: 'form-control selectpicker'} %>
-        </div>
-
-
 
 
         <div class="form-group col-xs-12 col-sm-4">
-          <select class="form-control selectpicker">
-            <option selected>Newest first</option>
-            <option>Oldest first</option>
-            <option>Low salary first</option>
-            <option>High salary first</option>
-            <option>Sort by name</option>
-          </select>
+          <h6>job title</h6>
+          <% if current_user.client %>
+              <%= select_tag :post, options_from_collection_for_select(Post.where(:client_id => current_user.client.id), "id", "title", params[:post]), {:include_blank => 'All',class: 'form-control selectpicker'} %>
+          <% elsif current_user.teenager %>
+              <%= select_tag :post, options_from_collection_for_select(PostApplication.where(:teenager_id => current_user.teenager.id), "post_id", "post_title", params[:post]), {:include_blank => 'All',class: 'form-control selectpicker'} %>
+          <%end%>
+              </div>
+
+
+         <div class="form-group col-xs-12 col-sm-4">
+           <h6>status</h6>
+          <%= select_tag :status, options_for_select(['Pending','Approved','Rejected'], params[:status]), {:include_blank => 'All', class: 'form-control selectpicker'} %>
         </div>
+
+        <div class="form-group col-xs-12 col-sm-4">
+          <h6>Order by</h6>
+          <%= select_tag :order, options_for_select(['status','title','apply time'], params[:order]), {class: 'form-control selectpicker'} %>
+        </div>
+
+
 
       </div>
 
