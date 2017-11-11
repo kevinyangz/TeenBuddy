@@ -22,9 +22,8 @@
           <%= link_to('Login', new_user_session_path, class: 'btn btn-sm btn-primary')%><%= link_to('Register', new_user_registration_path, class: 'btn btn-sm btn-success')%>
         </div>
         <!-- END User account -->
-    <%else%>
+    <%elsif current_user.teenager%>
         <div class="pull-right">
-
           <div class="dropdown user-account">
             <a class="dropdown-toggle" href="#" data-toggle="dropdown">
               <img src="/assets/img/logo-envato.png" alt="avatar">
@@ -36,6 +35,22 @@
              <li>Messages</li>
              <li>Credit</li>
              <li> <%= link_to('Logout', destroy_user_session_path, method: :delete) %></li>
+            </ul>
+          </div>
+        </div>
+        <%else%>
+        <div class="pull-right">
+          <div class="dropdown user-account">
+            <a class="dropdown-toggle" href="#" data-toggle="dropdown">
+              <img src="/assets/img/logo-envato.png" alt="avatar">
+            </a>
+            <b><%= "#{current_user.client.fname} #{current_user.client.lname}" %></b>
+            <ul class="dropdown-menu dropdown-menu-right">
+
+              <li><%= link_to 'Profile', current_user.client %></li>
+              <li>Messages</li>
+              <li>Credit</li>
+              <li> <%= link_to('Logout', destroy_user_session_path, method: :delete) %></li>
             </ul>
           </div>
         </div>
