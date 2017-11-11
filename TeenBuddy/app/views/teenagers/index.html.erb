@@ -1,16 +1,4 @@
 
-<%if current_user==nil%>
-<%= render 'home/header' %>
-<% elsif current_user.teenager %>
-<%= render 'home/header_teenager' %>
-<% elsif current_user.client %>
-<%= render 'home/header_client' %>
-
-<% end %>
-
-
-
-
 <header class="page-header bg-img" style="background-image: url(/assets/img/bg-banner1.jpg);">
   <div class="container page-name">
     <h1 class="text-center">Browse Teenagers</h1>
