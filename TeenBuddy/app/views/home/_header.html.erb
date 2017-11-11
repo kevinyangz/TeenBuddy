@@ -28,7 +28,9 @@
             <a class="dropdown-toggle" href="#" data-toggle="dropdown">
               <img src="/assets/img/logo-envato.png" alt="avatar">
             </a>
-
+               <%if current_user.teenager!=nil%>
+            <b><%= "#{current_user.teenager.fname} #{current_user.teenager.lname}"%>
+              <%end%>
            <ul class="dropdown-menu dropdown-menu-right">
 
              <li><%= link_to 'Profile', current_user.teenager %></li>
@@ -44,7 +46,9 @@
             <a class="dropdown-toggle" href="#" data-toggle="dropdown">
               <img src="/assets/img/logo-envato.png" alt="avatar">
             </a>
-
+            <%if current_user.client!=nil%>
+            <b><%= "#{current_user.client.fname} #{current_user.client.lname}"%>
+              <%end%>
             <ul class="dropdown-menu dropdown-menu-right">
 
               <li><%= link_to 'Profile', current_user.client %></li>
