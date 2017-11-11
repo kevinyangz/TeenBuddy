@@ -14,7 +14,7 @@ class Service < ApplicationRecord
     if my_post.services.count >= my_post.number_of_teenager_needed
       my_post.update(status:'close')
     else
-      my_post.update(status:'close')
+      my_post.update(status:'open')
     end
   end
 end
