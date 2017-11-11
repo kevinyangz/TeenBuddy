@@ -1,12 +1,11 @@
 class Post < ApplicationRecord
   # database tables associations
   belongs_to :client
-  #belongs_to :service
-  has_many :post_applications
-  has_many :services
   belongs_to :service_category
   belongs_to :service_type
-
+  has_many :post_applications
+  has_many :services
+  
   # getter and setter
   # validations
   validates :title, :description, :work_address, :pay, presence:true

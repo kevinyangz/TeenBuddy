@@ -1,4 +1,5 @@
 class PostsController < ApplicationController
+  require 'will_paginate/array'
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /posts
@@ -8,7 +9,7 @@ class PostsController < ApplicationController
       @posts = Post.where(client_id: params[:client_id])
       @state = 'client_posts'
     else
-      @posts = Post.search(params[:description])
+      @posts = Post.search(params[:description]).paginate(:page => params[:page], :per_page => 5)
       @state = 'all'
     end
   end

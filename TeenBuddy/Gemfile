@@ -55,6 +55,10 @@ ruby "2.4.2"
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 gem 'devise'
 
+# stripe for payment
 gem 'stripe'
 gem 'cancancan', '~> 2.0'
 gem 'bcrypt', platforms: :ruby
+
+# for pageable view
+gem 'will_paginate-bootstrap'

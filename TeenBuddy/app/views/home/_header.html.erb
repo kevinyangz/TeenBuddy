@@ -78,7 +78,7 @@
           <li>
             <a>My Center</a>
             <ul>
-              <li><%= link_to 'My Jobs', posts_path, {teenager_id: current_user.teenager.id} %></li>
+              <li><%= link_to 'My Jobs', posts_path(teenager_id: current_user.teenager.id) %></li>
               <li><%= link_to 'Offers' ,  post_invitations_path%></li>
               <li><%= link_to 'Applications' ,  post_applications_path %></li>
             </ul>
@@ -97,7 +97,7 @@
               <li>
                 <a>My Center</a>
                 <ul>
-                  <li><%= link_to 'My Posts', posts_path, {client_id: current_user.client.id} %></li>
+                  <li><%= link_to 'My Posts', posts_path(client_id: current_user.client.id) %></li>
                   <li><%= link_to 'Offers' ,  post_invitations_path%></li>
                   <li><%= link_to 'Applications' ,  post_applications_path%></li>
                 </ul>
