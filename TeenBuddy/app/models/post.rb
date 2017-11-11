@@ -12,6 +12,13 @@ class Post < ApplicationRecord
   validates :number_of_teenager_needed, numericality:{greater_than:0}
   validates :number_of_teenager_needed, format:{with: /[0-9]+/}
 
+
+  include Filterable
+
+  scope :title, -> (title) { where title: title }
+
+
+
   # functions
   def applicable teenager
 
