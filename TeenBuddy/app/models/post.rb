@@ -15,8 +15,12 @@ class Post < ApplicationRecord
 
   include Filterable
 
-  scope :title, -> (title) { where('title LIKE ? ', "%#{title}%") }
-
+  scope :searched_keyword, -> (searched_keyword) { where('title LIKE ? or 
+                                                          description LIKE ? or 
+                                                          requirements LIKE ?',
+                                                          "%#{searched_keyword}%", 
+                                                          "%#{searched_keyword}%", 
+                                                          "%#{searched_keyword}%") }
 
 
   # functions

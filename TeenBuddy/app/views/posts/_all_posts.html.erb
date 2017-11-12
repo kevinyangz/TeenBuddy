@@ -10,10 +10,7 @@
 
       <div class="row">
         <div class="form-group col-xs-12 col-sm-6">
-          <%= text_field_tag :description, params[:description], class: "form-control", placeholder: "Keyword: job title, description, or requirements" %>
-        </div>
-        <div class="form-group col-xs-12 col-sm-6">
-          <%= text_field_tag :title, params[:title], class: "form-control", placeholder: "Keyword: job title, description, or requirements" %>
+          <%= text_field_tag :searched_keyword, params[:searched_keyword], class: "form-control", placeholder: "Keyword: job title, description, or requirements" %>
         </div>
         <div class="form-group col-xs-12 col-sm-6">
           <%= text_field_tag :address, params[:address], class: "form-control", placeholder: "Location: city, state or zip" %>
@@ -89,10 +86,7 @@
 
         <% @posts.each do |post| %>
             <div class="col-xs-12">
-
               <%= link_to post, class: 'item-block' do %>
-
-
                 <header>
                   <img src="assets/img/logo-microsoft.jpg" alt="">
                   <div class="hgroup">
@@ -134,7 +128,7 @@
                     </li>
                   </ul>
                 </footer>
-                  <%end%>
+              <%end%>
             </div>
         <% end %>
       </div>
