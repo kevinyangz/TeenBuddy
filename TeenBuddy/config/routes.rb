@@ -1,4 +1,8 @@
 Rails.application.routes.draw do
+  
+
+  resources :messages, only: [:new, :create]
+  resources :conversations, only: [:index, :show, :destroy]
   resources :post_invitations
   resources :post_applications
   devise_for :users, controllers: { registrations: 'users/registrations'}
