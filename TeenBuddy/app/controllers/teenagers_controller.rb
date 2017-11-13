@@ -8,7 +8,13 @@ class TeenagersController < ApplicationController
   # GET /teenagers
   # GET /teenagers.json
   def index
-    @teenagers = Teenager.all
+    @current_teenager_interest= TeenagerInterest.all
+    @current_teenager_interest=@current_teenager_interest.filter(params.slice(:servicecategory))
+    test = @current_teenager_interest.all.collect {|p| p.teenager_id}
+    @teenagers = Teenager.where(id:test)
+  # @teenagers=@current_teenager_interest.teenagers
+    #puts "-----#{@current_teenager_interest.class}----"
+
 
   end
 
