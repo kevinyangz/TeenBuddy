@@ -10,8 +10,7 @@ class TeenagersController < ApplicationController
   def index
     @current_teenager_interest= TeenagerInterest.all
     @current_teenager_interest=@current_teenager_interest.filter(params.slice(:servicecategory))
-    test = @current_teenager_interest.all.collect {|p| p.teenager_id}
-    @teenagers = Teenager.where(id:test)
+    @teenagers = Teenager.where(id: @current_teenager_interest.select(:teenager_id))
   # @teenagers=@current_teenager_interest.teenagers
     #puts "-----#{@current_teenager_interest.class}----"
 
