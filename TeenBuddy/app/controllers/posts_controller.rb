@@ -18,6 +18,9 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @post = Post.find(params[:id])
+    if current_user.teenager
+    @post_client=Client.find(@post.client_id).user_id
+    end
   end
 
   # GET /posts/new
