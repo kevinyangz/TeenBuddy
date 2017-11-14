@@ -1,11 +1,12 @@
-<br>
-<br>
-<br>
 
-
+<header class="page-header bg-img" style="background-image: url(/assets/img/bg-banner1.jpg);">
+  <div class="container page-name">
+</header>
 <p>Chatting with
   <%= render 'conversations/participants', conversation: @conversation %>
 </p>
+<hi> <%= flash[:success]%></hi>
+
 
 <div class="panel panel-default">
   <div class="panel-heading"><%= @conversation.subject %></div>
@@ -29,3 +30,11 @@
     </div>
   </div>
 </div>
+
+<%= form_tag reply_conversation_path(@conversation), method: :post do %>
+  <div class="form-group">
+    <%= text_area_tag 'body', nil, cols: 3, class: 'form-control', placeholder: 'Type something...', required: true %>
+  </div>
+  <%= submit_tag "Send Message", class: 'btn btn-primary' %>
+<% end %>
+

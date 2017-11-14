@@ -34,7 +34,7 @@
            <ul class="dropdown-menu dropdown-menu-right">
 
              <li><%= link_to 'Profile', current_user.teenager %></li>
-             <li>Messages</li>
+              <li><%= link_to 'Your Conversations', conversations_path %></li>
              <li>Credit</li>
              <li> <%= link_to('Logout', destroy_user_session_path, method: :delete) %></li>
             </ul>
