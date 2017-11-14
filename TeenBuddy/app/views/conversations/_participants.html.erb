@@ -1,5 +1,9 @@
 <% conversation.participants.each do |participant| %>
   <% unless participant == current_user %>
-    <%= gravatar_for participant %>
-  <% end %>
+   <%if participant.teenager%>
+    <strong><%=Teenager.find_by(user_id: participant.id).fname%> </strong>
+    <%else%>
+    <strong><%=Client.find_by(user_id: participant.id).fname%> </strong>
+    <%end%>
+       <% end %>
 <% end %>
