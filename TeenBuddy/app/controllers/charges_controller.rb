@@ -1,6 +1,13 @@
 class ChargesController < ApplicationController
   def index
-    @amount = 420
+    @amount = 0    #in cents
+    
+    if current_user.teenager
+      @teenager = current_user.teenager
+    elsif current_user.client
+      @client = current_user.client
+    end
+
   end
 
   def new

@@ -19,7 +19,7 @@ class PostsController < ApplicationController
   def show
     @post = Post.find(params[:id])
     if current_user.teenager
-    @post_client=Client.find(@post.client_id).user_id
+      @post_client=Client.find(@post.client_id).user_id
     end
   end
 

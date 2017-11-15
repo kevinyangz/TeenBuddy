@@ -1,18 +1,24 @@
-<%= form_tag charges_path do %>
-  <article>
-    <% if flash[:error].present? %>
-      <div id="error_explanation">
-        <p><%= flash[:error] %></p>
-      </div>
-    <% end %>
-    <label class="amount">
-      <span>$<%= @amount/100 %>.<%= @amount%100 %></span>
-    </label>
-  </article>
+<header class="page-header bg-img" style="background-image: url(assets/img/bg-banner1.jpg);">
+  <div class="container page-name">
+    <h1 class="text-center">Credit</h1>
+    <p class="lead text-center">Check your available credit and transaction histroy</p>
+  </div>
+</header>
 
-  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-          data-description="A month's subscription"
-          data-amount="2500"
-          data-locale="auto"></script>
-<% end %>
+<section>
+  <div class="container">
+    <div class="row">
+      <div class="form-group col-xs-12 col-sm-12">
+        <h6>Title</h6>
+        <%= text_field :amou, placeholder: 'Post title, e.g. Need help on cleaning garden.', class: 'form-control input-lg' %>
+      </div>
+      <div>
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+              data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+              data-description="Deposit your credit"
+              data-amount="<%= @amount %>"
+              data-locale="auto"></script>
+      </div>
+    </div>
+  </div>
+</section>
