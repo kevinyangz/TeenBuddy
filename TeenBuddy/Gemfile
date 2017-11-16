@@ -72,3 +72,6 @@ gem 'gravatar_image_tag'
 gem 'chosen-rails'
 gem 'jquery-turbolinks'
 
+group :development, :test do
+  gem 'rspec-rails', '~> 3.6'
+end
