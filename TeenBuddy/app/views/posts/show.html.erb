@@ -6,7 +6,7 @@
         <h1><%= @post.title %></h1>
         <h3><a href="#"><%= "#{@post.client.fname} #{@post.client.lname}" %></a></h3>
       </div>
-      <time datetime=<%= @post.created_at %>>Updated at <%= @post.created_at %></time>
+      <time datetime=<%= @post.created_at %>>Created at <%= @post.created_at %></time>
       <hr>
       <p class="lead"><%= @post.description %></p>
 
@@ -28,7 +28,7 @@
 
         <li>
           <i class="fa fa-certificate"></i>
-          <span><%= @post.post_status %></span>
+          <span><%= @post.status %></span>
         </li>
       </ul>
 
@@ -43,6 +43,7 @@
 
         <div class="action-buttons">
           <% if current_user.teenager %>
+             <%= link_to 'Chat with Client', '#', :class => 'btn btn-success', 'data-toggle' => 'modal', 'data-target' => '#messageModal' %>
               <% if (teenager_applicable=@post.applicable(current_user.teenager)) == 'applicable' %>
                   <%= link_to 'Apply now', '#', :class => 'btn btn-success', 'data-toggle' => 'modal', 'data-target' => '#applyModal' %>
               <% else %>
@@ -87,10 +88,41 @@
 
       </div>
     </div>
+     <div id="messageModal" class="modal fade" role="dialog">
+      <div class="modal-dialog" >
+
+        <!-- Modal content-->
+  <div class="modal-content">
+   <%= form_tag messages_path, method: :post do %>
+    <div class="modal-body">
+
+  <div class="form-group">
+    <%= label_tag 'message[subject]', 'Subject' %>
+    <%= text_field_tag 'message[subject]', nil, class: 'form-control', required: true %>
+  </div>
+
+  <div class="form-group ">
+    <%= label_tag 'message[body]', 'Message' %>
+    <%= text_area_tag 'message[body]', nil, cols: 3, class: 'form-control', required: true %>
+  </div>
+
+    <%= hidden_field_tag 'recipients', @post_client %>
+</div>
+      <div class="modal-footer">
+
+  <%= submit_tag 'Send', class: 'btn btn-primary' %>
+  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+
+</div>
+<% end %>
+   </div>
+
+      </div>
+    </div>
 <% end %>
 
 <main>
-  <% if current_user.client == @post.client %>
+  <% if current_user.client == @post.client && (post_service = Service.where(:client_id => current_user.client, :post_id => @post.id)).any? %>
       <section class="no-padding-top bg-alt">
         <header class="section-header">
           <h2>On Service Teenagers</h2>
@@ -98,13 +130,13 @@
         <div class="container">
           <div class="row item-blocks-condensed">
 
-            <!-- Job item -->
+          <% post_service.each do |service| %>
             <div class="col-xs-12">
               <a class="item-block" href="job-detail.html">
                 <header>
                   <img src="assets/img/logo-google.jpg" alt="">
                   <div class="hgroup">
-                    <h4>Senior front-end developer</h4>
+                    <h4><%= service.teenager.fname %></h4>
                     <h5>Google</h5>
                   </div>
                   <div class="header-meta">
@@ -114,6 +146,7 @@
                 </header>
               </a>
             </div>
+            <%end %>
             <!-- END Job item -->
           </div>
         </div>

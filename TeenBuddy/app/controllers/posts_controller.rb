@@ -1,14 +1,15 @@
 class PostsController < ApplicationController
+  require 'will_paginate/array'
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /posts
   # GET /posts.json
   def index
     if params[:client_id].presence
-      @posts = Post.where(client_id: params[:client_id])
+      @posts = Post.where(client_id: params[:client_id]).order(params[:sort]).reverse.paginate(:page => params[:page], :per_page => 5)
       @state = 'client_posts'
     else
-      @posts = Post.search(params[:description])
+      @posts = Post.all.filter(params.slice(:searched_keyword)).order(params[:sort]).reverse.paginate(:page => params[:page], :per_page => 5)
       @state = 'all'
     end
   end
@@ -17,6 +18,9 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @post = Post.find(params[:id])
+    if current_user.teenager
+      @post_client=Client.find(@post.client_id).user_id
+    end
   end
 
   # GET /posts/new
@@ -46,6 +50,7 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.client_id = current_user.client.id
+    @post.status = "open"
 
     respond_to do |format|
       if @post.save
@@ -56,7 +61,6 @@ class PostsController < ApplicationController
         format.json { render json: @post.errors, status: :unprocessable_entity }
       end
     end
-    puts @post.service_category_id
   end
 
   # PATCH/PUT /posts/1
@@ -64,7 +68,7 @@ class PostsController < ApplicationController
   def update
     respond_to do |format|
       if @post.update(post_params)
-        format.html { redirect_to posts_path, notice: 'Post was successfully updated.' }
+        format.html { redirect_to @post, notice: 'Post was successfully updated.' }
         format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit }

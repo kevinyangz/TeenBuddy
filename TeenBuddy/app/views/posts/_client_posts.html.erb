@@ -1,12 +1,14 @@
 
-<header class="page-header bg-img size-lg" style="background-image: url(／assets/img/bg-banner1.jpg)">
-  <div class="container no-shadow">
-    <h1 class="text-center">Manage jobs</h1>
+<header class="page-header bg-img" style="background-image: url(assets/img/bg-banner1.jpg);">
+  <div class="container page-name">
+    <h1 class="text-center">Manage your posted jobs</h1>
     <p class="lead text-center">Here's the list of your submitted jobs. You can edit or delete them, or even add a new one.</p>
+  </div>
+  <div class="container">
+    <p id="notice"><%= notice %></p>
   </div>
 </header>
 
-<p id="notice"><%= notice %></p>
 
 <main>
   <section class="no-padding-top bg-alt">
@@ -18,7 +20,7 @@
           <%= link_to 'Post a Service' , new_post_path, class: 'btn btn-primary btn-sm' %>
         </div>
 
-        <% @posts.order(:updated_at).reverse.each do |post| %>
+        <% @posts.each do |post| %>
             <div class="col-xs-12">
               <div class="item-block">
                 <header>
@@ -39,7 +41,7 @@
                 </header>
 
                 <footer>
-                  <p class="status"><strong>Status: </strong><%= post.post_status %></p>
+                  <p class="status"><strong>Status: </strong><%= post.status %></p>
 
                   <div class="action-btn">
                     <%= link_to 'Edit', edit_post_path(post), class: 'btn btn-xs btn-gray'%>
@@ -49,8 +51,23 @@
               </div>
             </div>
         <% end %>
-        
       </div>
+      <!-- Page navigation -->
+      <nav class="text-center">
+        <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
+      </nav>
+      <div id="order-by">
+        <form>
+          <select name="sort">
+            <option value="updated_at">Update Time</option>
+            <option value="created_at">Create Time</option>
+            <option value="title">Title</option>
+          </select>
+
+          <input type="submit" value="Sort"/>
+        </form>
+      </div>
+      <!-- END Page navigation -->
     </div>
   </section>
 </main>
