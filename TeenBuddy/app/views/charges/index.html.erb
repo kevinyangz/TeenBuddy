@@ -5,20 +5,35 @@
   </div>
 </header>
 
-<section>
+
+<%= form_tag charges_path do %>
+  <% if current_user.client %>
+    <section>
+      <div class="container">
+        <div class="row">
+          <div class="form-group col-xs-12 col-sm-12">
+            <h6>Amount (in cents & > 50 cents)</h6>
+            <%= number_field_tag :credit, placeholder: 'Post title, e.g. Need help on cleaning garden.', class: 'form-control input-lg', id: 'charges_amount' %>
+          </div>
+          <div>
+            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                  data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                  data-description="Deposit your credit"
+                  data-amount="<% @amount %>"
+                  data-locale="auto"></script>
+          </div>
+        </div>
+      </div>
+    </section>
+  <% end %>
+
   <div class="container">
-    <div class="row">
-      <div class="form-group col-xs-12 col-sm-12">
-        <h6>Title</h6>
-        <%= text_field :amou, placeholder: 'Post title, e.g. Need help on cleaning garden.', class: 'form-control input-lg' %>
-      </div>
-      <div>
-        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-              data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-              data-description="Deposit your credit"
-              data-amount="<%= @amount %>"
-              data-locale="auto"></script>
-      </div>
-    </div>
+    <p>$
+      <% if @state == 'client' %>
+        <%= number_with_precision(@client.available_credit/100, :precision => 2) %>
+      <% elsif @state == 'teenager' %>
+        <%= number_with_precision(@teenager.available_credit/100, :precision => 2) %>
+      <% end %>
+    </p>
   </div>
-</section>
+<% end %>

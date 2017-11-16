@@ -1,1 +1,8 @@
-<h2>Thanks, you paid <strong>$<%= @amount %></strong>!</h2>
+<header class="page-header bg-img" style="background-image: url(assets/img/bg-banner1.jpg);">
+  <div class="container page-name">
+    <h1 class="text-center">Credit</h1>
+    <p class="lead text-center">Check your available credit and transaction histroy</p>
+  </div>
+</header>
+
+<h2>Thanks, you paid <strong>$<%= number_with_precision(@amount.to_i/100, :precision => 2) %></strong>!</h2>
