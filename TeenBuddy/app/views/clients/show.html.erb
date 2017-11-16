@@ -1,10 +1,14 @@
 
 
 <!-- Page header -->
-<header class="page-header bg-img size-lg" style="background-image: url(assets/img/bg-banner2.jpg)">
+<header class="page-header bg-img" style="background-image: url(assets/img/bg-banner1.jpg)">
   <div class="container">
-    <div class="header-detail">
-      <img class="logo" src="assets/img/logo-google.jpg" alt="">
+    <div class="row">
+      <div class="col-xs-12 col-sm-4">
+        <img src="assets/img/avatar.jpg" alt="">
+      </div>
+
+      <div class="col-xs-12 col-sm-8 header-detail">
       <div class="hgroup">
         <h1><%= @client.fname %> <%= @client.lname %></h1>
 
@@ -35,7 +39,7 @@
           <a href="#"><%= @client.user.email %></a>
         </li>
       </ul>
-
+      </div>
       <div class="button-group">
         <ul class="social-icons">
           <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
