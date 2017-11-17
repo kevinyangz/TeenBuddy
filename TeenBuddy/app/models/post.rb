@@ -22,6 +22,8 @@ class Post < ApplicationRecord
                                                           "%#{searched_keyword}%", 
                                                           "%#{searched_keyword}%") }
 
+  scope :status, -> (status) { where('status = ?', "#{status}") }
+
 
 
 
