@@ -1,4 +1,4 @@
-<%= form_with(model: teenager, local: true) do |form| %>
+<%=form_with(model:teenager, local: true) :teenager  do |form| %>
      <header class="page-header bg-img size-lg" style="background-image: url(/assets/img/bg-banner1.jpg)">
       <div class="container page-name">
         <h1 class="text-center"><%= @post_form_header_title %></h1>
@@ -54,7 +54,6 @@
 </div>
 </div>
 </header>
-
  <section class="bg-alt">
       <div class="container">
         <header class="section-header">
@@ -63,10 +62,14 @@
         </header>
         <div class="actions">
           <p class="text-center">
-            <%= form.submit class: 'btn btn-success btn-xl btn-round' %>
+            <%= f.submit class: 'btn btn-success btn-xl btn-round' %>
           </p>
         </div>
       </div>
     </section>
 
 <% end %>
+
+
+
+

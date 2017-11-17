@@ -1,8 +1,9 @@
 class Users::PasswordsController < Devise::PasswordsController
   # GET /resource/password/new
-  # def new
-  #   super
-  # end
+   def new
+     @user = User.new
+    @user.build_teenager
+   end
 
   # POST /resource/password
   # def create
