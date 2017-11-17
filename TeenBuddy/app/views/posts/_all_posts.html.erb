@@ -10,19 +10,33 @@
 
       <div class="row">
         <div class="form-group col-xs-12 col-sm-6">
-          <%= text_field_tag :description, params[:description], class: "form-control", placeholder: "Keyword: job title, description, or requirements" %>
+          <h6>Keywords</h6>
+          <%= text_field_tag :searched_keyword, params[:searched_keyword], class: "form-control", placeholder: "Keyword: job title, description, or requirements" %>
         </div>
-
         <div class="form-group col-xs-12 col-sm-6">
+          <h6>Address</h6>
           <%= text_field_tag :address, params[:address], class: "form-control", placeholder: "Location: city, state or zip" %>
         </div>
 
-        <div class="form-group col-xs-12 col-sm-6">
+        <div class="form-group col-xs-12 col-sm-3">
+          <h6>Category</h6>
           <%= collection_select(:post, :filtered_service_category_id, ServiceCategory.order(:title), :id, :title, {}, {class: 'form-control selectpicker'}) %>
         </div>
 
-        <div class="form-group col-xs-12 col-sm-6">
+        <div class="form-group col-xs-12 col-sm-3">
+          <h6>Type</h6>
           <%= grouped_collection_select(:post, :filtered_service_type_id, ServiceCategory.order(:title), :service_types, :title, :id, :title, {}, {class: 'form-control selectpicker'}) %>
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-3">
+          <h6>Status</h6>
+          <%= select_tag :status, options_for_select([['Open', 'open'], ['Close', 'lose']], params[:status]), {:include_blank => 'All', class: 'form-control selectpicker'} %>
+        </div>
+
+        <div class="form-group col-xs-12 col-sm-3">
+          <h6>Order By</h6>
+          <%= select_tag :order, options_for_select([["update time", "updated_at"], ["create time", "created_at"]],params[:order]), {:include_blank => 'Default', class: 'form-control selectpicker'} %>
+
         </div>
 
         <!--
@@ -85,12 +99,9 @@
           <h5>We found <strong><%= @posts.count %></strong> matches</h5>
         </div>
 
-        <% @posts.order(:updated_at).reverse.each do |post| %>
+        <% @posts.each do |post| %>
             <div class="col-xs-12">
-
               <%= link_to post, class: 'item-block' do %>
-
-
                 <header>
                   <img src="assets/img/logo-microsoft.jpg" alt="">
                   <div class="hgroup">
@@ -132,7 +143,7 @@
                     </li>
                   </ul>
                 </footer>
-                  <%end%>
+              <%end%>
             </div>
         <% end %>
       </div>
@@ -140,23 +151,19 @@
 
       <!-- Page navigation -->
       <nav class="text-center">
-        <ul class="pagination">
-          <li>
-            <a href="#" aria-label="Previous">
-              <i class="ti-angle-left"></i>
-            </a>
-          </li>
-          <li><a href="#">1</a></li>
-          <li class="active"><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li>
-            <a href="#" aria-label="Next">
-              <i class="ti-angle-right"></i>
-            </a>
-          </li>
-        </ul>
+        <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
       </nav>
+      <div id="order-by">
+        <form>
+          <select name="sort">
+            <option value="updated_at">Update Time</option>
+            <option value="created_at">Create Time</option>
+            <option value="title">Title</option>
+          </select>
+
+          <input type="submit" value="Sort"/>
+        </form>
+      </div>
       <!-- END Page navigation -->
 
     </div>

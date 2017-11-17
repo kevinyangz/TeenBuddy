@@ -15,7 +15,8 @@ class Teenager < ApplicationRecord
   validates :cell_phone,presence: true
   validates :birth_date, presence:true
   validate :age_requirement19, on: :create
-  
+ 
+
   def self.get_age (birthdate)
      now = Time.now.utc.to_date
      age =now.year - birthdate.year 

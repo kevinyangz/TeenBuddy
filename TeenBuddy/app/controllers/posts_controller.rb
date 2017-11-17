@@ -1,14 +1,16 @@
 class PostsController < ApplicationController
+  require 'will_paginate/array'
   before_action :set_post, only: [:show, :edit, :update, :destroy]
 
   # GET /posts
   # GET /posts.json
   def index
     if params[:client_id].presence
-      @posts = Post.where(client_id: params[:client_id])
+      @posts = Post.where(client_id: params[:client_id]).order(params[:sort]).reverse.paginate(:page => params[:page], :per_page => 5)
       @state = 'client_posts'
     else
-      @posts = Post.search(params[:description])
+      @posts = Post.all.filter(params.slice(:searched_keyword, :status)).order(params[:order]).reverse.paginate(:page => params[:page], :per_page => 5)
+
       @state = 'all'
     end
   end
@@ -17,6 +19,9 @@ class PostsController < ApplicationController
   # GET /posts/1.json
   def show
     @post = Post.find(params[:id])
+    if current_user.teenager
+      @post_client=Client.find(@post.client_id).user_id
+    end
   end
 
   # GET /posts/new
