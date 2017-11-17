@@ -43,11 +43,11 @@
 
         <div class="action-buttons">
           <% if current_user.teenager %>
-             <%= link_to 'Chat with Client', '#', :class => 'btn btn-success', 'data-toggle' => 'modal', 'data-target' => '#messageModal' %>
+              <%= link_to 'Chat with Client', '#', :class => 'btn btn-success', 'data-toggle' => 'modal', 'data-target' => '#messageModal' %>
               <% if (teenager_applicable=@post.applicable(current_user.teenager)) == 'applicable' %>
                   <%= link_to 'Apply now', '#', :class => 'btn btn-success', 'data-toggle' => 'modal', 'data-target' => '#applyModal' %>
               <% else %>
-                  <button type="button" class="btn btn-primary"><%=teenager_applicable%></button>
+                  <button type="button" class="btn btn-primary"><%= teenager_applicable %></button>
               <% end %>
           <% elsif current_user.client == @post.client %>
               <%= link_to 'Edit', edit_post_path(@post), class: 'btn btn-gray' %>
@@ -88,34 +88,34 @@
 
       </div>
     </div>
-     <div id="messageModal" class="modal fade" role="dialog">
-      <div class="modal-dialog" >
+    <div id="messageModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
 
         <!-- Modal content-->
-  <div class="modal-content">
-   <%= form_tag messages_path, method: :post do %>
-    <div class="modal-body">
+        <div class="modal-content">
+          <%= form_tag messages_path, method: :post do %>
+              <div class="modal-body">
 
-  <div class="form-group">
-    <%= label_tag 'message[subject]', 'Subject' %>
-    <%= text_field_tag 'message[subject]', nil, class: 'form-control', required: true %>
-  </div>
+                <div class="form-group">
+                  <%= label_tag 'message[subject]', 'Subject' %>
+                  <%= text_field_tag 'message[subject]', nil, class: 'form-control', required: true %>
+                </div>
 
-  <div class="form-group ">
-    <%= label_tag 'message[body]', 'Message' %>
-    <%= text_area_tag 'message[body]', nil, cols: 3, class: 'form-control', required: true %>
-  </div>
+                <div class="form-group ">
+                  <%= label_tag 'message[body]', 'Message' %>
+                  <%= text_area_tag 'message[body]', nil, cols: 3, class: 'form-control', required: true %>
+                </div>
 
-    <%= hidden_field_tag 'recipients', @post_client %>
-</div>
-      <div class="modal-footer">
+                <%= hidden_field_tag 'recipients', @post_client %>
+              </div>
+              <div class="modal-footer">
 
-  <%= submit_tag 'Send', class: 'btn btn-primary' %>
-  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+                <%= submit_tag 'Send', class: 'btn btn-primary' %>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
 
-</div>
-<% end %>
-   </div>
+              </div>
+          <% end %>
+        </div>
 
       </div>
     </div>
@@ -130,23 +130,23 @@
         <div class="container">
           <div class="row item-blocks-condensed">
 
-          <% post_service.each do |service| %>
-            <div class="col-xs-12">
-              <a class="item-block" href="job-detail.html">
-                <header>
-                  <img src="assets/img/logo-google.jpg" alt="">
-                  <div class="hgroup">
-                    <h4><%= service.teenager.fname %></h4>
-                    <h5>Google</h5>
-                  </div>
-                  <div class="header-meta">
-                    <span class="location">Menlo park, CA</span>
-                    <span class="label label-success">Full-time</span>
-                  </div>
-                </header>
-              </a>
-            </div>
-            <%end %>
+            <% post_service.each do |service| %>
+                <div class="col-xs-12">
+                  <a class="item-block" href="job-detail.html">
+                    <header>
+                      <img src="assets/img/logo-google.jpg" alt="">
+                      <div class="hgroup">
+                        <h4><%= service.teenager.fname %></h4>
+                        <h5>Google</h5>
+                      </div>
+                      <div class="header-meta">
+                        <span class="location">Menlo park, CA</span>
+                        <span class="label label-success">Full-time</span>
+                      </div>
+                    </header>
+                  </a>
+                </div>
+            <% end %>
             <!-- END Job item -->
           </div>
         </div>

@@ -1,138 +1,94 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=5">
-    <meta name="description" content="Post a job position or create your online resume by TheJobs!">
-    <meta name="keywords" content="">
-
-    <title>TheJobs - Register</title>
-
-    <!-- Styles -->
-    <link href="assets/css/app.min.css" rel="stylesheet">
-    <link href="assets/css/custom.css" rel="stylesheet">
-
-    <!-- Fonts -->
-    <link href='http://fonts.googleapis.com/css?family=Oswald:100,300,400,500,600,800%7COpen+Sans:300,400,500,600,700,800%7CMontserrat:400,700' rel='stylesheet' type='text/css'>
-
-    <!-- Favicons -->
-    <link rel="apple-touch-icon" href="/apple-touch-icon.png">
-    <link rel="icon" href="assets/img/favicon.ico">
-  </head>
-
-  <body class="login-page">
+<body class="login-page">
 
 
-    <main>
-      <%if params[:role] == nil %>
+<main>
+  <% if params[:role] == nil %>
       <div class="login-block">
         <h1>Choose type of your account</h1>
         <p class="lead text-center">If you are looking for tasks</p>
-          <%= (link_to 'Teenager', new_user_registration_path(:role =>"teenager" ), class: 'btn btn-primary btn-block') %>
-          <p class="lead text-center"></p>
-          <p class="lead text-center">If you want to post tasks</p>
-          <%= (link_to 'Client', new_user_registration_path(:role =>"client" ), class: 'btn btn-primary btn-block') %>
+        <%= (link_to 'Teenager', new_user_registration_path(:role => "teenager"), class: 'btn btn-primary btn-block') %>
+        <p class="lead text-center"></p>
+        <p class="lead text-center">If you want to post tasks</p>
+        <%= (link_to 'Client', new_user_registration_path(:role => "client"), class: 'btn btn-primary btn-block') %>
 
 
-          <div class="login-footer">
-            <h6>Or register with</h6>
-            <ul class="social-icons">
-              <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-              <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-            </ul>
-          </div>
+        <div class="login-footer">
+          <h6>Or register with</h6>
+          <ul class="social-icons">
+            <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+          </ul>
+        </div>
 
         </form>
       </div>
 
       <!--if registration type is tennager -->
-      <%elsif params[:role] == "teenager" %>
+  <% elsif params[:role] == "teenager" %>
+      <div class="login-block">
+
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-         <%= devise_error_messages! %>
+            <%= devise_error_messages! %>
 
-          <div class="field">
-          <%= f.label :email %><br />
-            <%= f.email_field :email, autofocus: true %>
-         </div>
+            <div class="field">
+              <%= f.label :email %><br/>
+              <%= f.email_field :email, autofocus: true %>
+            </div>
 
-          <div class="field">
-            <%= f.label :password %>
-            <% if @minimum_password_length %>
-            <em>(<%= @minimum_password_length %> characters minimum)</em>
-            <% end %><br />
-            <%= f.password_field :password, autocomplete: "off" %>
-          </div>
+            <div class="field">
+              <%= f.label :password %>
+              <% if @minimum_password_length %>
+                  <em>(<%= @minimum_password_length %> characters minimum)</em>
+              <% end %><br/>
+              <%= f.password_field :password, autocomplete: "off" %>
+            </div>
 
-          <div class="field">
-            <%= f.label :password_confirmation %><br />
-            <%= f.password_field :password_confirmation, autocomplete: "off" %>
-          </div>
-     
-      <!-- nested fields -->
-      <%= f.fields_for :teenager, @user.build_teenager   do |form| %>
-     <header class="page-header bg-img size-lg" style="background-image: url(/assets/img/bg-banner1.jpg)">
-      <div class="container page-name">
-        <h1 class="text-center"><%= @post_form_header_title %></h1>
-        <p class="lead text-center"><%= @post_form_header_description %></p>
-      </div>
-      <div class="container">
-      <div class="row">
+            <div class="field">
+              <%= f.label :password_confirmation %><br/>
+              <%= f.password_field :password_confirmation, autocomplete: "off" %>
+            </div>
 
+            <!-- nested fields -->
+            <%= f.fields_for :teenager, @user.build_teenager do |form| %>
+                <div class="form-group col-xs-12 col-sm-12">
+                  <%= form.text_field :fname, placeholder: 'First Name', class: 'form-control' %>
+                </div>
 
-     <div class="form-group col-xs-12 col-sm-12">
-      <%= form.text_field :fname, placeholder: 'First Name', class: 'form-control input-lg' %>
-    </div>
+                <div class="form-group col-xs-12 col-sm-12">
+                  <%= form.text_field :lname, placeholder: 'Last Name', class: 'form-control' %>
+                </div>
 
-     <div class="form-group col-xs-12 col-sm-12">
-      <%= form.text_field :lname, placeholder: 'Last Name', class: 'form-control input-lg' %>
-    </div>
+                <div class="form-group col-xs-12 col-sm-12">
+                  <%= form.text_field :home_address, id: :teenager_home_address, placeholder: 'Home Address', class: 'form-control' %>
+                </div>
 
-     <div class="form-group col-xs-12 col-sm-12">
-      <%= form.text_field :home_address,  id: :teenager_home_address, placeholder: 'Home Address', class: 'form-control input-lg' %>
-    </div>
+                <div class="form-group col-xs-12 col-sm-12">
+                  <%= form.text_field :postal_code, id: :postal_code, placeholder: 'Please enter your Postal Code ', class: 'form-control'%>
+                </div>
 
-     <div class="form-group col-xs-12 col-sm-12">
-      <%= form.text_field :postal_code,id: :postal_code,placeholder: 'Please enter your Postal Code ', class: 'form-control input-lg' %>
-    </div>
+                <div class="form-group col-xs-12 col-sm-12">
+                  <%= form.text_field :cell_phone, placeholder: 'Please enter your Cell Phone Number', class: 'form-control'%>
+                </div>
 
-  
-     <div class="form-group col-xs-12 col-sm-12">
-      <%= form.text_field :cell_phone, placeholder: 'Please enter your Cell Phone Number', class: 'form-control input-lg' %>
-    </div>
+                <div class="form-group col-xs-12 col-sm-12">
+                  <%= form.select :service_category_ids, ServiceCategory.all.collect {|x| [x.title, x.id]}, {}, :multiple => true,
+                                  :prompt => 'Please select service category', class: 'form-control selectpicker' %>
+                </div>
 
-     <div class="form-group col-xs-12 col-sm-12">
-      <%= form.select :service_category_ids, ServiceCategory.all.collect {|x| [x.title, x.id]}, {}, :multiple => true ,
-       :prompt => 'Please select service category',class: 'form-control selectpicker' %>
-          </div>
-
-     <div class="form-group col-xs-12 col-sm-12">
-      <%= form.date_field :birth_date, placeholder: 'Please enter your Postal Code ', class: 'form-control input-lg' %>
-    </div>
-</div>
-</div>
-</header>
- <section class="bg-alt">
-      <div class="container">
-        <header class="section-header">
-          <h1>Are you done?</h1>
-          <p>Please review your information once more and press the below button to put your post online.</p>
-        </header>
-        <div class="actions">
-          <p class="text-center">
+                <div class="form-group col-xs-12 col-sm-12">
+                  <%= form.date_field :birth_date, placeholder: 'Please enter your Postal Code ', class: 'form-control' %>
+                </div>
+                
+            <% end %>
+            </div>
             <%= f.submit class: 'btn btn-success btn-xl btn-round' %>
-          </p>
-        </div>
-      </div>
-    </section>
-    <% end %>
+        <% end %>
+
   <% end %>
-<%end%>
 
 
- </main>
+</main>
 
 
-  </body>
-</html>
+</body>
