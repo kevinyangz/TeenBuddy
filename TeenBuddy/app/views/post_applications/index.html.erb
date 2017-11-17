@@ -1,17 +1,20 @@
 <!-- Page header -->
 <header class="page-header bg-img size-lg" style="background-image: url(assets/img/bg-banner1.jpg)">
   <div class="container page-name">
-    <h1 class="text-center">Job Candidates</h1>
-    <p class="lead text-center">Use following search box to find best candidates for your openning position</p>
+
+    <%if current_user.teenager %>
+        <h1 class="text-center">Job Applications</h1>
+        <p class="lead text-center">Use following search box to find status of your applications</p>
+    <% elsif current_user.client %>
+        <h1 class="text-center">Job Candidates</h1>
+        <p class="lead text-center">Use following search box to find best candidates for your openning position</p>
+    <%end%>
   </div>
 
   <div class="container">
     <%= form_tag(post_applications_path, method: :get) do %>
 
-
-
       <div class="row">
-
 
         <div class="form-group col-xs-12 col-sm-4">
           <h6>job title</h6>
@@ -20,8 +23,7 @@
           <% elsif current_user.teenager %>
               <%= select_tag :post, options_from_collection_for_select(PostApplication.where(:teenager_id => current_user.teenager.id), "post_id", "post_title", params[:post]), {:include_blank => 'All',class: 'form-control selectpicker'} %>
           <%end%>
-              </div>
-
+        </div>
 
          <div class="form-group col-xs-12 col-sm-4">
            <h6>status</h6>

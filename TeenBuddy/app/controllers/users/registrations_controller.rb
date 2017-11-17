@@ -3,9 +3,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-  #   super
-  # end
+   #def new
+    @user = User.new
+    @user.build_teenager
+   #end
 
   # POST /resource
   # def create
@@ -40,7 +41,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
    def configure_sign_up_params
-     devise_parameter_sanitizer.permit(:sign_up, keys: [:role])
+     devise_parameter_sanitizer.permit(:sign_up, keys: [:role,
+                                                        :teenager_attributes=> [:fname,:lname, :home_address,
+          :cell_phone, :birth_date,:postal_code,service_category_ids: [] ]])
    end
 
   # If you have extra params to permit, append them to the sanitizer.
