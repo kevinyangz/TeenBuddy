@@ -3,13 +3,18 @@
 
 <main>
   <% if params[:role] == nil %>
+      <row>
+
       <div class="login-block">
-        <h1>Choose type of your account</h1>
-        <p class="lead text-center">If you are looking for tasks</p>
-        <%= (link_to 'Teenager', new_user_registration_path(:role => "teenager"), class: 'btn btn-primary btn-block') %>
-        <p class="lead text-center"></p>
-        <p class="lead text-center">If you want to post tasks</p>
-        <%= (link_to 'Client', new_user_registration_path(:role => "client"), class: 'btn btn-primary btn-block') %>
+
+        <%= link_to image_tag("/assets/img/logo.png", border: 0), home_index_path, class: 'logo', method: :get %></a>
+       <br><br>
+        <p class="lead text-center">Search posts, apply jobs, accept offer, find best jobs nearby!</p>
+        <%= (link_to 'Teenager', new_user_registration_path(:role => "teenager"), class: 'btn btn-block btn-primary') %>
+        <hr>
+
+        <p class="lead text-center">Post Jobs, invite teenager, accept applications, find teenagers for your jobs.</p>
+        <%= (link_to 'Client', new_user_registration_path(:role => "client"), class: 'btn btn-block btn-primary') %>
 
 
         <div class="login-footer">
@@ -20,9 +25,11 @@
             <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
           </ul>
         </div>
-
         </form>
       </div>
+      </row>
+
+
 
       <!--if registration type is tennager -->
   <% elsif params[:role] == "teenager" %>
