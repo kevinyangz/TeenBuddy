@@ -9,7 +9,8 @@ class PostsController < ApplicationController
       @posts = Post.where(client_id: params[:client_id]).order(params[:sort]).reverse.paginate(:page => params[:page], :per_page => 5)
       @state = 'client_posts'
     else
-      @posts = Post.all.filter(params.slice(:searched_keyword)).order(params[:sort]).reverse.paginate(:page => params[:page], :per_page => 5)
+      @posts = Post.all.filter(params.slice(:searched_keyword)).order(params[:order]).reverse.paginate(:page => params[:page], :per_page => 5)
+
       @state = 'all'
     end
   end
