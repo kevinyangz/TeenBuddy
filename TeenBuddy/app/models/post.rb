@@ -23,6 +23,9 @@ class Post < ApplicationRecord
                                                           "%#{searched_keyword}%") }
 
 
+
+
+
   # functions
   def applicable teenager
 
