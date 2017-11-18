@@ -1,39 +1,98 @@
+<body class="login-page">
 
-<h2>Sign up</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= devise_error_messages! %>
+<main>
+  <% if params[:role] == nil %>
+      <row>
 
-    <div class="form-group col-xs-12 col-sm-12">
-    <div class="field">
-      <%= f.label :role %>
-      <%= f.select(:role, options_for_select(['teenager','client','admin']), {}, class: 'selectpicker') %>
+      <div class="login-block">
 
-    </div>
-    </div>
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true %>
-  </div>
+        <%= link_to image_tag("/assets/img/logo.png", border: 0), home_index_path, class: 'logo', method: :get %></a>
+       <br><br>
+        <p class="lead text-center">Search posts, apply jobs, accept offer, find best jobs nearby!</p>
+        <%= (link_to 'Teenager', new_user_registration_path(:role => "teenager"), class: 'btn btn-block btn-primary') %>
+        <hr>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "off" %>
-  </div>
+        <p class="lead text-center">Post Jobs, invite teenager, accept applications, find teenagers for your jobs.</p>
+        <%= (link_to 'Client', new_user_registration_path(:role => "client"), class: 'btn btn-block btn-primary') %>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "off" %>
-  </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
-  </div>
-<% end %>
+        <div class="login-footer">
+          <h6>Or register with</h6>
+          <ul class="social-icons">
+            <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+          </ul>
+        </div>
+        </form>
+      </div>
+      </row>
 
 
 
-<%= render "devise/shared/links" %>
+      <!--if registration type is tennager -->
+  <% elsif params[:role] == "teenager" %>
+
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= devise_error_messages! %>
+               <div class="container">
+                <div class="row">
+                <div class="form-group col-xs-12 col-sm-12">
+              <%= f.email_field :email, autofocus: true, placeholder: 'Email Address', class: 'form-control' %>
+            </div>
+
+                <div class="form-group col-xs-12 col-sm-12">
+              <%= f.password_field :password, autocomplete: "off" , placeholder: "#{@minimum_password_length} characters minimum", class: 'form-control'%>
+            </div>
+
+                <div class="form-group col-xs-12 col-sm-12">
+              <%= f.password_field :password_confirmation, autocomplete: "off" , placeholder: 'Password Confirmation', class: 'form-control'%>
+            </div>
+
+            <!-- nested fields -->
+            <%= f.fields_for :teenager, @user.build_teenager do |form| %>
+                <div class="form-group col-xs-12 col-sm-12">
+                  <%= form.text_field :fname, placeholder: 'First Name', class: 'form-control' %>
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-12">
+                  <%= form.text_field :lname, placeholder: 'Last Name', class: 'form-control' %>
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-12">
+                  <%= form.text_field :home_address, id: :teenager_home_address, placeholder: 'Home Address', class: 'form-control' %>
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-12">
+                  <%= form.text_field :postal_code, id: :postal_code, placeholder: 'Please enter your Postal Code ', class: 'form-control'%>
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-12">
+                  <%= form.text_field :cell_phone, placeholder: 'Please enter your Cell Phone Number', class: 'form-control'%>
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-12">
+                  <%= form.select :service_category_ids, ServiceCategory.all.collect {|x| [x.title, x.id]}, {}, :multiple => true,
+                                  :prompt => 'Please select service category', class: 'form-control selectpicker' %>
+                </div>
+
+                <div class="form-group col-xs-12 col-sm-12">
+                  <%= form.date_field :birth_date, placeholder: 'Please enter your Postal Code ', class: 'form-control' %>
+                </div>
+                
+                          </div>
+                        </div>
+
+            <% end %>
+          
+            <%= f.submit class: 'btn btn-success btn-xl btn-round' %>
+        <% end %>
+
+  <% end %>
+
+
+</main>
+
+
+</body>

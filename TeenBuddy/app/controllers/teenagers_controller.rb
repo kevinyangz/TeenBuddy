@@ -8,7 +8,12 @@ class TeenagersController < ApplicationController
   # GET /teenagers
   # GET /teenagers.json
   def index
-    @teenagers = Teenager.all
+    @current_teenager_interest= TeenagerInterest.all
+    @current_teenager_interest=@current_teenager_interest.filter(params.slice(:servicecategory))
+    @teenagers = Teenager.where(id: @current_teenager_interest.select(:teenager_id))
+  # @teenagers=@current_teenager_interest.teenagers
+    #puts "-----#{@current_teenager_interest.class}----"
+
 
   end
 
@@ -34,6 +39,7 @@ class TeenagersController < ApplicationController
   def create
     @teenager = Teenager.new(teenager_params)
     @teenager.user_id = current_user.id
+    @teenager.available_credit = 0
 
     respond_to do |format|
     if @teenager.save

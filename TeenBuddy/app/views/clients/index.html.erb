@@ -1,38 +1,96 @@
-<p id="notice"><%= notice %></p>
 
-<h1>Clients</h1>
 
-<table>
-  <thead>
-    <tr>
-      <th>Fname</th>
-      <th>Lname</th>
-      <th>Home address</th>
-      <th>Home phone</th>
-      <th>Cell phone</th>
-      <th>Number of Posts</th>
-      <th colspan="3"></th>
-    </tr>
-  </thead>
+<header class="page-header bg-img" style="background-image: url(/assets/img/bg-banner1.jpg);">
+  <div class="container page-name">
+    <h1 class="text-center">Browse Clients</h1>
+  </div>
 
-  <tbody>
-    <% @clients.each do |client| %>
-      <tr>
-        <td><%= client.fname %></td>
-        <td><%= client.lname %></td>
-        <td><%= client.home_address %></td>
-        <td><%= client.home_phone %></td>
-        <td><%= client.cell_phone %></td>
-        <td><%= Post.where(client: client.id).count() %></td>
-        <td><%= link_to 'Show', client %></td>
-        <td><%= link_to 'Edit', edit_client_path(client) %></td>
-        <td><%= link_to 'Destroy', client, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
 
-<br>
+</header>
+<!-- END Page header -->
 
-<%= link_to 'New Client', new_client_path %>
-<%= link_to 'Home Page', home_index_path %>
+<!-- Main container -->
+<main>
+  <section class="no-padding-top bg-alt">
+    <div class="container">
+
+
+      <div class="row">
+        <% @clients.each do |client| %>
+            <div class="col-xs-12">
+
+              <%= link_to client, class: 'item-block' do %>
+                  <header>
+                    <img class="resume-avatar" src="assets/img/avatar.jpg" alt="">
+                    <div class="hgroup">
+                      <h4><%= client.fname%> <%= client.lname%></h4>
+                    </div>
+                  </header>
+
+                  <div class="item-body">
+                    <p><%= client.description%></p>
+
+
+                  </div>
+
+                  <footer>
+                    <ul class="details cols-3">
+                      <li>
+                        <i class="fa fa-home"></i>
+                        <span><%=client.home_address%></span>
+                      </li>
+
+                      <li>
+                        <i class="fa fa-mobile"></i>
+                        <span><%= client.cell_phone%></span>
+                      </li>
+
+                      <li>
+                        <i class="fa fa-sticky-note-o"></i>
+                        <span>Number of post: <%= Post.where(client: client.id).count() %></span>
+                      </li>
+
+
+
+                      <li>
+                        <i class="fa fa-certificate"></i>
+                        <span><%=User.find(client.user_id).email%></span>
+                      </li>
+                    </ul>
+                  </footer>
+
+              <% end %>
+            </div>
+
+        <% end %>
+      </div>
+
+
+
+
+
+      <!-- Page navigation -->
+      <nav class="text-center">
+        <ul class="pagination">
+          <li>
+            <a href="#" aria-label="Previous">
+              <i class="ti-angle-left"></i>
+            </a>
+          </li>
+          <li><a href="#">1</a></li>
+          <li class="active"><a href="#">2</a></li>
+          <li><a href="#">3</a></li>
+          <li><a href="#">4</a></li>
+          <li>
+            <a href="#" aria-label="Next">
+              <i class="ti-angle-right"></i>
+            </a>
+          </li>
+        </ul>
+      </nav>
+      <!-- END Page navigation -->
+
+
+    </div>
+  </section>
+</main>

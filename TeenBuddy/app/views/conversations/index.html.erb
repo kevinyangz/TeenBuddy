@@ -1,0 +1,71 @@
+
+
+<header class="page-header bg-img" style="background-image: url(/assets/img/bg-banner1.jpg);">
+
+  <div class="container page-name">
+
+  <div class="col-sm-3">
+    <ul class="nav nav-pills nav-stacked">
+    
+    
+    <p> <%= link_to 'Start conversation', '#', :class => 'btn btn-lg btn-primary', 'data-toggle' => 'modal', 'data-target' => '#applyModal' %></p>
+
+      <%= mailbox_section 'inbox', @box %>
+      <%= mailbox_section 'sent', @box %>
+      <%= mailbox_section 'trash', @box %>
+    </ul>
+  </div>
+
+<div class="col-sm-9">
+    <% if @box == 'trash' %>
+      <p><%= link_to 'Empty trash', empty_trash_conversations_path, class: 'btn btn-danger', method: :delete,
+                     data: {confirm: 'Are you sure?'} %></p>
+    <% end %>
+    <ul class="list-group">
+      <%= render partial: 'conversations/conversation', collection: @conversations %>
+    </ul>
+
+    <%= will_paginate %>
+  </div>
+
+<%= will_paginate %>
+</div>
+</header>
+
+ <div id="applyModal" class="modal fade" role="dialog">
+      <div class="modal-dialog" >
+
+        <!-- Modal content-->
+        <div class="modal-content">
+   <%= form_tag messages_path, method: :post do %>
+    <div class="modal-body">
+
+  <div class="form-group">
+    <%= label_tag 'message[subject]', 'Subject' %>
+    <%= text_field_tag 'message[subject]', nil, class: 'form-control', required: true %>
+  </div>
+
+  <div class="form-group ">
+    <%= label_tag 'message[body]', 'Message' %>
+    <%= text_area_tag 'message[body]', nil, cols: 3, class: 'form-control', required: true %>
+  </div>
+
+  <div class="form-group">
+    <%= label_tag 'recipients', 'Choose recipients' %>
+    <%= select_tag 'recipients', recipients_options, multiple: true, class: 'form-control chosen-it' %>
+  </div>
+</div>
+      <div class="modal-footer">
+
+  <%= submit_tag 'Send', class: 'btn btn-primary' %>
+  <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+
+</div>
+<% end %>
+   </div>
+
+      </div>
+    </div>
+
+
+

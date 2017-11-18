@@ -1,50 +1,51 @@
 <!-- Page header -->
 <header class="page-header bg-img size-lg" style="background-image: url(assets/img/bg-banner1.jpg)">
   <div class="container page-name">
-    <h1 class="text-center">Job Candidates</h1>
-    <p class="lead text-center">Use following search box to find best candidates for your openning position</p>
+
+    <%if current_user.teenager %>
+        <h1 class="text-center">Job Applications</h1>
+        <p class="lead text-center">Use following search box to find status of your applications</p>
+    <% elsif current_user.client %>
+        <h1 class="text-center">Job Candidates</h1>
+        <p class="lead text-center">Use following search box to find best candidates for your openning position</p>
+    <%end%>
   </div>
 
   <div class="container">
-    <h5>Search</h5>
-    <form action="#">
+    <%= form_tag(post_applications_path, method: :get) do %>
 
       <div class="row">
+
         <div class="form-group col-xs-12 col-sm-4">
-          <input type="text" class="form-control" placeholder="Keyword">
+          <h6>job title</h6>
+          <% if current_user.client %>
+              <%= select_tag :post, options_from_collection_for_select(Post.where(:client_id => current_user.client.id), "id", "title", params[:post]), {:include_blank => 'All',class: 'form-control selectpicker'} %>
+          <% elsif current_user.teenager %>
+              <%= select_tag :post, options_from_collection_for_select(PostApplication.where(:teenager_id => current_user.teenager.id), "post_id", "post_title", params[:post]), {:include_blank => 'All',class: 'form-control selectpicker'} %>
+          <%end%>
+        </div>
+
+         <div class="form-group col-xs-12 col-sm-4">
+           <h6>status</h6>
+          <%= select_tag :status, options_for_select(['Pending','Approved','Rejected'], params[:status]), {:include_blank => 'All', class: 'form-control selectpicker'} %>
         </div>
 
         <div class="form-group col-xs-12 col-sm-4">
-          <select class="form-control selectpicker" multiple>
-            <option selected>All statuses</option>
-            <option>New</option>
-            <option>Contacted</option>
-            <option>Interviewed</option>
-            <option>Hired</option>
-            <option>Archived</option>
-          </select>
+          <h6>Order by</h6>
+          <%= select_tag :order, options_for_select(['status','title','apply time'], params[:order]), {class: 'form-control selectpicker'} %>
         </div>
 
-        <div class="form-group col-xs-12 col-sm-4">
-          <select class="form-control selectpicker">
-            <option selected>Newest first</option>
-            <option>Oldest first</option>
-            <option>Low salary first</option>
-            <option>High salary first</option>
-            <option>Sort by name</option>
-          </select>
-        </div>
+
 
       </div>
 
       <div class="button-group">
         <div class="action-buttons">
-          <button class="btn btn-success">Download CSV</button>
-          <button class="btn btn-primary">Apply filter</button>
+          <%= submit_tag("Apply filter", class: 'btn btn-primary') %>
         </div>
       </div>
 
-    </form>
+    <%end%>
   </div>
 </header>
 <!-- END Page header -->

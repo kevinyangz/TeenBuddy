@@ -1,4 +1,7 @@
 Rails.application.configure do
+  #Fix a bug for mail_box
+
+
   # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.

@@ -4,12 +4,10 @@ class PostInvitationsController < ApplicationController
   # GET /post_invitations
   # GET /post_invitations.json
   def index
-    if params[:client_id].presence
-      @post_invitations = PostInvitation.joins(:post).where(['posts.client_id= ?',params[:client_id]])
-      @state ='client_invitations'
-    elsif params[:teenager_id].presence
-      @post_invitations=PostInvitation.where(teenager_id: params[:teenager_id])
-      @state ='teenager_invitations'
+    if  current_user.client
+      @post_invitations = PostInvitation.joins(:post).where(['posts.client_id= ?', current_user.client.id])
+    elsif  current_user.teenager
+      @post_invitations=PostInvitation.where(teenager_id:  current_user.teenager.id)
     end
   end
 
@@ -21,9 +19,6 @@ class PostInvitationsController < ApplicationController
   # GET /post_invitations/new
   def new
     @post_invitation = PostInvitation.new
-    @post_invitation.post_id=params[:post_id]
-    @post_invitation.teenager_id=params[:teenager_id]
-    @post_invitation.message=params[:message]
   end
 
   # GET /post_invitations/1/edit
@@ -37,7 +32,7 @@ class PostInvitationsController < ApplicationController
 
     respond_to do |format|
       if @post_invitation.save
-        format.html { redirect_to @post_invitation, notice: 'Post invitation was successfully created.' }
+        format.html { redirect_to post_invitations_path, notice: 'Post invitation was successfully created.' }
         format.json { render :show, status: :created, location: @post_invitation }
       else
         format.html { render :new }
@@ -50,7 +45,7 @@ class PostInvitationsController < ApplicationController
   # PATCH/PUT /post_invitations/1.json
   def update
     respond_to do |format|
-      if @post_invitation.update(post_invitation_params)
+      if @post_invitation.update(status: params[:status])
         format.html { redirect_to @post_invitation, notice: 'Post invitation was successfully updated.' }
         format.json { render :show, status: :ok, location: @post_invitation }
       else
