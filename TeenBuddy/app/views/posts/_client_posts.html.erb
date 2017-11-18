@@ -26,13 +26,9 @@
                 <header>
                   <a href="company-detail.html"><img src="assets/img/logo-google.jpg" alt=""></a>
                   <div class="hgroup">
-                    <h4><%= post.title %></h4>
+                    <%= link_to  "#{post.title}", post, class: 'h4'%>
                     <h5>Description</h5>
                     <p><%= post.description %></p>
-                    <% if post.requirements %>
-                      <h5>Requirements</h5>
-                      <p><%= post.requirements %></p>
-                  <% end %>
                   </div>
                   <div class="header-meta">
                     <span class="location"><%= post.work_address %></span>
@@ -56,17 +52,6 @@
       <nav class="text-center">
         <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
       </nav>
-      <div id="order-by">
-        <form>
-          <select name="sort">
-            <option value="updated_at">Update Time</option>
-            <option value="created_at">Create Time</option>
-            <option value="title">Title</option>
-          </select>
-
-          <input type="submit" value="Sort"/>
-        </form>
-      </div>
       <!-- END Page navigation -->
     </div>
   </section>

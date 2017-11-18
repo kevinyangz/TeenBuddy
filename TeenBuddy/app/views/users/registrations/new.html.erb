@@ -3,13 +3,18 @@
 
 <main>
   <% if params[:role] == nil %>
+      <row>
+
       <div class="login-block">
-        <h1>Choose type of your account</h1>
-        <p class="lead text-center">If you are looking for tasks</p>
-        <%= (link_to 'Teenager', new_user_registration_path(:role => "teenager"), class: 'btn btn-primary btn-block') %>
-        <p class="lead text-center"></p>
-        <p class="lead text-center">If you want to post tasks</p>
-        <%= (link_to 'Client', new_user_registration_path(:role => "client"), class: 'btn btn-primary btn-block') %>
+
+        <%= link_to image_tag("/assets/img/logo.png", border: 0), home_index_path, class: 'logo', method: :get %></a>
+       <br><br>
+        <p class="lead text-center">Search posts, apply jobs, accept offer, find best jobs nearby!</p>
+        <%= (link_to 'Teenager', new_user_registration_path(:role => "teenager"), class: 'btn btn-block btn-primary') %>
+        <hr>
+
+        <p class="lead text-center">Post Jobs, invite teenager, accept applications, find teenagers for your jobs.</p>
+        <%= (link_to 'Client', new_user_registration_path(:role => "client"), class: 'btn btn-block btn-primary') %>
 
 
         <div class="login-footer">
@@ -20,33 +25,29 @@
             <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
           </ul>
         </div>
-
         </form>
       </div>
+      </row>
+
+
 
       <!--if registration type is tennager -->
   <% elsif params[:role] == "teenager" %>
-      <div class="login-block">
 
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
             <%= devise_error_messages! %>
-
-            <div class="field">
-              <%= f.label :email %><br/>
-              <%= f.email_field :email, autofocus: true %>
+               <div class="container">
+                <div class="row">
+                <div class="form-group col-xs-12 col-sm-12">
+              <%= f.email_field :email, autofocus: true, placeholder: 'Email Address', class: 'form-control' %>
             </div>
 
-            <div class="field">
-              <%= f.label :password %>
-              <% if @minimum_password_length %>
-                  <em>(<%= @minimum_password_length %> characters minimum)</em>
-              <% end %><br/>
-              <%= f.password_field :password, autocomplete: "off" %>
+                <div class="form-group col-xs-12 col-sm-12">
+              <%= f.password_field :password, autocomplete: "off" , placeholder: "#{@minimum_password_length} characters minimum", class: 'form-control'%>
             </div>
 
-            <div class="field">
-              <%= f.label :password_confirmation %><br/>
-              <%= f.password_field :password_confirmation, autocomplete: "off" %>
+                <div class="form-group col-xs-12 col-sm-12">
+              <%= f.password_field :password_confirmation, autocomplete: "off" , placeholder: 'Password Confirmation', class: 'form-control'%>
             </div>
 
             <!-- nested fields -->
@@ -82,8 +83,11 @@
                   <%= form.date_field :birth_date, placeholder: 'Please enter your Postal Code ', class: 'form-control' %>
                 </div>
                 
+                          </div>
+                        </div>
+
             <% end %>
-            </div>
+          
             <%= f.submit class: 'btn btn-success btn-xl btn-round' %>
         <% end %>
   <% elsif params[:role] == "client" %>
