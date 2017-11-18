@@ -51,6 +51,8 @@
 
             <!-- nested fields -->
             <%= f.fields_for :teenager, @user.build_teenager do |form| %>
+
+
                 <div class="form-group col-xs-12 col-sm-12">
                   <%= form.text_field :fname, placeholder: 'First Name', class: 'form-control' %>
                 </div>
@@ -84,6 +86,91 @@
             </div>
             <%= f.submit class: 'btn btn-success btn-xl btn-round' %>
         <% end %>
+  <% elsif params[:role] == "client" %>
+     <div class="login-block">
+
+        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+            <%= devise_error_messages! %>
+
+            <div class="field">
+              <%= f.label :email %><br/>
+              <%= f.email_field :email, autofocus: true %>
+            </div>
+
+            <div class="field">
+              <%= f.label :password %>
+              <% if @minimum_password_length %>
+                  <em>(<%= @minimum_password_length %> characters minimum)</em>
+              <% end %><br/>
+              <%= f.password_field :password, autocomplete: "off" %>
+            </div>
+
+            <div class="field">
+              <%= f.label :password_confirmation %><br/>
+              <%= f.password_field :password_confirmation, autocomplete: "off" %>
+            </div>
+
+            <!-- nested fields -->
+ <%= f.fields_for :client, @user.build_client do |form| %>
+
+    <header class="page-header bg-img size-lg" style="background-image: url(/assets/img/bg-banner1.jpg)">
+      <div class="container page-name">
+        <h1 class="text-center"><%= @client_form_header_title %></h1>
+        <p class="lead text-center"><%= @client_form_header_description %></p>
+      </div>
+      <div class="container">
+
+
+        <div class="row">
+
+
+
+          <div class="form-group col-xs-12 col-sm-12">
+            <%= form.text_field :fname, id: :client_fname, placeholder: 'Please enter your first name', class: 'form-control input-lg' %>
+          </div>
+
+          <div class="form-group col-xs-12 col-sm-12">
+            <%= form.text_field :lname, id: :client_lname, placeholder: 'Please enter your last name', class: 'form-control input-lg' %>
+          </div>
+
+
+          <div class="form-group col-xs-12 col-sm-12">
+
+              <%= form.text_field :home_address, id: :client_home_address, placeholder: 'Home address', class: 'form-control input-lg' %>
+
+          </div>
+
+
+
+          <div class="form-group col-xs-12 col-sm-12">
+            <%= form.text_area :description, id: :client_description, placeholder: 'Tell us a bit more about yourself', class: 'form-control input-lg' %>
+          </div>
+
+
+
+
+
+          <div class="form-group col-xs-12 col-sm-6">
+            <div class="input-group input-group-sm">
+              <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+              <%= form.number_field :home_phone, id: :client_home_phone, placeholder: 'Home Phone', class: 'form-control input-lg' %>
+            </div>
+          </div>
+
+          <div class="form-group col-xs-12 col-sm-6">
+            <div class="input-group input-group-sm">
+              <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
+              <%= form.number_field :cell_phone, id: :client_cell_phone, placeholder: 'Cell Phone', class: 'form-control input-lg' %>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </header>
+ 
+    <% end %>
+    <%= f.submit class: 'btn btn-success btn-xl btn-round' %>
+    <% end %>
 
   <% end %>
 

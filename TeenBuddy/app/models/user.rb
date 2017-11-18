@@ -7,7 +7,7 @@ class User < ApplicationRecord
   has_one :client
 
   accepts_nested_attributes_for :teenager
-
+  accepts_nested_attributes_for :client
   acts_as_messageable
   
   def mailboxer_email(object)
