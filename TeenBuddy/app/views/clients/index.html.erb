@@ -21,8 +21,13 @@
 
               <%= link_to client, class: 'item-block' do %>
                   <header>
-                    <img class="resume-avatar" src="assets/img/avatar.jpg" alt="">
-                    <div class="hgroup">
+    <% if client.selfie.present? %>
+          <%= image_tag(client.selfie.thum.url,style:"border-radius:50%;width:60px;height:60px;",class:"thumbnail")  %>
+        <!-- user upload -->
+          <% else %>
+         <%= image_tag("/assets/img/client1.jpeg",class:"thumbnail",style:"width:60px;height:60px;border-radius:50%;") %>
+        <!-- default picture -->
+           <% end %>                    <div class="hgroup">
                       <h4><%= client.fname%> <%= client.lname%></h4>
                     </div>
                   </header>

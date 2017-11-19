@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171119014341) do
+ActiveRecord::Schema.define(version: 20171119170314) do
 
   create_table "client_reviews", force: :cascade do |t|
     t.integer "client_id"
@@ -34,6 +34,7 @@ ActiveRecord::Schema.define(version: 20171119014341) do
     t.integer "user_id"
     t.string "description"
     t.integer "available_credit"
+    t.string "selfie"
     t.index ["user_id"], name: "index_clients_on_user_id"
   end
 
