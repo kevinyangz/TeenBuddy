@@ -1,6 +1,8 @@
 
 <% if @state == 'client_posts' %>
     <%= render 'client_posts' %>
-<% elsif @state == 'all' %>
+<% elsif @state == 'teenager_posts' %>
+    <%= render 'teenager_posts' %>
+<% else @state == 'all' %>
     <%= render 'all_posts' %>
 <% end %>

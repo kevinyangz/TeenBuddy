@@ -1,0 +1,55 @@
+
+<header class="page-header bg-img" style="background-image: url(assets/img/bg-banner1.jpg);">
+  <div class="container page-name">
+    <h1 class="text-center">Manage your posted jobs</h1>
+    <p class="lead text-center">Here's the list of your submitted jobs. You can edit or delete them, or even add a new one.</p>
+  </div>
+</header>
+
+
+<main>
+  <section class="no-padding-top bg-alt">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-xs-12 text-right">
+          <br>
+          <%= link_to 'Post a Service' , new_post_path, class: 'btn btn-primary btn-sm' %>
+        </div>
+
+        <% @posts.each do |service| %>
+            <div class="col-xs-12">
+              <div class="item-block">
+                <header>
+                  <a href="company-detail.html"><img src="assets/img/logo-google.jpg" alt=""></a>
+                  <div class="hgroup">
+                    <%= link_to  "#{service.post.title}", service.post, class: 'h4'%>
+                    <h5>Description</h5>
+                    <p><%= service.post.description %></p>
+                  </div>
+                  <div class="header-meta">
+                    <span class="location"><%= service.post.work_address %></span>
+                    <time datetime=<%= service.post.updated_at %>>Updated at <%= service.post.updated_at.in_time_zone('Eastern Time (US & Canada)').strftime("%b %d %Y %H:%M") %></time>
+                  </div>
+                </header>
+
+                <footer>
+                  <p class="status"><strong>Status: </strong><%= service.post.status %></p>
+
+                  <div class="action-btn">
+
+                  </div>
+                </footer>
+              </div>
+            </div>
+        <% end %>
+      </div>
+      <!-- Page navigation -->
+      <nav class="text-center">
+        <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
+      </nav>
+      <!-- END Page navigation -->
+    </div>
+  </section>
+</main>
+

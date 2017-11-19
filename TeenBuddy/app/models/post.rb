@@ -4,6 +4,7 @@ class Post < ApplicationRecord
   belongs_to :service_category
   belongs_to :service_type
   has_many :post_applications
+  has_many :post_invitations
   has_many :services
   
   # getter and setter
@@ -31,8 +32,10 @@ class Post < ApplicationRecord
   # functions
   def applicable teenager
 
-    if Service.where(:teenager_id => teenager.id, :post_id => self.id).any?
-      'Enrolled, In progress'
+    if Service.where(:teenager_id => teenager.id, :post_id => self.id, :finished => true).any?
+      'You have finished the work.'
+    elsif Service.where(:teenager_id => teenager.id, :post_id => self.id, :finished => false).any?
+        'You are enrolled in this work.'
     elsif PostApplication.where(:teenager_id => teenager.id, :post_id => self.id).any?
       'You have applied this job.'
     elsif self.status != 'open'
