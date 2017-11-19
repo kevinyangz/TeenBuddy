@@ -72,6 +72,8 @@ gem 'gravatar_image_tag'
 gem 'chosen-rails'
 gem 'jquery-turbolinks'
 
+gem 'carrierwave'
+gem 'mini_magick', '~> 4.5', '>= 4.5.1'
 group :development, :test do
   gem 'rspec-rails', '~> 3.6'
 end

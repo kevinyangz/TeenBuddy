@@ -40,7 +40,7 @@ class TeenagersController < ApplicationController
     @teenager = Teenager.new(teenager_params)
     @teenager.user_id = current_user.id
     @teenager.available_credit = 0
-
+     
     respond_to do |format|
     if @teenager.save
     #@age= Teenager.get_age(@teenager.birth_date)
@@ -92,7 +92,7 @@ class TeenagersController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def teenager_params
       params.require(:teenager).permit(:fname,:lname, :home_address, 
-         :cell_phone, :birth_date,:postal_code,service_category_ids: [] 
+         :cell_phone, :birth_date,:postal_code, :selfie, service_category_ids: [], 
          )
     end
 end

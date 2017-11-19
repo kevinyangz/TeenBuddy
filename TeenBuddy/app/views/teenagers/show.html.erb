@@ -2,12 +2,19 @@
 <!-- Page header -->
 <header class="page-header bg-img" style="background-image: url(assets/img/bg-banner1.jpg)">
   <div class="container">
-    <div class="row">
-      <div class="col-xs-12 col-sm-4">
-        <img src="assets/img/avatar.jpg" alt="">
-      </div>
+    <div class="row equal">
+      
+      <div class="col-xs-4 col-sm-4 ">
+      <% if @teenager.selfie.present? %>
+          <%= image_tag(@teenager.selfie.thum.url,style:"border-radius:50%;",class:"thumbnail center-block ")  %>
+        <!-- 用户的可以自选头像 -->
+          <% else %> 
+         <%= image_tag("/assets/img/teenager1.png",class:"thumbnail center-block",style:"width:100px;height:100px;border-radius:50%;") %>
+        <!-- 定义用户未选择头像时的默认头像 -->
+           <% end %>     
+       </div>
 
-      <div class="col-xs-12 col-sm-8 header-detail">
+      <div class="col-xs-8 col-sm-8">
         <div class="hgroup">
           <h1><%=@teenager.fname%>  <%=@teenager.lname%></h1>
           <div class="tag-list">
@@ -47,20 +54,9 @@
 
           <li>
             <i class="fa fa-envelope"></i>
-            <a href="#"><%=current_user.email%></a>
+            <a href="#"><%=User.find(@teenager.user_id).email%></a>
           </li>
         </ul>
-
-          <div class="tag-list">
-           <%@current_teenager_interest= TeenagerInterest.where(teenager_id:@teenager.id).all%>
-           <%@current_teenager_interest.all.each do |interest| %>
-            <span>
-              <%=ServiceCategory.find(interest.service_category_id).title%> <%="   "%>
-            </span>
-            <% end %>
-             </div>
-
-        
       </div>
     </div>
   </div>
@@ -73,7 +69,8 @@
         <li><a class="instagram" href="#"><i class="fa fa-instagram"></i></a></li>
       </ul>
 
-      <% if current_user.client %>
+      
+      <% if current_user.client!=nil %>
       <div class="action-buttons">
         <%= link_to 'Invite me', '#', :class => 'btn btn-success', 'data-toggle' => 'modal','data-target'=>'#inviteModal' %>
       </div>

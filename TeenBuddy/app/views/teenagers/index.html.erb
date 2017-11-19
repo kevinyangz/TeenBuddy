@@ -67,7 +67,13 @@
 
                 <%= link_to teenager, class: 'item-block' do %>
                 <header>
-                  <img class="resume-avatar" src="assets/img/avatar.jpg" alt="">
+          <% if teenager.selfie.present? %>
+          <%= image_tag(teenager.selfie.thum.url,style:"border-radius:50%;width:60px;height:60px;",class:"thumbnail")  %>
+        <!-- user upload -->
+          <% else %>
+         <%= image_tag("/assets/img/teenager1.png",class:"thumbnail",style:"width:60px;height:60px;border-radius:50%;") %>
+        <!-- default picture -->
+           <% end %>
                   <div class="hgroup">
                     <h4><%= teenager.fname%> <%= teenager.lname%></h4>
                   </div>
@@ -92,6 +98,10 @@
                       <i class="fa fa-home"></i>
                       <span><%=teenager.home_address%></span>
                     </li>
+                      <li>
+                      <i class="fa fa-home"></i>
+                      <span><%=teenager.selfie%></span>
+                    </li>
 
                     <li>
                       <i class="fa fa-map-marker"></i>
@@ -115,26 +125,7 @@
 
 
 
-      <!-- Page navigation -->
-      <nav class="text-center">
-        <ul class="pagination">
-          <li>
-            <a href="#" aria-label="Previous">
-              <i class="ti-angle-left"></i>
-            </a>
-          </li>
-          <li><a href="#">1</a></li>
-          <li class="active"><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li>
-            <a href="#" aria-label="Next">
-              <i class="ti-angle-right"></i>
-            </a>
-          </li>
-        </ul>
-      </nav>
-      <!-- END Page navigation -->
+
 
 
     </div>
