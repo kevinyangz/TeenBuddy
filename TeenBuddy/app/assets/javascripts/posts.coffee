@@ -100,7 +100,50 @@ jQuery ->
 
   #auto complete API javascripts
   initialize = ->
+    map = new (google.maps.Map)(document.getElementById('post_form_map'),
+      center:
+        lat: 43.70011
+        lng: -79.4163
+      zoom: 10)
     input = document.getElementById('post_work_address')
     autocomplete = new (google.maps.places.Autocomplete)(input)
+    autocomplete.bindTo 'bounds', map
+    infowindow = new (google.maps.InfoWindow)
+    infowindowContent = document.getElementById('infowindow-content')
+    infowindow.setContent infowindowContent
+    marker = new (google.maps.Marker)(
+      map: map
+      anchorPoint: new (google.maps.Point)(0, -29))
+    autocomplete.addListener 'place_changed', ->
+      infowindow.close()
+      marker.setVisible false
+      place = autocomplete.getPlace()
+      if !place.geometry
+        # User entered the name of a Place that was not suggested and
+        # pressed the Enter key, or the Place Details request failed.
+        window.alert 'No details available for input: \'' + place.name + '\''
+        return
+      # If the place has a geometry, then present it on a map.
+      if place.geometry.viewport
+        map.fitBounds place.geometry.viewport
+      else
+        map.setCenter place.geometry.location
+        map.setZoom 17
+        # Why 17? Because it looks good.
+      marker.setPosition place.geometry.location
+      marker.setVisible true
+      address = ''
+      if place.address_components
+        address = [
+          place.address_components[0] and place.address_components[0].short_name or ''
+          place.address_components[1] and place.address_components[1].short_name or ''
+          place.address_components[2] and place.address_components[2].short_name or ''
+        ].join(' ')
+      infowindowContent.children['place-icon'].src = place.icon
+      infowindowContent.children['place-name'].textContent = place.name
+      infowindowContent.children['place-address'].textContent = address
+      infowindow.open map, marker
+
+
 
   google.maps.event.addDomListener window, 'load', initialize
