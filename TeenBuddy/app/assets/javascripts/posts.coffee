@@ -98,8 +98,8 @@ jQuery ->
   $(":checkbox").parent().hide()
 
 
-  #auto complete API javascripts
-  initialize = ->
+  #auto complete google map API javascripts
+  initializeFormMap = ->
     map = new (google.maps.Map)(document.getElementById('post_form_map'),
       center:
         lat: 43.70011
@@ -144,6 +144,28 @@ jQuery ->
       infowindowContent.children['place-address'].textContent = address
       infowindow.open map, marker
 
+  google.maps.event.addDomListener window, 'load', initializeFormMap
 
 
-  google.maps.event.addDomListener window, 'load', initialize
+
+  #google map API for showing up selected address javascripts
+  initializeShowMap = ->
+    latlng = new (google.maps.LatLng)(43.70011, -79.4163)
+    mapOptions = 
+      zoom: 17
+      center: latlng
+    map = new (google.maps.Map)(document.getElementById('post_show_map'), mapOptions)
+    geocoder = new (google.maps.Geocoder)
+    geocoder.geocode { 'address': address }, (results, status) ->
+      if status == google.maps.GeocoderStatus.OK
+        # Center map on location
+        map.setCenter results[0].geometry.location
+        # Add marker on location
+        marker = new (google.maps.Marker)(
+          map: map
+          position: results[0].geometry.location)
+      else
+        alert 'Geocode was not successful for the following reason: ' + status
+    return
+
+  google.maps.event.addDomListener window, 'load', initializeShowMap
