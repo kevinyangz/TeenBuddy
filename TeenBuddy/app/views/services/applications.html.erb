@@ -12,7 +12,7 @@
   </div>
 
   <div class="container">
-    <%= form_tag(services_path, method: :get) do %>
+    <%= form_tag(services_applications_path, method: :get) do %>
 
         <div class="row">
 
@@ -27,7 +27,7 @@
 
           <div class="form-group col-xs-12 col-sm-4">
             <h6>status</h6>
-            <%= select_tag :status, options_for_select([[:applied, "Pending"],[:enrolled, "Approved"],[:rejected, "Declined"]], params[:status]), {:include_blank => 'All', class: 'form-control selectpicker'} %>
+            <%= select_tag :status, options_for_select([[ "Pending", :applied],["Approved", :enrolled],["Declined", :rejected]], params[:status]), {:include_blank => 'All', class: 'form-control selectpicker'} %>
           </div>
 
           <div class="form-group col-xs-12 col-sm-4">
@@ -63,18 +63,21 @@
               <div class="item-block">
 
                 <header>
-                  <h3><%=service.post.title%></h3>
+                  <h3><%=service.post.title%>
+                    <div class="pull-right">
+                      <label class= "btn btn-xs <%=status_style(service.status)%>"> <%= status_text(service.status) %> </label></div>
+                  </h3>
                   <a href="resume-detail.html"><img class="resume-avatar" src="assets/img/avatar-3.jpg" alt=""></a>
                   <div class="hgroup">
                     <h4>
                       <a href="resume-detail.html"><%=service.teenager.fname%></a>
 
-                      <label class= "btn btn-xs <%=app_inv_status_style(service.status)%>"> <%= service.status %> </label>
 
                     </h4>
                     <h5><%= service.applyMessage %></h5>
                   </div>
                   <div class="header-meta">
+
                     <span class="location">Fremont, CA</span>
                     <span class="rate">$70 per hour</span>
                   </div>

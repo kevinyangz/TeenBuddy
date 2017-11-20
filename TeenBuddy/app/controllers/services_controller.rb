@@ -12,8 +12,9 @@ class ServicesController < ApplicationController
     if current_user.teenager
       @services = Service.where(teenager_id: current_user.teenager.id, enrollType: true)
     elsif current_user.client
-      @services = Service.joins(:post).where(['posts.client_id= ?', current_user.client.id], enrollType: true)
+      @services = Service.where(client_id: current_user.client.id, enrollType: true)
     end
+    @services = @services.filter(params.slice(:status, :post))
   end
 
   # GET /services/1
@@ -68,8 +69,11 @@ class ServicesController < ApplicationController
   def destroy
     @service.destroy
     respond_to do |format|
-      format.html { redirect_to services_url, notice: 'Service was successfully destroyed.' }
-      format.json { head :no_content }
+      if @service.enrollType
+      format.html { redirect_to services_applications_path, notice: 'Service was successfully destroyed.' }
+      else
+        format.html { redirect_to services_invitations_path, notice: 'Service was successfully destroyed.' }
+        end
     end
   end
 
