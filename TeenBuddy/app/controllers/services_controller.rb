@@ -17,6 +17,16 @@ class ServicesController < ApplicationController
     @services = @services.filter(params.slice(:status, :post)).order(params[:sort])
   end
 
+  def invitations
+    if current_user.teenager
+      @services = Service.where(teenager_id: current_user.teenager.id, enrollType: false)
+    elsif current_user.client
+      @services = Service.where(client_id: current_user.client.id, enrollType: false)
+    end
+    @services = @services.filter(params.slice(:status, :post)).order(params[:sort])
+  end
+
+
   # GET /services/1
   # GET /services/1.json
   def show
@@ -40,7 +50,7 @@ class ServicesController < ApplicationController
 
     respond_to do |format|
       if @service.save
-        if service_params[:enrollType]
+        if service_params[:enrollType] == 'true'
         format.html { redirect_to services_applications_path, notice: 'Your application was successfully sent.' }
         else
           format.html { redirect_to services_invitations_path, notice: 'Your invitation was successfully sent.' }

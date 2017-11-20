@@ -1,20 +1,19 @@
 <!-- Page header -->
-<header class="page-header bg-img size-lg" style="background-image: url(/assets/img/application.jpg)">
+<header class="page-header bg-img size-lg" style="background-image: url(/assets/img/invitation.jpeg)">
   <div class="container page-name">
 
     <%if current_user.teenager %>
-        <h1 class="text-center">Job Applications</h1>
-        <p class="lead text-center">Use following search box to find status of your applications</p>
+        <h1 class="text-center">Job Offers</h1>
+        <p class="lead text-center">Use following search box to find all your job offers</p>
     <% elsif current_user.client %>
-        <h1 class="text-center">Job Candidates</h1>
-        <p class="lead text-center">Use following search box to find best candidates for your openning position</p>
+        <h1 class="text-center">Job Invitations</h1>
+        <p class="lead text-center">Use following search box to find status of your invitations</p>
     <%end%>
   </div>
 
   <div class="container">
 
-    <%= form_tag(services_applications_path, method: :get) do %>
-
+    <%= form_tag(services_invitations_path, method: :get) do %>
         <div class="row">
 
           <div class="form-group col-xs-12 col-sm-4">
@@ -28,12 +27,12 @@
 
           <div class="form-group col-xs-12 col-sm-4">
             <h6>status</h6>
-            <%= select_tag :status, options_for_select([[ "Pending", :applied],["Approved", :enrolled],["Declined", :rejected]], params[:status]), {:include_blank => 'All', class: 'form-control selectpicker'} %>
+            <%= select_tag :status, options_for_select([[ "Pending", :beingInvited],["Approved", :enrolled],["Declined", :rejected]], params[:status]), {:include_blank => 'All', class: 'form-control selectpicker'} %>
           </div>
 
           <div class="form-group col-xs-12 col-sm-4">
             <h6>Order by</h6>
-            <%= select_tag :order, options_for_select(['status','apply time'], params[:order]), {class: 'form-control selectpicker'} %>
+            <%= select_tag :order, options_for_select(['status', 'invite time'], params[:order]), {class: 'form-control selectpicker'} %>
           </div>
 
         </div>
@@ -54,12 +53,12 @@
 <main>
   <section class="no-padding-top bg-alt">
     <%if notice%>
-    <div class="container">
-      <div class="alert alert-info">
-        <strong>Heads up!</strong> <%= notice %>
-      </div>
-    </div>
-        <%end%>
+        <div class="container">
+          <div class="alert alert-info">
+            <strong>Heads up!</strong> <%= notice %>
+          </div>
+        </div>
+    <%end%>
 
     <div class="container">
       <h5>We found <strong><%= @services.count %></strong> matches</h5>
@@ -87,7 +86,7 @@
                       <%=link_to service.teenager.fname,  teenager_path(service.teenager)%>
 
                     </h4>
-                    <h5><%= service.applyMessage %></h5>
+                    <h5><%= service.inviteMessage %></h5>
                   </div>
                   <div class="header-meta">
                     <span class="location"><%=service.teenager.home_address%></span>
@@ -98,10 +97,10 @@
                 <footer>
                   <div class="status"><strong>Applied on: </strong><%=service.created_at%></div>
                   <div class="action-btn">
-                    <%if current_user.client && service.applied? %>
+                    <%if current_user.teenager && service.beingInvited? %>
                         <%=link_to('Approve', service_path(service, :service => {:status => :enrolled}), :method => :put, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-success')%>
                         <%=link_to('Reject',  service_path(service, :service => {:status => :rejected}), :method => :put, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-danger')%>
-                    <%elsif current_user.teenager && service.applied?  %>
+                    <%elsif current_user.client && service.beingInvited?  %>
                         <%=link_to('Delete',  service_path(service), :method => :delete, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-danger')%>
                     <%end%>
                   </div>

@@ -92,7 +92,7 @@
 
     <!-- Modal content-->
     <div class="modal-content">
-      <%= form_for(:post_invitation, url: post_invitations_url, method: :post) do |form| %>
+      <%= form_for(:service, url: services_url, method: :post) do |form| %>
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
         <h4 class="modal-title">Invite teenager to your jobs.</h4>
@@ -100,15 +100,16 @@
       <div class="modal-body">
         <div class="form-group">
           <h6>My open jobs</h6>
-          <%= collection_select(:post_invitation, :post_id, Post.where(:client_id => current_user.client.id), :id, :title, {:prompt => 'Please select a job for teenager.'}, {class: 'form-control selectpicker'}) %>
+          <%= collection_select(:service, :post_id, Post.where(:client_id => current_user.client.id, :status => 'open'), :id, :title, {:prompt => 'Please select a job for teenager.'}, {class: 'form-control selectpicker'}) %>
         </div>
 
         <%= form.hidden_field :teenager_id, value: @teenager.id %>
-        <%= form.hidden_field :status, value: 'Pending' %>
+        <%= form.hidden_field :status, value: :beingInvited %>
+        <%= form.hidden_field :enrollType, value: false %>
 
         <div class="form-group">
           <h6>Message</h6>
-          <%= form.text_area :message, class: "form-control", placeholder: "Leave some Message to show yourself." %>
+          <%= form.text_area :inviteMessage, class: "form-control", placeholder: "Leave some Message to convince him." %>
         </div>
       </div>
       <div class="modal-footer">

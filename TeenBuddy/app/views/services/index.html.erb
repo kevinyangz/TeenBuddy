@@ -1,101 +1,55 @@
-<!-- Page header -->
-<header class="page-header bg-img size-lg" style="background-image: url(assets/img/bg-banner1.jpg)">
+
+<header class="page-header bg-img" style="background-image: url(assets/img/bg-banner1.jpg);">
   <div class="container page-name">
-
-    <%if current_user.teenager %>
-        <h1 class="text-center">Job Applications</h1>
-        <p class="lead text-center">Use following search box to find status of your applications</p>
-    <% elsif current_user.client %>
-        <h1 class="text-center">Job Candidates</h1>
-        <p class="lead text-center">Use following search box to find best candidates for your openning position</p>
-    <%end%>
-  </div>
-
-  <div class="container">
-    <%= form_tag(services_path, method: :get) do %>
-
-        <div class="row">
-
-          <div class="form-group col-xs-12 col-sm-4">
-            <h6>job title</h6>
-            <% if current_user.client %>
-                <%= select_tag :post, options_from_collection_for_select(Post.where(:client_id => current_user.client.id), "id", "title", params[:post]), {:include_blank => 'All',class: 'form-control selectpicker'} %>
-            <% elsif current_user.teenager %>
-                <%= select_tag :post, options_from_collection_for_select(Service.where(:teenager_id => current_user.teenager.id), "post_id", "post_title", params[:post]), {:include_blank => 'All',class: 'form-control selectpicker'} %>
-            <%end%>
-          </div>
-
-          <div class="form-group col-xs-12 col-sm-4">
-            <h6>status</h6>
-            <%= select_tag :status, options_for_select([[:applied, "Pending"],[:enrolled, "Approved"],[:rejected, "Declined"]], params[:status]), {:include_blank => 'All', class: 'form-control selectpicker'} %>
-          </div>
-
-          <div class="form-group col-xs-12 col-sm-4">
-            <h6>Order by</h6>
-            <%= select_tag :order, options_for_select(['status','title','apply time'], params[:order]), {class: 'form-control selectpicker'} %>
-          </div>
-
-
-
-        </div>
-
-        <div class="button-group">
-          <div class="action-buttons">
-            <%= submit_tag("Apply filter", class: 'btn btn-primary') %>
-          </div>
-        </div>
-
-    <%end%>
+    <h1 class="text-center">Manage your posted jobs</h1>
+    <p class="lead text-center">Here's the list of your submitted jobs. You can edit or delete them, or even add a new one.</p>
   </div>
 </header>
-<!-- END Page header -->
 
 
-<!-- Main container -->
 <main>
   <section class="no-padding-top bg-alt">
     <div class="container">
+      <div class="row">
 
-      <%@services.each do |service| %>
-          <div class="row">
-            <!-- Candidate item -->
+        <div class="col-xs-12 text-right">
+          <br>
+          <%= link_to 'Post a Service' , new_post_path, class: 'btn btn-primary btn-sm' %>
+        </div>
+
+        <% @posts.each do |service| %>
             <div class="col-xs-12">
               <div class="item-block">
-
                 <header>
-                  <h3><%=service.post.title%></h3>
-                  <a href="resume-detail.html"><img class="resume-avatar" src="assets/img/avatar-3.jpg" alt=""></a>
+                  <a href="company-detail.html"><img src="assets/img/logo-google.jpg" alt=""></a>
                   <div class="hgroup">
-                    <h4>
-                      <a href="resume-detail.html"><%=service.teenager.fname service.teenager.lname%></a>
-
-                      <label class= "btn btn-xs <%=app_inv_status_style(post_application.status)%>"> <%= post_application.status %> </label>
-
-                    </h4>
-                    <h5><%= post_application.message %></h5>
+                    <%= link_to  "#{service.post.title}", service.post, class: 'h4'%>
+                    <h5>Description</h5>
+                    <p><%= service.post.description %></p>
                   </div>
                   <div class="header-meta">
-                    <span class="location">Fremont, CA</span>
-                    <span class="rate">$70 per hour</span>
+                    <span class="location"><%= service.post.work_address %></span>
+                    <time datetime=<%= service.post.updated_at %>>Updated at <%= service.post.updated_at.in_time_zone('Eastern Time (US & Canada)').strftime("%b %d %Y %H:%M") %></time>
                   </div>
                 </header>
 
                 <footer>
-                  <div class="status"><strong>Applied on:</strong> July 16, 2016</div>
+                  <p class="status"><strong>Status: </strong><%= service.post.status %></p>
+
                   <div class="action-btn">
-                    <%if can? :update, post_application %>
-                        <%=link_to('Approve', post_application_path(post_application, :status => 'Approved'), :method => :put, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-success')%>
-                        <%=link_to('Reject',  post_application_path(post_application, :status => 'Rejected'), :method => :put, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-danger')%>
-                    <%elsif can? :destroy, post_application %>
-                        <%=link_to('Delete',  post_application_path(post_application), :method => :delete, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-danger')%>
-                    <%end%>
+
                   </div>
                 </footer>
               </div>
             </div>
-            <!-- END Candidate item -->
-          </div>
-      <% end %>
+        <% end %>
+      </div>
+      <!-- Page navigation -->
+      <nav class="text-center">
+        <%= will_paginate @posts, renderer: BootstrapPagination::Rails %>
+      </nav>
+      <!-- END Page navigation -->
     </div>
   </section>
 </main>
+
