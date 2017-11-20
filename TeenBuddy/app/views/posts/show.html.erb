@@ -133,7 +133,7 @@
 <% end %>
 
 <main>
-  <% if current_user.client == @post.client && (post_service = Service.where(:client_id => current_user.client, :post_id => @post.id)).any? %>
+  <% if current_user.client == @post.client && (post_service = Service.where(:client_id => current_user.client, :post_id => @post.id, :status => [ :enrolled, :finished, :confirmed])).any? %>
       <section class="no-padding-top bg-alt">
         <header class="section-header">
           <h2>On Service Teenagers</h2>
@@ -142,20 +142,34 @@
           <div class="row item-blocks-condensed">
 
             <% post_service.each do |service| %>
-                <div class="col-xs-12">
-                  <a class="item-block" href="job-detail.html">
-                    <header>
-                      <img src="assets/img/logo-google.jpg" alt="">
-                      <div class="hgroup">
-                        <h4><%= service.teenager.fname %></h4>
-                        <h5>Google</h5>
+                <div class="row">
+                  <!-- Candidate item -->
+                  <div class="col-xs-12">
+                    <div class="col-xs-12">
+                      <div class="item-block">
+                        <header>
+                          <%= link_to image_tag("/assets/img/teenager1.png", border: 0), teenager_path(service.teenager), class: 'logo', method: :get,class:'resume-avatar' %></a>
+                          <div class="hgroup">
+                            <h4><%=link_to service.teenager.fname,  teenager_path(service.teenager)%></h4>
+                            <h5><label class= "btn btn-xs <%=status_style2(service.status)%>"> <%= status_text2(service.status) %> </label></h5>
+                          </div>
+                          <div class="header-meta">
+                            <span class="location"><%=service.teenager.home_address%></span>
+                            <span class="rate"><%= service.post.pay%></span>
+                          </div>
+                        </header>
+
+                        <footer>
+                          <div class="action-btn">
+                            <%if service.finished?%>
+                            <%=link_to('Confirm',  service_path(service, :service => {:status => :confirmed}), :method => :put, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-success')%>
+                          <%end%>
+                                </div>
+                        </footer>
                       </div>
-                      <div class="header-meta">
-                        <span class="location">Menlo park, CA</span>
-                        <span class="label label-success">Full-time</span>
-                      </div>
-                    </header>
-                  </a>
+                    </div>
+                  </div>
+                  <!-- END Candidate item -->
                 </div>
             <% end %>
             <!-- END Job item -->

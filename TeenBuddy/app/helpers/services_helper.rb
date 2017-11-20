@@ -1,23 +1,44 @@
 module ServicesHelper
   def status_style(status)
-    if status == 'enrolled'
-      'btn-success'
+
+    if status == 'applied' || status == 'beingInvited'
+      'btn-warning'
     elsif status == 'rejected'
       'btn-danger'
     else
-      'btn-warning'
+      'btn-success'
     end
   end
 
   def status_text(status)
-    if status == 'enrolled'
-      'Approved'
+    if status == 'applied' || status == 'beingInvited'
+      'Pending'
     elsif status == 'rejected'
       'Rejected'
     else
-      'Pending'
+      'Approved'
     end
   end
 
+  def status_style2(status)
+
+    if status == 'enrolled'
+      'btn-primary'
+    elsif status == 'confirmed'
+      'btn-success'
+    else
+      'btn-success'
+    end
+  end
+
+  def status_text2(status)
+    if status == 'enrolled'
+      'In progress'
+    elsif status == 'confirmed'
+      'Confirmed'
+    else
+      'Finished'
+    end
+  end
 
 end
