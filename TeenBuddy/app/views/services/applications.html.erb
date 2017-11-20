@@ -12,6 +12,9 @@
   </div>
 
   <div class="container">
+
+
+
     <%= form_tag(services_applications_path, method: :get) do %>
 
         <div class="row">
@@ -35,8 +38,6 @@
             <%= select_tag :order, options_for_select(['status','title','apply time'], params[:order]), {class: 'form-control selectpicker'} %>
           </div>
 
-
-
         </div>
 
         <div class="button-group">
@@ -54,6 +55,18 @@
 <!-- Main container -->
 <main>
   <section class="no-padding-top bg-alt">
+    <%if notice%>
+    <div class="container">
+      <div class="alert alert-info">
+        <strong>Heads up!</strong> <%= notice %>
+      </div>
+    </div>
+        <%end%>
+
+    <div class="container">
+      <h5>We found <strong><%= @services.count %></strong> matches</h5>
+    </div>
+
     <div class="container">
 
       <%@services.each do |service| %>
@@ -63,30 +76,31 @@
               <div class="item-block">
 
                 <header>
-                  <h3><%=service.post.title%>
+                  <h3>
+                    <%=link_to service.post.title,  post_path(service.post)%>
                     <div class="pull-right">
                       <label class= "btn btn-xs <%=status_style(service.status)%>"> <%= status_text(service.status) %> </label></div>
                   </h3>
-                  <a href="resume-detail.html"><img class="resume-avatar" src="assets/img/avatar-3.jpg" alt=""></a>
+
+                  <%= link_to image_tag("/assets/img/teenager1.png", border: 0), teenager_path(service.teenager), class: 'logo', method: :get,class:'resume-avatar' %></a>
                   <div class="hgroup">
                     <h4>
-                      <a href="resume-detail.html"><%=service.teenager.fname%></a>
 
+                      <%=link_to service.teenager.fname,  teenager_path(service.teenager)%>
 
                     </h4>
                     <h5><%= service.applyMessage %></h5>
                   </div>
                   <div class="header-meta">
-
-                    <span class="location">Fremont, CA</span>
-                    <span class="rate">$70 per hour</span>
+                    <span class="location"><%=service.teenager.home_address%></span>
+                    <span class="rate"><%= service.post.pay%></span>
                   </div>
                 </header>
 
                 <footer>
-                  <div class="status"><strong>Applied on:</strong><%=service.created_at%></div>
+                  <div class="status"><strong>Applied on: </strong><%=service.created_at%></div>
                   <div class="action-btn">
-                    <%if current_user.client %>
+                    <%if current_user.client && service.applied? %>
                         <%=link_to('Approve', service_path(service, :service => {:status => :enrolled}), :method => :put, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-success')%>
                         <%=link_to('Reject',  service_path(service, :service => {:status => :rejected}), :method => :put, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-danger')%>
                     <%elsif current_user.teenager %>

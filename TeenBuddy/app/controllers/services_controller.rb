@@ -14,7 +14,7 @@ class ServicesController < ApplicationController
     elsif current_user.client
       @services = Service.where(client_id: current_user.client.id, enrollType: true)
     end
-    @services = @services.filter(params.slice(:status, :post))
+    @services = @services.filter(params.slice(:status, :post)).order(params[:sort])
   end
 
   # GET /services/1
@@ -41,9 +41,9 @@ class ServicesController < ApplicationController
     respond_to do |format|
       if @service.save
         if service_params[:enrollType]
-        format.html { redirect_to services_applications_path, notice: 'Service was successfully created.' }
+        format.html { redirect_to services_applications_path, notice: 'Your application was successfully sent.' }
         else
-          format.html { redirect_to services_invitations_path, notice: 'Service was successfully created.' }
+          format.html { redirect_to services_invitations_path, notice: 'Your invitation was successfully sent.' }
           end
       else
         format.html { render :new }
@@ -57,7 +57,11 @@ class ServicesController < ApplicationController
   def update
     respond_to do |format|
       if @service.update(service_params)
-        format.html { redirect_to @service, notice: 'Service was successfully updated.' }
+        if @service.enrollType
+          format.html { redirect_to services_applications_path, notice: 'Application was successfully updated.' }
+        else
+          format.html { redirect_to services_invitations_path, notice: 'Invitation was successfully updated.' }
+        end
         format.json { render :show, status: :ok, location: @service }
       else
         format.html { render :edit }
