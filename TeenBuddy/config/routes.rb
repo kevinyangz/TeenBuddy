@@ -11,8 +11,6 @@ Rails.application.routes.draw do
     delete :empty_trash
   end
   end 
-  resources :post_invitations
-  resources :post_applications
   devise_for :users, controllers: { registrations: 'users/registrations'}
   resources :posts
   resources :clients do
