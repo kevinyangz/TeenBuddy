@@ -34,6 +34,8 @@ class ServicesController < ApplicationController
   # POST /services
   # POST /services.json
   def create
+    puts 'here are the params'
+    puts service_params
     @service = Service.new(service_params)
 
     respond_to do |format|
@@ -85,6 +87,7 @@ class ServicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_params
-      params.require(:service).permit(:teenager_id, :post_id, :applyMessage, :status,:enrollType, :inviteMessage)
+     # params.fetch(:service)
+      params.require(:service).permit(:teenager_id, :post_id, :applyMessage, :status, :enrollType, :inviteMessage)
     end
 end

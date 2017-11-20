@@ -87,8 +87,8 @@
                   <div class="status"><strong>Applied on:</strong><%=service.created_at%></div>
                   <div class="action-btn">
                     <%if current_user.client %>
-                        <%=link_to('Approve', service_path(service, :status => :enrolled), :method => :put, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-success')%>
-                        <%=link_to('Reject',  service_path(service, :status => :rejected), :method => :put, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-danger')%>
+                        <%=link_to('Approve', service_path(service, :service => {:status => :enrolled}), :method => :put, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-success')%>
+                        <%=link_to('Reject',  service_path(service, :service => {:status => :rejected}), :method => :put, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-danger')%>
                     <%elsif current_user.teenager %>
                         <%=link_to('Delete',  service_path(service), :method => :delete, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-danger')%>
                     <%end%>
