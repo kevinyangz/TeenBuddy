@@ -1,5 +1,6 @@
 class Client < ApplicationRecord
   has_many :posts
+  has_many :services
 
   belongs_to :user
   validates :fname, :lname, :home_address, :cell_phone, presence: true

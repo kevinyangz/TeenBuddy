@@ -3,8 +3,7 @@ class Post < ApplicationRecord
   belongs_to :client
   belongs_to :service_category
   belongs_to :service_type
-  has_many :post_applications
-  has_many :post_invitations
+
   has_many :services
   
   # getter and setter
