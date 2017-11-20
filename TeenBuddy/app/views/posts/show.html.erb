@@ -84,9 +84,9 @@
                 <%= form.hidden_field :post_id, value: @post.id %>
                 <%= form.hidden_field :teenager_id, value: current_user.teenager.id %>
                 <%= form.hidden_field :status, value: :applied %>
-
+                <%= form.hidden_field :type, value: true %>
                 <div class="form-group">
-                  <%= form.text_area :message, class: "form-control", placeholder: "Leave some Message to show yourself." %>
+                  <%= form.text_area :applyMessage, class: "form-control", placeholder: "Leave some Message to show yourself." %>
                 </div>
               </div>
               <div class="modal-footer">

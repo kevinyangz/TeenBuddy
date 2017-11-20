@@ -4,7 +4,20 @@ class ServicesController < ApplicationController
   # GET /services
   # GET /services.json
   def index
-    @services = Service.all
+
+    if params[:applications].presence
+      if current_user.teenager
+        @services = Service.where(teenager_id: current_user.teenager.id, type: true)
+      elsif current_user.client
+        @services = Service.joins(:post).where(['posts.client_id= ?', current_user.client.id], type: true)
+      end
+
+    elsif params[:invitations].presence
+      if current_user.teenager
+      elsif current_user.client
+      end
+
+    end
   end
 
   # GET /services/1
@@ -69,6 +82,6 @@ class ServicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_params
-      params.fetch(:service, {})
+      params.require(:service).permit(:teenager_id, :post_id, :applyMessage, :status,:type, :inviteMessage)
     end
 end
