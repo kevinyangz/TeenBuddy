@@ -19,7 +19,14 @@ Rails.application.routes.draw do
     resources :client_reviews
   end
   resources :teenagers
+
+  get '/services/invitations', to: 'services#invitations'
+  get '/services/applications', to: 'services#applications'
   resources :services
+
+
+
+
   resources :charges
 
   root 'home#index'

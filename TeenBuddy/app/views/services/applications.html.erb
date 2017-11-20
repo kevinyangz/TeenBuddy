@@ -1,0 +1,101 @@
+<!-- Page header -->
+<header class="page-header bg-img size-lg" style="background-image: url(assets/img/bg-banner1.jpg)">
+  <div class="container page-name">
+
+    <%if current_user.teenager %>
+        <h1 class="text-center">Job Applications</h1>
+        <p class="lead text-center">Use following search box to find status of your applications</p>
+    <% elsif current_user.client %>
+        <h1 class="text-center">Job Candidates</h1>
+        <p class="lead text-center">Use following search box to find best candidates for your openning position</p>
+    <%end%>
+  </div>
+
+  <div class="container">
+    <%= form_tag(services_path, method: :get) do %>
+
+        <div class="row">
+
+          <div class="form-group col-xs-12 col-sm-4">
+            <h6>job title</h6>
+            <% if current_user.client %>
+                <%= select_tag :post, options_from_collection_for_select(Post.where(:client_id => current_user.client.id), "id", "title", params[:post]), {:include_blank => 'All',class: 'form-control selectpicker'} %>
+            <% elsif current_user.teenager %>
+                <%= select_tag :post, options_from_collection_for_select(Service.where(:teenager_id => current_user.teenager.id), "post_id", "post_title", params[:post]), {:include_blank => 'All',class: 'form-control selectpicker'} %>
+            <%end%>
+          </div>
+
+          <div class="form-group col-xs-12 col-sm-4">
+            <h6>status</h6>
+            <%= select_tag :status, options_for_select([[:applied, "Pending"],[:enrolled, "Approved"],[:rejected, "Declined"]], params[:status]), {:include_blank => 'All', class: 'form-control selectpicker'} %>
+          </div>
+
+          <div class="form-group col-xs-12 col-sm-4">
+            <h6>Order by</h6>
+            <%= select_tag :order, options_for_select(['status','title','apply time'], params[:order]), {class: 'form-control selectpicker'} %>
+          </div>
+
+
+
+        </div>
+
+        <div class="button-group">
+          <div class="action-buttons">
+            <%= submit_tag("Apply filter", class: 'btn btn-primary') %>
+          </div>
+        </div>
+
+    <%end%>
+  </div>
+</header>
+<!-- END Page header -->
+
+
+<!-- Main container -->
+<main>
+  <section class="no-padding-top bg-alt">
+    <div class="container">
+
+      <%@services.each do |service| %>
+          <div class="row">
+            <!-- Candidate item -->
+            <div class="col-xs-12">
+              <div class="item-block">
+
+                <header>
+                  <h3><%=service.post.title%></h3>
+                  <a href="resume-detail.html"><img class="resume-avatar" src="assets/img/avatar-3.jpg" alt=""></a>
+                  <div class="hgroup">
+                    <h4>
+                      <a href="resume-detail.html"><%=service.teenager.fname%></a>
+
+                      <label class= "btn btn-xs <%=app_inv_status_style(service.status)%>"> <%= service.status %> </label>
+
+                    </h4>
+                    <h5><%= service.applyMessage %></h5>
+                  </div>
+                  <div class="header-meta">
+                    <span class="location">Fremont, CA</span>
+                    <span class="rate">$70 per hour</span>
+                  </div>
+                </header>
+
+                <footer>
+                  <div class="status"><strong>Applied on:</strong><%=service.created_at%></div>
+                  <div class="action-btn">
+                    <%if current_user.client %>
+                        <%=link_to('Approve', service_path(service, :status => :enrolled), :method => :put, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-success')%>
+                        <%=link_to('Reject',  service_path(service, :status => :rejected), :method => :put, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-danger')%>
+                    <%elsif current_user.teenager %>
+                        <%=link_to('Delete',  service_path(service), :method => :delete, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-danger')%>
+                    <%end%>
+                  </div>
+                </footer>
+              </div>
+            </div>
+            <!-- END Candidate item -->
+          </div>
+      <% end %>
+    </div>
+  </section>
+</main>

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171120033031) do
+ActiveRecord::Schema.define(version: 20171120155117) do
 
   create_table "client_reviews", force: :cascade do |t|
     t.integer "client_id"
@@ -161,7 +161,7 @@ ActiveRecord::Schema.define(version: 20171120033031) do
     t.integer "status", default: 0
     t.string "applyMessage"
     t.string "inviteMessage"
-    t.boolean "type"
+    t.boolean "enrollType"
     t.index ["post_id"], name: "index_services_on_post_id"
     t.index ["teenager_id"], name: "index_services_on_teenager_id"
   end
