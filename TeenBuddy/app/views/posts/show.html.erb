@@ -54,10 +54,10 @@
         <div class="action-buttons">
           <% if current_user.teenager %>
               <%= link_to 'Chat with Client', '#', :class => 'btn btn-success', 'data-toggle' => 'modal', 'data-target' => '#messageModal' %>
-              <% if (teenager_service=Service.find(post_id: @post.id, teenager_id: current_user.teenager.id)).any? %>
+              <% if (teenager_applicable=@post.applicable(current_user.teenager)) == 'applicable' %>
                   <%= link_to 'Apply now', '#', :class => 'btn btn-success', 'data-toggle' => 'modal', 'data-target' => '#applyModal' %>
               <% else %>
-                  <button type="button" class="btn btn-primary"><%= teenager_service.status %></button>
+                  <button type="button" class="btn btn-primary"><%= teenager_applicable %></button>
               <% end %>
           <% elsif current_user.client == @post.client %>
               <%= link_to 'Edit', edit_post_path(@post), class: 'btn btn-gray' %>

@@ -29,6 +29,8 @@ class ServicesController < ApplicationController
     respond_to do |format|
       if @service.save
         format.html { redirect_to @service, notice: 'Service was successfully created.' }
+        current_user.send_message(Post.find(params[post_id]).client, params[:message], 'Job Application').conversation
+
         format.json { render :show, status: :created, location: @service }
       else
         format.html { render :new }
@@ -69,6 +71,6 @@ class ServicesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def service_params
-      params.fetch(:service, {})
+      params.require(:service).permit(:teenager_id, :post_id, :status, :message)
     end
 end
