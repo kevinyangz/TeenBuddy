@@ -80,7 +80,7 @@
             <ul>
               <li><%= link_to 'My Jobs', posts_path(teenager_id: current_user.teenager.id) %></li>
               <li><%= link_to 'Offers' ,  post_invitations_path%></li>
-              <li><%= link_to 'Applications' ,  post_applications_path %></li>
+              <li><%= link_to 'Applications' ,  services_applications_path %></li>
             </ul>
           </li>
         </ul>
@@ -99,7 +99,7 @@
                 <ul>
                   <li><%= link_to 'My Posts', posts_path(client_id: current_user.client.id) %></li>
                   <li><%= link_to 'Offers' ,  post_invitations_path%></li>
-                  <li><%= link_to 'Applications' ,  post_applications_path%></li>
+                  <li><%= link_to 'Applications' ,  services_applications_path%></li>
                 </ul>
               </li>
             </ul>
