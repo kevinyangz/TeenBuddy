@@ -32,18 +32,18 @@ class Post < ApplicationRecord
   # functions
   def applicable teenager
 
-    if Service.where(:teenager_id => teenager.id, :post_id => self.id, :finished => true).any?
-      'You have finished the work.'
-    elsif Service.where(:teenager_id => teenager.id, :post_id => self.id, :finished => false).any?
-        'You are enrolled in this work.'
-    elsif PostApplication.where(:teenager_id => teenager.id, :post_id => self.id).any?
-      'You have applied this job.'
-    elsif self.status != 'open'
-      'This post has been closed.'
-    elsif PostInvitation.where(:teenager_id => teenager.id, :post_id => self.id).any?
-      'You have been invited for this job, please check the Invitations.'
-    else
+    if !(teenager_service = Service.where(:teenager_id => teenager.id, :post_id => self.id).first()) || teenager_service.open?
       'applicable'
+    elsif teenager_service.beingInvited?
+        'You have been invited for this job, please check the Invitations.'
+    elsif teenager_service.applied?
+      'You have applied for this job'
+    elsif teenager_service.enrolled?
+      'In Progress'
+    elsif teenager_service.finished?
+      'You have finished this job'
+    elsif teenager_service.confirmed?
+      'Done'
     end
 
   end

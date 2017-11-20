@@ -54,10 +54,10 @@
         <div class="action-buttons">
           <% if current_user.teenager %>
               <%= link_to 'Chat with Client', '#', :class => 'btn btn-success', 'data-toggle' => 'modal', 'data-target' => '#messageModal' %>
-              <% if (teenager_applicable=@post.applicable(current_user.teenager)) == 'applicable' %>
+              <% if (teenager_service=@post.applicable(current_user.teenager)) == 'applicable' %>
                   <%= link_to 'Apply now', '#', :class => 'btn btn-success', 'data-toggle' => 'modal', 'data-target' => '#applyModal' %>
               <% else %>
-                  <button type="button" class="btn btn-primary"><%= teenager_applicable %></button>
+                  <button type="button" class="btn btn-primary"><%= teenager_service %></button>
               <% end %>
           <% elsif current_user.client == @post.client %>
               <%= link_to 'Edit', edit_post_path(@post), class: 'btn btn-gray' %>
@@ -75,7 +75,7 @@
 
         <!-- Modal content-->
         <div class="modal-content">
-          <%= form_for(:post_application, url: post_applications_url, method: :post) do |form| %>
+          <%= form_for(:service, url: services_url, method: :post) do |form| %>
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
                 <h4 class="modal-title">Apply this job.</h4>
@@ -83,7 +83,8 @@
               <div class="modal-body">
                 <%= form.hidden_field :post_id, value: @post.id %>
                 <%= form.hidden_field :teenager_id, value: current_user.teenager.id %>
-                <%= form.hidden_field :status, value: 'Pending' %>
+                <%= form.hidden_field :status, value: :applied %>
+
                 <div class="form-group">
                   <%= form.text_area :message, class: "form-control", placeholder: "Leave some Message to show yourself." %>
                 </div>
