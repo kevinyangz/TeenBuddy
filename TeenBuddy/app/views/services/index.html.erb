@@ -44,8 +44,20 @@
 
 <main>
   <section class="no-padding-top bg-alt">
+    <%if notice%>
+        <div class="container">
+          <div class="alert alert-info">
+            <strong>Heads up!</strong> <%= notice %>
+          </div>
+        </div>
+    <%end%>
+
+    <div class="container">
+      <h5>We found <strong><%= @services.count %></strong> matches</h5>
+    </div>
     <div class="container">
       <div class="row">
+
 
         <% @services.each do |service| %>
             <div class="col-xs-12">

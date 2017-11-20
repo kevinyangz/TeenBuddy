@@ -24,7 +24,13 @@ class Post < ApplicationRecord
 
   scope :status, -> (status) { where('status = ?', "#{status}") }
 
-
+  def hasPosition
+    if self.number_of_teenager_needed > self.services.where(:status => [:enrolled, :finished, :confirmed]).count
+      'open'
+    else
+      'close'
+    end
+  end
 
 
 

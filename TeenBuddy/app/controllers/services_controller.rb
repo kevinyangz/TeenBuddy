@@ -57,10 +57,13 @@ class ServicesController < ApplicationController
         format.html { redirect_to services_applications_path, notice: 'Your application was successfully sent.' }
         else
           format.html { redirect_to services_invitations_path, notice: 'Your invitation was successfully sent.' }
-          end
+        end
       else
-        format.html { render :new }
-        format.json { render json: @service.errors, status: :unprocessable_entity }
+        if service_params[:enrollType] == 'true'
+          format.html { redirect_back(services_applications_path: { notice: @service.errors}) }
+        else
+          format.html { redirect_back(services_invitations_path: { notice: @service.errors}) }
+        end
       end
     end
   end
@@ -71,14 +74,17 @@ class ServicesController < ApplicationController
     respond_to do |format|
       if @service.update(service_params)
         if @service.enrollType
-          format.html { redirect_to services_applications_path, notice: 'Application was successfully updated.' }
+          format.html { redirect_back(fallback_location: services_applications_path, notice: 'Application was successfully updated.') }
         else
-          format.html { redirect_to services_invitations_path, notice: 'Invitation was successfully updated.' }
+          format.html { redirect_back(fallback_location: services_applications_path, notice: 'Invitation was successfully updated.') }
         end
         format.json { render :show, status: :ok, location: @service }
       else
-        format.html { render :edit }
-        format.json { render json: @service.errors, status: :unprocessable_entity }
+        if @service.enrollType
+          format.html { redirect_back(fallback_location: services_applications_path, notice: @service.errors) }
+        else
+          format.html { redirect_back(fallback_location: services_invitations_path, notice: @service.errors) }
+        end
       end
     end
   end
