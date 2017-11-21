@@ -1,5 +1,5 @@
 class ClientReviewsController < ApplicationController
-
+  before_action :authenticate_user!
   before_action :set_client_review, only: [:show, :edit, :update, :destroy]
 
   # GET /posts

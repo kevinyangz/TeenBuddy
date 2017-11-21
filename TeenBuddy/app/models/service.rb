@@ -18,7 +18,7 @@ class Service < ApplicationRecord
 
 
 def position_filled
-  if self.post.hasPosition == 'close'
+  if self.post.hasPosition == 'close' && (self.status == :enrolled)
     errors.add(:post,"The Job has been filled with enough people.")
   end
 end

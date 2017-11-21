@@ -66,7 +66,7 @@
                   <a href="company-detail.html"><img src="assets/img/logo-google.jpg" alt=""></a>
                   <div class="hgroup">
                     <%= link_to  "#{service.post.title}", service.post, class: 'h4'%>
-                    <h5>Description</h5>
+                    <h5><label class= "btn btn-xs <%=status_style2(service.status)%>"> <%= status_text2(service.status) %> </label></h5>
 
                   </div>
                   <div class="header-meta">
@@ -76,10 +76,12 @@
                 </header>
 
                 <footer>
-                  <p class="status"><strong>Status: </strong><%= service.post.status %></p>
+                  <p class="status"><strong>Updated at </strong><%= service.updated_at %></p>
 
                   <div class="action-btn">
+                    <%if service.enrolled?%>
                     <%=link_to('Finish',  service_path(service, :service => {:status => :finished}), :method => :put, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-success')%>
+                  <%end%>
                   </div>
                 </footer>
               </div>

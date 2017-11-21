@@ -38,7 +38,12 @@ class Post < ApplicationRecord
   def applicable teenager
 
     if !(teenager_service = Service.where(:teenager_id => teenager.id, :post_id => self.id).first()) || teenager_service.open?
-      'applicable'
+
+      if self.hasPosition == 'open'
+        'applicable'
+      else
+        'This Job has been closed.'
+      end
     elsif teenager_service.beingInvited?
         'You have been invited for this job, please check the Invitations.'
     elsif teenager_service.applied?

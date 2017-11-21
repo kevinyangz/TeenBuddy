@@ -3,6 +3,7 @@
 # 
 
 class TeenagersController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_teenager, only: [:show, :edit, :update, :destroy]
 
   # GET /teenagers

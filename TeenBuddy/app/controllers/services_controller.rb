@@ -1,11 +1,12 @@
 class ServicesController < ApplicationController
+  before_action :authenticate_user!
   before_action :set_service, only: [:show, :edit, :update, :destroy]
 
   # GET /services
   # GET /services.json
   def index
     if current_user.teenager
-      @services = Service.where(teenager_id: current_user.teenager.id, status: :enrolled).reverse.paginate(:page => params[:page], :per_page => 5)
+      @services = Service.where(teenager_id: current_user.teenager.id, status: [:enrolled, :finished, :confirmed]).reverse.paginate(:page => params[:page], :per_page => 5)
     end
 
 
