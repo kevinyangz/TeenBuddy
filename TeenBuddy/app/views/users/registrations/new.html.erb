@@ -1,6 +1,7 @@
 
 
 <main>
+   
   <% if params[:role] == nil %>
   <body class="login-page">
 
@@ -37,83 +38,110 @@
 
         <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
             <%= devise_error_messages! %>
-              <header class="page-header size-lg" style="background-image: url(assets/img/bg-banner1.jpg)">
-                      <div class="pull-left">
-      <a class="navbar-toggle" href="#" data-toggle="offcanvas"><i class="ti-menu"></i></a>
-      <div class="logo-wrapper">
-        <%= link_to image_tag("/assets/img/logo.png", border: 0), home_index_path, class: 'logo', method: :get %></a>
-        <%= link_to image_tag("/assets/img/logo-alt.png", border: 0), home_index_path, class: 'logo-alt', method: :get %></a>
-      </div>
-    </div>
+              <header >
+
                <div class="container">
 
-
-
                 <div class="row">
-                <div class="form-group col-xs-12 col-sm-12">
-              <%= f.email_field :email, autofocus: true, placeholder: 'Email Address', class: 'form-control' %>
-            </div>
+                <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
+                           
 
-                <div class="form-group col-xs-12 col-sm-12">
-              <%= f.password_field :password, autocomplete: "off" , placeholder: "#{@minimum_password_length} characters minimum", class: 'form-control'%>
-            </div>
+                <div class="form-group ">
+                   <label>Email Address</label>
+              <%= f.email_field :email, autofocus: true, placeholder: 'Email Address', class: 'form-control ' %>
+             </div>
 
-                <div class="form-group col-xs-12 col-sm-12">
-              <%= f.password_field :password_confirmation, autocomplete: "off" , placeholder: 'Password Confirmation', class: 'form-control'%>
-            </div>
+          <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6">
+                    
+
+          <div class="form-group">
+              <label>Password</label>
+            <%= f.password_field :password, autocomplete: "off" , placeholder: "#{@minimum_password_length} characters minimum", class: 'form-control '%>    </div>
+        </div>
+        <div class="col-xs-12 col-sm-6 col-md-6">
+                   
+          <div class="form-group">
+             <label>Repeat Password</label>
+            <%= f.password_field :password_confirmation, autocomplete: "off" , placeholder: 'Password Confirmation', class: 'form-control '%>
+          </div>
+        </div>
+      </div>
 
             <!-- nested fields -->
-            <%= f.fields_for :teenager, @user.build_teenager do |form| %>
+        <%= f.fields_for :teenager, @user.build_teenager do |form| %>
 
 
-                <div class="form-group col-xs-12 col-sm-12">
-                  <%= form.text_field :fname, placeholder: 'First Name', class: 'form-control' %>
-                </div>
-
-                <div class="form-group col-xs-12 col-sm-12">
+         <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6">
+                  <label>First Name</label>
+             <div class="form-group"> 
+                  <%= form.text_field :fname, placeholder: 'First Name', class: 'form-control ' %>
+            </div>
+         </div>
+           <div class="col-xs-12 col-sm-6 col-md-6">
+                   <label>Last Name</label>
+             <div class="form-group">
                   <%= form.text_field :lname, placeholder: 'Last Name', class: 'form-control' %>
-                </div>
+            </div>
+         </div>
+        </div>
 
-                <div class="form-group col-xs-12 col-sm-12">
-                  <%= form.text_field :home_address, id: :teenager_home_address, placeholder: 'Home Address', class: 'form-control' %>
-                </div>
+           <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6">
+              <label>Home Address</label>
+             <div class="form-group">
+              <%= form.text_field :home_address, id: :teenager_home_address, placeholder: 'Home Address', class: 'form-control' %>            </div>
+         </div>
+           <div class="col-xs-12 col-sm-6 col-md-6">
+                  <label>Postal Code</label>
+             <div class="form-group">
+            <%= form.text_field :postal_code, id: :postal_code, placeholder: 'Please enter your Postal Code ', class: 'form-control'%>      </div>
+         </div>
+        </div>
 
-                <div class="form-group col-xs-12 col-sm-12">
-                  <%= form.text_field :postal_code, id: :postal_code, placeholder: 'Please enter your Postal Code ', class: 'form-control'%>
-                </div>
 
-                <div class="form-group col-xs-12 col-sm-12">
-                  <%= form.text_field :cell_phone, placeholder: 'Please enter your Cell Phone Number', class: 'form-control'%>
-                </div>
+                  <%= form.hidden_field :cell_phone, :value => 666666666,placeholder: 'Please enter your Cell Phone Number', class: 'form-control'%>
 
-                <div class="form-group col-xs-12 col-sm-12">
+                <div class="form-group ">
+                <label>Service Interests</label>
                   <%= form.select :service_category_ids, ServiceCategory.all.collect {|x| [x.title, x.id]}, {}, :multiple => true,
                                   :prompt => 'Please select service category', class: 'form-control selectpicker' %>
                 </div>
 
-                <div class="form-group col-xs-12 col-sm-12">
-                  <%= form.date_field :birth_date, placeholder: 'Please enter your Postal Code ', class: 'form-control' %>
-                </div>
 
-                <div class="form-group col-xs-12 col-sm-12">
-                <%= form.file_field :selfie , placeholder: 'Please upload your selfie',class: 'form-control'%>
-                 </div>
+                  <div class="row">
+          <div class="col-xs-12 col-sm-6 col-md-6">
+                      <label>Birth Date</label>
+             <div class="form-group">
+            <%= form.date_field :birth_date, placeholder: 'Please enter your Postal Code ', class: 'form-control' %>
+                  </div>
+         </div>
+           <div class="col-xs-12 col-sm-6 col-md-6">
+                      <label>Upload Selfie</label>
+             <div class="form-group">
+                  <%= form.file_field :selfie , placeholder: 'Please upload your selfie',class: 'form-control'%>
+      </div>
+         </div>
+        </div>
+
+      <div class="row">
+        <div class="col-xs-12 col-md-6">
+            <%= f.submit class: 'btn btn-primary btn-block btn-lg' %>
+          </div>
+        <div class="col-xs-12 col-md-6">
+           <%= link_to('Login', new_user_session_path, class: 'btn btn-success btn-block btn-lg')%>
+        </div>
+      </div>
 
             <% end %>
           
                           </div>
                         </div>
+                        </div>
               </header>
 
-   <div class="container">
-        <header class="section-header">
-          <h5>Are you done?</h5>
-          <p>Please review your information once more and press the below button to put your post online.</p>
-        </header>
-          <p class="text-center">
-            <%= f.submit class: 'btn btn-success btn-xl btn-round' %>
-          </p>
-    </div>
+
       
        <% end %>
   <% elsif params[:role] == "client" %>
