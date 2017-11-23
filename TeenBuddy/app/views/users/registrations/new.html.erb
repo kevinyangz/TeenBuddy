@@ -1,242 +1,162 @@
-
-
 <main>
-   
-  <% if params[:role] == nil %>
   <body class="login-page">
+  <row>
+    <% if params[:role] == nil %>
 
-      <row>
+        <div class="login-block">
 
-      <div class="login-block">
+          <%= link_to image_tag("/assets/img/logo.png", border: 0), home_index_path, class: 'logo', method: :get %></a>
+          <br><br>
+          <p class="lead text-center">Search posts, apply jobs, accept offer, find best jobs nearby!</p>
+          <%= (link_to 'Teenager', new_user_registration_path(:role => "teenager"), class: 'btn btn-block btn-primary') %>
+          <hr>
 
-        <%= link_to image_tag("/assets/img/logo.png", border: 0), home_index_path, class: 'logo', method: :get %></a>
-       <br><br>
-        <p class="lead text-center">Search posts, apply jobs, accept offer, find best jobs nearby!</p>
-        <%= (link_to 'Teenager', new_user_registration_path(:role => "teenager"), class: 'btn btn-block btn-primary') %>
-        <hr>
-
-        <p class="lead text-center">Post Jobs, invite teenager, accept applications, find teenagers for your jobs.</p>
-        <%= (link_to 'Client', new_user_registration_path(:role => "client"), class: 'btn btn-block btn-primary') %>
-
-
-        <div class="login-footer">
-          <h6>Or register with</h6>
-          <ul class="social-icons">
-            <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
-            <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-            <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
-          </ul>
-        </div>
-        </form>
-      </div>
-      </row>
-      </body>
+          <p class="lead text-center">Post Jobs, invite teenager, accept applications, find teenagers for your jobs.</p>
+          <%= (link_to 'Client', new_user_registration_path(:role => "client"), class: 'btn btn-block btn-primary') %>
 
 
-      <!--if registration type is tennager -->
-  <% elsif params[:role] == "teenager" %>
-
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-            <%= devise_error_messages! %>
-              <header >
-
-               <div class="container">
-
-                <div class="row">
-                <div class="col-xs-12 col-sm-8 col-md-6 col-sm-offset-2 col-md-offset-3">
-                           
-
-                <div class="form-group ">
-                   <label>Email Address</label>
-              <%= f.email_field :email, autofocus: true, placeholder: 'Email Address', class: 'form-control ' %>
-             </div>
-
-          <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-6">
-                    
-
-          <div class="form-group">
-              <label>Password</label>
-            <%= f.password_field :password, autocomplete: "off" , placeholder: "#{@minimum_password_length} characters minimum", class: 'form-control '%>    </div>
-        </div>
-        <div class="col-xs-12 col-sm-6 col-md-6">
-                   
-          <div class="form-group">
-             <label>Repeat Password</label>
-            <%= f.password_field :password_confirmation, autocomplete: "off" , placeholder: 'Password Confirmation', class: 'form-control '%>
+          <div class="login-footer">
+            <h6>Or register with</h6>
+            <ul class="social-icons">
+              <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+              <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+              <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+            </ul>
           </div>
+          </form>
         </div>
-      </div>
-
-            <!-- nested fields -->
-        <%= f.fields_for :teenager, @user.build_teenager do |form| %>
 
 
-         <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-6">
-                  <label>First Name</label>
-             <div class="form-group"> 
+        <!--if registration type is tennager -->
+    <% elsif params[:role] == "teenager" %>
+
+        <div class="login-block">
+
+          <%= link_to image_tag("/assets/img/logo.png", border: 0), home_index_path, class: 'logo', method: :get %></a>
+          <h6>Fill the form , and sign up as teenager</h6><br>
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+              <%= devise_error_messages! %>
+              <%= f.fields_for :teenager, @user.build_teenager do |form| %>
                   <%= form.text_field :fname, placeholder: 'First Name', class: 'form-control ' %>
-            </div>
-         </div>
-           <div class="col-xs-12 col-sm-6 col-md-6">
-                   <label>Last Name</label>
-             <div class="form-group">
+                  <hr class="hr-xs">
                   <%= form.text_field :lname, placeholder: 'Last Name', class: 'form-control' %>
-            </div>
-         </div>
-        </div>
+              <% end %>
+              <hr class="hr-xs">
+              <%= f.email_field :email, autofocus: true, placeholder: "Email", class: "form-control" %>
+              <hr class="hr-xs">
+              <%= f.password_field :password, autocomplete: "off", placeholder: "Password", class: "form-control" %>
+              <hr class="hr-xs">
+              <%= f.password_field :password, autocomplete: "off", placeholder: 'Password Confirmation', class: "form-control" %>
+              <hr class="hr-xs">
+              <!-- nested fields -->
+              <div class="actions">
+                <%= f.submit "Sign up", class: 'btn btn-primary btn-block' %>
+              </div>
+              <div class="login-footer">
+                <h6>Or login with</h6>
+                <ul class="social-icons">
+                  <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+                  <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+                  <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+                </ul>
+              </div>
 
-           <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-6">
-              <label>Home Address</label>
-             <div class="form-group">
-              <%= form.text_field :home_address, id: :teenager_home_address, placeholder: 'Home Address', class: 'form-control' %>            </div>
-         </div>
-           <div class="col-xs-12 col-sm-6 col-md-6">
-                  <label>Postal Code</label>
-             <div class="form-group">
-            <%= form.text_field :postal_code, id: :postal_code, placeholder: 'Please enter your Postal Code ', class: 'form-control'%>      </div>
-         </div>
-        </div>
+              </div>
+
+          <% end %>
+    <% elsif params[:role] == "client" %>
+        <div class="login-block">
+
+          <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
+              <%= devise_error_messages! %>
+
+              <div class="field">
+                <%= f.label :email %><br/>
+                <%= f.email_field :email, autofocus: true %>
+              </div>
+
+              <div class="field">
+                <%= f.label :password %>
+                <% if @minimum_password_length %>
+                    <em>(<%= @minimum_password_length %> characters minimum)</em>
+                <% end %><br/>
+                <%= f.password_field :password, autocomplete: "off" %>
+              </div>
+
+              <div class="field">
+                <%= f.label :password_confirmation %><br/>
+                <%= f.password_field :password_confirmation, autocomplete: "off" %>
+              </div>
+
+              <!-- nested fields -->
+              <%= f.fields_for :client, @user.build_client do |form| %>
+
+                  <header class="page-header bg-img size-lg" style="background-image: url(/assets/img/bg-banner1.jpg)">
+                    <div class="container page-name">
+                      <h1 class="text-center"><%= @client_form_header_title %></h1>
+                      <p class="lead text-center"><%= @client_form_header_description %></p>
+                    </div>
+                    <div class="container">
 
 
-                  <%= form.hidden_field :cell_phone, :value => 666666666,placeholder: 'Please enter your Cell Phone Number', class: 'form-control'%>
-
-                <div class="form-group ">
-                <label>Service Interests</label>
-                  <%= form.select :service_category_ids, ServiceCategory.all.collect {|x| [x.title, x.id]}, {}, :multiple => true,
-                                  :prompt => 'Please select service category', class: 'form-control selectpicker' %>
-                </div>
+                      <div class="row">
 
 
-                  <div class="row">
-          <div class="col-xs-12 col-sm-6 col-md-6">
-                      <label>Birth Date</label>
-             <div class="form-group">
-            <%= form.date_field :birth_date, placeholder: 'Please enter your Postal Code ', class: 'form-control' %>
-                  </div>
-         </div>
-           <div class="col-xs-12 col-sm-6 col-md-6">
-                      <label>Upload Selfie</label>
-             <div class="form-group">
-                  <%= form.file_field :selfie , placeholder: 'Please upload your selfie',class: 'form-control'%>
-      </div>
-         </div>
-        </div>
+                        <div class="form-group col-xs-12 col-sm-12">
+                          <%= form.text_field :fname, id: :client_fname, placeholder: 'Please enter your first name', class: 'form-control input-lg' %>
+                        </div>
 
-      <div class="row">
-        <div class="col-xs-12 col-md-6">
-            <%= f.submit class: 'btn btn-primary btn-block btn-lg' %>
-          </div>
-        <div class="col-xs-12 col-md-6">
-           <%= link_to('Login', new_user_session_path, class: 'btn btn-success btn-block btn-lg')%>
-        </div>
-      </div>
+                        <div class="form-group col-xs-12 col-sm-12">
+                          <%= form.text_field :lname, id: :client_lname, placeholder: 'Please enter your last name', class: 'form-control input-lg' %>
+                        </div>
 
-            <% end %>
-          
+
+                        <div class="form-group col-xs-12 col-sm-12">
+
+                          <%= form.text_field :home_address, id: :client_home_address, placeholder: 'Home address', class: 'form-control input-lg' %>
+
+                        </div>
+
+
+                        <div class="form-group col-xs-12 col-sm-12">
+                          <%= form.text_area :description, id: :client_description, placeholder: 'Tell us a bit more about yourself', class: 'form-control input-lg' %>
+                        </div>
+
+
+                        <div class="form-group col-xs-12 col-sm-6">
+                          <div class="input-group input-group-sm">
+                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                            <%= form.number_field :home_phone, id: :client_home_phone, placeholder: 'Home Phone', class: 'form-control input-lg' %>
                           </div>
                         </div>
+
+                        <div class="form-group col-xs-12 col-sm-6">
+                          <div class="input-group input-group-sm">
+                            <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
+                            <%= form.number_field :cell_phone, id: :client_cell_phone, placeholder: 'Cell Phone', class: 'form-control input-lg' %>
+                          </div>
                         </div>
-              </header>
 
+                        <div class="form-group col-xs-12 col-sm-12">
+                          <%= form.file_field :selfie, placeholder: 'Please upload your selfie', class: 'form-control' %>
+                        </div>
 
-      
-       <% end %>
-  <% elsif params[:role] == "client" %>
-     <div class="login-block">
+                      </div>
+                    </div>
+                  </header>
 
-        <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-            <%= devise_error_messages! %>
+              <% end %>
+              <%= f.submit class: 'btn btn-success btn-xl btn-round' %>
+          <% end %>
 
-            <div class="field">
-              <%= f.label :email %><br/>
-              <%= f.email_field :email, autofocus: true %>
-            </div>
-
-            <div class="field">
-              <%= f.label :password %>
-              <% if @minimum_password_length %>
-                  <em>(<%= @minimum_password_length %> characters minimum)</em>
-              <% end %><br/>
-              <%= f.password_field :password, autocomplete: "off" %>
-            </div>
-
-            <div class="field">
-              <%= f.label :password_confirmation %><br/>
-              <%= f.password_field :password_confirmation, autocomplete: "off" %>
-            </div>
-
-            <!-- nested fields -->
- <%= f.fields_for :client, @user.build_client do |form| %>
-
-    <header class="page-header bg-img size-lg" style="background-image: url(/assets/img/bg-banner1.jpg)">
-      <div class="container page-name">
-        <h1 class="text-center"><%= @client_form_header_title %></h1>
-        <p class="lead text-center"><%= @client_form_header_description %></p>
-      </div>
-      <div class="container">
-
-
-        <div class="row">
-
-
-
-          <div class="form-group col-xs-12 col-sm-12">
-            <%= form.text_field :fname, id: :client_fname, placeholder: 'Please enter your first name', class: 'form-control input-lg' %>
-          </div>
-
-          <div class="form-group col-xs-12 col-sm-12">
-            <%= form.text_field :lname, id: :client_lname, placeholder: 'Please enter your last name', class: 'form-control input-lg' %>
-          </div>
-
-
-          <div class="form-group col-xs-12 col-sm-12">
-
-              <%= form.text_field :home_address, id: :client_home_address, placeholder: 'Home address', class: 'form-control input-lg' %>
-
-          </div>
-
-
-
-          <div class="form-group col-xs-12 col-sm-12">
-            <%= form.text_area :description, id: :client_description, placeholder: 'Tell us a bit more about yourself', class: 'form-control input-lg' %>
-          </div>
-
-
-
-
-
-          <div class="form-group col-xs-12 col-sm-6">
-            <div class="input-group input-group-sm">
-              <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-              <%= form.number_field :home_phone, id: :client_home_phone, placeholder: 'Home Phone', class: 'form-control input-lg' %>
-            </div>
-          </div>
-
-          <div class="form-group col-xs-12 col-sm-6">
-            <div class="input-group input-group-sm">
-              <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
-              <%= form.number_field :cell_phone, id: :client_cell_phone, placeholder: 'Cell Phone', class: 'form-control input-lg' %>
-            </div>
-          </div>
-
-            <div class="form-group col-xs-12 col-sm-12">
-            <%= form.file_field :selfie , placeholder: 'Please upload your selfie',class: 'form-control'%>
-            </div>
-
-        </div>
-      </div>
-    </header>
- 
     <% end %>
-    <%= f.submit class: 'btn btn-success btn-xl btn-round' %>
-    <% end %>
+    <div class="login-links">
+      <%= link_to "Forgot password?", new_password_path(resource_name), class: "pull-left" %>
+      <%= link_to "Already Have an account?", new_user_session_path, class: "pull-right" %>
+    </div>
 
-  <% end %>
-
-
+  </row>
+  </body>
 </main>
 
 

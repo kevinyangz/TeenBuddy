@@ -11,7 +11,7 @@ class TeenagersController < ApplicationController
   def index
     @current_teenager_interest= TeenagerInterest.all
     @current_teenager_interest=@current_teenager_interest.filter(params.slice(:servicecategory))
-    @teenagers = Teenager.where(id: @current_teenager_interest.select(:teenager_id))
+    @teenagers = Teenager.where(id: @current_teenager_interest.select(:teenager_id)).reverse.paginate(:page => params[:page], :per_page => 5)
   # @teenagers=@current_teenager_interest.teenagers
     #puts "-----#{@current_teenager_interest.class}----"
 

@@ -30,7 +30,7 @@
 
 
 
-<% if !current_page?('/users/sign_up') && !current_page?('/users/sign_in')%>
+<% if controller.controller_name != "sessions" && controller.controller_name != "registrations"%>
 
    <%= render 'home/header' %>
 
