@@ -3,11 +3,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-   #def new
-    @user = User.new
-    @user.build_teenager
-    @user.build_client
-   #end
+  # def new
+
+ #  end
 
   # POST /resource
   # def create
@@ -38,6 +36,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   #   super
   # end
 
+
   protected
 
   # If you have extra params to permit, append them to the sanitizer.
@@ -55,13 +54,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
    def after_sign_up_path_for(resource)
-      if params[:role] == 'teenager'
-        teenager_path(resource.teenager)
-      elsif
-        client_path(resource.client)
-      else
-        super
-      end
+       if resource.teenager
+         edit_teenager_path(resource.teenager)
+       elsif resource.client
+         edit_client_path(resource.client)
+       else
+         super
+       end
+
    end
 
   # The path used after sign up for inactive accounts.

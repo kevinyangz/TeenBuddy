@@ -10,8 +10,11 @@ Rails.application.routes.draw do
     collection do
     delete :empty_trash
   end
-  end 
+  end
+
   devise_for :users, controllers: { registrations: 'users/registrations'}
+
+
   resources :posts
   resources :clients do
     resources :client_reviews
@@ -20,6 +23,7 @@ Rails.application.routes.draw do
 
   get '/services/invitations', to: 'services#invitations'
   get '/services/applications', to: 'services#applications'
+
   resources :services
 
 
