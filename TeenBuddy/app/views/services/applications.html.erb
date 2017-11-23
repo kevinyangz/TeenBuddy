@@ -98,7 +98,7 @@
                 </header>
 
                 <footer>
-                  <div class="status"><strong>Applied on: </strong><%=service.created_at%></div>
+                  <div class="status"><strong>Applied on: </strong><%=service.updated_at%></div>
                   <div class="action-btn">
                     <%if current_user.client && service.applied? %>
                         <%=link_to('Approve', service_path(service, :service => {:status => :enrolled}), :method => :put, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-success')%>
