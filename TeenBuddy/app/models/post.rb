@@ -24,6 +24,7 @@ class Post < ApplicationRecord
 
   scope :status, -> (status) { where('status = ?', "#{status}") }
 
+
   def hasPosition
     if self.number_of_teenager_needed > self.services.where(:status => [:enrolled, :finished, :confirmed]).count
       'open'
@@ -45,7 +46,7 @@ class Post < ApplicationRecord
         'This Job has been closed.'
       end
     elsif teenager_service.beingInvited?
-        'You have been invited for this job, please check the Invitations.'
+        'You have been invited for this job, please check the Offers.'
     elsif teenager_service.applied?
       'You have applied for this job'
     elsif teenager_service.enrolled?

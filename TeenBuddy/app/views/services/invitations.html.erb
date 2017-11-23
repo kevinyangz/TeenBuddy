@@ -13,6 +13,13 @@
 
   <div class="container">
 
+    <%if notice%>
+
+          <div class="alert alert-info">
+            <strong>Heads up!</strong> <%= notice %>
+          </div>
+    <%end%>
+
     <%= form_tag(services_invitations_path, method: :get) do %>
         <div class="row">
 
@@ -52,13 +59,7 @@
 <!-- Main container -->
 <main>
   <section class="no-padding-top bg-alt">
-    <%if notice%>
-        <div class="container">
-          <div class="alert alert-info">
-            <strong>Heads up!</strong> <%= notice %>
-          </div>
-        </div>
-    <%end%>
+
 
     <div class="container">
       <h5>We found <strong><%= @services.count %></strong> matches</h5>

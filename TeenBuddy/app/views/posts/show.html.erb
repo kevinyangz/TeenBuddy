@@ -1,7 +1,15 @@
 <header class="page-header bg-img size-lg" style="background-image: url(assets/img/bg-banner2.jpg)">
   <div class="container">
+    <%if notice%>
+
+        <div class="alert alert-info">
+          <strong>Heads up!</strong> <%= notice %>
+        </div>
+
+    <%end%>
     <div class="header-detail">
       <img class="logo" src="assets/img/logo-google.jpg" alt="">
+
       <div class="hgroup">
         <h1><%= @post.title %></h1>
         <h3><a href="#"><%= "#{@post.client.fname} #{@post.client.lname}" %></a></h3>
@@ -28,7 +36,7 @@
 
         <li>
           <i class="fa fa-certificate"></i>
-          <span><%= @post.status %></span>
+          <span><%= @post.hasPosition %></span>
         </li>
       </ul>
 

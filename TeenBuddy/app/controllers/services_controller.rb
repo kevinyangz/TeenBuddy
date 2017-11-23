@@ -61,9 +61,9 @@ class ServicesController < ApplicationController
         end
       else
         if service_params[:enrollType] == 'true'
-          format.html { redirect_back(services_applications_path: { notice: @service.errors}) }
+          format.html { redirect_back(fallback_location: services_applications_path, notice: @service.errors) }
         else
-          format.html { redirect_back(services_invitations_path: { notice: @service.errors}) }
+          format.html { redirect_back(fallback_location: services_invitations_path,notice: @service.errors.full_messages) }
         end
       end
     end

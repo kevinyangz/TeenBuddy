@@ -1,7 +1,17 @@
 
 <!-- Page header -->
+
+
+
 <header class="page-header bg-img" style="background-image: url(assets/img/bg-banner1.jpg)">
+
+
   <div class="container">
+    <%if notice%>
+    <div class="alert alert-info">
+      <strong>Heads up!</strong> <%= notice %>
+    </div>
+<%end%>
     <div class="row equal">
       
       <div class="col-xs-4 col-sm-4 ">
@@ -13,6 +23,11 @@
         <!-- default picture-->
            <% end %>     
        </div>
+
+
+
+
+
 
       <div class="col-xs-8 col-sm-8">
         <div class="hgroup">
@@ -100,7 +115,7 @@
       <div class="modal-body">
         <div class="form-group">
           <h6>My open jobs</h6>
-          <%= collection_select(:service, :post_id, Post.where(:client_id => current_user.client.id, :status => 'open'), :id, :title, {:prompt => 'Please select a job for teenager.'}, {class: 'form-control selectpicker'}) %>
+          <%= collection_select(:service, :post_id, Post.where(:client_id => current_user.client.id).all.select {|c| c.hasPosition == 'open'}, :id, :title, {:prompt => 'Please select a job for teenager.'}, {class: 'form-control selectpicker'}) %>
         </div>
 
         <%= form.hidden_field :teenager_id, value: @teenager.id %>
