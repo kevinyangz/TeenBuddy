@@ -61,9 +61,9 @@ class ServicesController < ApplicationController
         end
       else
         if service_params[:enrollType] == 'true'
-          format.html { redirect_back(fallback_location: services_applications_path, notice: @service.errors) }
+          format.html { redirect_back(fallback_location: services_applications_path, notice: @service.errors[:post].first) }
         else
-          format.html { redirect_back(fallback_location: services_invitations_path,notice: @service.errors.full_messages) }
+          format.html { redirect_back(fallback_location: services_invitations_path,notice: @service.errors[:post].first) }
         end
       end
     end
@@ -82,9 +82,9 @@ class ServicesController < ApplicationController
         format.json { render :show, status: :ok, location: @service }
       else
         if @service.enrollType
-          format.html { redirect_back(fallback_location: services_applications_path, notice: @service.errors) }
+          format.html { redirect_back(fallback_location: services_applications_path, notice: @service.errors[:post].first) }
         else
-          format.html { redirect_back(fallback_location: services_invitations_path, notice: @service.errors) }
+          format.html { redirect_back(fallback_location: services_invitations_path, notice: @service.errors[:post].first) }
         end
       end
     end
