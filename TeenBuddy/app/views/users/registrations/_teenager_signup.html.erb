@@ -1,15 +1,13 @@
 <div class="login-block">
 
   <%= link_to image_tag("/assets/img/logo.png", border: 0), home_index_path, class: 'logo', method: :get %></a>
-  <h6>Fill the form , and sign up as teenager</h6><br>
+  <h6>Fill the form, sign up as teenager</h6><br>
   <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
       <font color = 'red'> <%= resource.errors.full_messages.first %></font>
       <%= f.fields_for :teenager, resource.teenager do |form| %>
           <%= form.text_field :fname, placeholder: 'First Name', class: 'form-control ' %>
           <hr class="hr-xs">
           <%= form.text_field :lname, placeholder: 'Last Name', class: 'form-control' %>
-
-            <%= form.date_field :birth_date, placeholder: 'Birthday ', class: 'form-control input-lg' %>
 
       <% end %>
       <hr class="hr-xs">
