@@ -25,43 +25,45 @@
               </div>
           <% end %>
 
-          <div class="form-group col-xs-12 col-sm-12">
-            <%= form.text_field :fname, id: :client_fname, placeholder: 'Please enter your first name', class: 'form-control input-lg' %>
+          <div class="form-group col-md-6 col-sm-12">
+            <h6>First Name</h6>
+            <%= form.text_field :fname, id: :client_fname,  class: 'form-control input-lg' %>
           </div>
 
-          <div class="form-group col-xs-12 col-sm-12">
-            <%= form.text_field :lname, id: :client_lname, placeholder: 'Please enter your last name', class: 'form-control input-lg' %>
+          <div class="form-group col-md-6 col-sm-12">
+            <h6>Last Name</h6>
+            <%= form.text_field :lname, id: :client_lname,class: 'form-control input-lg' %>
           </div>
-
-
-          <div class="form-group col-xs-12 col-sm-12">
-
-              <%= form.text_field :home_address, id: :client_home_address, placeholder: 'Home address', class: 'form-control input-lg' %>
-
-          </div>
-
 
 
           <div class="form-group col-xs-12 col-sm-12">
-            <%= form.text_area :description, id: :client_description, placeholder: 'Tell us a bit more about yourself', class: 'form-control input-lg' %>
+            <h6>Home Address</h6>
+              <%= form.text_field :home_address, id: :client_home_address, class: 'form-control input-lg' %>
+
+          </div>
+
+
+
+          <div class="form-group col-xs-12 col-sm-12">
+            <h6>Description</h6>
+            <%= form.text_area :description, id: :client_description,  class: 'form-control input-lg' %>
           </div>
 
 
 
 
 
-          <div class="form-group col-xs-12 col-sm-6">
-            <div class="input-group input-group-sm">
-              <span class="input-group-addon"><i class="fa fa-phone"></i></span>
-              <%= form.number_field :home_phone, id: :client_home_phone, placeholder: 'Home Phone', class: 'form-control input-lg' %>
-            </div>
+          <div class="form-group col-md-6 col-sm-12">
+            <h6>Home Phone</h6>
+              <%= form.number_field :home_phone, id: :client_home_phone, class: 'form-control input-lg' %>
+
           </div>
 
-          <div class="form-group col-xs-12 col-sm-6">
-            <div class="input-group input-group-sm">
-              <span class="input-group-addon"><i class="fa fa-mobile"></i></span>
-              <%= form.number_field :cell_phone, id: :client_cell_phone, placeholder: 'Cell Phone', class: 'form-control input-lg' %>
-            </div>
+          <div class="form-group col-md-6 col-sm-12">
+
+              <h6>Cell Phone</h6>
+              <%= form.number_field :cell_phone, id: :client_cell_phone,  class: 'form-control input-lg' %>
+
           </div>
 
         </div>
@@ -76,7 +78,7 @@
         </header>
         <div class="actions">
           <p class="text-center">
-            <%= form.submit @client_form_submit_title, class: 'btn btn-success btn-xl btn-round' %>
+            <%= form.submit 'Submit', class: 'btn btn-success btn-xl btn-round' %>
           </p>
         </div>
       </div>
