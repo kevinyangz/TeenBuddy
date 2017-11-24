@@ -28,7 +28,7 @@
           <a class="dropdown-toggle" href="#" data-toggle="dropdown">
             <img src="/assets/img/teenager1.png" alt="avatar">
           </a>
-          <b><%="#{current_user.teenager.fname} #{current_user.teenager.lname}"%></b>
+          <b><font color="white"><<%="#{current_user.teenager.fname} #{current_user.teenager.lname}"%></font></b>
          <ul class="dropdown-menu dropdown-menu-right">
 
            <li><%= link_to 'Profile', current_user.teenager %></li>
@@ -44,9 +44,7 @@
           <a class="dropdown-toggle" href="#" data-toggle="dropdown">
             <img src="/assets/img/client1.jpeg" alt="avatar">
           </a>
-          <%if current_user.client!=nil%>
-
-            <%end%>
+          <b><font color="white"><%="#{current_user.client.fname} #{current_user.client.lname}"%></font></b>
           <ul class="dropdown-menu dropdown-menu-right">
 
             <li><%= link_to 'Profile', current_user.client %></li>
