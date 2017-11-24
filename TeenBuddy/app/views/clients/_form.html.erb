@@ -8,22 +8,12 @@
         <p class="lead text-center"><%= @client_form_header_description %></p>
       </div>
       <div class="container">
-
+        <font color = 'red'> <%= client.errors.full_messages.first %></font>
 
         <div class="row">
 
 
-          <% if client.errors.any? %>
-              <div id="error_explanation">
-                <h2><%= pluralize(client.errors.count, "error") %> prohibited this post from being saved:</h2>
 
-                <ul>
-                  <% client.errors.full_messages.each do |message| %>
-                      <li><%= message %></li>
-                  <% end %>
-                </ul>
-              </div>
-          <% end %>
 
           <div class="form-group col-md-6 col-sm-12">
             <h6>First Name</h6>

@@ -5,22 +5,8 @@
         <p class="lead text-center">Please complete the form with detailed infomation</p>
       </div>
       <div class="container">
+        <font color = 'red'> <%= client.errors.full_messages.first %></font>
       <div class="row">
-
-
-
-    <% if teenager.errors.any? %>
-        <div id="error_explanation">
-          <h2><%= pluralize(teenager.errors.count, "error") %> prohibited this teenager from being saved:</h2>
-
-          <ul>
-            <% teenager.errors.full_messages.each do |message| %>
-                <li><%= message %></li>
-            <% end %>
-          </ul>
-        </div>
-    <% end %>
-
 
      <div class="form-group col-md-6 col-sm-12">
        <h6>First Name</h6>

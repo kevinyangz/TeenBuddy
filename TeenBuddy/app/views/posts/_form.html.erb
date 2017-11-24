@@ -8,16 +8,9 @@
       </div>
 
       <div class="container">
+        <font color = 'red'> <%= post.errors.full_messages.first %></font>
 
         <div class="row">
-
-          <% if post.errors.any? %>
-              <div class="form-group col-xs-12 col-sm-12">
-                <div class="alert alert-danger">
-                  <strong>Oh snap!</strong> <%= post.errors.full_messages.first %>
-                </div>
-              </div>
-          <% end %>
 
           <div class="form-group col-xs-12 col-sm-12">
             <h6>Title</h6>
