@@ -2,9 +2,10 @@
 $unchecked-star: '\2606';
 $unchecked-color: #888;
 $checked-star: '\2605';
-$checked-color: #e52;
-
-
+$checked-color: #000000;
+.test{
+  text-align:center
+}
 .star-cb-group {
   /* remove inline-block whitespace */
   font-size: 0;
@@ -14,6 +15,7 @@ $checked-color: #e52;
   /* flip the order so we can use the + and ~ combinators */
   unicode-bidi: bidi-override;
   direction: rtl;
+
   & > input {
     display: none;
     & + label {
@@ -35,7 +37,7 @@ $checked-color: #e52;
       & + label:hover ~ label:before,
       & + label:hover:before {
       content: $checked-star;
-      color: #e52;
+      color: #000000;
       text-shadow: 0 0 1px #333;
     }
   }
@@ -63,6 +65,7 @@ $checked-color: #e52;
   }
 }
 :root {
+
   font-size: 1.4em;
   font-family: Helvetica, arial, sans-serif;
 }
