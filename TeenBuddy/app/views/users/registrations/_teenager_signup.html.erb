@@ -8,6 +8,9 @@
           <%= form.text_field :fname, placeholder: 'First Name', class: 'form-control ' %>
           <hr class="hr-xs">
           <%= form.text_field :lname, placeholder: 'Last Name', class: 'form-control' %>
+
+            <%= form.date_field :birth_date, placeholder: 'Birthday ', class: 'form-control input-lg' %>
+
       <% end %>
       <hr class="hr-xs">
       <%= f.email_field :email, autofocus: true, placeholder: "Email", class: "form-control" %>

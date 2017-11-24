@@ -26,11 +26,9 @@
       <div class="pull-right">
         <div class="dropdown user-account">
           <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-            <img src="/assets/img/teenager1.jpeg" alt="avatar">
+            <img src="/assets/img/teenager1.png" alt="avatar">
           </a>
-             <%if current_user.teenager!=nil%>
-
-            <%end%>
+          <b><%="#{current_user.teenager.fname} #{current_user.teenager.lname}"%></b>
          <ul class="dropdown-menu dropdown-menu-right">
 
            <li><%= link_to 'Profile', current_user.teenager %></li>

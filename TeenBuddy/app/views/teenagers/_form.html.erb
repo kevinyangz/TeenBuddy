@@ -24,34 +24,36 @@
 
      <div class="form-group col-md-6 col-sm-12">
        <h6>First Name</h6>
-      <%= form.text_field :fname, placeholder: 'First Name', class: 'form-control input-lg' %>
+      <%= form.text_field :fname, class: 'form-control input-lg' %>
     </div>
 
      <div class="form-group col-md-6 col-sm-12">
-      <%= form.text_field :lname, placeholder: 'Last Name', class: 'form-control input-lg' %>
+       <h6>Last Name</h6>
+      <%= form.text_field :lname, class: 'form-control input-lg' %>
     </div>
 
-     <div class="form-group col-xs-12 col-sm-12">
-      <%= form.text_field :home_address,  id: :teenager_home_address, placeholder: 'Home Address', class: 'form-control input-lg' %>
+     <div class="form-group col-md-6 col-sm-12">
+       <h6>Home Address</h6>
+      <%= form.text_field :home_address,  id: :teenager_home_address,  class: 'form-control input-lg' %>
     </div>
 
-     <div class="form-group col-xs-12 col-sm-12">
-      <%= form.text_field :postal_code,id: :postal_code,placeholder: 'Please enter your Postal Code ', class: 'form-control input-lg' %>
+     <div class="form-group col-md-6 col-sm-12">
+       <h6>Postal Code</h6>
+      <%= form.text_field :postal_code,id: :postal_code, class: 'form-control input-lg' %>
     </div>
 
-  
-     <div class="form-group col-xs-12 col-sm-12">
-      <%= form.text_field :cell_phone, placeholder: 'Please enter your Cell Phone Number', class: 'form-control input-lg' %>
+     <div class="form-group col-md-6 col-sm-12">
+       <h6>Cell Phone</h6>
+      <%= form.text_field :cell_phone, class: 'form-control input-lg' %>
     </div>
 
-     <div class="form-group col-xs-12 col-sm-12">
+     <div class="form-group col-md-6 col-sm-12">
+       <h6>Interests</h6>
       <%= form.select :service_category_ids, ServiceCategory.all.collect {|x| [x.title, x.id]}, {}, :multiple => true ,
        :prompt => 'Please select service category',class: 'form-control selectpicker' %>
           </div>
 
-     <div class="form-group col-xs-12 col-sm-12">
-      <%= form.date_field :birth_date, placeholder: 'Please enter your BirthDate yyyy/mm/dd ', class: 'form-control input-lg' %>
-    </div>
+
 </div>
 </div>
 </header>
@@ -64,7 +66,7 @@
         </header>
         <div class="actions">
           <p class="text-center">
-            <%= form.submit class: 'btn btn-success btn-xl btn-round' %>
+            <%= form.submit 'Submit', class: 'btn btn-success btn-xl btn-round' %>
           </p>
         </div>
       </div>
