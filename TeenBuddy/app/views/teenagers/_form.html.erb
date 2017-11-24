@@ -1,8 +1,8 @@
 <%= form_with(model: teenager, local: true) do |form| %>
      <header class="page-header bg-img size-lg" style="background-image: url(/assets/img/bg-banner1.jpg)">
       <div class="container page-name">
-        <h1 class="text-center"><%= @post_form_header_title %></h1>
-        <p class="lead text-center"><%= @post_form_header_description %></p>
+        <h1 class="text-center">Detail Information</h1>
+        <p class="lead text-center">Please complete the form with detailed infomation</p>
       </div>
       <div class="container">
       <div class="row">
@@ -22,11 +22,12 @@
     <% end %>
 
 
-     <div class="form-group col-xs-12 col-sm-12">
+     <div class="form-group col-md-6 col-sm-12">
+       <h6>First Name</h6>
       <%= form.text_field :fname, placeholder: 'First Name', class: 'form-control input-lg' %>
     </div>
 
-     <div class="form-group col-xs-12 col-sm-12">
+     <div class="form-group col-md-6 col-sm-12">
       <%= form.text_field :lname, placeholder: 'Last Name', class: 'form-control input-lg' %>
     </div>
 

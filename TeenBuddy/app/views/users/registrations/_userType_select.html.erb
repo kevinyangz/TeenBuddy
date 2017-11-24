@@ -1,0 +1,21 @@
+<div class="login-block">
+  <%= link_to image_tag("/assets/img/logo.png", border: 0), home_index_path, class: 'logo', method: :get %></a>
+  <br><br>
+  <p class="lead text-center">Search posts, apply jobs, accept offer, find best jobs nearby!</p>
+  <%= (link_to 'Teenager', new_user_registration_path(role: 'teenager') , class: 'btn btn-block btn-primary') %>
+  <hr>
+
+  <p class="lead text-center">Post Jobs, invite teenager, accept applications, find teenagers for your jobs.</p>
+  <%= (link_to 'Client', new_user_registration_path(:role => "client"), class: 'btn btn-block btn-primary') %>
+
+
+  <div class="login-footer">
+    <h6>Or register with</h6>
+    <ul class="social-icons">
+      <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+      <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+      <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+    </ul>
+  </div>
+  </form>
+</div>

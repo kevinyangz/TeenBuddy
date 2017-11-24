@@ -3,9 +3,13 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
-  # def new
-
- #  end
+  def new
+    build_resource({})
+    resource.build_teenager
+    resource.build_client
+    yield resource if block_given?
+    respond_with resource
+  end
 
   # POST /resource
   # def create
