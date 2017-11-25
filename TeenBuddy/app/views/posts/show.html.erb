@@ -156,7 +156,11 @@
                     <div class="col-xs-12">
                       <div class="item-block">
                         <header>
-                          <%= link_to image_tag("/assets/img/teenager1.png", border: 0), teenager_path(service.teenager), class: 'logo', method: :get,class:'resume-avatar' %></a>
+                          <%if service.teenager.selfie.present? %>
+                          <%= link_to image_tag(service.teenager.selfie.thum.url, border: 0), teenager_path(service.teenager), class: 'logo', method: :get,class:'resume-avatar' %></a>
+                          <%else%>
+                           <%= link_to image_tag("/assets/img/teenager1.png", border: 0), teenager_path(service.teenager), class: 'logo', method: :get,class:'resume-avatar' %></a>
+                          <%end%>
                           <div class="hgroup">
                             <h4><%=link_to service.teenager.fname,  teenager_path(service.teenager)%></h4>
                             <h5><label class= "btn btn-xs <%=status_style2(service.status)%>"> <%= status_text2(service.status) %> </label></h5>
@@ -205,7 +209,11 @@
                     <div class="col-xs-12">
                       <div class="item-block">
                         <header>
-                          <%= link_to image_tag("/assets/img/teenager1.png", border: 0), teenager_path(service.teenager), class: 'logo', method: :get,class:'resume-avatar' %></a>
+                          <%if service.teenager.selfie.present? %>
+                          <%= link_to image_tag(service.teenager.selfie.thum.url, border: 0), teenager_path(service.teenager), class: 'logo', method: :get,class:'resume-avatar' %></a>
+                          <%else%>
+                           <%= link_to image_tag("/assets/img/teenager1.png", border: 0), teenager_path(service.teenager), class: 'logo', method: :get,class:'resume-avatar' %></a>
+                           <%end%>
                           <div class="hgroup">
                             <h4><%=link_to service.teenager.fname,  teenager_path(service.teenager)%></h4>
                             <h5><label class= "btn btn-xs <%=status_style(service.status)%>"> <%= status_text(service.status) %> </label></h5>
