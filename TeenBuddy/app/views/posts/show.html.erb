@@ -166,11 +166,14 @@
                             <span class="rate"><%= service.post.pay%></span>
                           </div>
                         </header>
-
+                    <%="Debug Information teenager Rating:#{service.teen_rating}"%>
                         <footer>
                           <div class="action-btn">
                             <%if service.finished?%>
                             <%=link_to('Confirm',  service_path(service, :service => {:status => :confirmed}), :method => :put, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-success')%>
+                            <%elsif service.confirmed? and !service.teen_rating%> 
+                               <%= link_to 'Rate Teenager', '#', :class => 'btn btn-xs btn-info', 'data-toggle' => 'modal', 
+                            'data-target' =>  "#messageModal#{service.id}" %>
                           <%end%>
                                 </div>
                         </footer>
@@ -234,3 +237,71 @@
       </section>
   <% end %>
 </main>
+
+<!-- Fake Pop Up window Form -->
+<% if current_user.client == @post.client && (post_service = Service.where(:client_id => current_user.client, :post_id => @post.id, :status => [ :enrolled, :finished, :confirmed])).any? %>
+     <% post_service.each do |service| %>
+
+<div id=<%= "messageModal#{service.id}" %> class="modal fade" role="dialog"> 
+
+      <div class="modal-dialog">
+        <div class="modal-content">
+        <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title" style="text-align: center">Rate Teenager.</h4>
+        </div>
+  <div style="text-align: center">
+  <form class="rating">
+  <label>
+    <input type="radio" id=<%="rating-1:#{service.id}"%> name="stars" value="1" />
+    <span class="icon">★</span>
+  </label>
+  <label>
+    <input type="radio" id=<%="rating-2:#{service.id}"%>  name="stars" value="2" />
+    <span class="icon">★</span>
+    <span class="icon">★</span>
+  </label>
+  <label>
+    <input type="radio"  id=<%="rating-3:#{service.id}"%>  name="stars" value="3" />
+    <span class="icon">★</span>
+    <span class="icon">★</span>
+    <span class="icon">★</span>   
+  </label>
+  <label>
+    <input type="radio"   id=<%="rating-4:#{service.id}"%> name="stars" value="4" />
+    <span class="icon">★</span>
+    <span class="icon">★</span>
+    <span class="icon">★</span>
+    <span class="icon">★</span>
+  </label>
+  <label>
+    <input type="radio"   id=<%="rating-5:#{service.id}"%> name="stars" value="5" />
+    <span class="icon">★</span>
+    <span class="icon">★</span>
+    <span class="icon">★</span>
+    <span class="icon">★</span>
+    <span class="icon">★</span>
+  </label>
+</form>
+</div>
+          <%= form_for :service, url:service_path(service),:method =>:PUT do |form| %>
+
+              <div class="modal-body">
+            <div class="form-group">
+                  <%= form.hidden_field :teen_rating, :id=>"email_field#{service.id}" ,class: "form-control", placeholder: "Rate teenager " %>
+                  <%= form.text_area :teen_review, class: "form-control", placeholder: "Comments about your client" %>
+                 </div>
+            </div>
+              <div class="modal-footer">
+                <%= form.submit 'Submit', :class => "btn btn-success" %>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+     <%end%>
+ <%end%>
+
+
