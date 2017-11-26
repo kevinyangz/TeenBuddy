@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171126164214) do
+ActiveRecord::Schema.define(version: 20171126175631) do
 
   create_table "client_reviews", force: :cascade do |t|
     t.integer "client_id"
@@ -39,8 +39,6 @@ ActiveRecord::Schema.define(version: 20171126164214) do
   end
 
   create_table "endorsements", force: :cascade do |t|
-    t.integer "liker_id"
-    t.integer "liked_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
