@@ -70,7 +70,7 @@ class EndorsementsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def endorsement_params
       params.fetch(:endorsement, {})
-      params.require(:endorsement).permit(:liked,:liker)
+      params.require(:endorsement).permit(:liked_id,:liker_id)
 
     end
 end

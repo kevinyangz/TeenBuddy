@@ -1,4 +1,3 @@
-
 <!-- Page header -->
 
 
@@ -7,80 +6,82 @@
 
 
   <div class="container">
-    <%if notice%>
-    <div class="alert alert-info">
-      <strong>Heads up!</strong> <%= notice %>
-    </div>
-<%end%>
+    <% if notice %>
+        <div class="alert alert-info">
+          <strong>Heads up!</strong> <%= notice %>
+        </div>
+    <% end %>
     <div class="row equal">
-      
+
       <div class="col-xs-4 col-sm-4 ">
-      <% if @teenager.selfie.present? %>
-          <%= image_tag(@teenager.selfie.thum.url,style:"border-radius:50%;",class:"thumbnail center-block ")  %>
-        <!-- User upload picture -->
-          <% else %> 
-         <%= image_tag("/assets/img/teenager1.png",class:"thumbnail center-block",style:"width:100px;height:100px;border-radius:50%;") %>
-        <!-- default picture-->
-           <% end %>     
-       </div>
-
-
-
-
+        <% if @teenager.selfie.present? %>
+            <%= image_tag(@teenager.selfie.thum.url, style: "border-radius:50%;", class: "thumbnail center-block ") %>
+            <!-- User upload picture -->
+        <% else %>
+            <%= image_tag("/assets/img/teenager1.png", class: "thumbnail center-block", style: "width:100px;height:100px;border-radius:50%;") %>
+            <!-- default picture-->
+        <% end %>
+      </div>
 
 
       <div class="col-xs-8 col-sm-8">
         <div class="hgroup">
-          <h1><%=@teenager.fname%>  <%=@teenager.lname%></h1>
-          <i class="fa fa-heart"></i>
-          <span>X </span>
-          <%= Endorsement.where(liked_id: @teenager.user.id).count%>
-          <%= link_to 'like', endorsements_path(@teenager), method: :post %>
-          <%=link_to('Like',  endorsements_path(:endorsement => {:liked_id => @teenager.user.id, :liker_id => current_user.id}), :method => :post, class: 'btn btn-xs btn-success')%>
+          <h1><%= @teenager.fname %>  <%= @teenager.lname %></h1>
+
+          <% if (endorse=Endorsement.where(liked_id: @teenager.user.id, liker_id: current_user.id)).any? %>
+              <%= link_to endorsement_path(endorse.first), :method => :delete do %>
+                  <i class="fa fa-heart"></i>
+              <% end %>
+
+          <% else %>
+              <%= link_to endorsements_path(:endorsement => {:liked_id => @teenager.user.id, :liker_id => current_user.id}), :method => :post do %>
+                  <i class="fa fa-heart-o"></i>
+              <% end %>
+          <% end %> <%= Endorsement.where(liked_id: @teenager.user.id).count %>
 
           <div class="tag-list">
-           <% @current_teenager_interest.all.each do |interest| %>
+            <% @current_teenager_interest.all.each do |interest| %>
             <span>
-              <%=ServiceCategory.find(interest.service_category_id).title%> <%="   "%>
+              <%= ServiceCategory.find(interest.service_category_id).title %> <%= "   " %>
             </span>
             <% end %>
-             </div>
-        <p class="lead">Teenager Self Introduction: Coming Soon!!!</p>
+          </div>
+          <p class="lead">Teenager Self Introduction: Coming Soon!!!</p>
 
-        <ul class="details cols-2">
-          <li>
-            <i class="fa fa-home"></i>
-            <span><%=@teenager.home_address %></span>
-          </li>
+          <ul class="details cols-2">
+            <li>
+              <i class="fa fa-home"></i>
+              <span><%= @teenager.home_address %></span>
+            </li>
 
-          <li>
-            <i class="fa fa-map-marker"></i>
-            <a><%=@teenager.postal_code%></a>
-          </li>
+            <li>
+              <i class="fa fa-map-marker"></i>
+              <a><%= @teenager.postal_code %></a>
+            </li>
 
-          <li>
-            <i class="fa fa-birthday-cake"></i>
-            <span><%=@teenager.birth_date%></span>
-          </li>
+            <li>
+              <i class="fa fa-birthday-cake"></i>
+              <span><%= @teenager.birth_date %></span>
+            </li>
 
-          <li>
-            <i class="fa fa-child"></i>
-            <span><%="#{@age} years-old"%></span>
-          </li>
+            <li>
+              <i class="fa fa-child"></i>
+              <span><%= "#{@age} years-old" %></span>
+            </li>
 
-          <li>
-            <i class="fa fa-phone"></i>
-            <span><%= @teenager.cell_phone%></span>
-          </li>
+            <li>
+              <i class="fa fa-phone"></i>
+              <span><%= @teenager.cell_phone %></span>
+            </li>
 
-          <li>
-            <i class="fa fa-envelope"></i>
-            <a href="#"><%=User.find(@teenager.user_id).email%></a>
-          </li>
-        </ul>
+            <li>
+              <i class="fa fa-envelope"></i>
+              <a href="#"><%= User.find(@teenager.user_id).email %></a>
+            </li>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
     <div class="button-group">
       <ul class="social-icons">
         <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
@@ -90,20 +91,19 @@
         <li><a class="instagram" href="#"><i class="fa fa-instagram"></i></a></li>
       </ul>
 
-      
 
       <div class="action-buttons">
         <% if current_user.client!=nil %>
-        <%= link_to 'Invite me', '#', :class => 'btn btn-success', 'data-toggle' => 'modal','data-target'=>'#inviteModal' %>
-      <% end %>
-        <%if current_user.teenager && current_user.teenager.id = @teenager.id%>
+            <%= link_to 'Invite me', '#', :class => 'btn btn-success', 'data-toggle' => 'modal', 'data-target' => '#inviteModal' %>
+        <% end %>
+        <% if current_user.teenager && current_user.teenager.id = @teenager.id %>
             <%= link_to 'Edit', edit_teenager_path(@teenager), class: 'btn btn-gray' %>
-        <%end%>
+        <% end %>
       </div>
 
-          <!-- Trigger the modal with a button -->
+      <!-- Trigger the modal with a button -->
 
-          <!-- Modal -->
+      <!-- Modal -->
 
 
     </div>
@@ -113,41 +113,41 @@
 </header>
 <!-- END Page header -->
 <% if current_user.client %>
-<div id="inviteModal" class="modal fade" role="dialog">
-  <div class="modal-dialog">
+    <div id="inviteModal" class="modal fade" role="dialog">
+      <div class="modal-dialog">
 
-    <!-- Modal content-->
-    <div class="modal-content">
-      <%= form_for(:service, url: services_url, method: :post) do |form| %>
-      <div class="modal-header">
-        <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title">Invite teenager to your jobs.</h4>
-      </div>
-      <div class="modal-body">
-        <div class="form-group">
-          <h6>My open jobs</h6>
-          <%= collection_select(:service, :post_id, Post.where(:client_id => current_user.client.id).all.select {|c| c.hasPosition == 'open'}, :id, :title, {:prompt => 'Please select a job for teenager.'}, {class: 'form-control selectpicker'}) %>
+        <!-- Modal content-->
+        <div class="modal-content">
+          <%= form_for(:service, url: services_url, method: :post) do |form| %>
+              <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Invite teenager to your jobs.</h4>
+              </div>
+              <div class="modal-body">
+                <div class="form-group">
+                  <h6>My open jobs</h6>
+                  <%= collection_select(:service, :post_id, Post.where(:client_id => current_user.client.id).all.select {|c| c.hasPosition == 'open'}, :id, :title, {:prompt => 'Please select a job for teenager.'}, {class: 'form-control selectpicker'}) %>
+                </div>
+
+                <%= form.hidden_field :teenager_id, value: @teenager.id %>
+                <%= form.hidden_field :status, value: :beingInvited %>
+                <%= form.hidden_field :enrollType, value: false %>
+
+                <div class="form-group">
+                  <h6>Message</h6>
+                  <%= form.text_area :inviteMessage, class: "form-control", placeholder: "Leave some Message to convince him." %>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <%= form.submit 'Submit', :class => "btn btn-success" %>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+              </div>
+          <% end %>
         </div>
 
-        <%= form.hidden_field :teenager_id, value: @teenager.id %>
-        <%= form.hidden_field :status, value: :beingInvited %>
-        <%= form.hidden_field :enrollType, value: false %>
-
-        <div class="form-group">
-          <h6>Message</h6>
-          <%= form.text_area :inviteMessage, class: "form-control", placeholder: "Leave some Message to convince him." %>
-        </div>
       </div>
-      <div class="modal-footer">
-        <%= form.submit 'Submit', :class => "btn btn-success"%>
-        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-      </div>
-      <% end %>
     </div>
-
-  </div>
-</div>
-<%end%>
+<% end %>
 
 <!-- Main container -->
 <main>
@@ -168,13 +168,18 @@
             <header>
               <img src="assets/img/logo-mit.png" alt="">
               <div class="hgroup">
-                <h4>Master <small>Computer Science</small></h4>
+                <h4>Master
+                  <small>Computer Science</small>
+                </h4>
                 <h5>Massachusetts Institute of Technology</h5>
               </div>
               <h6 class="time">2012 - 2014</h6>
             </header>
             <div class="item-body">
-              <p>The Massachusetts Institute of Technology (MIT) is a private research university in Cambridge, Massachusetts. Founded in 1861 in response to the increasing industrialization of the United States, MIT adopted a European polytechnic university model and stressed laboratory instruction in applied science and engineering.</p>
+              <p>The Massachusetts Institute of Technology (MIT) is a private research university in Cambridge,
+                Massachusetts. Founded in 1861 in response to the increasing industrialization of the United States, MIT
+                adopted a European polytechnic university model and stressed laboratory instruction in applied science
+                and engineering.</p>
             </div>
           </div>
         </div>
@@ -184,13 +189,18 @@
             <header>
               <img src="assets/img/logo-berkeley.png" alt="">
               <div class="hgroup">
-                <h4>Bachelor <small>Computer Science</small></h4>
+                <h4>Bachelor
+                  <small>Computer Science</small>
+                </h4>
                 <h5>University of California, Berkeley</h5>
               </div>
               <h6 class="time">2008 - 2012</h6>
             </header>
             <div class="item-body">
-              <p>The University of California, Berkeley is a public research university located in Berkeley, California. It is the flagship campus of the University of California system, one of three parts in the state's public higher education plan, which also includes the California State University system and the California Community Colleges System.</p>
+              <p>The University of California, Berkeley is a public research university located in Berkeley, California.
+                It is the flagship campus of the University of California system, one of three parts in the state's
+                public higher education plan, which also includes the California State University system and the
+                California Community Colleges System.</p>
             </div>
           </div>
         </div>
@@ -225,12 +235,16 @@
             <div class="item-body">
               <p>Responsibilities:</p>
               <ul>
-                <li>Developed front-end for world-class online social viewing video and chat platform using xHTML, CSS, ActionScript 2-3, Javascript, and XML.</li>
+                <li>Developed front-end for world-class online social viewing video and chat platform using xHTML, CSS,
+                  ActionScript 2-3, Javascript, and XML.
+                </li>
                 <li>Developed built-in chat application into Flash video player in ActionScript 3.</li>
-                <li>Built and developed sites for ABC Family properties such as Gilmore Girls, The Middleman, Secret Life of an American Teenager, Greek, and Kyle XY. </li>
-                <li>Translate designs into responsive web interfaces </li>
-                <li>Collaboration with the graphic designer on the front-end aspect of development. </li>
-                <li>Cross-platform cross-browser development. </li>
+                <li>Built and developed sites for ABC Family properties such as Gilmore Girls, The Middleman, Secret
+                  Life of an American Teenager, Greek, and Kyle XY.
+                </li>
+                <li>Translate designs into responsive web interfaces</li>
+                <li>Collaboration with the graphic designer on the front-end aspect of development.</li>
+                <li>Cross-platform cross-browser development.</li>
                 <li>Some back-end development in collaboration with senior developer.</li>
               </ul>
             </div>
@@ -254,7 +268,9 @@
               <p>Responsibilities:</p>
               <ul>
                 <li>Work as a part of a large team on a major corporate project</li>
-                <li>Responsible for all aspects of presentation layer development including developing templates using HTML, DHTML, Javascript, XML, and XSL.</li>
+                <li>Responsible for all aspects of presentation layer development including developing templates using
+                  HTML, DHTML, Javascript, XML, and XSL.
+                </li>
                 <li>Rapid-prototyping for usability studies and new business development.</li>
                 <li>Collaboration with the graphic designer on the front-end aspect of development.</li>
                 <li>Some back-end development in collaboration with senior developer.</li>
@@ -281,7 +297,9 @@
               <ul>
                 <li>Software testing in a Web Applications/Mobile environment.</li>
                 <li>Software Test Plans from Business Requirement Specifications for test engineering group.</li>
-                <li>Run production tests as part of software implementation; Create, deliver and support test plans for testing group to execute.</li>
+                <li>Run production tests as part of software implementation; Create, deliver and support test plans for
+                  testing group to execute.
+                </li>
                 <li>Software testing in a Web Applications environment.</li>
               </ul>
             </div>
