@@ -13,7 +13,7 @@ class PostsController < ApplicationController
       @posts = Service.where(teenager_id: params[:teenager_id]).reverse.paginate(:page => params[:page], :per_page => 5)
       @state = 'teenager_posts'
     else
-      @posts = Post.all.filter(params.slice(:searched_keyword, :status)).order(params[:order]).reverse.paginate(:page => params[:page], :per_page => 5)
+      @posts = Post.all.filter(params.slice(:searched_keyword, :status, :category_id, :type_id)).order(params[:order]).reverse.paginate(:page => params[:page], :per_page => 5)
       @state = 'all'
     end
   end

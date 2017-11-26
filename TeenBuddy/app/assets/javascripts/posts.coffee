@@ -21,11 +21,10 @@ jQuery ->
 
 
   #dynamic select menu for filters
-  types_2 = $('#post_filtered_service_type_id').html()
-  $('#post_filtered_service_type_id').empty()
-  $('#post_filtered_service_category_id').change -> 
-    categories = $('#post_filtered_service_category_id :selected')
-    total = $('#post_filtered_service_type_id')
+  types_2 = $('#post_type_id').html()
+  $('#post_category_id').change -> 
+    categories = $('#post_category_id :selected')
+    total = $('#post_type_id')
     options = null
     #if categories.length > 0
       #options = "<option>All types</option>"
@@ -36,12 +35,12 @@ jQuery ->
       options = options + option
       i++
     if options
-      $('#post_filtered_service_type_id').html(options)
-      $('#post_filtered_service_type_id').selectpicker('refresh')
-      $('#post_filtered_service_type_id').parent().show()
+      $('#post_type_id').html(options)
+      $('#post_type_id').selectpicker('refresh')
+      $('#post_type_id').parent().show()
     else
-      $('#post_filtered_service_type_id').empty()
-      $('#post_filtered_service_type_id').selectpicker('refresh')
+      $('#post_type_id').empty()
+      $('#post_type_id').selectpicker('refresh')
 
 
 
