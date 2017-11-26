@@ -28,8 +28,8 @@ class EndorsementsController < ApplicationController
 
     respond_to do |format|
       if @endorsement.save
-        format.html { redirect_to @endorsement, notice: 'Endorsement was successfully created.' }
-        format.json { render :show, status: :created, location: @endorsement }
+        format.html {redirect_back(fallback_location: home_index_path)}
+
       else
         format.html { render :new }
         format.json { render json: @endorsement.errors, status: :unprocessable_entity }
@@ -56,7 +56,7 @@ class EndorsementsController < ApplicationController
   def destroy
     @endorsement.destroy
     respond_to do |format|
-      format.html { redirect_to endorsements_url, notice: 'Endorsement was successfully destroyed.' }
+      format.html {redirect_back(fallback_location: home_index_path)}
       format.json { head :no_content }
     end
   end
@@ -70,5 +70,7 @@ class EndorsementsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def endorsement_params
       params.fetch(:endorsement, {})
+      params.require(:endorsement).permit(:liked,:liker)
+
     end
 end
