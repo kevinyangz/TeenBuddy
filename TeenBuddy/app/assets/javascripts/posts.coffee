@@ -3,7 +3,8 @@
 # You can use CoffeeScript in this file: http://coffeescript.org/
 
 jQuery ->
-  # dynamic select menu for new job posts
+
+# dynamic select menu for new job posts
   types_1 = $('#post_service_type_id').html()
   $('#post_service_type_id').empty()
   $('#post_service_type_id').selectpicker('refresh')
@@ -11,7 +12,6 @@ jQuery ->
     category = $('#post_service_category_id :selected').text()
     options = $(types_1).filter("optgroup[label='#{category}']").html()
     if options
-      #below line changes html but the new html is not rendered, need help
       $('#post_service_type_id').html(options)
       $('#post_service_type_id').selectpicker('refresh')
     else
@@ -20,12 +20,21 @@ jQuery ->
 
 
 
-  #dynamic select menu for filters
-  types_2 = $('#post_filtered_service_type_id').html()
-  $('#post_filtered_service_type_id').empty()
-  $('#post_filtered_service_category_id').change -> 
-    categories = $('#post_filtered_service_category_id :selected')
-    total = $('#post_filtered_service_type_id')
+#dynamic select menu for filters
+  types_2 = $('#post_type_id').html()
+  #show up the previously selected type
+  $(document).ready ->
+    category = $('#post_category_id :selected').text()
+    options = $(types_2).filter("optgroup[label='#{category}']").html()
+    if options
+      $('#post_type_id').html(options)
+      $('#post_type_id').selectpicker('refresh')
+    else
+      $('#post_type_id').empty()
+      $('#post_type_id').selectpicker('refresh')
+  $('#post_category_id').change -> 
+    categories = $('#post_category_id :selected')
+    total = $('#post_type_id')
     options = null
     #if categories.length > 0
       #options = "<option>All types</option>"
@@ -36,18 +45,18 @@ jQuery ->
       options = options + option
       i++
     if options
-      $('#post_filtered_service_type_id').html(options)
-      $('#post_filtered_service_type_id').selectpicker('refresh')
-      $('#post_filtered_service_type_id').parent().show()
+      $('#post_type_id').html(options)
+      $('#post_type_id').selectpicker('refresh')
+      $('#post_type_id').parent().show()
     else
-      $('#post_filtered_service_type_id').empty()
-      $('#post_filtered_service_type_id').selectpicker('refresh')
+      $('#post_type_id').empty()
+      $('#post_type_id').selectpicker('refresh')
 
 
 
 
 
-  # dynamic checkboxes for filters
+# dynamic checkboxes for filters
   $(":checkbox[name='service_type']").parent().hide()
   $(":checkbox[id='service_type_all']").parent().show()
   c = document.getElementById('service_category_babysitting')
@@ -73,7 +82,7 @@ jQuery ->
 
       i++
 
-  # track all_types checkbox only, remove all the checked boxes
+# track all_types checkbox only, remove all the checked boxes
   $(":checkbox[id='service_category_all']").change ->
     category_all_types = document.getElementById('service_category_all')
     categories_check = document.getElementsByName('service_category')
@@ -98,7 +107,9 @@ jQuery ->
   $(":checkbox").parent().hide()
 
 
-  #auto complete google map API javascripts
+
+
+#auto complete google map API javascripts
   initializeFormMap = ->
     map = new (google.maps.Map)(document.getElementById('post_form_map'),
       center:
@@ -148,7 +159,8 @@ jQuery ->
 
 
 
-  #google map API for showing up selected address javascripts
+
+#google map API for showing up selected address javascripts
   initializeShowMap = ->
     latlng = new (google.maps.LatLng)(43.70011, -79.4163)
     mapOptions = 
@@ -172,6 +184,7 @@ jQuery ->
 
 
 
+#ratings
   $(document).ready ->
   $('[type*="radio"]').change ->
     test = @id

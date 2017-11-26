@@ -16,9 +16,10 @@ Rails.application.routes.draw do
 
 
   resources :posts
-  resources :clients do
-    resources :client_reviews
-  end
+  resources :clients
+
+  resources :endorsements
+
   resources :teenagers
 
   get '/services/invitations', to: 'services#invitations'

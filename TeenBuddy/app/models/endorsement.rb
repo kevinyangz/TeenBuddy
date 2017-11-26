@@ -1,5 +1,4 @@
 class Endorsement < ApplicationRecord
-  belongs_to :user
-  has_one :teenager
-  has_one :client
+  has_one :liker, :class_name => "User"
+  has_one :liked, :class_name => "User"
 end
