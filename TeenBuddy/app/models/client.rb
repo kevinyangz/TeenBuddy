@@ -8,4 +8,15 @@ class Client < ApplicationRecord
 
     mount_uploader :selfie, SelifieUploader
 
+  def get_average_rating()
+  	if current_client_jobs= Service.where(client_id: self.id).where.not(client_rating: nil)
+  		current_client_jobs.average(:client_rating)
+  	end
+  end
+
+  def get_posts_numbers()
+  	  	all_client_post= Post.where(client_id: self.id).count
+  end
+
+
 end

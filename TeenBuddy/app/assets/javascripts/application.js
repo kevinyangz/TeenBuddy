@@ -15,3 +15,10 @@
 //= require jquery.turbolinks
 //= require chosen-jquery
 //= require messages
+
+
+$("form").on("keypress", function (e) {
+    if (e.keyCode == 13) {
+        return false;
+    }
+});

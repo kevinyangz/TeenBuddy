@@ -37,7 +37,7 @@ module ServicesHelper
     elsif status == 'confirmed'
       'Confirmed'
     else
-      'Finished'
+      'Finished, waiting client to confirm'
     end
   end
 

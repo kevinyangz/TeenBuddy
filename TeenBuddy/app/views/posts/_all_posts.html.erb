@@ -20,12 +20,12 @@
 
         <div class="form-group col-xs-12 col-sm-3">
           <h6>Category</h6>
-          <%= collection_select(:post, :filtered_service_category_id, ServiceCategory.order(:title), :id, :title, {}, {class: 'form-control selectpicker'}) %>
+          <%= select_tag :category_id, options_from_collection_for_select(ServiceCategory.order(:title), :id, :title, params[:category_id]), {id: "post_category_id", include_blank: 'All', class: 'form-control selectpicker'} %>
         </div>
 
         <div class="form-group col-xs-12 col-sm-3">
           <h6>Type</h6>
-          <%= grouped_collection_select(:post, :filtered_service_type_id, ServiceCategory.order(:title), :service_types, :title, :id, :title, {}, {class: 'form-control selectpicker'}) %>
+          <%= select_tag :type_id, option_groups_from_collection_for_select(ServiceCategory.order(:title), :service_types, :title, :id, :title, params[:type_id]), {id: "post_type_id", include_blank: 'All', class: 'form-control selectpicker'} %>
         </div>
 
         <div class="form-group col-xs-12 col-sm-3">
@@ -96,7 +96,14 @@
 
         <div class="col-xs-12">
           <br>
-          <h5>We found <strong><%= @posts.count %></strong> matches</h5>
+          <% if @posts.total_entries == 0 %>
+            <h5>Sorry, we could not find any match</h5>
+          <% elsif @posts.total_entries == 1 %>
+            <h5>We find 1 match for you</h5>
+          <% else %>
+            <h5>We find <strong><%= @posts.total_entries %></strong> matches, we are showing matches <%= (@posts.current_page-1) * 5 +1 %> - <%= (@posts.current_page-1) * 5 + @posts.count %>
+            </h5>
+          <% end %>
         </div>
 
         <% @posts.each do |post| %>

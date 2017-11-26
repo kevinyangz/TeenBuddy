@@ -1,68 +1,83 @@
 
 <%= form_with(model: client, local: true) do |form| %>
-
-
+    
     <header class="page-header bg-img size-lg" style="background-image: url(/assets/img/bg-banner1.jpg)">
       <div class="container page-name">
-        <h1 class="text-center"><%= @client_form_header_title %></h1>
-        <p class="lead text-center"><%= @client_form_header_description %></p>
+        <h1 class="text-center">Detail Information</h1>
+        <p class="lead text-center">Please complete the form with detailed infomation</p>
       </div>
+
       <div class="container">
-        <font color = 'red'> <%= client.errors.full_messages.first %></font>
+
+        <p><font color='red'> <%= client.errors.full_messages.first %></font></p>
+
 
         <div class="row">
-
-
-
-
-          <div class="form-group col-md-6 col-sm-12">
-            <h6>First Name</h6>
-            <%= form.text_field :fname, id: :client_fname,  class: 'form-control input-lg' %>
+          <div class="col-xs-12 col-sm-4">
+            <div class="form-group">
+              <%= form.file_field :selfie, class: 'dropify'%>
+              <span class="help-block">Please upload a profile picture.</span>
+            </div>
           </div>
 
-          <div class="form-group col-md-6 col-sm-12">
-            <h6>Last Name</h6>
-            <%= form.text_field :lname, id: :client_lname,class: 'form-control input-lg' %>
+          <div class="col-xs-12 col-sm-8">
+            <div class="row">
+              <div class="form-group col-xs-12 col-sm-6">
+                <h6>First Name</h6>
+                <%= form.text_field :fname, class: 'form-control input-lg' %>
+              </div>
+
+              <div class="form-group col-xs-12 col-sm-6">
+                <h6>Last Name</h6>
+                <%= form.text_field :lname, class: 'form-control input-lg' %>
+              </div>
+
+              <div class="form-group col-md-12">
+                <%= form.text_area :description, id: :client_description, placeholder:"Short description about you", class: 'form-control input-lg' %>
+              </div>
+
+              <hr class="hr-lg">
+            </div>
+            <h6>Basic information</h6>
+            <div class="row">
+
+              <div class="form-group col-xs-12 col-sm-6">
+                <div class="input-group input-group-sm">
+                  <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
+                  <%= form.text_field :home_address, id: :teenager_home_address, placeholder: "Location, e.g. Melon Park, CA", class: 'form-control input-lg' %>
+                </div>
+              </div>
+
+
+
+
+
+              <div class="form-group col-xs-12 col-sm-6">
+                <div class="input-group input-group-sm">
+                  <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                  <%= form.text_field :cell_phone,placeholder:"Cell Phone", class: 'form-control input-lg' %>
+                </div>
+              </div>
+
+              <div class="form-group col-xs-12 col-sm-6">
+                <div class="input-group input-group-sm">
+                  <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                  <%= form.text_field :home_phone,placeholder:"Home Phone", class: 'form-control input-lg' %>
+                </div>
+              </div>
+
+
+
+
+            </div>
+
+            <hr class="hr-lg">
+
+
+
           </div>
-
-
-          <div class="form-group col-xs-12 col-sm-12">
-            <h6>Home Address</h6>
-              <%= form.text_field :home_address, id: :client_home_address, class: 'form-control input-lg' %>
-
-          </div>
-
-
-
-          <div class="form-group col-xs-12 col-sm-12">
-            <h6>Description</h6>
-            <%= form.text_area :description, id: :client_description,  class: 'form-control input-lg' %>
-          </div>
-
-
-
-
-
-          <div class="form-group col-md-6 col-sm-12">
-            <h6>Home Phone</h6>
-              <%= form.number_field :home_phone, id: :client_home_phone, class: 'form-control input-lg' %>
-
-          </div>
-
-          <div class="form-group col-md-6 col-sm-12">
-
-              <h6>Cell Phone</h6>
-              <%= form.number_field :cell_phone, id: :client_cell_phone,  class: 'form-control input-lg' %>
-
-          </div>
-
-      <div class="form-group col-md-12 col-sm-12">
-             <h6>Upload your Selfie</h6>
-      <%= form.file_field :selfie, placeholder: 'Selife', class: 'form-control' %>
-    </div>
-
-
         </div>
+
       </div>
     </header>
 

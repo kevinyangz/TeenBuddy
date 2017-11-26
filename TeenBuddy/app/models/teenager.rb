@@ -39,7 +39,23 @@ class Teenager < ApplicationRecord
   		end
   end
 
+  def get_average_rating()
+    #Filter Rating 
+     if current_teenager_services= Service.where(teenager_id: self.id).where.not(teen_rating: nil)
+         avg =current_teenager_services.average(:teen_rating)
+         #current_teenager_services.each do |service|
+         #sum += service.teen_rating
+         #puts "++++#{service.teen_rating}++++"
+         #end
+        # current_teenager_services.teen_rating    
+     end
+     
+  end
 
-
+  def get_service_numbers()
+    if current_teenager_services= Service.where(teenager_id: self.id).where.not(teen_rating: nil)
+         count =current_teenager_services.count
+    end
+  end
   #
 end
