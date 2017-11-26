@@ -164,14 +164,21 @@
                           <div class="hgroup">
                             <h4><%=link_to service.teenager.fname,  teenager_path(service.teenager)%></h4>
                             <h5><label class= "btn btn-xs <%=status_style2(service.status)%>"> <%= status_text2(service.status) %> </label></h5>
+                            <%if service.teen_review %>
+                                <h6><strong>My Rating: </strong><%for i in 0...service.teen_rating.round %> <span class="icon"><font color = orange>★</font></span> <%end%></h6><h6><%=service.teen_review%>
+                          </h6><%end%>
+                            <%if service.client_review %>
+                                <h6><strong>Teenager's Rating: </strong><%for i in 0...service.client_rating.round %> <span class="icon"> <font color = orange>★</font></span> <%end%></h6><h6><%=service.client_review%>
+                          </h6><%end%>
+
                           </div>
                           <div class="header-meta">
                             <span class="location"><%=service.teenager.home_address%></span>
                             <span class="rate"><%= service.post.pay%></span>
                           </div>
                         </header>
-                    <%="Debug Information teenager Rating:#{service.teen_rating}"%>
                         <footer>
+                          <p class="status"><strong>Updated at </strong><%= service.updated_at %></p>
                           <div class="action-btn">
                             <%if service.finished?%>
                             <%=link_to('Confirm',  service_path(service, :service => {:status => :confirmed}), :method => :put, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-success')%>
