@@ -57,9 +57,10 @@
         </ul>
 
         <div class="action-buttons">
+          <%if current_user.client && current_user.client.id = @client.id%>
 
           <%= link_to 'Edit', edit_client_path(@client), class: 'btn btn-gray' %>
-
+<%end%>
         </div>
       </div>
 
