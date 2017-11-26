@@ -1,58 +1,4 @@
 <%= form_with(model: teenager, local: true) do |form| %>
-    <header class="page-header bg-img size-lg" style="background-image: url(/assets/img/bg-banner1.jpg)">
-      <div class="container page-name">
-        <h1 class="text-center">Detail Information</h1>
-        <p class="lead text-center">Please complete the form with detailed infomation</p>
-      </div>
-      <div class="container">
-        <font color='red'> <%= teenager.errors.full_messages.first %></font>
-        <div class="row">
-
-          <div class="form-group col-md-6 col-sm-12">
-            <h6>First Name</h6>
-            <%= form.text_field :fname, class: 'form-control input-lg' %>
-          </div>
-
-          <div class="form-group col-md-6 col-sm-12">
-            <h6>Last Name</h6>
-            <%= form.text_field :lname, class: 'form-control input-lg' %>
-          </div>
-
-          <div class="form-group col-md-6 col-sm-12">
-            <h6>Birthday</h6>
-            <%= form.date_field :birth_date, placeholder: 'Birthday ', class: 'form-control input-lg' %>
-          </div>
-
-          <div class="form-group col-md-6 col-sm-12">
-            <h6>Home Address</h6>
-
-          </div>
-
-          <div class="form-group col-md-6 col-sm-12">
-            <h6>Postal Code</h6>
-            <%= form.text_field :postal_code, id: :postal_code, class: 'form-control input-lg' %>
-          </div>
-
-          <div class="form-group col-md-6 col-sm-12">
-            <h6>Cell Phone</h6>
-            <%= form.text_field :cell_phone, class: 'form-control input-lg' %>
-          </div>
-
-          <div class="form-group col-md-6 col-sm-12">
-            <h6>Interests</h6>
-            <%= form.select :service_category_ids, ServiceCategory.all.collect {|x| [x.title, x.id]}, {}, :multiple => true,
-                            :prompt => 'Please select service category', class: 'form-control selectpicker' %>
-          </div>
-
-          <div class="form-group col-md-6 col-sm-12">
-            <h6>Upload your Selfie</h6>
-            <%= form.file_field :selfie, placeholder: 'Please enter your BirthDate yyyy/mm/dd ', class: 'form-control' %>
-          </div>
-
-        </div>
-      </div>
-    </header>
-
     <!-- Page header -->
     <header class="page-header bg-img size-lg" style="background-image: url(/assets/img/bg-banner1.jpg)">
       <div class="container page-name">
@@ -62,18 +8,17 @@
 
       <div class="container">
 
-        <p><font color='red'> <%= teenager.errors.full_messages.first %></font>Here is the errors.</p>
+        <p><font color='red'> <%= teenager.errors.full_messages.first %></font></p>
 
 
         <div class="row">
           <div class="col-xs-12 col-sm-4">
             <div class="form-group">
-              <input type="file" class="dropify" data-default-file="assets/img/avatar.jpg">
-              <span class="help-block">Please choose a 4:6 profile picture.</span>
+              <%= form.file_field :selfie, class: 'dropify'%>
+              <span class="help-block">Please upload a profile picture.</span>
             </div>
           </div>
-
-
+          
           <div class="col-xs-12 col-sm-8">
             <div class="row">
               <div class="form-group col-xs-12 col-sm-6">
@@ -105,7 +50,7 @@
               <div class="form-group col-xs-12 col-sm-6">
                 <div class="input-group input-group-sm">
                   <span class="input-group-addon"><i class="fa fa-map-marker"></i></span>
-                  <%= form.text_field :postal_code, id: :postal_code, placehoder:"Postal Code", class: 'form-control input-lg' %>
+                  <%= form.text_field :postal_code, id: :postal_code, placehoder: "Postal Code", class: 'form-control input-lg' %>
                 </div>
               </div>
 
@@ -130,30 +75,19 @@
 
             <hr class="hr-lg">
 
-            <h6>Tags list</h6>
+            <h6>Interests list</h6>
             <div class="form-group">
-              <input type="text" value="HTML,CSS,Javascript" data-role="tagsinput" placeholder="Tag name">
-              <span class="help-block">Write tag name and press enter</span>
+
+
+
+              <%= form.select :service_category_ids, ServiceCategory.all.collect {|x| [x.title, x.id]}, {}, :multiple => true,
+                              :prompt => 'Please select service category',  class: 'form-control selectpicker' %>
+              <span class="help-block">Select some of your favorite fileds.</span>
             </div>
 
           </div>
         </div>
 
-        <div class="button-group">
-          <div class="action-buttons">
-
-            <div class="upload-button">
-              <button class="btn btn-block btn-gray">Choose a resume file</button>
-              <input type="file">
-            </div>
-
-            <div class="upload-button">
-              <button class="btn btn-block btn-primary">Choose a cover image</button>
-              <input id="cover_img_file" type="file">
-            </div>
-
-          </div>
-        </div>
       </div>
     </header>
 
