@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171120155117) do
+ActiveRecord::Schema.define(version: 20171126164214) do
 
   create_table "client_reviews", force: :cascade do |t|
     t.integer "client_id"
@@ -36,6 +36,13 @@ ActiveRecord::Schema.define(version: 20171120155117) do
     t.integer "available_credit"
     t.string "selfie"
     t.index ["user_id"], name: "index_clients_on_user_id"
+  end
+
+  create_table "endorsements", force: :cascade do |t|
+    t.integer "liker_id"
+    t.integer "liked_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "mailboxer_conversation_opt_outs", force: :cascade do |t|
@@ -174,6 +181,7 @@ ActiveRecord::Schema.define(version: 20171120155117) do
   end
 
   create_table "teenagers", force: :cascade do |t|
+    t.text "email_address"
     t.text "home_address"
     t.string "cell_phone"
     t.date "birth_date"
