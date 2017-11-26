@@ -11,6 +11,7 @@ class Post < ApplicationRecord
   validates :title, :description, :work_address, :pay, presence:true
   validates :number_of_teenager_needed, numericality:{greater_than:0}
   validates :number_of_teenager_needed, format:{with: /[0-9]+/}
+  validate :have_enough_money
 
 
   include Filterable
@@ -30,6 +31,12 @@ class Post < ApplicationRecord
       'open'
     else
       'close'
+    end
+  end
+
+  def have_enough_money
+    if self.client.available_credit < (self.pay * self.number_of_teenager_needed)
+      errors.add(:client,"You do not have sufficient fund for your post, please make a deposit.")
     end
   end
 
