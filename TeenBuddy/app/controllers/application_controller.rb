@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  require 'will_paginate/array'
 
 
 rescue_from ActiveRecord::RecordNotFound do
