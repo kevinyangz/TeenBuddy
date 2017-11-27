@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171126182052) do
+ActiveRecord::Schema.define(version: 20171127015345) do
 
   create_table "client_reviews", force: :cascade do |t|
     t.integer "client_id"
@@ -201,6 +201,10 @@ ActiveRecord::Schema.define(version: 20171126182052) do
     t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.boolean "inout"
+    t.string "comment"
+    t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
