@@ -36,8 +36,15 @@
         <div class="form-group col-xs-12 col-sm-3">
           <h6>Order By</h6>
           <%= select_tag :order, options_for_select([["update time", "updated_at"], ["create time", "created_at"]],params[:order]), {:include_blank => 'Default', class: 'form-control selectpicker'} %>
-
         </div>
+
+        <div class="form-group col-xs-12 col-sm-12" style="height:500px;" id="post_all_map"></div>
+        <div id="infowindow-content">
+          <img src="" width="16" height="16" id="place-icon">
+          <span id="place-name"  class="title"></span><br>
+          <span id="place-address"></span>
+        </div>
+        <%= javascript_tag "all_posts = #{@posts.to_json};" %>
 
         <!--
         <div class="form-group col-xs-12 col-sm-6">
