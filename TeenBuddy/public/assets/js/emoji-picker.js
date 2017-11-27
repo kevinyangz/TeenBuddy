@@ -14,6 +14,7 @@
       }
       this.options = options;
     }
+    //TEST: Teenbuddy 
 
     EmojiPicker.prototype.discover = function() {
       var isiOS;
