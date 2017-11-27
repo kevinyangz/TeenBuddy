@@ -37,17 +37,12 @@
                   <i class="fa fa-heart-o"></i>
               <% end %>
           <% end %> <%= Endorsement.where(liked_id: @teenager.user.id).count %>
-          <table>
-            <tr class="hotel_a">
-              <td>
+            <div class="hotel_a">
                 <div class="stars-outer">
                   <div id=<%= @teenager.get_average_rating %> class="stars-inner"></div>
                 </div>
                 <strong> <%= "  #{@teenager.get_service_numbers} Reviews" %></strong>
-              </td>
-            </tr>
-          </table>
-
+              </div>
 
           <div class="tag-list">
             <% @current_teenager_interest.all.each do |interest| %>

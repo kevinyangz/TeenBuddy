@@ -80,7 +80,12 @@
                 </header>
 
                 <div class="item-body">
-                  <p>Teenager Self Introduction: Coming Soon!!!.</p>
+              <div class="hotel_a">
+                <div class="stars-outer">
+                  <div id=<%= teenager.get_average_rating %> class="stars-inner"></div>
+                </div>
+                <strong> <%= "#{teenager.get_service_numbers} Reviews" %></strong>
+              </div>
 
                   <div class="tag-list">
            <%@current_teenager_interest= TeenagerInterest.where(teenager_id:teenager.id).all%>
@@ -97,11 +102,6 @@
                     <li>
                       <i class="fa fa-home"></i>
                       <span><%=teenager.home_address%></span>
-                    </li>
-                      <li>
-                      <i class="fa fa-home"></i>
-                      <span><%=teenager.selfie%></span>
-                    </li>
 
                     <li>
                       <i class="fa fa-map-marker"></i>
