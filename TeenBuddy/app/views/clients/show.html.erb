@@ -14,7 +14,15 @@
 
       <div class="col-xs-12 col-sm-8 header-detail">
         <div class="hgroup">
-          <h1><%= @client.fname %> <%= @client.lname %></h1>
+         <h4><%= @client.fname %> <%= @client.lname %></h4>
+          <% if @client.get_service_counts >2 %>
+          <div class="teenager_rating">
+                <div class="stars-outer">
+                  <div id=<%= @client.get_average_rating %> class="stars-inner"></div>
+                </div>
+                <strong> <%= "  #{@client.get_service_counts} Reviews" %></strong>
+              </div>
+          <%end%>
 
 
         <hr>
