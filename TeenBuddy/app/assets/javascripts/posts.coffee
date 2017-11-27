@@ -120,9 +120,9 @@ jQuery ->
   initializeFormMap = ->
     map = new (google.maps.Map)(document.getElementById('post_form_map'),
       center:
-        lat: 43.70011
-        lng: -79.4163
-      zoom: 10)
+        lat: 43.6629
+        lng: -79.3957
+      zoom: 11)
     input = document.getElementById('post_work_address')
     autocomplete = new (google.maps.places.Autocomplete)(input)
     autocomplete.bindTo 'bounds', map
@@ -169,13 +169,14 @@ jQuery ->
 
 #google map API for showing up selected address javascripts
   initializeShowMap = ->
-    latlng = new (google.maps.LatLng)(43.70011, -79.4163)
+    latlng = new (google.maps.LatLng)(43.6629, -79.3957)
     mapOptions = 
       zoom: 17
       center: latlng
     map = new (google.maps.Map)(document.getElementById('post_show_map'), mapOptions)
     geocoder = new (google.maps.Geocoder)
-    geocoder.geocode { 'address': address }, (results, status) ->
+    infowindow = new (google.maps.InfoWindow)
+    geocoder.geocode { 'address': show_address }, (results, status) ->
       if status == google.maps.GeocoderStatus.OK
         # Center map on location
         map.setCenter results[0].geometry.location
@@ -183,11 +184,49 @@ jQuery ->
         marker = new (google.maps.Marker)(
           map: map
           position: results[0].geometry.location)
+        google.maps.event.addListener marker, 'click', ->
+          post_information = "<h5>Work Location: " + show_address + "</h5>\n"
+          infowindow.setContent post_information
+          infowindow.open map, marker
       else
         alert 'Geocode was not successful for the following reason: ' + status
     return
 
   google.maps.event.addDomListener window, 'load', initializeShowMap
+
+
+
+
+#google map API for showing up all address javascripts
+  initializeAllMap = ->
+    latlng = new (google.maps.LatLng)(43.6629, -79.3957)
+    mapOptions = 
+      zoom: 13
+      center: latlng
+    map = new (google.maps.Map)(document.getElementById('post_all_map'), mapOptions)
+    geocoder = new (google.maps.Geocoder)
+    infowindow = new (google.maps.InfoWindow)
+    i = 0
+    while i < all_posts.length
+      post = all_posts[i]
+      geocoder.geocode { 'address': post.work_address }, displayMarkerInformation(post, map, infowindow)
+      i++
+
+  displayMarkerInformation = (post, map, infowindow) ->
+    (results, status) ->
+      if status == google.maps.GeocoderStatus.OK
+        marker = new (google.maps.Marker)(
+          map: map
+          position: results[0].geometry.location)
+        google.maps.event.addListener marker, 'click', ->
+          post_information = "<h5>Job Title: " + post.title + "</h5>\n" + "<p><strong>Description: </strong>" + post.description + "</p>"
+          infowindow.setContent post_information
+          infowindow.open map, marker
+      else
+        alert 'Geocode was not successful for the following reason: ' + status
+    
+  google.maps.event.addDomListener window, 'load', initializeAllMap
+
 
 
 

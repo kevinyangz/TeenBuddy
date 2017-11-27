@@ -184,6 +184,7 @@ ActiveRecord::Schema.define(version: 20171127202738) do
   end
 
   create_table "teenagers", force: :cascade do |t|
+    t.text "email_address"
     t.text "home_address"
     t.string "cell_phone"
     t.date "birth_date"

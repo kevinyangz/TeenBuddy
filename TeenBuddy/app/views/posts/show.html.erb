@@ -51,14 +51,14 @@
         </li>
       </ul>
 
-      <div class="form-group col-xs-12 col-sm-12" style="height:400px;" id="post_show_map"></div>
+      <div class="form-group col-xs-12 col-sm-12" style="height:500px;" id="post_show_map"></div>
         <div id="infowindow-content">
           <img src="" width="16" height="16" id="place-icon">
           <span id="place-name"  class="title"></span><br>
           <span id="place-address"></span>
         </div>
       <script>
-        var address = "<%== escape_javascript @post.work_address %>";
+        var show_address = "<%== escape_javascript @post.work_address %>";
       </script>
 
       <div class="button-group">

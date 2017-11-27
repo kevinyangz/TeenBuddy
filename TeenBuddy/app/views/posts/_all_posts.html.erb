@@ -36,8 +36,15 @@
         <div class="form-group col-xs-12 col-sm-3">
           <h6>Order By</h6>
           <%= select_tag :order, options_for_select([["update time", "updated_at"], ["create time", "created_at"]],params[:order]), {:include_blank => 'Default', class: 'form-control selectpicker'} %>
-
         </div>
+
+        <div class="form-group col-xs-12 col-sm-12" style="height:500px;" id="post_all_map"></div>
+        <div id="infowindow-content">
+          <img src="" width="16" height="16" id="place-icon">
+          <span id="place-name"  class="title"></span><br>
+          <span id="place-address"></span>
+        </div>
+        <%= javascript_tag "all_posts = #{@posts.to_json};" %>
 
         <!--
         <div class="form-group col-xs-12 col-sm-6">
@@ -113,16 +120,14 @@
                   <img src="assets/img/logo-microsoft.jpg" alt="">
                   <div class="hgroup">
                     <h4><%= post.title %></h4>
-                      
-                <div class="teenager_rating">
-               <h5><%= "#{post.client.fname} #{post.client.lname}" %>
-                <%if post.client.get_service_counts > minimum_review_numbers%>
-                <div class="stars-outer">
-                  <div id=<%= post.client.get_average_rating %> class="stars-inner"></div>
-                </div>
-              </div>
-              <%end%>
-                    </h5>
+                    <h5><%= "#{post.client.fname} #{post.client.lname}" %></h5>
+                    <div class="teenager_rating">
+                      <%if post.client.get_service_counts > minimum_review_numbers%>
+                        <div class="stars-outer">
+                          <div id=<%= post.client.get_average_rating %> class="stars-inner"></div>
+                        </div>
+                      <%end%> 
+                    </div>   
                   </div>
                   <time datetime=<%= post.updated_at %>>Updated at <%= post.updated_at.in_time_zone('Eastern Time (US & Canada)').strftime("%b %d %Y %H:%M") %></time>
                 </header>
