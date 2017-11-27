@@ -39,7 +39,7 @@ class Post < ApplicationRecord
   end
 
   def have_enough_money
-    if self.client.available_credit < (self.pay * self.number_of_teenager_needed)
+    if self.client.available_credit/100 < (self.pay.to_i * self.number_of_teenager_needed)
       errors.add(:client,"You do not have sufficient fund for your post, please make a deposit.")
     end
   end

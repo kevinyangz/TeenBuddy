@@ -6,8 +6,15 @@ jQuery ->
 
 # dynamic select menu for new job posts
   types_1 = $('#post_service_type_id').html()
-  $('#post_service_type_id').empty()
-  $('#post_service_type_id').selectpicker('refresh')
+  $(document).ready ->
+    category = $('#post_service_category_id :selected').text()
+    options = $(types_1).filter("optgroup[label='#{category}']").html()
+    if options
+      $('#post_service_type_id').html(options)
+      $('#post_service_type_id').selectpicker('refresh')
+    else
+      $('#post_service_type_id').empty()
+      $('#post_service_type_id').selectpicker('refresh')
   $('#post_service_category_id').change -> 
     category = $('#post_service_category_id :selected').text()
     options = $(types_1).filter("optgroup[label='#{category}']").html()

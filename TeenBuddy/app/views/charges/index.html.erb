@@ -36,7 +36,7 @@
                   <%= number_field_tag :credit, class: 'form-control input-lg', id: 'charges_amount' %>
                   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                          data-description="A month's subscription"
+                          data-description="Deposit"
                           data-locale="auto"></script>
                 </h6>
               </airticle>

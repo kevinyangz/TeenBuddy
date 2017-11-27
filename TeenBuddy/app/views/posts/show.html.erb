@@ -69,6 +69,7 @@
               <% end %>
           <% elsif current_user.client == @post.client %>
               <%= link_to 'Edit', edit_post_path(@post), class: 'btn btn-gray' %>
+              <%= link_to 'Delete', { action: :destroy, id: @post.id }, method: :delete, data: { confirm: 'Are you sure?' }, class: 'btn btn-danger'  %>
           <% end %>
         </div>
       </div>
