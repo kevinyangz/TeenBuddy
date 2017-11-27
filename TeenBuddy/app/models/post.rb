@@ -13,6 +13,7 @@ class Post < ApplicationRecord
   validates :number_of_teenager_needed, format:{with: /[0-9]+/}
   validate :have_enough_money, :on => :create
   after_create :set_transaction
+  after_destroy :get_back_money
 
   include Filterable
 
@@ -47,6 +48,10 @@ class Post < ApplicationRecord
     self.credit = self.pay.to_i * self.number_of_teenager_needed * 100
     self.save
     @transaction = Transaction.new(user: self.client.user, inout: false, comment: "Hold for job (#{self.title})", amount: self.credit)
+    @transaction.save
+  end
+  def get_back_money
+    @transaction = Transaction.new(user: self.client.user, inout: true, comment: "Unhold money from (#{self.title})", amount: self.credit)
     @transaction.save
   end
 
