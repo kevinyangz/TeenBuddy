@@ -316,7 +316,7 @@
               <div class="modal-body">
             <div class="form-group">
                   <%= form.hidden_field :teen_rating, :id=>"email_field#{service.id}" ,class: "form-control", placeholder: "Rate teenager " %>
-                  <%= form.text_area :teen_review, class: "form-control", placeholder: "Comments about your client" %>
+                  <%= form.text_area :teen_review, class: "form-control", placeholder: "Comments about your client" ,data: { emojiable: true }%>
                  </div>
             </div>
               <div class="modal-footer">
