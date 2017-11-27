@@ -19,4 +19,15 @@ class User < ApplicationRecord
     self.transactions.where(inout:true).sum(:amount) -  self.transactions.where(inout:false).sum(:amount)
   end
 
+  def onhold
+    if self.teenager
+      0
+    elsif self.client
+      self.client.posts.sum(:credit)
+    else
+      0
+    end
+
+  end
+
 end

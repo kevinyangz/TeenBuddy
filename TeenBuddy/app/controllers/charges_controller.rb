@@ -2,13 +2,7 @@ class ChargesController < ApplicationController
   before_action :authenticate_user!
 
   def index
-    if current_user.teenager
-      @teenager = current_user.teenager
-      @state = 'teenager'
-    elsif current_user.client
-      @client = current_user.client
-      @state = 'client'
-    end
+   @transactions = Transaction.where(user:current_user).order(created_at: :desc);
   end
 
   def new
@@ -39,7 +33,7 @@ class ChargesController < ApplicationController
     )
 
     if charge
-      @transaction = Transaction.new(user: current_user, inout: true, comment: 'Deposit with amount ', amount: @amount.to_i)
+      @transaction = Transaction.new(user: current_user, inout: true, comment: 'Deposit', amount: @amount.to_i)
       @transaction.save
       redirect_to charges_path, notice:"Thanks, you have successfully deposited $#{@amount/100.0}"
     end

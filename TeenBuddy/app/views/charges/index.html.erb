@@ -7,7 +7,7 @@
   <div class="container no-shadow">
     <row>
       <div class="col-md-6 col-sm-12"><h5>Available Credits: $<%= current_user.balance/100.0 %></h5></div>
-      <div class="col-md-6 col-sm-12"><h5>On-holding Credits:</h5></div>
+      <div class="col-md-6 col-sm-12"><h5>On-holding Credits: $<%= current_user.onhold/100.0 %></h5></div>
 
     </row>
   </div>
@@ -46,5 +46,40 @@
         </div>
       </div>
     </div>
+    <header class="section-header">
+      <h2>Transaction History</h2>
+    </header>
+    <div class="container">
+      <div class="row item-blocks-condensed">
+
+        <% @transactions.each do |transaction| %>
+            <div class="row">
+              <!-- Candidate item -->
+              <!-- END Candidate item -->
+              <div class="col-xs-12">
+                <a class="item-block">
+                  <header>
+                    <div class="hgroup">
+                      <h4><%=transaction.comment%>  $<%= transaction.amount/100.0%><span class="rate">CAD</span></h4>
+                    </div>
+                    <div class="header-meta">
+                      <%if transaction.inout%>
+                          <span class="label label-success">Income</span>
+                      <%else%>
+                          <span class="label label-default">PayOut</span>
+                      <%end%>
+                    </div>
+                  </header>
+                </a>
+              </div>
+            </div>
+
+        <% end %>
+        <!-- END Job item -->
+      </div>
+    </div>
   </section>
+
+
+
 </main>
