@@ -114,13 +114,14 @@
                   <div class="hgroup">
                     <h4><%= post.title %></h4>
                       
-                <div class="hotel_a">
+                <div class="teenager_rating">
                <h5><%= "#{post.client.fname} #{post.client.lname}" %>
-
+                <%if post.client.get_service_counts > minimum_review_numbers%>
                 <div class="stars-outer">
                   <div id=<%= post.client.get_average_rating %> class="stars-inner"></div>
                 </div>
               </div>
+              <%end%>
                     </h5>
                   </div>
                   <time datetime=<%= post.updated_at %>>Updated at <%= post.updated_at.in_time_zone('Eastern Time (US & Canada)').strftime("%b %d %Y %H:%M") %></time>

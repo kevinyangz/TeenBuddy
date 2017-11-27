@@ -12,7 +12,18 @@
 
       <div class="hgroup">
         <h1><%= @post.title %></h1>
-        <h3><a href="#"><%= "#{@post.client.fname} #{@post.client.lname}" %></a></h3>
+
+         <div class="teenager_rating">
+                <h3> <%=link_to "#{@post.client.fname} #{@post.client.lname}", client_path(@post.client)%> 
+                <%if @post.client.get_service_counts > minimum_review_numbers %>
+                <div class="stars-outer">
+                  <div id=<%= @post.client.get_average_rating %> class="stars-inner"></div>
+                </div>
+                <%end%>
+
+              </h3>
+              </div>
+            
       </div>
       <time datetime=<%= @post.created_at %>>Created at <%= @post.created_at %></time>
       <hr>

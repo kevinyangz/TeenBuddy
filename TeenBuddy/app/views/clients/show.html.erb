@@ -15,7 +15,7 @@
       <div class="col-xs-12 col-sm-8 header-detail">
         <div class="hgroup">
          <h4><%= @client.fname %> <%= @client.lname %></h4>
-          <% if @client.get_service_counts >2 %>
+          <% if @client.get_service_counts >minimum_review_numbers %>
           <div class="teenager_rating">
                 <div class="stars-outer">
                   <div id=<%= @client.get_average_rating %> class="stars-inner"></div>
