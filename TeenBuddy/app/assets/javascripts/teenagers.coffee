@@ -37,7 +37,7 @@ initAutocomplete = ->
 google.maps.event.addDomListener window, 'load', initAutocomplete
 
 $(document).ready ->
-  x = document.querySelectorAll('.hotel_a .stars-inner')
+  x = document.querySelectorAll('.teenager_rating .stars-inner')
   i = undefined
   i = 0
   while i < x.length

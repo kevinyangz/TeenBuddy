@@ -65,7 +65,7 @@
         <% @teenagers.each do |teenager| %>
             <div class="col-xs-12">
 
-                <%= link_to teenager, class: 'item-block' do %>
+          <%= link_to teenager, class: 'item-block' do %>
                 <header>
           <% if teenager.selfie.present? %>
           <%= image_tag(teenager.selfie.thum.url,style:"border-radius:50%;width:60px;height:60px;",class:"thumbnail")  %>
@@ -75,17 +75,23 @@
         <!-- default picture -->
            <% end %>
                   <div class="hgroup">
+                <div class="teenager_rating">
                     <h4><%= teenager.fname%> <%= teenager.lname%></h4>
+                <%if teenager.get_service_numbers > minimum_review_numbers %>
+
+                <div class="stars-outer">
+
+                  <div id=<%= teenager.get_average_rating %> class="stars-inner"></div>
+                </div>
+                <strong> <%= "#{teenager.get_service_numbers} Reviews" %></strong>
+                <%end%>
+              </div>
+
                   </div>
                 </header>
 
                 <div class="item-body">
-              <div class="hotel_a">
-                <div class="stars-outer">
-                  <div id=<%= teenager.get_average_rating %> class="stars-inner"></div>
-                </div>
-                <strong> <%= "#{teenager.get_service_numbers} Reviews" %></strong>
-              </div>
+             
 
                   <div class="tag-list">
            <%@current_teenager_interest= TeenagerInterest.where(teenager_id:teenager.id).all%>
