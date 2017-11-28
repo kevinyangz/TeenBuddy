@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171126182052) do
+ActiveRecord::Schema.define(version: 20171127013915) do
 
   create_table "client_reviews", force: :cascade do |t|
     t.integer "client_id"
@@ -99,28 +99,6 @@ ActiveRecord::Schema.define(version: 20171126182052) do
     t.string "message_id"
     t.index ["notification_id"], name: "index_mailboxer_receipts_on_notification_id"
     t.index ["receiver_id", "receiver_type"], name: "index_mailboxer_receipts_on_receiver_id_and_receiver_type"
-  end
-
-  create_table "post_applications", force: :cascade do |t|
-    t.integer "post_id"
-    t.integer "teenager_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "message"
-    t.string "status"
-    t.index ["post_id"], name: "index_post_applications_on_post_id"
-    t.index ["teenager_id"], name: "index_post_applications_on_teenager_id"
-  end
-
-  create_table "post_invitations", force: :cascade do |t|
-    t.integer "post_id"
-    t.integer "teenager_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string "message"
-    t.string "status"
-    t.index ["post_id"], name: "index_post_invitations_on_post_id"
-    t.index ["teenager_id"], name: "index_post_invitations_on_teenager_id"
   end
 
   create_table "posts", force: :cascade do |t|
@@ -217,6 +195,8 @@ ActiveRecord::Schema.define(version: 20171126182052) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "role"
+    t.string "provider"
+    t.string "uid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
