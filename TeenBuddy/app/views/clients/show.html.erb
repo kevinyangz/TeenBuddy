@@ -14,7 +14,15 @@
 
       <div class="col-xs-12 col-sm-8 header-detail">
         <div class="hgroup">
-          <h1><%= @client.fname %> <%= @client.lname %></h1>
+         <h4><%= @client.fname %> <%= @client.lname %></h4>
+          <% if @client.get_service_counts >minimum_review_numbers %>
+          <div class="teenager_rating">
+                <div class="stars-outer">
+                  <div id=<%= @client.get_average_rating %> class="stars-inner"></div>
+                </div>
+                <strong> <%= "  #{@client.get_service_counts} Reviews" %></strong>
+              </div>
+          <%end%>
 
 
         <hr>
@@ -128,3 +136,45 @@
 
 
 </main>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-8 col-lg-9">
+      <div id="comments">
+        <header>
+          <h3>Review
+            <span class=“txt-gray”><%= "(#{Service.where(client_id: @client.id).where.not("client_review like ?", "").count})" %></span>
+          </h3>
+        </header>
+        <ul class="comments-list">
+
+          <% Service.where(client_id: @client.id).where.not("client_review like ?", "").each do |service| %>
+              <li class="comment">
+                <% if Teenager.find(service.teenager_id).selfie.present? %>
+                    <%= image_tag(Teenager.find(service.teenager_id).selfie.thum.url, border: 0, class: "avatar") %>
+                    <!-- User upload picture -->
+                <% else %>
+                    <%= image_tag("/assets/img/teenager1.jpeg", border: 0, class: "avatar") %>
+                    <!-- default picture-->
+                <% end %>
+                <div class="comment-body">
+                  <h6>
+                    <a href="#"><%= Teenager.find(service.teenager_id).fname %></a>
+                    <time>
+                      <%= service.updated_at %>
+                    </time>
+                  </h6>
+
+                  <p>
+                    <%= service.client_review %>
+                  </p>
+                </div>
+              </li>
+
+          <% end %>
+
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

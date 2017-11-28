@@ -4,6 +4,7 @@ class Service < ApplicationRecord
   before_create :set_client
   validate :position_filled
   validate :service_exists
+  after_update :set_transaction
 
   enum status: [:open, :beingInvited, :applied, :rejected, :enrolled, :finished, :confirmed]
 
@@ -24,6 +25,18 @@ def position_filled
     errors.add(:post,"The Job has been filled with enough people.")
   end
 end
+
+  def set_transaction
+    if self.confirmed?
+      @client_transaction = Transaction.new(user: self.post.client.user, inout: false, comment: "Pay for (#{self.post.title}) to (#{self.teenager.fname} #{self.teenager.lname})", amount: self.post.pay.to_i*100)
+      @client_transaction.save
+      @teen_transaction = Transaction.new(user: self.teenager.user, inout: true, comment: "Payment of (#{self.post.title}) from (#{self.post.client.fname} #{self.post.client.lname})", amount: self.post.pay.to_i*100)
+      @teen_transaction.save
+      self.post.credit = self.post.credit - self.post.pay.to_i * 100
+      self.post.save
+    end
+  end
+
 
   def service_exists
     if my_service = Service.where(teenager_id: self.teenager_id, post_id: self.post_id).first

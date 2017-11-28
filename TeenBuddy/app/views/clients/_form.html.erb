@@ -27,13 +27,15 @@
                 <%= form.text_field :fname, class: 'form-control input-lg' %>
               </div>
 
-              <div class="form-group col-xs-12 col-sm-6">
+              <div class="form-group col-xs-12 col-sm-6" >
                 <h6>Last Name</h6>
                 <%= form.text_field :lname, class: 'form-control input-lg' %>
               </div>
 
-              <div class="form-group col-md-12">
-                <%= form.text_area :description, id: :client_description, placeholder:"Short description about you", class: 'form-control input-lg' %>
+              <div class="form-group  col-xs-12 col-sm-12">
+                <p class="emoji-picker-container">
+                <%= form.text_area :description, id: :client_description, placeholder:"Short description about you", row:3,class: 'form-control input-lg',data: { emojiable: true } %>
+              </p>
               </div>
 
               <hr class="hr-lg">

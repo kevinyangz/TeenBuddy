@@ -10,7 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171127013915) do
+
+ActiveRecord::Schema.define(version: 20171127202738) do
 
   create_table "client_reviews", force: :cascade do |t|
     t.integer "client_id"
@@ -116,6 +117,7 @@ ActiveRecord::Schema.define(version: 20171127013915) do
     t.integer "service_type_id"
     t.text "requirements"
     t.string "status"
+    t.integer "credit"
     t.index ["client_id"], name: "index_posts_on_client_id"
     t.index ["service_id"], name: "index_posts_on_service_id"
   end
@@ -161,6 +163,7 @@ ActiveRecord::Schema.define(version: 20171127013915) do
   end
 
   create_table "teenagers", force: :cascade do |t|
+    t.text "email_address"
     t.text "home_address"
     t.string "cell_phone"
     t.date "birth_date"
@@ -179,6 +182,10 @@ ActiveRecord::Schema.define(version: 20171127013915) do
     t.integer "amount"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "user_id"
+    t.boolean "inout"
+    t.string "comment"
+    t.index ["user_id"], name: "index_transactions_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

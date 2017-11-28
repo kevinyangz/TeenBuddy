@@ -14,8 +14,10 @@ class Client < ApplicationRecord
   	end
   end
 
-  def get_posts_numbers()
-  	  	all_client_post= Post.where(client_id: self.id).count
+  def get_service_counts()
+    if current_client_jobs= Service.where(client_id: self.id).where.not(client_rating: nil)
+        current_client_jobs.count
+    end
   end
 
 

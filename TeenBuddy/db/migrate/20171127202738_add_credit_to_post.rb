@@ -1,0 +1,5 @@
+class AddCreditToPost < ActiveRecord::Migration[5.1]
+  def change
+    add_column :posts, :credit, :integer
+  end
+end

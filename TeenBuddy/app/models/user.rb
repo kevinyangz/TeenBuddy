@@ -6,6 +6,7 @@ class User < ApplicationRecord
          :omniauthable, :omniauth_providers => [:facebook]
   has_one :teenager
   has_one :client
+  has_many :transactions
 
   accepts_nested_attributes_for :teenager
   accepts_nested_attributes_for :client
@@ -16,9 +17,24 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth)
-    puts "bob"
     puts auth.info.email
     model=where(email: auth.info.email).first
     return model if model
   end
+
+  def balance
+    self.transactions.where(inout:true).sum(:amount) -  self.transactions.where(inout:false).sum(:amount)
+  end
+
+  def onhold
+    if self.teenager
+      0
+    elsif self.client
+      self.client.posts.sum(:credit)
+    else
+      0
+    end
+
+  end
+  
 end
