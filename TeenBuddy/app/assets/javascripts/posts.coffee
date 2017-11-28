@@ -162,7 +162,8 @@ jQuery ->
       infowindowContent.children['place-address'].textContent = address
       infowindow.open map, marker
 
-  google.maps.event.addDomListener window, 'load', initializeFormMap
+  $(document).ready ->
+    initializeFormMap()
 
 
 
@@ -192,8 +193,8 @@ jQuery ->
         alert 'Geocode was not successful for the following reason: ' + status
     return
 
-  google.maps.event.addDomListener window, 'load', initializeShowMap
-
+  $(document).ready ->
+    initializeShowMap()
 
 
 
@@ -224,21 +225,20 @@ jQuery ->
           infowindow.open map, marker
       else
         alert 'Geocode was not successful for the following reason: ' + status
-    
-  google.maps.event.addDomListener window, 'load', initializeAllMap
-
-
+ 
+  $(document).ready ->
+    initializeAllMap()
 
 
 #ratings
   $(document).ready ->
-  $('[type*="radio"]').change ->
-    test = @id
-    string = test.split(':')
-    me = undefined
-    me = undefined
-    me = $(this)
-    id_result = 'email_field' + string[1]
-    document.getElementById(id_result).value = me.attr('value')
+    $('[type*="radio"]').change ->
+      test = @id
+      string = test.split(':')
+      me = undefined
+      me = undefined
+      me = $(this)
+      id_result = 'email_field' + string[1]
+      document.getElementById(id_result).value = me.attr('value')
+      return
     return
-  return
