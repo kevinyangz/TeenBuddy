@@ -10,11 +10,15 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
  *= require_self
  @import 'chosen';
 
  */
+@import "posts.css";
+@import "services.css";
+@import "teenagers.css";
+@import "clients.css";
+@import "charges.css";
 @import 'chosen';
 .alert-notice {
   @extend .alert-success;
@@ -23,6 +27,9 @@
 .alert-alert {
   @extend .alert-warning;
 }
+
+
+
 
 
 

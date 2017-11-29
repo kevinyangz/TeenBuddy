@@ -78,6 +78,9 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.6'
 end
 
+gem 'activeadmin'
+gem 'draper'
+gem 'pundit'
 group :test, :development do
   gem 'cucumber-rails', :require => false
   # database_cleaner is not required, but highly recommended
