@@ -4,9 +4,9 @@ class User < ApplicationRecord
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
-  has_one :teenager, :dependent => :destroy
-  has_one :client, :dependent => :destroy
-  has_many :transactions, :dependent => :destroy
+  has_one :teenager, :dependent => :delete
+  has_one :client, :dependent => :delete
+  has_many :transactions, :dependent => :delete_all
 
   accepts_nested_attributes_for :teenager
   accepts_nested_attributes_for :client
