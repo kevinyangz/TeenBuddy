@@ -17,9 +17,15 @@ class User < ApplicationRecord
   end
 
   def self.from_omniauth(auth)
-    puts auth.info.email
-    model=where(email: auth.info.email).first
-    return model if model
+    where(provider: auth.provider, uid: auth.uid).first
+  end
+
+  def self.new_with_session(params, session)
+    super.tap do |user|
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
+    end
   end
 
   def balance
