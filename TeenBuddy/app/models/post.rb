@@ -4,7 +4,7 @@ class Post < ApplicationRecord
   belongs_to :service_category
   belongs_to :service_type
 
-  has_many :services, :dependent => :destroy
+  has_many :services, :dependent => :delete_all
   
   # getter and setter
   # validations

@@ -89,7 +89,6 @@
   <section id="open-positions" class="bg-alt">
     <div class="container">
       <header class="section-header">
-
         <h2>Open Posts</h2>
       </header>
 
@@ -141,10 +140,10 @@
   <div class="row">
     <div class="col-md-8 col-lg-9">
       <div id="comments">
-        <header>
-          <h3>Review
+        <header class="section-header">
+          <h2>Review
             <span class=“txt-gray”><%= "(#{Service.where(client_id: @client.id).where.not("client_review like ?", "").count})" %></span>
-          </h3>
+          </h2>
         </header>
         <ul class="comments-list">
 
