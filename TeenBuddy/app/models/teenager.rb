@@ -1,7 +1,7 @@
 class Teenager < ApplicationRecord
-  has_many :services
+  has_many :services, :dependent => :destroy
   belongs_to :user
-  has_many :teenager_interests
+  has_many :teenager_interests, :dependent => :destroy
   has_many :service_categories, through: :teenager_interests #Not sure about this relationship
 
   
