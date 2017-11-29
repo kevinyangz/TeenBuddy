@@ -9,13 +9,13 @@ User.delete_all
 
 for i in 0..10
 	user = User.create!(email: Faker::Internet.free_email, password: 123456, role:'teenager',
-  teenager_attributes: {fname:Faker::Name.first_name, lname:Faker::Name.last_name}
+  teenager_attributes: {fname:Faker::Name.first_name, lname:Faker::Name.last_name, selfie: UiFaces.face}
   )
 end
 
 for i in 0..10
 	user = User.create!(email: Faker::Internet.free_email, password: 123456, role:'client',
-                      client_attributes: {fname:Faker::Name.first_name, lname:Faker::Name.last_name}
+                      client_attributes: {fname:Faker::Name.first_name, lname:Faker::Name.last_name, selfie: UiFaces.face}
 	)
 end
 

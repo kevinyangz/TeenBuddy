@@ -2,7 +2,7 @@ class Client < ApplicationRecord
   has_many :posts, :dependent => :destroy
   has_many :services, :dependent => :destroy
 
-  belongs_to :user
+  belongs_to :user, :dependent => :destroy
   validates :fname, :lname, presence: true
   validates :fname, :lname, length: { minimum: 2 }
 
