@@ -19,7 +19,6 @@
 @import "teenagers.css";
 @import "clients.css";
 @import "charges.css";
-@import 'chosen';
 .alert-notice {
   @extend .alert-success;
 }
