@@ -9,18 +9,25 @@ User.delete_all
 Teenager.delete_all
 Client.delete_all
 
-require 'ui_faces'
+
+
+user = User.create!(email:'teenager@teenager.com', password: 123456, role:'teenager',
+										teenager_attributes: {fname:Faker::Name.first_name, lname:Faker::Name.last_name, remote_selfie_url: UiFaces.face}
+)
+user = User.create!(email: 'client@client.com', password: 123456, role:'client',
+										teenager_attributes: {fname:Faker::Name.first_name, lname:Faker::Name.last_name, remote_selfie_url: UiFaces.face}
+)
+
 
 for i in 0..10
 	user = User.create!(email: Faker::Internet.free_email, password: 123456, role:'teenager',
-  teenager_attributes: {fname:Faker::Name.first_name, lname:Faker::Name.last_name, selfie: open(UiFaces.face)}
+  teenager_attributes: {fname:Faker::Name.first_name, lname:Faker::Name.last_name, remote_selfie_url: UiFaces.face}
   )
-
 end
 
 for i in 0..10
 	user = User.create!(email: Faker::Internet.free_email, password: 123456, role:'client',
-                      client_attributes: {fname:Faker::Name.first_name, lname:Faker::Name.last_name,selfie: open(UiFaces.face)}
+                      client_attributes: {fname:Faker::Name.first_name, lname:Faker::Name.last_name,remote_selfie_url: UiFaces.face}
 	)
 end
 
