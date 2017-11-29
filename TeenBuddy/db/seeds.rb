@@ -6,16 +6,21 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 User.delete_all
+Teenager.delete_all
+Client.delete_all
+
+require 'ui_faces'
 
 for i in 0..10
 	user = User.create!(email: Faker::Internet.free_email, password: 123456, role:'teenager',
-  teenager_attributes: {fname:Faker::Name.first_name, lname:Faker::Name.last_name, selfie: UiFaces.face}
+  teenager_attributes: {fname:Faker::Name.first_name, lname:Faker::Name.last_name, selfie: open(UiFaces.face)}
   )
+
 end
 
 for i in 0..10
 	user = User.create!(email: Faker::Internet.free_email, password: 123456, role:'client',
-                      client_attributes: {fname:Faker::Name.first_name, lname:Faker::Name.last_name, selfie: UiFaces.face}
+                      client_attributes: {fname:Faker::Name.first_name, lname:Faker::Name.last_name,selfie: open(UiFaces.face)}
 	)
 end
 

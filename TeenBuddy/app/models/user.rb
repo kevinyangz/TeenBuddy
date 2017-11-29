@@ -36,6 +36,7 @@ class User < ApplicationRecord
 
   def balance
     self.transactions.where(inout:true).sum(:amount) -  self.transactions.where(inout:false).sum(:amount)
+
   end
 
   def onhold
