@@ -1,4 +1,13 @@
-<header class="page-header bg-img size-lg" style="background-image: url(assets/img/bg-banner2.jpg)">
+<header class="page-header bg-img size-lg" style="background-image: url(/assets/img/bg-banner1.jpg)">
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=478437375640740';
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
   <div class="container">
     <%if notice%>
 
@@ -27,9 +36,14 @@
       </div>
       <time datetime=<%= @post.created_at %>>Created at <%= @post.created_at %></time>
       <hr>
+      <h3>Description</h3>
       <p class="lead"><%= @post.description %></p>
+      <% if @post.requirements != "" %>
+        <h3>Requirements</h3>
+        <p class="lead"><%= @post.requirements %></p>
+      <%end%>
 
-      <ul class="details cols-3">
+      <ul class="details cols-2">
         <li>
           <i class="fa fa-map-marker"></i>
           <span><%= @post.work_address %></span>
@@ -42,12 +56,17 @@
 
         <li>
           <i class="fa fa-money"></i>
-          <span><%= @post.pay %></span>
+          <span>Pay: $<%= @post.pay %></span>
+        </li>
+
+        <li>
+          <i class="fa fa-male"></i>
+          <span>Teenagers needed: <%= @post.number_of_teenager_needed %></span>
         </li>
 
         <li>
           <i class="fa fa-certificate"></i>
-          <span><%= @post.hasPosition %></span>
+          <span>Status: <%= @post.hasPosition %></span>
         </li>
       </ul>
 
@@ -64,7 +83,7 @@
       <div class="button-group">
         <ul class="social-icons">
           <li class="title">Share on</li>
-          <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+          <li><div class="fb-share-button" data-href="https://developers.facebook.com/docs/plugins/" data-layout="button" data-size="large" data-mobile-iframe="true"><a class="fa fa-facebook fb-xfbml-parse-ignore " target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"></a></div></li>
           <li><a class="google-plus" href="#"><i class="fa fa-google-plus"></i></a></li>
           <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
           <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>

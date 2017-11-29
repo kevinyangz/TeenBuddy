@@ -7,7 +7,7 @@
         <p class="lead text-center"><%= @post_form_header_description %></p>
       </div>
 
-      <div class="container">
+      <div class="container" style="z-index:2;">
         <font color = 'red'> <%= post.errors.full_messages.first %></font>
 
         <div class="row">
@@ -40,7 +40,7 @@
             <h6>Wage</h6>
             <div class="input-group input-group-sm">
               <span class="input-group-addon"><i class="fa fa-money"></i></span>
-              <%= form.number_field :pay, id: :post_pay, placeholder: 'Pay', class: 'form-control input-lg' %>
+              <%= form.number_field :pay, id: :post_pay, placeholder: 'Total amount of payment for each teenager', class: 'form-control input-lg' %>
             </div>
           </div>
 
@@ -56,7 +56,7 @@
         </div>
       </div>
 
-      <div class="container">
+      <div class="container" style="z-index:1;">
       <div class="form-group col-xs-12 col-sm-12" style="height:500px;" id="post_form_map"></div>
         <div id="infowindow-content">
           <img src="" width="16" height="16" id="place-icon">

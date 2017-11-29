@@ -116,6 +116,9 @@ jQuery ->
 
 
 
+
+
+
 #auto complete google map API javascripts
   initializeFormMap = ->
     map = new (google.maps.Map)(document.getElementById('post_form_map'),
@@ -168,6 +171,9 @@ jQuery ->
 
 
 
+
+
+
 #google map API for showing up selected address javascripts
   initializeShowMap = ->
     latlng = new (google.maps.LatLng)(43.6629, -79.3957)
@@ -198,6 +204,10 @@ jQuery ->
 
 
 
+
+
+
+
 #google map API for showing up all address javascripts
   initializeAllMap = ->
     latlng = new (google.maps.LatLng)(43.6629, -79.3957)
@@ -206,28 +216,36 @@ jQuery ->
       center: latlng
     map = new (google.maps.Map)(document.getElementById('post_all_map'), mapOptions)
     geocoder = new (google.maps.Geocoder)
+    bound = new (google.maps.LatLngBounds)
     infowindow = new (google.maps.InfoWindow)
     i = 0
     while i < all_posts.length
       post = all_posts[i]
-      geocoder.geocode { 'address': post.work_address }, displayMarkerInformation(post, map, infowindow)
+      geocoder.geocode { 'address': post.work_address }, displayMarkerInformation(post, map, bound, infowindow)
       i++
 
-  displayMarkerInformation = (post, map, infowindow) ->
+  displayMarkerInformation = (post, map, bound, infowindow) ->
     (results, status) ->
       if status == google.maps.GeocoderStatus.OK
         marker = new (google.maps.Marker)(
           map: map
           position: results[0].geometry.location)
         google.maps.event.addListener marker, 'click', ->
-          post_information = "<h5>Job Title: " + post.title + "</h5>\n" + "<p><strong>Description: </strong>" + post.description + "</p>"
+          post_information = "<h5>" + post.title + "</h5>\n" + "<p><strong>Description: </strong>" + post.description + "</p>"
           infowindow.setContent post_information
           infowindow.open map, marker
+        #bound map to cover all the posts in the map
+        bound.extend marker.getPosition()
+        map.fitBounds bound
       else
         alert 'Geocode was not successful for the following reason: ' + status
  
   $(document).ready ->
     initializeAllMap()
+
+
+
+
 
 
 #ratings
