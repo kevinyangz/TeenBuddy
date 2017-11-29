@@ -10,6 +10,7 @@ class Post < ApplicationRecord
   # validations
   validates :title, :description, :work_address, :pay, presence:true
   validates :number_of_teenager_needed, numericality:{greater_than:0}
+  validates :pay, numericality:{greater_than:0}
   validates :number_of_teenager_needed, format:{with: /[0-9]+/}
   validate :have_enough_money, :on => :create
   after_create :set_transaction
