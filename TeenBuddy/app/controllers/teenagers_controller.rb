@@ -40,7 +40,6 @@ class TeenagersController < ApplicationController
   def create
     @teenager = Teenager.new(teenager_params)
     @teenager.user_id = current_user.id
-    @teenager.available_credit = 0
      
     respond_to do |format|
     if @teenager.save

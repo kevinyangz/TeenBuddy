@@ -32,7 +32,7 @@
          <ul class="dropdown-menu dropdown-menu-right">
 
            <li><%= link_to 'Profile', current_user.teenager %></li>
-           <li><%= link_to 'Your Conversations', conversations_path %></li>
+           <li><%= link_to 'Conversations', conversations_path %></li>
            <li><%= link_to 'Credit', charges_path %></li>
            <li> <%= link_to('Logout', destroy_user_session_path, method: :delete) %></li>
           </ul>
