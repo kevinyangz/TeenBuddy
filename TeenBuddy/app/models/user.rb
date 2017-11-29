@@ -6,7 +6,7 @@ class User < ApplicationRecord
          :omniauthable, :omniauth_providers => [:facebook]
   has_one :teenager
   has_one :client
-  has_many :transactions
+  has_many :transactions, :dependent => :destroy
 
   accepts_nested_attributes_for :teenager
   accepts_nested_attributes_for :client

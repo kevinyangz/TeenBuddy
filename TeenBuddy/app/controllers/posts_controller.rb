@@ -54,7 +54,6 @@ class PostsController < ApplicationController
   def create
     @post = Post.new(post_params)
     @post.client_id = current_user.client.id
-    @post.status = "open"
 
     respond_to do |format|
       if @post.save

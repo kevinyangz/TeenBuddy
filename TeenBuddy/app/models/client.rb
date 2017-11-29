@@ -1,6 +1,6 @@
 class Client < ApplicationRecord
-  has_many :posts
-  has_many :services
+  has_many :posts, :dependent => :destroy
+  has_many :services, :dependent => :destroy
 
   belongs_to :user
   validates :fname, :lname, presence: true
