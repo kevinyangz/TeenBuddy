@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
 
+  ActiveAdmin.routes(self)
   resources :messages, only: [:new, :create]
   resources :conversations, only: [:index, :show, :destroy] do
       member do
