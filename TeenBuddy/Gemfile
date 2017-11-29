@@ -86,3 +86,5 @@ group :test, :development do
 end
 
 gem 'omniauth-facebook','~> 4.0.0'
+
+gem 'faker'

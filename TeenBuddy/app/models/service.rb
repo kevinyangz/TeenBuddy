@@ -59,7 +59,7 @@ end
 
 
   def post_title
-    post.title
+    self.post.title
   end
 
 
