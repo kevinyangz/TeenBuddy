@@ -52,6 +52,11 @@
             </div>
           </div>
 
+          <% if @post %>
+            <script>
+              var post_id = "<%== escape_javascript @post.id.to_s %>";
+            </script>
+          <% end %>
 
         </div>
       </div>
