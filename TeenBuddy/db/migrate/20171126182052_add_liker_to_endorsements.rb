@@ -1,6 +1,6 @@
 class AddLikerToEndorsements < ActiveRecord::Migration[5.1]
   def change
-    add_reference :endorsements, :liker, foreign_key: true
-    add_reference :endorsements, :liked, foreign_key: true
+    add_column :endorsements, :liker, :integer
+    add_column :endorsements, :liked, :integer
   end
 end

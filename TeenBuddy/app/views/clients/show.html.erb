@@ -15,6 +15,16 @@
       <div class="col-xs-12 col-sm-8 header-detail">
         <div class="hgroup">
          <h4><%= @client.fname %> <%= @client.lname %></h4>
+          <% if (endorse=Endorsement.where(liked: @client.user.id, liker: current_user.id)).any? %>
+              <%= link_to endorsement_path(endorse.first), :method => :delete do %>
+                  <i class="fa fa-heart"></i>
+              <% end %>
+
+          <% else %>
+              <%= link_to endorsements_path(:endorsement => {:liked => @client.user.id, :liker => current_user.id}), :method => :post do %>
+                  <i class="fa fa-heart-o"></i>
+              <% end %>
+          <% end %>
           <% if @client.get_service_counts >minimum_review_numbers %>
           <div class="teenager_rating">
                 <div class="stars-outer">

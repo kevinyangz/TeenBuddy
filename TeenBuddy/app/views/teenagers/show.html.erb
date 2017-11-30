@@ -27,16 +27,17 @@
         <div class="hgroup">
 
           <h1><%= @teenager.fname %>  <%= @teenager.lname %>   </h1>
-          <% if (endorse=Endorsement.where(liked_id: @teenager.user.id, liker_id: current_user.id)).any? %>
+          <% if (endorse=Endorsement.where(liked: @teenager.user.id, liker: current_user.id)).any? %>
               <%= link_to endorsement_path(endorse.first), :method => :delete do %>
                   <i class="fa fa-heart"></i>
               <% end %>
 
           <% else %>
-              <%= link_to endorsements_path(:endorsement => {:liked_id => @teenager.user.id, :liker_id => current_user.id}), :method => :post do %>
+              <%= link_to endorsements_path(:endorsement => {:liked => @teenager.user.id, :liker => current_user.id}), :method => :post do %>
                   <i class="fa fa-heart-o"></i>
               <% end %>
-          <% end %> <%= Endorsement.where(liked_id: @teenager.user.id).count %>
+          <% end %>
+          <%= Endorsement.where(liked: @teenager.user.id).count %>
             <%if @teenager.get_service_numbers >minimum_review_numbers %>
             <div class="teenager_rating">
                 <div class="stars-outer">
