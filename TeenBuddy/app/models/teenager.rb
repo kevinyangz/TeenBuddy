@@ -4,7 +4,7 @@ class Teenager < ApplicationRecord
   has_many :teenager_interests, :dependent => :delete_all
   has_many :service_categories, through: :teenager_interests #Not sure about this relationship
 
-  
+
   #Validate Canadian Postal Code. Need to use gem if more countries need to be checked.
   canadian_postal_code = /\A[ABCEGHJKLMNPRSTVXY]{1}\d{1}[A-Z]{1} *\d{1}[A-Z]{1}\d{1}\z/
  # validates :postal_code, format: { with: canadian_postal_code }
@@ -16,7 +16,12 @@ class Teenager < ApplicationRecord
   validate :age_requirement19, on: :create
   
   mount_uploader :selfie, SelifieUploader
+      include Filterable
 
+ scope :service_category_id , ->(service_category_id)  {
+    current_teenager_interest=TeenagerInterest.where(:service_category_id =>service_category_id)
+    Teenager.where(id:current_teenager_interest.select(:teenager_id))
+  }
 
   def self.get_age (birthdate)
      now = Time.now.utc.to_date

@@ -9,12 +9,14 @@ class TeenagersController < ApplicationController
   # GET /teenagers
   # GET /teenagers.json
   def index
-    @current_teenager_interest= TeenagerInterest.all
-    @current_teenager_interest=@current_teenager_interest.filter(params.slice(:servicecategory))
-    @teenagers = Teenager.where(id: @current_teenager_interest.select(:teenager_id)).reverse.paginate(:page => params[:page], :per_page => 5)
-  # @teenagers=@current_teenager_interest.teenagers
-    #puts "-----#{@current_teenager_interest.class}----"
+   # @current_teenager_interest= TeenagerInterest.all
+    #@current_teenager_interest=@current_teenager_interest.filter(params.slice(:servicecategory))
+    @teenagers = Teenager.all.filter(params.slice(:service_category_id)).reverse.paginate(:page => params[:page], :per_page => 5)
+    #@posts = Post.all.filter(params.slice(:searched_keyword,:status ,:category_id, :type_id)).order(params[:order]).reverse.paginate(:page => params[:page], :per_page => 5)
 
+    # @teenagers=@current_teenager_interest.teenagers
+    #puts "-----#{@current_teenager_interest.class}----"
+    #Post.all.filter(params.slice(:searched_keyword,:status ,:category_id, :type_id))
 
   end
 
