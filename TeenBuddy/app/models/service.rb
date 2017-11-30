@@ -29,7 +29,7 @@ end
   def set_transaction
     if self.confirmed?
       @post_transaction = Transaction.new(user: self.post.client.user, inout: true, comment: "Unhold (#{self.post.title}) to Pay Service ", amount: self.post.pay.to_i*100)
-      @postt_transaction.save
+      @post_transaction.save
       @client_transaction = Transaction.new(user: self.post.client.user, inout: false, comment: "Pay for (#{self.post.title}) to (#{self.teenager.fname} #{self.teenager.lname})", amount: self.post.pay.to_i*100)
       @client_transaction.save
       @teen_transaction = Transaction.new(user: self.teenager.user, inout: true, comment: "Payment of (#{self.post.title}) from (#{self.post.client.fname} #{self.post.client.lname})", amount: self.post.pay.to_i*100)
@@ -46,7 +46,7 @@ end
         if self.applied?
           errors.add(:post,"You already enrolled in this job")
         elsif self.beingInvited?
-          errors.add(:post,"This teenager already enrooled in this job.")
+          errors.add(:post,"This teenager already enrolled in this job.")
         end
       else
         if self.applied?

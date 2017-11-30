@@ -82,20 +82,24 @@
                       <label class= "btn btn-xs <%=status_style(service.status)%>"> <%= status_text(service.status) %> </label></div>
                   </h3>
 
-                  <%= link_to image_tag("/assets/img/teenager1.png", border: 0), teenager_path(service.teenager), class: 'logo', method: :get,class:'resume-avatar' %></a>
+                 <% if service.teenager.selfie.present? %>
+                      <%= image_tag(service.teenager.selfie.thum.url, style: "border-radius:50%;width:60px;height:60px;", class: "thumbnail") %>
+                      <!-- user upload -->
+                  <% else %>
+                      <%= image_tag(UiFaces.face, class: "thumbnail", style: "width:60px;height:60px;border-radius:50%;") %>
+                      <!-- default picture -->
+                  <% end %>
                   <div class="hgroup">
                     <h4>
 
                       <%=link_to service.teenager.fname,  teenager_path(service.teenager)%>
 
                     </h4>
-                    <h5><%= service.applyMessage %></h5>
+                    <p>Message: <%= service.applyMessage %></p>
                   </div>
-                  <div class="header-meta">
-                    <span class="location"><%=service.teenager.home_address%></span>
-                    <span class="rate"><%= service.post.pay%></span>
-                  </div>
+
                 </header>
+
 
                 <footer>
                   <div class="status"><strong>Applied on: </strong><%=service.updated_at%></div>
