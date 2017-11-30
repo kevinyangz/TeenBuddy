@@ -38,6 +38,7 @@ for i in 0..50
                teenager_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name,
                                      birth_date: Faker::Date.between(18.years.ago, 8.years.ago),
                                      cell_phone: Faker::PhoneNumber.cell_phone,
+                                     description: Faker::MostInterestingManInTheWorld.quote,
                                      home_address: real_address[address_index]['address'],
                                      postal_code: real_address[address_index]['postal_code']}
   )
@@ -99,7 +100,36 @@ ServiceType.create!(title: "Tutoring", service_category_id: ServiceCategory.find
 ServiceType.create!(title: "Reading", service_category_id: ServiceCategory.find_by(title: "Reading").id)
 
 
+
+#add teenager interests
+
+for i in 0..5
+  @SomeTeenagers = Teenager.all.sample(Teenager.count/2)
+
+  @SomeTeenagers.each do |teenager|
+
+
+  TeenagerInterest.create(teenager:teenager, service_category: ServiceCategory.all.sample(1).first)
+
+  end
+
+
+end
+
+
+
+
+
+
+
+
+
+
 #setup some job array
+
+
+
+
 
 
 #start posting jobs
@@ -171,7 +201,7 @@ end
 
 @someService = Service.where(status:[:applied,:beingInvited])
 
-@someService = @someService.sample(@someService.count/2)
+@someService = @someService.sample(@someService.count/1.5)
 
 
 @someService.each do |service|
@@ -182,7 +212,7 @@ end
 
 @someService = Service.where(status:[:confirmed])
 
-@someService = @someService.sample(@someService.count/2)
+@someService = @someService.sample(@someService.count/1.5)
 
 
 @someService.each do |service|
@@ -203,7 +233,12 @@ end
                  teen_rating: Faker::Number.between(1, 5))
 end
 
+#endorsements
 
+for i in 0..200
+  Endorsement.create(liker:User.all.sample(1).first.id, liked:User.all.sample(1).first.id)
+
+end
 
 
 

@@ -60,7 +60,7 @@
       <div class="row">
         <div class="col-xs-12">
           <br>
-          <h5>We found <strong><%=@teenagers.count%>mathes</strong> </h5>
+          <h5>We found <strong><%=@teenagers.count%> matches</strong> </h5>
         </div>
       </div>
 
@@ -81,15 +81,19 @@
                 <div class="teenager_rating">
                     <h4><%= teenager.fname%> <%= teenager.lname%></h4>
 
-                  <div class="stars-outer">
 
-                    <div id=<%= teenager.get_average_rating %> class="stars-inner"></div>
-                  </div>
                 <%if teenager.get_service_numbers > minimum_review_numbers %>
+                      <div class="stars-outer">
 
+                        <div id=<%= teenager.get_average_rating %> class="stars-inner"></div>
+                      </div>
 
                 <strong> <%= "#{teenager.get_service_numbers} Reviews" %></strong>
                       <%else%>
+                      <div class="stars-outer">
+
+                        <div id=<%= 0 %> class="stars-inner"></div>
+                      </div>
                   no rating
                 <%end%>
               </div>
@@ -98,7 +102,7 @@
                 </header>
 
                 <div class="item-body">
-             
+                  <p><%= teenager.description %></p>
 
                   <div class="tag-list">
            <%@current_teenager_interest= TeenagerInterest.where(teenager_id:teenager.id).all%>

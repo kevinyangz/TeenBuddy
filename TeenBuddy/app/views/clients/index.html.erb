@@ -31,13 +31,17 @@
 
                       <div class="teenager_rating">
 
-                        <div class="stars-outer">
-                          <div id=<%= client.get_average_rating %> class="stars-inner"></div>
-                        </div>
+
                       <% if client.get_service_counts >minimum_review_numbers %>
+                            <div class="stars-outer">
+                              <div id=<%= client.get_average_rating %> class="stars-inner"></div>
+                            </div>
                             <strong> <%= "  #{client.get_service_counts} Reviews" %></strong>
 
                           <%else%>
+                            <div class="stars-outer">
+                              <div id=<%= 0 %> class="stars-inner"></div>
+                            </div>
                             no rating
                       <% end %>
                       </div>
