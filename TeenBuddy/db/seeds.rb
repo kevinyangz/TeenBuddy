@@ -8,29 +8,50 @@
 User.delete_all
 Teenager.delete_all
 Client.delete_all
+Post.delete_all
 FileUtils.rm_rf('public/uploads')
 
-user = User.create!(email: 'teenager@teenager.com', password: 123456, role: 'teenager',
-                    teenager_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name, remote_selfie_url: UiFaces.face,
-                                          birth_date: Faker::Date.between(18.years.ago, 8.years.ago)}
-)
-user = User.create!(email: 'client@client.com', password: 123456, role: 'client',
-                    teenager_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name, remote_selfie_url: UiFaces.face}
-)
+
+address_array = [['500 Kingston Rd Toronto ON', 'M4L 1V3'],
+                 ['315 St Germain Ave Toronto ON', 'M5M 1W4'],
+                 ['234 Willow Ave Toronto ON', 'M4E 3K7'],
+                 ['26 Goodwood Park Cres East York ON', 'M4C 2G5']]
+
+real_address = []
+address_array.each {|record| real_address << {'address' => record[0], 'postal_code' => record[1]}}
+
+
+# two constant account for testing
 
 
 for i in 0..10
-  user = User.create!(email: Faker::Internet.free_email, password: 123456, role: 'teenager',
+  address_index = Faker::Number.between(0, real_address.count()-1)
+
+
+  User.create!(email: Faker::Internet.free_email, password: 123456, role: 'teenager',
                       teenager_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name, remote_selfie_url: UiFaces.face,
-                                            birth_date: Faker::Date.between(18.years.ago, 8.years.ago)}
+                                            birth_date: Faker::Date.between(18.years.ago, 8.years.ago),
+                                            cell_phone: Faker::PhoneNumber.cell_phone,
+                                            home_address: real_address[address_index]['address'],
+                                            postal_code: real_address[address_index]['postal_code']}
   )
 end
 
 for i in 0..10
-  user = User.create!(email: Faker::Internet.free_email, password: 123456, role: 'client',
-                      client_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name, remote_selfie_url: UiFaces.face}
+  address_index = Faker::Number.between(0, real_address.count()-1)
+
+  User.create!(email: Faker::Internet.free_email, password: 123456, role: 'client',
+                      client_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name, remote_selfie_url: UiFaces.face,
+                                          home_phone: Faker::PhoneNumber.phone_number, cell_phone: Faker::PhoneNumber.cell_phone,
+                                          description: Faker::MostInterestingManInTheWorld.quote,
+                                          home_address: real_address[address_index]['address'],
+                                          postal_code: real_address[address_index]['postal_code']}
   )
 end
+
+Client.first.user.update(email:'client@ut.com')
+Teenager.first.user.update(email:'teenager@ut.com')
+
 
 
 ServiceCategory.delete_all
