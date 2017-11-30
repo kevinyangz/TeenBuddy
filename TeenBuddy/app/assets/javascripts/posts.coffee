@@ -153,7 +153,7 @@ jQuery ->
 
   $(document).ready ->
     currentLocation = window.location
-    if currentLocation.pathname == "/posts/new" or currentLocation.pathname == "/posts/"+post_id
+    if currentLocation.pathname == "/posts/"+post_id
       initializeShowMap()
 
 

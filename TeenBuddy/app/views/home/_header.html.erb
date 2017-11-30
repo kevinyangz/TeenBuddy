@@ -62,7 +62,7 @@
           <li><%= link_to 'Clients' , clients_path%></li>
           <li><%= link_to 'Teenagers' , teenagers_path%></li>
           <li><%= link_to 'About' , home_aboutus_path%></li>
-          <li><a>Contact Us </a></li>
+          <li><%=link_to 'Contact Us', home_contactus_path%></li>
         </ul>
 
     <% elsif current_user.teenager %>
@@ -70,7 +70,7 @@
           <li><%= link_to 'Job Market' , posts_path%></li>
           <li><%= link_to 'Clients' , clients_path%></li>
           <li><%= link_to 'About' , home_aboutus_path%></li>
-          <li><a>Contact Us </a></li>
+          <li><%=link_to 'Contact Us', home_contactus_path%></li>
           <li>
             <a>My Center</a>
             <ul>
@@ -89,7 +89,7 @@
               </ul></li>
               <li><%= link_to 'Teenagers' , teenagers_path%></li>
               <li><%= link_to 'About' , home_aboutus_path%></li>
-              <li><a>Contact Us </a></li>
+              <li><%=link_to 'Contact Us', home_contactus_path%></li>
               <li>
                 <a>My Center</a>
                 <ul>

@@ -45,6 +45,9 @@
           <span id="place-address"></span>
         </div>
         <%= javascript_tag "all_posts = #{@posts.to_json};" %>
+        <script>
+          var post_id = -1;
+        </script>
 
         <!--
         <div class="form-group col-xs-12 col-sm-6">

@@ -56,6 +56,10 @@
             <script>
               var post_id = "<%== escape_javascript @post.id.to_s %>";
             </script>
+          <%else%>
+            <script>
+              var post_id = -1;
+            </script>
           <% end %>
 
         </div>

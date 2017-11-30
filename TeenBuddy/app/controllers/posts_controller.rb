@@ -14,7 +14,6 @@ class PostsController < ApplicationController
       @state = 'teenager_posts'
     else
       #get the array and then use where to transform back to activerecord_relation
-     # posts_array = filterByStatus(Post.all)
       @posts = Post.all.filter(params.slice(:searched_keyword,:status ,:category_id, :type_id)).order(params[:order]).reverse.paginate(:page => params[:page], :per_page => 5)
       @state = 'all'
     end
@@ -101,13 +100,5 @@ class PostsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def post_params
       params.require(:post).permit(:title, :description, :work_address, :pay, :number_of_teenager_needed, :service_category_id, :service_type_id, :requirements)
-    end
-
-    def filterByStatus(posts)
-      if params[:status]
-        new_posts = posts.select {|post| params[:status] == "" or post.hasPosition == params[:status]}
-      else
-        posts
-      end
     end
 end
