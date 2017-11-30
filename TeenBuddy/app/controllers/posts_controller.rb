@@ -104,6 +104,10 @@ class PostsController < ApplicationController
     end
 
     def filterByStatus(posts)
-      new_posts = posts.select {|post| params[:status] == "" or post.hasPosition == params[:status]}
+      if params[:status]
+        new_posts = posts.select {|post| params[:status] == "" or post.hasPosition == params[:status]}
+      else
+        posts
+      end
     end
 end
