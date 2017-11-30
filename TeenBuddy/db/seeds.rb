@@ -34,22 +34,21 @@ for i in 0..20
 
 
   User.create!(email: Faker::Internet.free_email, password: 123456, role: 'teenager',
-                      teenager_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name, remote_selfie_url: UiFaces.face,
+                      teenager_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name,
                                             birth_date: Faker::Date.between(18.years.ago, 8.years.ago),
                                             cell_phone: Faker::PhoneNumber.cell_phone,
                                             home_address: real_address[address_index]['address'],
                                             postal_code: real_address[address_index]['postal_code']}
   )
 
-
-
+  
 end
 
 for i in 0..20
   address_index = Faker::Number.between(0, real_address.count()-1)
 
  user = User.create!(email: Faker::Internet.free_email, password: 123456, role: 'client',
-               client_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name, remote_selfie_url: UiFaces.face,
+               client_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name,
                                    home_phone: Faker::PhoneNumber.phone_number, cell_phone: Faker::PhoneNumber.cell_phone,
                                    description: Faker::MostInterestingManInTheWorld.quote,
                                    home_address: real_address[address_index]['address'],
@@ -126,3 +125,4 @@ SomeClients.each do |client|
   puts "created post #{post.id} for client #{client.id}"
 
 end
+

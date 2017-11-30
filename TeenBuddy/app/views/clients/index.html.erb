@@ -23,26 +23,24 @@
                         <%= image_tag(client.selfie.thum.url, style: "border-radius:50%;width:60px;height:60px;", class: "thumbnail") %>
                         <!-- user upload -->
                     <% else %>
-                        <%= image_tag("/assets/img/client1.jpeg", class: "thumbnail", style: "width:60px;height:60px;border-radius:50%;") %>
+                        <%= image_tag(UiFaces.face, class: "thumbnail", style: "width:60px;height:60px;border-radius:50%;") %>
                         <!-- default picture -->
                     <% end %>
                     <div class="hgroup">
                       <h4><%= client.fname %> <%= client.lname %></h4>
+
+                      <div class="teenager_rating">
+
+                        <div class="stars-outer">
+                          <div id=<%= client.get_average_rating %> class="stars-inner"></div>
+                        </div>
                       <% if client.get_service_counts >minimum_review_numbers %>
-                          <div class="teenager_rating">
-                            <div class="stars-outer">
-                              <div id=<%= client.get_average_rating %> class="stars-inner"></div>
-                            </div>
                             <strong> <%= "  #{client.get_service_counts} Reviews" %></strong>
-                          </div>
+
                           <%else%>
-                          <div class="teenager_rating">
-                            <div class="stars-outer">
-                              <div id=<%= client.get_average_rating %> class="stars-inner"></div>
-                            </div>
-                            <strong>0 reviews</strong>
-                          </div>
+                            no rating
                       <% end %>
+                      </div>
                     </div>
                   </header>
 
