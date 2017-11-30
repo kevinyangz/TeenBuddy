@@ -25,6 +25,8 @@ class Post < ApplicationRecord
                                                           "%#{searched_keyword.downcase}%", 
                                                           "%#{searched_keyword.downcase}%") }
 
+  scope :address, -> (address) {where('lower(work_address) LIKE ?', "%#{address.downcase}%")}
+
   scope :category_id, -> (category_id) {where('service_category_id = ?', "#{category_id}")}
 
   scope :type_id, -> (type_id) {where('service_type_id = ?', "#{type_id}")}
