@@ -5,10 +5,15 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
+Endorsement.delete_all
+Transaction.delete_all
+Service.delete_all
+Post.delete_all
 User.delete_all
+TeenagerInterest.delete_all
 Teenager.delete_all
 Client.delete_all
-Post.delete_all
+
 FileUtils.rm_rf('public/uploads')
 
 
@@ -24,11 +29,11 @@ address_array.each {|record| real_address << {'address' => record[0], 'postal_co
 # two constant account for testing
 
 
-for i in 0..10
+for i in 0..20
   address_index = Faker::Number.between(0, real_address.count()-1)
 
 
-  user = User.create!(email: Faker::Internet.free_email, password: 123456, role: 'teenager',
+  User.create!(email: Faker::Internet.free_email, password: 123456, role: 'teenager',
                       teenager_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name, remote_selfie_url: UiFaces.face,
                                             birth_date: Faker::Date.between(18.years.ago, 8.years.ago),
                                             cell_phone: Faker::PhoneNumber.cell_phone,
@@ -36,34 +41,36 @@ for i in 0..10
                                             postal_code: real_address[address_index]['postal_code']}
   )
 
-  Transaction.create!(user: user, inout: true, comment: 'Deposit', amount: 1000 * 100)
+
 
 end
 
-for i in 0..10
+for i in 0..20
   address_index = Faker::Number.between(0, real_address.count()-1)
 
-  User.create!(email: Faker::Internet.free_email, password: 123456, role: 'client',
-                      client_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name, remote_selfie_url: UiFaces.face,
-                                          home_phone: Faker::PhoneNumber.phone_number, cell_phone: Faker::PhoneNumber.cell_phone,
-                                          description: Faker::MostInterestingManInTheWorld.quote,
-                                          home_address: real_address[address_index]['address'],
-                                          postal_code: real_address[address_index]['postal_code']}
+ user = User.create!(email: Faker::Internet.free_email, password: 123456, role: 'client',
+               client_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name, remote_selfie_url: UiFaces.face,
+                                   home_phone: Faker::PhoneNumber.phone_number, cell_phone: Faker::PhoneNumber.cell_phone,
+                                   description: Faker::MostInterestingManInTheWorld.quote,
+                                   home_address: real_address[address_index]['address'],
+                                   postal_code: real_address[address_index]['postal_code']}
   )
+
+  transaction =  Transaction.create!(user: user, inout: true, comment: 'Deposit', amount: 1000 * 100)
+
+    puts "Deposit for user id #{user.id}, transaction id is #{transaction.id}"
+
+
+
 end
 
-Client.first.user.update(email:'client@ut.com')
-Teenager.first.user.update(email:'teenager@ut.com')
+Client.first.user.update(email: 'client@ut.com')
+Teenager.first.user.update(email: 'teenager@ut.com')
 
 
 
 
-
-
-
-
-
-
+# initialize Service types and category
 ServiceCategory.delete_all
 ServiceType.delete_all
 
@@ -96,3 +103,26 @@ ServiceType.create!(title: "Computer Help", service_category_id: ServiceCategory
 ServiceType.create!(title: "Tutoring", service_category_id: ServiceCategory.find_by(title: "Tutoring").id)
 ServiceType.create!(title: "Reading", service_category_id: ServiceCategory.find_by(title: "Reading").id)
 
+
+
+#start posting jobs
+
+SomeClients = Client.all.sample(Faker::Number.between(Client.count/2, Client.count))
+
+SomeClients.each do |client|
+
+  address_index = Faker::Number.between(0, real_address.count()-1)
+
+  post =  Post.create(title: Faker::Job.title,
+               client: client,
+               description: Faker::MostInterestingManInTheWorld.quote,
+               work_address: real_address[address_index]['address'],
+               pay: Faker::Number.between(1, 100),
+               number_of_teenager_needed: Faker::Number.between(1, 10),
+               service_category:ServiceCategory.find_by(title: "Babysitting"),
+               service_type:ServiceType.find_by(title:'Babysitting')
+
+  )
+  puts "created post #{post.id} for client #{client.id}"
+
+end
