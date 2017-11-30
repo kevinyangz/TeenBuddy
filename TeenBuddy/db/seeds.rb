@@ -8,47 +8,46 @@
 User.delete_all
 Teenager.delete_all
 Client.delete_all
+FileUtils.rm_rf('public/uploads')
 
-
-
-user = User.create!(email:'teenager@teenager.com', password: 123456, role:'teenager',
-										teenager_attributes: {fname:Faker::Name.first_name, lname:Faker::Name.last_name, remote_selfie_url: UiFaces.face}
+user = User.create!(email: 'teenager@teenager.com', password: 123456, role: 'teenager',
+                    teenager_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name, remote_selfie_url: UiFaces.face,
+                                          birth_date: Faker::Date.between(18.years.ago, 8.years.ago)}
 )
-user = User.create!(email: 'client@client.com', password: 123456, role:'client',
-										teenager_attributes: {fname:Faker::Name.first_name, lname:Faker::Name.last_name, remote_selfie_url: UiFaces.face}
+user = User.create!(email: 'client@client.com', password: 123456, role: 'client',
+                    teenager_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name, remote_selfie_url: UiFaces.face}
 )
 
 
 for i in 0..10
-	user = User.create!(email: Faker::Internet.free_email, password: 123456, role:'teenager',
-  teenager_attributes: {fname:Faker::Name.first_name, lname:Faker::Name.last_name, remote_selfie_url: UiFaces.face}
+  user = User.create!(email: Faker::Internet.free_email, password: 123456, role: 'teenager',
+                      teenager_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name, remote_selfie_url: UiFaces.face,
+                                            birth_date: Faker::Date.between(18.years.ago, 8.years.ago)}
   )
 end
 
 for i in 0..10
-	user = User.create!(email: Faker::Internet.free_email, password: 123456, role:'client',
-                      client_attributes: {fname:Faker::Name.first_name, lname:Faker::Name.last_name,remote_selfie_url: UiFaces.face}
-	)
+  user = User.create!(email: Faker::Internet.free_email, password: 123456, role: 'client',
+                      client_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name, remote_selfie_url: UiFaces.face}
+  )
 end
-
-
 
 
 ServiceCategory.delete_all
 ServiceType.delete_all
 
-many_service_categories = [ {title: "Babysitting"}, 
-							{title: "Yard Work"},
-							{title: "Snow Shoveling"},
-							{title: "Furniture Moving"},
-							{title: "Simple Cleaning Tasks"},
-							{title: "Vacation Services"},
-							{title: "Dog Walking"},
-							{title: "Computer Help"},
-							{title: "Tutoring"},
-							{title: "Reading"} ]
+many_service_categories = [{title: "Babysitting"},
+                           {title: "Yard Work"},
+                           {title: "Snow Shoveling"},
+                           {title: "Furniture Moving"},
+                           {title: "Simple Cleaning Tasks"},
+                           {title: "Vacation Services"},
+                           {title: "Dog Walking"},
+                           {title: "Computer Help"},
+                           {title: "Tutoring"},
+                           {title: "Reading"}]
 many_service_categories.each do |sc|
-	ServiceCategory.create!(sc)
+  ServiceCategory.create!(sc)
 end
 
 ServiceType.create!(title: "Babysitting", service_category_id: ServiceCategory.find_by(title: "Babysitting").id)
