@@ -55,10 +55,8 @@ ActiveRecord::Schema.define(version: 20171130203913) do
   create_table "endorsements", force: :cascade do |t|
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.integer "liker_id"
-    t.integer "liked_id"
-    t.index ["liked_id"], name: "index_endorsements_on_liked_id"
-    t.index ["liker_id"], name: "index_endorsements_on_liker_id"
+    t.integer "liker"
+    t.integer "liked"
   end
 
   create_table "mailboxer_conversation_opt_outs", force: :cascade do |t|
