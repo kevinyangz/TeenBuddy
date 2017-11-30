@@ -26,7 +26,7 @@
       <div class="pull-right">
         <div class="dropdown user-account">
           <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-            <img src= <%= current_user.teenager.selfie %> alt="avatar">
+            <img src="<%= current_user.teenager.selfie %>"alt="avatar">
           </a>
           <b><%="#{current_user.teenager.fname} #{current_user.teenager.lname}"%></b>
          <ul class="dropdown-menu dropdown-menu-right">
@@ -42,7 +42,7 @@
       <div class="pull-right">
         <div class="dropdown user-account">
           <a class="dropdown-toggle" href="#" data-toggle="dropdown">
-            <img src=<%= current_user.client.selfie %> alt="avatar">
+            <img src="<%= current_user.client.selfie %>" alt="avatar">
           </a>
           <b><%="#{current_user.client.fname} #{current_user.client.lname}"%></b>
           <ul class="dropdown-menu dropdown-menu-right">
