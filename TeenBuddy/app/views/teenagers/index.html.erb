@@ -9,19 +9,22 @@
     <%= form_tag(teenagers_path, method: :get) do %>
 
       <div class="row">
-        <div class="form-group col-xs-12 col-sm-4">
+        <div class="form-group col-xs-12 col-sm-6">
+                  <h6>Keywords</h6>
           <input type="text" class="form-control" placeholder="Keyword: name, skills, or tags">
         </div>
 
-        <div class="form-group col-xs-12 col-sm-4">
+        <div class="form-group col-xs-12 col-sm-6">
+                 <h6>Locations</h6>
           <input type="text" class="form-control" placeholder="Location: city, state or zip">
         </div>
 
-        <div class="form-group col-xs-12 col-sm-4">
-          <%= select_tag :servicecategory, options_from_collection_for_select(ServiceCategory.all,"id","title"),{:include_blank => 'All',class: 'form-control selectpicker'}  %>
+        <div class="form-group col-xs-12 col-sm-6">
+              <h6>Teenager Interest</h6>
+            <%= select_tag :service_category_id, options_from_collection_for_select(ServiceCategory.order(:title), :id, :title, params[:service_category_id]), { include_blank: 'All', class: 'form-control '} %>
         </div>
 
-        <div class="form-group col-xs-12 col-sm-4">
+        <div class="form-group col-xs-12 col-sm-6">
           <h6>Sort by</h6>
           <div class="radio">
             <input type="radio" name="sortby" id="sortby1" value="option1" checked>
