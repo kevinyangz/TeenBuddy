@@ -28,13 +28,16 @@ for i in 0..10
   address_index = Faker::Number.between(0, real_address.count()-1)
 
 
-  User.create!(email: Faker::Internet.free_email, password: 123456, role: 'teenager',
+  user = User.create!(email: Faker::Internet.free_email, password: 123456, role: 'teenager',
                       teenager_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name, remote_selfie_url: UiFaces.face,
                                             birth_date: Faker::Date.between(18.years.ago, 8.years.ago),
                                             cell_phone: Faker::PhoneNumber.cell_phone,
                                             home_address: real_address[address_index]['address'],
                                             postal_code: real_address[address_index]['postal_code']}
   )
+
+  Transaction.create!(user: user, inout: true, comment: 'Deposit', amount: 1000 * 100)
+
 end
 
 for i in 0..10
@@ -51,6 +54,13 @@ end
 
 Client.first.user.update(email:'client@ut.com')
 Teenager.first.user.update(email:'teenager@ut.com')
+
+
+
+
+
+
+
 
 
 
