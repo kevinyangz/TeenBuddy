@@ -14,19 +14,23 @@
       <br><br>
       <script>
         function initMap() {
+          var uluru = {lat: 43.661865, lng: -79.385684}
           var map = new google.maps.Map(document.getElementById('contact-map'), {
-            center: {lat: -33.8688, lng: 151.2195},
-            zoom: 13
+            center: {lat: 43.661865, lng: -79.385684},
+            zoom: 16
           });
 
-          //var infowindow = new google.maps.InfoWindow();
-          //var infowindowContent = document.getElementById('infowindow-content');
-          //infowindow.setContent(infowindowContent);
+          var infowindow = new google.maps.InfoWindow();
+          var infowindowContent = "<h5>" + "TeenBuddy Group" + "</h5>\n" + "<p><strong>Address: </strong>" + "38 Greenville Street Toronto Ontario" + "</p>";
+          infowindow.setContent(infowindowContent);
           var marker = new google.maps.Marker({
             map: map,
-            anchorPoint: new google.maps.Point(0, -29)
+            position: uluru
           });
-
+          marker.addListener('click', function() {
+            infowindow.open(map, marker);
+          });
+          infowindow.open(map, marker);
         }
 
         $( document ).ready(function() {
@@ -59,7 +63,7 @@
           <div class="highlighted-block">
             <dl class="icon-holder">
               <dt><i class="fa fa-map-marker"></i></dt>
-              <dd>3652 Seventh Avenue, Los Angeles, CA</dd>
+              <dd>38 Greenville Street Toronto Ontario</dd>
 
               <dt><i class="fa fa-phone"></i></dt>
               <dd>(+1) 987 654 3210</dd>
@@ -68,7 +72,7 @@
               <dd>(+1) 123 456 7890</dd>
 
               <dt><i class="fa fa-envelope"></i></dt>
-              <dd>hi@yoursite.com</dd>
+              <dd>contact@teenbuddy.com</dd>
             </dl>
           </div>
 
