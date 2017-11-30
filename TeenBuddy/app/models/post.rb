@@ -25,8 +25,6 @@ class Post < ApplicationRecord
                                                           "%#{searched_keyword}%", 
                                                           "%#{searched_keyword}%") }
 
-  scope :status, -> (status) { where('status = ?', "#{status}") }
-
   scope :category_id, -> (category_id) {where('service_category_id = ?', "#{category_id}")}
 
   scope :type_id, -> (type_id) {where('service_type_id = ?', "#{type_id}")}

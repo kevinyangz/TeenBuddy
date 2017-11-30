@@ -30,7 +30,7 @@
 
         <div class="form-group col-xs-12 col-sm-3">
           <h6>Status</h6>
-          <%= select_tag :status, options_for_select([['Open', 'open'], ['Close', 'lose']], params[:status]), {:include_blank => 'All', class: 'form-control selectpicker'} %>
+          <%= select_tag :status, options_for_select([['Open', 'open'], ['Close', 'close']], params[:status]), {:include_blank => 'All', class: 'form-control selectpicker'} %>
         </div>
 
         <div class="form-group col-xs-12 col-sm-3">
