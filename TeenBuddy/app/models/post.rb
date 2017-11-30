@@ -18,24 +18,23 @@ class Post < ApplicationRecord
 
   include Filterable
 
-  scope :searched_keyword, -> (searched_keyword) { where('title LIKE ? or 
-                                                          description LIKE ? or 
-                                                          requirements LIKE ?',
-                                                          "%#{searched_keyword}%", 
-                                                          "%#{searched_keyword}%", 
-                                                          "%#{searched_keyword}%") }
+  scope :searched_keyword, -> (searched_keyword) { where('lower(title) LIKE ? or 
+                                                          lower(description) LIKE ? or 
+                                                          lower(requirements) LIKE ?',
+                                                          "%#{searched_keyword.downcase}%", 
+                                                          "%#{searched_keyword.downcase}%", 
+                                                          "%#{searched_keyword.downcase}%") }
 
   scope :category_id, -> (category_id) {where('service_category_id = ?', "#{category_id}")}
 
   scope :type_id, -> (type_id) {where('service_type_id = ?', "#{type_id}")}
 
   scope :status , ->(status)  {
-
-     test= Post.all.select do |post|
-            post.hasPosition == status
-            #(post.services.where(:status => [:enrolled, :finished, :confirmed]).count ) >= post.number_of_teenager_needed
-         end
-         Post.where(id: test.map(&:id))
+    test= Post.all.select do |post|
+    post.hasPosition == status
+      #(post.services.where(:status => [:enrolled, :finished, :confirmed]).count ) >= post.number_of_teenager_needed
+    end
+    Post.where(id: test.map(&:id))
   }
 
   def hasPosition
