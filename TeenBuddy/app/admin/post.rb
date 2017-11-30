@@ -24,7 +24,7 @@ ActiveAdmin.register Post do
 	 	   			#scope.joins(:services).where('services.status IN (?)', [4,5,6])
 					#a=scope.joins(:services).where('services.status IN (?)', [4,5,6]) 
 
- 	  end
+ 	  #end
 	# scope("available") { |scope| scope.joins(:services).where(:status => [:enrolled, :finished, :confirmed]) }
 
 	  #self.services.where(:status => [:enrolled, :finished, :confirmed]).count
