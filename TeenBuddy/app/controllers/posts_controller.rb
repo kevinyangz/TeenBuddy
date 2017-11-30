@@ -14,8 +14,8 @@ class PostsController < ApplicationController
       @state = 'teenager_posts'
     else
       #get the array and then use where to transform back to activerecord_relation
-      posts_array = filterByStatus(Post.all)
-      @posts = Post.where(id: posts_array.map(&:id)).filter(params.slice(:searched_keyword, :category_id, :type_id)).order(params[:order]).reverse.paginate(:page => params[:page], :per_page => 5)
+     # posts_array = filterByStatus(Post.all)
+      @posts = Post.all.filter(params.slice(:searched_keyword,:status ,:category_id, :type_id)).order(params[:order]).reverse.paginate(:page => params[:page], :per_page => 5)
       @state = 'all'
     end
   end
