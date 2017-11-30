@@ -59,7 +59,6 @@ for i in 0..50
 
   transaction = Transaction.create!(user: user, inout: true, comment: 'Deposit', amount: 1000 * 100)
 
-
 end
 
 Client.first.user.update(email: 'client@ut.com')
@@ -161,7 +160,7 @@ end
 
 #teenager apply jobs
 
-for i in 0..5
+for i in 0..20
   @someTeenagers = Teenager.all.sample(Teenager.count/2)
 
   @someTeenagers.each do |teenager|
@@ -181,7 +180,7 @@ end
 #client invite teenagers
 
 
-for i in 0..5
+for i in 0..4
   @somePosts = Post.all.sample(Post.count/2)
 
   @somePosts.each do |post|
