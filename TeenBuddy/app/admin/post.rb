@@ -11,40 +11,30 @@ ActiveAdmin.register Post do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
+permit_params :list, :of, :attributes, :on, :model, :description, :pay, :number_of_teenager_needed, :work_address
 	  scope :all, :default => true
-  #scope :available do |posts|
-	#	posts.joins(:services).where(services.status => [:enrolled, :finished, :confirmed])
-  #end
-	 # scope("available") { |scope| scope.where("hasPosition > ?",100) }
-	 # scope("available") { |scope| scope.joins(:services).where("services.teen_rating > ?",100) }
-	 #'term in (?)', terms
-	  scope("available") { |scope| scope.joins(:services).where('services.status IN (?)', [4,5,6]) }
-	 	  # scope :available do |scope|
-	 	   	#@scope.where(hasPosition)
-	 	   			#scope.joins(:services).where('services.status IN (?)', [4,5,6])
-					#a=scope.joins(:services).where('services.status IN (?)', [4,5,6]) 
-
- 	  #end
-	# scope("available") { |scope| scope.joins(:services).where(:status => [:enrolled, :finished, :confirmed]) }
-
-	  #self.services.where(:status => [:enrolled, :finished, :confirmed]).count
-	  #scope :ind, -> { joins(:service).where("countries.name like %india%") }
-	  #scope :available, -> { Post.joins(:services).where("services.teen_rating > ?",2) }
-	   #scope :available do |posts|
-     	#		 posts.joins(:services).where("pay > ?", 100)
-  	  #end
-  	  # scope :available do |posts|
-      #			test= Post.joins(:services)
-      #			 Post.joins(:services).select('services.teen_rating,posts.id').where("services.teen_rating > ?",3)
-      #			 Post.joins(:services).where("services.teen_rating > ?",2)
-  #end
-
+	   scope :open do |posts|
+	   		 #Post.where(:status => [:enrolled, :finished, :confirmed])
+	   		 test= posts.all.select do |post|
+	   		    (post.services.where(:status => [:enrolled, :finished, :confirmed]).count ) < post.number_of_teenager_needed
+	   		 end
+	   		 posts.where(id: test.map(&:id))
+  	  end
+  	  	   scope :close do |posts|
+	   		 #Post.where(:status => [:enrolled, :finished, :confirmed])
+	   		 test= posts.all.select do |post|
+	   		    (post.services.where(:status => [:enrolled, :finished, :confirmed]).count ) >= post.number_of_teenager_needed
+	   		 end
+	   		 posts.where(id: test.map(&:id))
+  	  end
 
 	index do
 
-		column :title
+		column "Post Title" do |post|
+			link_to "#{post.title}", admin_post_path(post) 
+		end		
 		column :description
-		column :pay
+    	column("pay")    {|post| number_to_currency post.pay }
 		column :work_address
 		column "Client Name" do |post|
 			link_to "#{post.client.lname} #{post.client.fname}", admin_client_path(post.client) 
