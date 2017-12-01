@@ -74,16 +74,23 @@
             </div>
 
             <hr class="hr-lg">
-
+            <div class="form-group">
+              <h6>Interest fields</h6>
+              <%= form.select :service_category_ids, ServiceCategory.all.collect {|x| [x.title, x.id]}, {}, :multiple => true,
+                              :prompt => 'Please select service category',  class: 'form-control selectpicker' %>
+              <span class="help-block">Select some of your favorite fields.</span>
+            </div>
 
             <h6>Tags</h6>
             <div class="form-group">
               <%= form.text_field :tag_list, 'data-role'=>'tagsinput',value: teenager.tag_list.to_s  %>
               <span class="help-block">Type something about yourself for people to know you better. </span>
-              <span class="help-block">Popular Tags: <%ActsAsTaggableOn::Tag.most_used(10).each do |tag|%>
-                                  <%=tag%>,<%end%>
-              </span>
+              <h7>Popular Tags: <%ActsAsTaggableOn::Tag.most_used(5).each do |tag|%>
+                    <%="#{tag}, "%>   <%end%></h7>
+
             </div>
+
+
 
           </div>
         </div>

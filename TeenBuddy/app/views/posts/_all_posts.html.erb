@@ -141,7 +141,14 @@
                   <p><%= post.description %></p>
                   <% if post.requirements != "" %>
                     <h6>Requirements</h6>
-                    <p><%= post.requirements %></p>
+                      <div class="tag-list">
+                        <% post.tag_list.split(",") do |tag| %>
+            <span>
+              <%= tag %> <%= "   " %>
+            </span>
+                        <% end %>
+
+                      </div>
                   <% end %>
                 </div>
 

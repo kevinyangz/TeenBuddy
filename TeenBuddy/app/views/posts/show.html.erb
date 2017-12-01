@@ -40,7 +40,14 @@
       <p class="lead"><%= @post.description %></p>
       <% if @post.requirements != "" %>
         <h3>Requirements</h3>
-        <p class="lead"><%= @post.requirements %></p>
+          <div class="tag-list">
+            <% @post.tag_list.split(",") do |tag| %>
+            <span>
+              <%= tag %> <%= "   " %>
+            </span>
+            <% end %>
+
+          </div>
       <%end%>
 
       <ul class="details cols-2">

@@ -15,6 +15,7 @@ class Post < ApplicationRecord
   validate :have_enough_money, :on => :create
   after_create :set_transaction
   after_destroy :get_back_money
+  after_save :set_tag
   acts_as_taggable
   include Filterable
 
@@ -86,6 +87,9 @@ class Post < ApplicationRecord
       'Done'
     end
 
+  end
+  def set_tag
+    self.tag_list.add(self.service_category.title)
   end
 
 
