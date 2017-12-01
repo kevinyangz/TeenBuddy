@@ -36,7 +36,7 @@
           <span>X </span>
           <%= Endorsement.where(liked_id: @teenager.user.id).count%>
           <%= link_to 'like', endorsements_path(@teenager), method: :post %>
-          <%=link_to('Like',  endorsements_path(:endorsement => {:liked_id => @teenager.user.id, :liker_id => current_user.id}), :method => :post, class: 'btn btn-xs btn-success')%>
+          <%=link_to('Like',  endorsements_path(:endorsement => {:liked_id => @teenager.user_id, :liker_id => current_user.id}), :method => :post, class: 'btn btn-xs btn-success')%>
 
           <div class="tag-list">
            <% @current_teenager_interest.all.each do |interest| %>
