@@ -3,6 +3,26 @@
     <h1 class="text-center">Browse Clients</h1>
   </div>
 
+  <div class="container">
+    <%= form_tag(clients_path, method: :get) do %>
+
+      <div class="form-group col-xs-12 col-sm-6">
+        <h6>Keywords</h6>
+        <%= text_field_tag :searched_keyword, params[:searched_keyword], class: "form-control", placeholder: "Keyword: clients' name" %>
+      </div>
+      <div class="form-group col-xs-12 col-sm-6">
+        <h6>Address</h6>
+        <%= text_field_tag :address, params[:address], class: "form-control", placeholder: "Location: city, state or zip" %>
+      </div>
+
+      <div class="button-group">
+        <div class="action-buttons">
+          <button class="btn btn-primary">Apply filter</button>
+        </div>
+      </div>
+    <%end%>
+  </div>
+
 
 </header>
 <!-- END Page header -->
@@ -14,6 +34,18 @@
 
 
       <div class="row">
+        <div class="col-xs-12">
+          <br>
+          <% if @clients.total_entries == 0 %>
+            <h5>Sorry, we could not find any match</h5>
+          <% elsif @clients.total_entries == 1 %>
+            <h5>We find 1 match for you</h5>
+          <% else %>
+            <h5>We find <strong><%= @clients.total_entries %></strong> matches, we are showing matches <%= (@clients.current_page-1) * 5 +1 %> - <%= (@clients.current_page-1) * 5 + @clients.count %>
+            </h5>
+          <% end %>
+        </div>
+
         <% @clients.each do |client| %>
             <div class="col-xs-12">
 
@@ -86,27 +118,9 @@
       </div>
 
 
-      <!-- Page navigation -->
       <nav class="text-center">
-        <ul class="pagination">
-          <li>
-            <a href="#" aria-label="Previous">
-              <i class="ti-angle-left"></i>
-            </a>
-          </li>
-          <li><a href="#">1</a></li>
-          <li class="active"><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li>
-            <a href="#" aria-label="Next">
-              <i class="ti-angle-right"></i>
-            </a>
-          </li>
-        </ul>
+        <%= will_paginate @clients, renderer: BootstrapPagination::Rails %>
       </nav>
-      <!-- END Page navigation -->
-
 
     </div>
   </section>

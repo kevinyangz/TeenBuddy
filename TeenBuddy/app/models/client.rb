@@ -6,6 +6,16 @@ class Client < ApplicationRecord
   validates :fname, :lname, presence: true
   validates :fname, :lname, length: { minimum: 2 }
 
+  include Filterable
+
+  scope :searched_keyword, -> (searched_keyword) { where('lower(fname) LIKE ? or 
+                                                          lower(lname) LIKE ?',
+                                                          "%#{searched_keyword.downcase}%", 
+                                                          "%#{searched_keyword.downcase}%") }
+
+  scope :address, -> (address) {where('lower(home_address) LIKE ?', "%#{address.downcase}%")}
+
+
   mount_uploader :selfie, SelifieUploader
 
   def get_average_rating()
