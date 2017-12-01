@@ -150,10 +150,10 @@
   <div class="row">
     <div class="col-md-8 col-lg-9">
       <div id="comments">
-        <header class="section-header">
-          <h2>Review
+        <header >
+          <h3>Review
             <span class=“txt-gray”><%= "(#{Service.where(client_id: @client.id).where.not("client_review like ?", "").count})" %></span>
-          </h2>
+          </h3>
         </header>
         <ul class="comments-list">
 
