@@ -159,16 +159,13 @@
 
           <% Service.where(client_id: @client.id).where.not("client_review like ?", "").each do |service| %>
               <li class="comment">
-                <% if Teenager.find(service.teenager_id).selfie.present? %>
-                    <%= image_tag(Teenager.find(service.teenager_id).selfie.thum.url, border: 0, class: "avatar") %>
-                    <!-- User upload picture -->
-                <% else %>
-                    <%= image_tag(UiFaces.face, border: 0, class: "avatar") %>
-                    <!-- default picture-->
-                <% end %>
+                
+                <img class="avatar" src="<%= [Client.find(service.client_id).selfie.thum.url, UiFaces.face].find(&:itself)%>" alt="avatar" />
+
                 <div class="comment-body">
                   <h6>
-                    <a href="#"><%= Teenager.find(service.teenager_id).fname %></a>
+                    <%=link_to "#{Teenager.find(service.teenager_id).fname}", Client.find(service.teenager_id)%> 
+
                     <time>
                       <%= service.updated_at %>
                     </time>
