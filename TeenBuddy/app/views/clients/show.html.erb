@@ -148,7 +148,7 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-8 col-lg-9">
+    <div class="col-md-12">
       <div id="comments">
         <header >
           <h3>Review
@@ -163,7 +163,7 @@
                     <%= image_tag(Teenager.find(service.teenager_id).selfie.thum.url, border: 0, class: "avatar") %>
                     <!-- User upload picture -->
                 <% else %>
-                    <%= image_tag("/assets/img/teenager1.jpeg", border: 0, class: "avatar") %>
+                    <%= image_tag(UiFaces.face, border: 0, class: "avatar") %>
                     <!-- default picture-->
                 <% end %>
                 <div class="comment-body">

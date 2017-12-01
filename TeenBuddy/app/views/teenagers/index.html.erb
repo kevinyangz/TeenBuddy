@@ -60,7 +60,7 @@
       <div class="row">
         <div class="col-xs-12">
           <br>
-          <h5>We found <strong><%=@teenagers.count%>mathes</strong> </h5>
+          <h5>We found <strong><%=@teenagers.count%> matches</strong> </h5>
         </div>
       </div>
 
@@ -74,19 +74,27 @@
           <%= image_tag(teenager.selfie.thum.url,style:"border-radius:50%;width:60px;height:60px;",class:"thumbnail")  %>
         <!-- user upload -->
           <% else %>
-         <%= image_tag("/assets/img/teenager1.png",class:"thumbnail",style:"width:60px;height:60px;border-radius:50%;") %>
+         <%= image_tag(UiFaces.face,class:"thumbnail",style:"width:60px;height:60px;border-radius:50%;") %>
         <!-- default picture -->
            <% end %>
                   <div class="hgroup">
                 <div class="teenager_rating">
                     <h4><%= teenager.fname%> <%= teenager.lname%></h4>
+
+
                 <%if teenager.get_service_numbers > minimum_review_numbers %>
+                      <div class="stars-outer">
 
-                <div class="stars-outer">
+                        <div id=<%= teenager.get_average_rating %> class="stars-inner"></div>
+                      </div>
 
-                  <div id=<%= teenager.get_average_rating %> class="stars-inner"></div>
-                </div>
                 <strong> <%= "#{teenager.get_service_numbers} Reviews" %></strong>
+                      <%else%>
+                      <div class="stars-outer">
+
+                        <div id=<%= 0 %> class="stars-inner"></div>
+                      </div>
+                  no rating
                 <%end%>
               </div>
 
@@ -94,7 +102,7 @@
                 </header>
 
                 <div class="item-body">
-             
+                  <p><%= teenager.description %></p>
 
                   <div class="tag-list">
            <%@current_teenager_interest= TeenagerInterest.where(teenager_id:teenager.id).all%>

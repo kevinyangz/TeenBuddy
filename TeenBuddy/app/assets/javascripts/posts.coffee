@@ -185,7 +185,7 @@ jQuery ->
           map: map
           position: results[0].geometry.location)
         google.maps.event.addListener marker, 'click', ->
-          post_information = "<h5>" + post.title + "</h5>\n" + "<p><strong>Description: </strong>" + post.description + "</p>"
+          post_information = "<h5>" + post.title + "</h5>\n" + "<p><strong>Description: </strong>" + post.description + "</p>" + "<p><strong>Address: </strong>" + post.work_address + "</p>"
           infowindow.setContent post_information
           infowindow.open map, marker
         #bound map to cover all the posts in the map

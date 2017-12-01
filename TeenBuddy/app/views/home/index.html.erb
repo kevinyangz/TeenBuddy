@@ -1,15 +1,101 @@
+<header class="site-header size-lg text-center" style="background-image: url(/assets/img/main.jpg)">
 
 
+  <% if current_user && current_user.client %>
 
-<header class="site-header size-lg text-center" style="background-image: url(/assets/img/bg-banner1.jpg)">
+      <div class="container">
+        <div class="col-xs-12">
+          <br><br>
+          <h2>We have
+            <mark><%= Teenager.all.count %></mark>
+            teenagers registered here!
+          </h2>
+          <h5 class="font-alt">Find your desire one in a minute</h5>
+          <br><br><br>
+
+          <%= form_tag(teenagers_path, method: :get, class: 'header-job-search') do %>
+
+              <div class="input-keyword">
+                <%= text_field_tag :keyword, params[:searched_keyword], class: "form-control", placeholder: "Job title, description, or requirements" %>
+              </div>
+              <div class="input-location">
+                <%= text_field_tag :address, params[:address], class: "form-control", placeholder: "Location: city, state or zip" %>
+              </div>
+
+              <div class="btn-search">
+                <%= submit_tag 'Find Teenagers', name: nil, class: 'btn btn-primary' %>
+              </div>
+
+          <% end %>
+
+        </div>
+
+      </div>
+
+  <% else %>
+
+      <div class="container">
+        <div class="col-xs-12">
+          <br><br>
+          <h2>We offer
+            <mark><%= Post.all.count %></mark>
+            jobs right now!
+          </h2>
+          <h2>We have
+            <mark><%= Teenager.all.count %></mark>
+            teenagers registered here!
+          </h2>
+          <h5 class="font-alt">Find your desire one in a minute</h5>
+          <br><br><br>
+
+          <%= form_tag(posts_path, method: :get, class: 'header-job-search') do %>
+
+              <div class="input-keyword">
+                <%= text_field_tag :searched_keyword, params[:searched_keyword], class: "form-control", placeholder: "Job title, description, or requirements" %>
+              </div>
+              <div class="input-location">
+                <%= text_field_tag :address, params[:address], class: "form-control", placeholder: "Location: city, state or zip" %>
+              </div>
+
+              <div class="btn-search">
+                <%= submit_tag 'Find Jobs', name: nil, class: 'btn btn-primary' %>
+              </div>
+
+          <% end %>
+
+        </div>
+
+      </div>
+
+
+  <% end %>
+</header>
+
+
+<section class="bg-img bg-repeat no-overlay section-sm" style="background-image: url(assets/img/bg-pattern.jpg)">
   <div class="container">
-    <div class="col-xs-12">
-      <br><br>
-      <h1><strong>Welcome To TeenBuddy</strong></h1>
-      <h2>We offer <mark><%=Post.all.length%></mark> jobs right now!</h2>
-      <h2>We have <mark><%=Teenager.all.length%></mark> teenagers registered !</h2>
-      <h3>Join us in just a few seconds!</h3>
+
+    <div class="row">
+      <div class="counter col-md-3 col-sm-6">
+        <p><span data-from="0" data-to="<%= Post.all.count%>"></span>+</p>
+        <h6>Jobs</h6>
+      </div>
+
+      <div class="counter col-md-3 col-sm-6">
+        <p><span data-from="0" data-to="<%= User.all.count %>"></span>+</p>
+        <h6>Members</h6>
+      </div>
+
+      <div class="counter col-md-3 col-sm-6">
+        <p><span data-from="0" data-to="<%= Teenager.all.count%>"></span>+</p>
+        <h6>Teenagers</h6>
+      </div>
+
+      <div class="counter col-md-3 col-sm-6">
+        <p><span data-from="0" data-to="<%=Client.all.count%>"></span>+</p>
+        <h6>Clients</h6>
+      </div>
     </div>
 
   </div>
-</header>
+</section>
