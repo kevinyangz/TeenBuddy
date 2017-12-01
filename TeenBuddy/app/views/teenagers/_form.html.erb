@@ -75,14 +75,14 @@
 
             <hr class="hr-lg">
 
-            <h6>Interests list</h6>
+
+            <h6>Tags</h6>
             <div class="form-group">
-
-
-
-              <%= form.select :service_category_ids, ServiceCategory.all.collect {|x| [x.title, x.id]}, {}, :multiple => true,
-                              :prompt => 'Please select service category',  class: 'form-control selectpicker' %>
-              <span class="help-block">Select some of your favorite fileds.</span>
+              <%= form.text_field :tag_list, 'data-role'=>'tagsinput',value: teenager.tag_list.to_s  %>
+              <span class="help-block">Type something about yourself for people to know you better. </span>
+              <span class="help-block">Popular Tags: <%ActsAsTaggableOn::Tag.most_used(10).each do |tag|%>
+                                  <%=tag%>,<%end%>
+              </span>
             </div>
 
           </div>
