@@ -112,13 +112,13 @@
                   <p><%= teenager.description %></p>
 
                   <div class="tag-list">
-           <%@current_teenager_interest= TeenagerInterest.where(teenager_id:teenager.id).all%>
-           <%@current_teenager_interest.all.each do |interest| %>
+                    <% teenager.tag_list.split(",") do |tag| %>
             <span>
-              <%=ServiceCategory.find(interest.service_category_id).title%> <%="   "%>
+              <%= tag %> <%= "   " %>
             </span>
-            <% end %>
-             </div>
+                    <% end %>
+
+                  </div>
                 </div>
 
                 <footer>

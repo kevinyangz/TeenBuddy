@@ -48,9 +48,9 @@
               <%end%>
 
           <div class="tag-list">
-            <% @current_teenager_interest.all.each do |interest| %>
+            <% @teenager.tag_list.split(",") do |tag| %>
             <span>
-              <%= ServiceCategory.find(interest.service_category_id).title %> <%= "   " %>
+              <%= tag %> <%= "   " %>
             </span>
             <% end %>
 

@@ -15,7 +15,7 @@ class Post < ApplicationRecord
   validate :have_enough_money, :on => :create
   after_create :set_transaction
   after_destroy :get_back_money
-
+  acts_as_taggable
   include Filterable
 
   scope :searched_keyword, -> (searched_keyword) { where('lower(title) LIKE ? or 

@@ -100,9 +100,13 @@
           <p>Write about the requirement, help us to match the most suitable teenage for you.</p>
         </header>
         <div class="form-group col-xs-12 col-sm-12">
-          <h6>Requirements</h6>
-          <%= form.text_area :requirements, placeholder: 'Please enter your specific requirements here. - optional', class: 'form-control input-lg',rows: "5" %>
-        </div>
+
+            <%= form.text_field :tag_list, 'data-role'=>'tagsinput',value: post.tag_list.to_s  %>
+            <span class="help-block">Type something requirement of your job for us to match perfect teenagers. </span>
+            <span class="help-block">Popular Tags: <%ActsAsTaggableOn::Tag.most_used(10).each do |tag|%>
+                                  <%=tag%>,<%end%>
+              </span>
+         </div>
       </div>
     </section>
 
