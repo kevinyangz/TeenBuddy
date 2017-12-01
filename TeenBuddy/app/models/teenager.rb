@@ -12,9 +12,9 @@ class Teenager < ApplicationRecord
  # validates :postal_code, format: { with: canadian_postal_code }
   validates :fname, presence: true
   validates :lname,presence: true
- # validates :home_address,presence: true
- # validates :cell_phone,presence: true
- # validates :birth_date, presence:true
+  validates :birth_date, presence: true
+  validates :home_address,presence: true, on: :update
+  validates :cell_phone,presence: true, on: :update
   validate :age_requirement19, on: :create
   
   mount_uploader :selfie, SelifieUploader

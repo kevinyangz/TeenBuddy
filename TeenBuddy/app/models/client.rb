@@ -5,6 +5,8 @@ class Client < ApplicationRecord
   belongs_to :user, :dependent => :destroy
   validates :fname, :lname, presence: true
   validates :fname, :lname, length: { minimum: 2 }
+  validates :cell_phone, presence: true, on: :update
+  validates :home_address, presence: true, on: :update
 
   include Filterable
 
