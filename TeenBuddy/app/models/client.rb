@@ -1,12 +1,24 @@
 class Client < ApplicationRecord
-  has_many :posts
-  has_many :services
+  has_many :posts, :dependent => :delete_all
+  has_many :services, :dependent => :delete_all
 
-  belongs_to :user
+  belongs_to :user, :dependent => :destroy
   validates :fname, :lname, presence: true
   validates :fname, :lname, length: { minimum: 2 }
+  validates :cell_phone, presence: true, on: :update
+  validates :home_address, presence: true, on: :update
 
-    mount_uploader :selfie, SelifieUploader
+  include Filterable
+
+  scope :searched_keyword, -> (searched_keyword) { where('lower(fname) LIKE ? or 
+                                                          lower(lname) LIKE ?',
+                                                          "%#{searched_keyword.downcase}%", 
+                                                          "%#{searched_keyword.downcase}%") }
+
+  scope :address, -> (address) {where('lower(home_address) LIKE ?', "%#{address.downcase}%")}
+
+
+  mount_uploader :selfie, SelifieUploader
 
   def get_average_rating()
   	if current_client_jobs= Service.where(client_id: self.id).where.not(client_rating: nil)
@@ -14,8 +26,10 @@ class Client < ApplicationRecord
   	end
   end
 
-  def get_posts_numbers()
-  	  	all_client_post= Post.where(client_id: self.id).count
+  def get_service_counts()
+    if current_client_jobs= Service.where(client_id: self.id).where.not(client_rating: nil)
+        current_client_jobs.count
+    end
   end
 
 

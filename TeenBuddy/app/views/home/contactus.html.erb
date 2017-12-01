@@ -1,0 +1,93 @@
+<header class="site-header size-lg text-center" style="background-image: url(/assets/img/bg-banner1.jpg)">  
+	<div class="container no-shadow">
+    <h1 class="text-center">Contact Us</h1>
+    <p class="lead text-center">You can contact us with the following information!</p>
+  </div>
+</header>
+
+    <!-- Main container -->
+<main>
+
+  <section>
+    <div class="container">
+      <div id="contact-map" style="height: 500px"></div>
+      <br><br>
+      <script>
+        function initMap() {
+          var uluru = {lat: 43.661865, lng: -79.385684}
+          var map = new google.maps.Map(document.getElementById('contact-map'), {
+            center: {lat: 43.661865, lng: -79.385684},
+            zoom: 16
+          });
+
+          var infowindow = new google.maps.InfoWindow();
+          var infowindowContent = "<h5>" + "TeenBuddy Group" + "</h5>\n" + "<p><strong>Address: </strong>" + "38 Greenville Street Toronto Ontario" + "</p>";
+          infowindow.setContent(infowindowContent);
+          var marker = new google.maps.Marker({
+            map: map,
+            position: uluru
+          });
+          marker.addListener('click', function() {
+            infowindow.open(map, marker);
+          });
+          infowindow.open(map, marker);
+        }
+
+        $( document ).ready(function() {
+            initMap();
+        });
+      </script>
+
+      <div class="row">
+        <div class="col-sm-12 col-md-8">
+          <h4>Contact form</h4>
+          <form>
+            <div class="form-group">
+              <input type="text" class="form-control input-lg" placeholder="Name">
+            </div>
+
+            <div class="form-group">
+              <input type="email" class="form-control input-lg" placeholder="Email">
+            </div>
+
+            <div class="form-group">
+              <textarea class="form-control" rows="5" placeholder="Message"></textarea>
+            </div>
+            
+            <button type="submit" class="btn btn-primary">Send</button>
+          </form>
+        </div>
+
+        <div class="col-sm-12 col-md-4">
+          <h4>Information</h4>
+          <div class="highlighted-block">
+            <dl class="icon-holder">
+              <dt><i class="fa fa-map-marker"></i></dt>
+              <dd>38 Greenville Street Toronto Ontario</dd>
+
+              <dt><i class="fa fa-phone"></i></dt>
+              <dd>(+1) 987 654 3210</dd>
+
+              <dt><i class="fa fa-fax"></i></dt>
+              <dd>(+1) 123 456 7890</dd>
+
+              <dt><i class="fa fa-envelope"></i></dt>
+              <dd>contact@teenbuddy.com</dd>
+            </dl>
+          </div>
+
+          <br>
+
+          <ul class="social-icons size-sm text-center">
+            <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+            <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
+            <li><a class="dribbble" href="#"><i class="fa fa-dribbble"></i></a></li>
+            <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+            <li><a class="instagram" href="#"><i class="fa fa-instagram"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <a id="scroll-up" href="#"><i class="ti-angle-up"></i></a>
+  </section>
+</main>

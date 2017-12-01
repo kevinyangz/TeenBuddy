@@ -1,8 +1,26 @@
-
-
 <header class="page-header bg-img" style="background-image: url(/assets/img/bg-banner1.jpg);">
   <div class="container page-name">
     <h1 class="text-center">Browse Clients</h1>
+  </div>
+
+  <div class="container">
+    <%= form_tag(clients_path, method: :get) do %>
+
+      <div class="form-group col-xs-12 col-sm-6">
+        <h6>Keywords</h6>
+        <%= text_field_tag :searched_keyword, params[:searched_keyword], class: "form-control", placeholder: "Keyword: clients' name" %>
+      </div>
+      <div class="form-group col-xs-12 col-sm-6">
+        <h6>Address</h6>
+        <%= text_field_tag :address, params[:address], class: "form-control", placeholder: "Location: city, state or zip" %>
+      </div>
+
+      <div class="button-group">
+        <div class="action-buttons">
+          <button class="btn btn-primary">Apply filter</button>
+        </div>
+      </div>
+    <%end%>
   </div>
 
 
@@ -16,24 +34,54 @@
 
 
       <div class="row">
+        <div class="col-xs-12">
+          <br>
+          <% if @clients.total_entries == 0 %>
+            <h5>Sorry, we could not find any match</h5>
+          <% elsif @clients.total_entries == 1 %>
+            <h5>We find 1 match for you</h5>
+          <% else %>
+            <h5>We find <strong><%= @clients.total_entries %></strong> matches, we are showing matches <%= (@clients.current_page-1) * 5 +1 %> - <%= (@clients.current_page-1) * 5 + @clients.count %>
+            </h5>
+          <% end %>
+        </div>
+
         <% @clients.each do |client| %>
             <div class="col-xs-12">
 
               <%= link_to client, class: 'item-block' do %>
                   <header>
-    <% if client.selfie.present? %>
-          <%= image_tag(client.selfie.thum.url,style:"border-radius:50%;width:60px;height:60px;",class:"thumbnail")  %>
-        <!-- user upload -->
-          <% else %>
-         <%= image_tag("/assets/img/client1.jpeg",class:"thumbnail",style:"width:60px;height:60px;border-radius:50%;") %>
-        <!-- default picture -->
-           <% end %>                    <div class="hgroup">
-                      <h4><%= client.fname%> <%= client.lname%></h4>
+                    <% if client.selfie.present? %>
+                        <%= image_tag(client.selfie.thum.url, style: "border-radius:50%;width:60px;height:60px;", class: "thumbnail") %>
+                        <!-- user upload -->
+                    <% else %>
+                        <%= image_tag(UiFaces.face, class: "thumbnail", style: "width:60px;height:60px;border-radius:50%;") %>
+                        <!-- default picture -->
+                    <% end %>
+                    <div class="hgroup">
+                      <h4><%= client.fname %> <%= client.lname %></h4>
+
+                      <div class="teenager_rating">
+
+
+                      <% if client.get_service_counts >minimum_review_numbers %>
+                            <div class="stars-outer">
+                              <div id=<%= client.get_average_rating %> class="stars-inner"></div>
+                            </div>
+                            <strong> <%= "  #{client.get_service_counts} Reviews" %></strong>
+
+                          <%else%>
+                            <div class="stars-outer">
+                              <div id=<%= 0 %> class="stars-inner"></div>
+                            </div>
+                            no rating
+                      <% end %>
+                      </div>
                     </div>
                   </header>
 
                   <div class="item-body">
-                    <p><%= client.description%></p>
+                    <p><%= client.description %></p>
 
 
                   </div>
@@ -42,12 +90,12 @@
                     <ul class="details cols-3">
                       <li>
                         <i class="fa fa-home"></i>
-                        <span><%=client.home_address%></span>
+                        <span><%= client.home_address %></span>
                       </li>
 
                       <li>
                         <i class="fa fa-mobile"></i>
-                        <span><%= client.cell_phone%></span>
+                        <span><%= client.cell_phone %></span>
                       </li>
 
                       <li>
@@ -56,10 +104,9 @@
                       </li>
 
 
-
                       <li>
                         <i class="fa fa-certificate"></i>
-                        <span><%=User.find(client.user_id).email%></span>
+                        <span><%= User.find(client.user_id).email %></span>
                       </li>
                     </ul>
                   </footer>
@@ -71,31 +118,11 @@
       </div>
 
 
-
-
-
-      <!-- Page navigation -->
       <nav class="text-center">
-        <ul class="pagination">
-          <li>
-            <a href="#" aria-label="Previous">
-              <i class="ti-angle-left"></i>
-            </a>
-          </li>
-          <li><a href="#">1</a></li>
-          <li class="active"><a href="#">2</a></li>
-          <li><a href="#">3</a></li>
-          <li><a href="#">4</a></li>
-          <li>
-            <a href="#" aria-label="Next">
-              <i class="ti-angle-right"></i>
-            </a>
-          </li>
-        </ul>
+        <%= will_paginate @clients, renderer: BootstrapPagination::Rails %>
       </nav>
-      <!-- END Page navigation -->
-
 
     </div>
+    <a id="scroll-up" href="#"><i class="ti-angle-up"></i></a>
   </section>
 </main>

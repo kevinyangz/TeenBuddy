@@ -37,7 +37,7 @@
                 </header>
 
                 <footer>
-                  <p class="status"><strong>Status: </strong><%= post.status %></p>
+                  <p class="status"><strong>Status: </strong><%= post.hasPosition %></p>
 
                   <div class="action-btn">
                     <%= link_to 'Edit', edit_post_path(post), class: 'btn btn-xs btn-gray'%>
@@ -54,5 +54,6 @@
       </nav>
       <!-- END Page navigation -->
     </div>
+    <a id="scroll-up" href="#"><i class="ti-angle-up"></i></a>
   </section>
 </main>

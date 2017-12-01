@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   
 
+  ActiveAdmin.routes(self)
   resources :messages, only: [:new, :create]
   resources :conversations, only: [:index, :show, :destroy] do
       member do
@@ -12,7 +13,7 @@ Rails.application.routes.draw do
   end
   end
 
-  devise_for :users, controllers: { registrations: 'users/registrations'}
+  devise_for :users, controllers: { registrations: 'users/registrations',:omniauth_callbacks => "users/omniauth_callbacks"}
 
 
   resources :posts
@@ -35,5 +36,7 @@ Rails.application.routes.draw do
   root 'home#index'
   get  'home/index'
   get  'home/aboutus'
+  get  'home/contactus'
+  get  'home/privacypolicy'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

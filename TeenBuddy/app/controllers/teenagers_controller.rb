@@ -9,12 +9,14 @@ class TeenagersController < ApplicationController
   # GET /teenagers
   # GET /teenagers.json
   def index
-    @current_teenager_interest= TeenagerInterest.all
-    @current_teenager_interest=@current_teenager_interest.filter(params.slice(:servicecategory))
-    @teenagers = Teenager.where(id: @current_teenager_interest.select(:teenager_id)).reverse.paginate(:page => params[:page], :per_page => 5)
-  # @teenagers=@current_teenager_interest.teenagers
-    #puts "-----#{@current_teenager_interest.class}----"
+   # @current_teenager_interest= TeenagerInterest.all
+    #@current_teenager_interest=@current_teenager_interest.filter(params.slice(:servicecategory))
+    @teenagers = Teenager.all.filter(params.slice(:service_category_id, :searched_keyword, :address)).reverse.paginate(:page => params[:page], :per_page => 5)
+    #@posts = Post.all.filter(params.slice(:searched_keyword,:status ,:category_id, :type_id)).order(params[:order]).reverse.paginate(:page => params[:page], :per_page => 5)
 
+    # @teenagers=@current_teenager_interest.teenagers
+    #puts "-----#{@current_teenager_interest.class}----"
+    #Post.all.filter(params.slice(:searched_keyword,:status ,:category_id, :type_id))
 
   end
 
@@ -40,7 +42,6 @@ class TeenagersController < ApplicationController
   def create
     @teenager = Teenager.new(teenager_params)
     @teenager.user_id = current_user.id
-    @teenager.available_credit = 0
      
     respond_to do |format|
     if @teenager.save
@@ -92,8 +93,8 @@ class TeenagersController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def teenager_params
-      params.require(:teenager).permit(:fname,:lname, :home_address, 
-         :cell_phone, :birth_date,:postal_code, :selfie, service_category_ids: [], 
+      params.require(:teenager).permit(:fname,:lname,  :tag_list, :home_address,
+         :cell_phone, :birth_date,:postal_code, :selfie, service_category_ids: [],
          )
     end
 end

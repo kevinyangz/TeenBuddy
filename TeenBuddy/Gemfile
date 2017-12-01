@@ -60,7 +60,6 @@ gem 'stripe'
 gem 'cancancan', '~> 2.0'
 gem 'bcrypt', platforms: :ruby
 
-gem 'bootstrap-sass'
 gem 'will_paginate'
 # for pageable view
 gem 'will_paginate-bootstrap'
@@ -69,7 +68,6 @@ gem 'will_paginate-bootstrap'
 gem "mailboxer"
 
 gem 'gravatar_image_tag'
-gem 'chosen-rails'
 gem 'jquery-turbolinks'
 
 gem 'carrierwave'
@@ -78,9 +76,17 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.6'
 end
 
+gem 'activeadmin'
+gem 'draper'
+gem 'pundit'
 group :test, :development do
   gem 'cucumber-rails', :require => false
   # database_cleaner is not required, but highly recommended
   #gem 'database_cleaner'
 end
 
+gem 'omniauth-facebook','~> 4.0.0'
+
+gem 'faker'
+gem 'ui_faces'
+gem 'acts-as-taggable-on', '~> 4.0'

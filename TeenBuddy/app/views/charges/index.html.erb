@@ -1,39 +1,89 @@
 <header class="page-header bg-img" style="background-image: url(assets/img/bg-banner1.jpg);">
   <div class="container page-name">
-    <h1 class="text-center">Credit</h1>
-    <p class="lead text-center">Check your available credit and transaction histroy</p>
+    <h1 class="text-center">Financial Report</h1>
+    <p class="lead text-center">Here's the list of your financial status. You can check your transaction history or make
+      a deposit.</p>
+  </div>
+  <div class="container no-shadow">
+    <row>
+      <div class="col-md-6 col-sm-12"><h5>Available Credits: $<%= current_user.balance/100.0 %></h5></div>
+      <div class="col-md-6 col-sm-12"><h5>On-holding Credits: $<%= current_user.onhold/100.0 %></h5></div>
+
+    </row>
   </div>
 </header>
-
-
-<%= form_tag charges_path do %>
-  <% if current_user.client %>
-    <section>
-      <div class="container">
-        <div class="row">
-          <div class="form-group col-xs-12 col-sm-12">
-            <h6>Amount (in cents & > 50 cents)</h6>
-            <%= number_field_tag :credit, placeholder: 'Post title, e.g. Need help on cleaning garden.', class: 'form-control input-lg', id: 'charges_amount' %>
-          </div>
-          <div>
-            <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
-                  data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                  data-description="Deposit your credit"
-                  data-amount="<% @amount %>"
-                  data-locale="auto"></script>
+<main>
+  <section class="no-padding-top bg-alt">
+    <% if notice %>
+        <div class="container">
+          <div class="alert alert-info">
+            <strong>Heads up!</strong> <%= notice %>
           </div>
         </div>
-      </div>
-    </section>
-  <% end %>
+    <% end %>
 
-  <div class="container">
-    <p>$
-      <% if @state == 'client' %>
-        <%= number_with_precision(@client.available_credit/100, :precision => 2) %>
-      <% elsif @state == 'teenager' %>
-        <%= number_with_precision(@teenager.available_credit/100, :precision => 2) %>
-      <% end %>
-    </p>
-  </div>
-<% end %>
+    <%if current_user.client %>
+    <div class="container">
+      <div class="row">
+
+        <div class="text-right">
+          <%= form_tag charges_path do %>
+              <airticle>
+                <% if flash[:error].present? %>
+                    <div id="error_explanation">
+                      <p><%= flash[:error] %></p>
+                    </div>
+                <% end %>
+                <h6>Deposit:
+                  <%= number_field_tag :credit, class: 'form-control input-lg', id: 'charges_amount' %>
+                  <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                          data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
+                          data-description="Deposit"
+                          data-locale="auto"></script>
+                </h6>
+              </airticle>
+
+          <% end %>
+
+        </div>
+      </div>
+    </div>
+        <%end%>
+    <header class="section-header">
+      <h2>Transaction History</h2>
+    </header>
+    <div class="container">
+      <div class="row item-blocks-condensed">
+
+        <% @transactions.each do |transaction| %>
+            <div class="row">
+              <!-- Candidate item -->
+              <!-- END Candidate item -->
+              <div class="col-xs-12">
+                <a class="item-block">
+                  <header>
+                    <div class="hgroup">
+                      <h4><%=transaction.comment%>  $<%= transaction.amount/100.0%><span class="rate">CAD</span></h4>
+                    </div>
+                    <div class="header-meta">
+                      <%if transaction.inout%>
+                          <span class="label label-success">Income</span>
+                      <%else%>
+                          <span class="label label-default">PayOut</span>
+                      <%end%>
+                    </div>
+                  </header>
+                </a>
+              </div>
+            </div>
+
+        <% end %>
+        <!-- END Job item -->
+      </div>
+    </div>
+    <a id="scroll-up" href="#"><i class="ti-angle-up"></i></a>
+  </section>
+
+
+
+</main>
