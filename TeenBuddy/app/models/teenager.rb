@@ -17,12 +17,21 @@ class Teenager < ApplicationRecord
   validate :age_requirement19, on: :create
   
   mount_uploader :selfie, SelifieUploader
-      include Filterable
+  
+  include Filterable
 
- scope :service_category_id , ->(service_category_id)  {
+  scope :service_category_id , ->(service_category_id)  {
     current_teenager_interest=TeenagerInterest.where(:service_category_id =>service_category_id)
     Teenager.where(id:current_teenager_interest.select(:teenager_id))
   }
+
+  scope :searched_keyword, -> (searched_keyword) { where('lower(fname) LIKE ? or 
+                                                          lower(lname) LIKE ?',
+                                                          "%#{searched_keyword.downcase}%", 
+                                                          "%#{searched_keyword.downcase}%") }
+
+  scope :address, -> (address) {where('lower(home_address) LIKE ?', "%#{address.downcase}%")}
+
 
   def self.get_age (birthdate)
      now = Time.now.utc.to_date

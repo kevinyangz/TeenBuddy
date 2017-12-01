@@ -10,13 +10,12 @@
 
       <div class="row">
         <div class="form-group col-xs-12 col-sm-6">
-                  <h6>Keywords</h6>
-          <input type="text" class="form-control" placeholder="Keyword: name, skills, or tags">
+          <h6>Keywords</h6>
+          <%= text_field_tag :searched_keyword, params[:searched_keyword], class: "form-control", placeholder: "Keyword: teenagers' name" %>
         </div>
-
         <div class="form-group col-xs-12 col-sm-6">
-                 <h6>Locations</h6>
-          <input type="text" class="form-control" placeholder="Location: city, state or zip">
+          <h6>Address</h6>
+          <%= text_field_tag :address, params[:address], class: "form-control", placeholder: "Location: city, state or zip" %>
         </div>
 
         <div class="form-group col-xs-12 col-sm-6">
@@ -58,9 +57,17 @@
   <section class="no-padding-top bg-alt">
     <div class="container">
       <div class="row">
+        <div class="row">
         <div class="col-xs-12">
           <br>
-          <h5>We found <strong><%=@teenagers.count%> matches</strong> </h5>
+          <% if @teenagers.total_entries == 0 %>
+            <h5>Sorry, we could not find any match</h5>
+          <% elsif @teenagers.total_entries == 1 %>
+            <h5>We find 1 match for you</h5>
+          <% else %>
+            <h5>We find <strong><%= @teenagers.total_entries %></strong> matches, we are showing matches <%= (@teenagers.current_page-1) * 5 +1 %> - <%= (@teenagers.current_page-1) * 5 + @teenagers.count %>
+            </h5>
+          <% end %>
         </div>
       </div>
 
@@ -148,5 +155,6 @@
 
 
     </div>
+    <a id="scroll-up" href="#"><i class="ti-angle-up"></i></a>
   </section>
 </main>
