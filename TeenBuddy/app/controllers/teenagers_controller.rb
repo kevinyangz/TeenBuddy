@@ -35,6 +35,8 @@ class TeenagersController < ApplicationController
 
   # GET /teenagers/1/edit
   def edit
+    @teenager = Teenager.find(params[:id])
+    @teenager_edit = "yes"
   end
 
   # POST /teenagers

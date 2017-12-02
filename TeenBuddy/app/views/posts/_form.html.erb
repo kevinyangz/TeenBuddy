@@ -1,3 +1,7 @@
+<% if @post and @post.client and current_user.client != @post.client %>
+  <%= controller.redirect_to posts_path%>
+<% end %>
+
 <%= form_with(model: post, local: true) do |form| %>
 
 
