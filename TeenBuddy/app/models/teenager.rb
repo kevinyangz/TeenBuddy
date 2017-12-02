@@ -65,7 +65,18 @@ class Teenager < ApplicationRecord
          #end
         # current_teenager_services.teen_rating    
      end
-     
+  end
+
+  def get_total_paid()
+    sum =0
+     self.services.where(:status => [:finished]).all.each do |service|
+      sum = sum+ service.post.pay.to_i
+     end
+     sum
+  end
+
+  def teenager_name()
+    "#{fname} #{lname}"
   end
 
   def get_service_numbers()

@@ -12,7 +12,7 @@ ActiveAdmin.register Post do
 #   permitted
 # end
 permit_params :list, :of, :attributes, :on, :model, :description, :pay, :number_of_teenager_needed, :work_address
-	  scope :all, :default => true
+	   scope :all, :default => true
 	   scope :open do |posts|
 	   		 #Post.where(:status => [:enrolled, :finished, :confirmed])
 	   		 test= posts.all.select do |post|
@@ -28,7 +28,7 @@ permit_params :list, :of, :attributes, :on, :model, :description, :pay, :number_
 	   		 posts.where(id: test.map(&:id))
   	  end
 
-	index do
+	index  do
 
 		column "Post Title" do |post|
 			link_to "#{post.title}", admin_post_path(post) 
@@ -58,11 +58,12 @@ end
 sidebar :help do
   "Need help? Email us at help@teenBudy.com"
 end
-sidebar :Teenager, if: proc{ current_user.teenager } do
-  "Only for Teenager!"
+
+sidebar :Admin, if: proc{ current_admin_user.role=='admin' } do
+  "Only for admin!"
 
 end
-sidebar :Client, if: proc{ current_user.client} do
-  "Only for client!"
+sidebar :Superadmin, if: proc{ current_admin_user.role=='superadmin'} do
+  "Only for superadmin"
 end
 end
