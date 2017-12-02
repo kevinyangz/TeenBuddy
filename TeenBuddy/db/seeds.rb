@@ -140,7 +140,15 @@ for i in 0..5
 end
 
 
+# store tags
 
+@teenagers = Teenager.all
+
+@teenagers.each do |teenager|
+
+  teenager.save
+
+end
 
 
 
