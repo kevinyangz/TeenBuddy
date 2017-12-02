@@ -16,7 +16,9 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'users/registrations',:omniauth_callbacks => "users/omniauth_callbacks"}
 
-
+devise_scope :user do
+  get "users/inactive"=> "users/registrations#inactive", :as => "users_inactive"
+end
   resources :posts
   resources :clients
 
@@ -26,7 +28,7 @@ Rails.application.routes.draw do
 
   get '/services/invitations', to: 'services#invitations'
   get '/services/applications', to: 'services#applications'
-
+  
   resources :services
 
 
