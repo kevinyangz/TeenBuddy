@@ -65,4 +65,5 @@ RSpec.describe Client, type: :model do
     expect(user).to_not be_valid
 
   end
+
 end

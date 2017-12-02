@@ -62,7 +62,7 @@ RSpec.describe Teenager, type: :model do
     user = User.create(email: Faker::Internet.free_email, password: 123456, role: 'teenager',
                        teenager_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name,
                                              birth_date: Faker::Date.between(18.years.ago, 8.years.ago),
-                                             
+
                                              description: Faker::MostInterestingManInTheWorld.quote,
                                              home_address: '123 Bay St',
                                              postal_code: 'M4y 1c9'}
