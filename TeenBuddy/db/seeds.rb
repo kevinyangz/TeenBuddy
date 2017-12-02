@@ -58,8 +58,8 @@ for i in 0..50
   address_index = Faker::Number.between(0, real_address.count()-1)
 
 
-  User.create(email: Faker::Internet.free_email, password: 123456, role: 'teenager',
-               teenager_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name,
+  User.create(email: Faker::Internet.free_email, password: 123456, role: 'teenager',:confirmed_at => DateTime.now,
+               teenager_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name, 
                                      birth_date: Faker::Date.between(18.years.ago, 8.years.ago),
                                      cell_phone: Faker::PhoneNumber.cell_phone,
                                      description: Faker::MostInterestingManInTheWorld.quote,
@@ -73,8 +73,8 @@ end
 for i in 0..50
   address_index = Faker::Number.between(0, real_address.count()-1)
 
-  user = User.create(email: Faker::Internet.free_email, password: 123456, role: 'client',
-                      client_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name,
+  user = User.create(email: Faker::Internet.free_email, password: 123456, role: 'client',:confirmed_at => DateTime.now,
+                      client_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name, 
                                           home_phone: Faker::PhoneNumber.phone_number, cell_phone: Faker::PhoneNumber.cell_phone,
                                           description: Faker::MostInterestingManInTheWorld.quote,
                                           home_address: real_address[address_index]['address'],
