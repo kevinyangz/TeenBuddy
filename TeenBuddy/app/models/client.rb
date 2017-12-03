@@ -22,8 +22,16 @@ class Client < ApplicationRecord
 
   def get_average_rating()
   	if current_client_jobs= Service.where(client_id: self.id).where.not(client_rating: nil)
-  		current_client_jobs.average(:client_rating)
+  		current_client_jobs.average(:client_rating).to_i
   	end
+  end
+
+  def get_total_paid()
+    sum =0
+     self.services.where(:status => [:finished]).all.each do |service|
+      sum = sum+ service.post.pay.to_i
+     end
+     sum
   end
 
   def get_service_counts()
@@ -32,5 +40,12 @@ class Client < ApplicationRecord
     end
   end
 
+  def client_name()
+    "#{fname} #{lname}"
+  end
+  
+  def get_client_email()
+         self.user.email
+  end
 
 end

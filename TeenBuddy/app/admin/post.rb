@@ -11,6 +11,7 @@ ActiveAdmin.register Post do
 #   permitted << :other if params[:action] == 'create' && current_user.admin?
 #   permitted
 # end
+
 permit_params :list, :of, :attributes, :on, :model, :description, :pay, :number_of_teenager_needed, :work_address
 	   scope :all, :default => true
 	   scope :open do |posts|
@@ -28,6 +29,8 @@ permit_params :list, :of, :attributes, :on, :model, :description, :pay, :number_
 	   		 posts.where(id: test.map(&:id))
   	  end
 
+
+
 	index  do
 
 		column "Post Title" do |post|
@@ -40,21 +43,91 @@ permit_params :list, :of, :attributes, :on, :model, :description, :pay, :number_
 			link_to "#{post.client.lname} #{post.client.fname}", admin_client_path(post.client) 
 		end
 		column "Status" do |post|
-			status_tag(post.hasPosition)
+			if post.hasPosition == 'open'
+				status_tag post.hasPosition , :green
+			elsif  post.hasPosition == 'close'
+				status_tag post.hasPosition , :gray
+			end
 		end
 
-
+        
  
 		#column "Age" do |teenager|
 		#	Teenager.get_age(teenager.birth_date)
 			#teenager.get_average_rating
 		#nd
+  if current_admin_user.role == 'admin'
+  actions  defaults: false do |resource|
+  #	destroy_admin_user_path
+  item "Show", admin_client_path(resource.client)
+  end
+  elsif current_admin_user.role =='superadmin'
+  actions defaults: false do |post|
+    item "Show", admin_client_path(post)
+    text_node "&nbsp".html_safe
+    item "Edit", edit_admin_post_path(post) 
+    text_node "&nbsp".html_safe
+    item "Delete", admin_post_path(post), method: :delete
+  end
 
-
-	actions
+  
+  end 	 
 
 
 end
+#####################################################################################################
+ show title: :title  do
+ panel "Service Teenagers" do
+    	#paginated_collection(teenager.services.page(params[:page]).per_page_kaminari(5), download_links: false) do
+    	paginated_collection(post.services.paginate(:page => params[:page], :per_page => 15	), download_links: false) do
+    	table_for(collection) do |service|
+    	column "Post" do |service|
+			link_to "#{service.id}", admin_service_path(service) 
+		end
+		column "Teenager Name" do |service|
+		link_to "#{service.teenager.teenager_name}",  admin_teenager_path(service.teenager)		
+		end
+
+		column "Pay" do |service|
+			#status_tag(ervice.status)
+			number_to_currency service.post.pay
+		end
+			column "Status" do |service|
+			if service.post.hasPosition == 'open'
+				status_tag service.post.hasPosition , :green
+			elsif  service.post.hasPosition == 'close'
+				status_tag service.post.hasPosition , :gray
+			end
+		end
+		column "Client Rating " do |service|
+			#status_tag(ervice.status)
+			 service.client_rating
+		end
+		column "Teenager Rating" do |service|
+			#status_tag(ervice.status)
+			service.teen_rating
+		end
+		column "Client Review" do |service|
+			#status_tag(ervice.status)
+			service.client_review
+		end
+		
+		column "Teenager Review" do |service|
+			#status_tag(ervice.status)
+			service.teen_review
+		end
+
+	
+		end
+
+	end
+    end
+ end
+################################################################################
+
+
+
+
 sidebar :help do
   "Need help? Email us at help@teenBudy.com"
 end
