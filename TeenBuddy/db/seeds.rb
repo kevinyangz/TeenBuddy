@@ -341,7 +341,21 @@ client_comment_fake=[]
 client_comment.each {|record| client_comment_fake << {'comment' => record[0], 'rating' => record[1]}}
 
 
+teenager_comment=[['Very mean',1],
+                ['Very nice man',4],
+                ['give me too much work',1],
+                ['good',5],
+                ['alright',4],
+                ['It's ok,3],
+    ['Most amazing client ever, I love him.',5],
+    ['Always calls me a slacker',2],
+    ['it\'s not friday~',3],
+    ['So annoying',2],
+    ['her hair smells good',5]
 
+]
+teenager_comment_fake=[]
+teenager_comment.each {|record| teenager_comment_fake << {'comment' => record[0], 'rating' => record[1]}}
 
 #client rate some service
 
