@@ -72,6 +72,8 @@
 </header>
 
 
+
+
 <section class="bg-img bg-repeat no-overlay section-sm" style="background-image: url(assets/img/bg-pattern.jpg)">
   <div class="container">
 
@@ -95,6 +97,37 @@
         <p><span data-from="0" data-to="<%=Client.all.count%>"></span>+</p>
         <h6>Clients</h6>
       </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="bg-alt">
+  <div class="container">
+    <header class="section-header">
+      <span>Categories</span>
+      <h2>Popular categories</h2>
+      <p>Here's the most popular categories</p>
+    </header>
+
+    <div class="category-grid">
+
+
+      <% Post.all.group(:service_category).count(:id).sort_by { |name, count | count }.reverse.take(6).each do |category|%>
+
+          <a style="height: 295px;">
+
+
+          <i class="fa <%= category.first.get_fa %>"></i>
+
+            <h6><%=category.first.title%></h6>
+            <p><%="#{category.second} jobs about #{category.first.title} "%></p>
+          </a>
+      <%end%>
+
+
+
+
     </div>
 
   </div>

@@ -236,7 +236,17 @@ end
 
 
 @someService.each do |service|
-  service.update({status: [:enrolled, :finished, :confirmed].sample(1).first})
+  service.update({status: :enrolled})
+end
+
+
+
+@someService = Service.where(status:[:enrolled])
+
+@someService = @someService.sample(@someService.count/1.5)
+
+@someService.each do |service|
+  service.update({status: [:finished, :confirmed].sample(1).first})
 end
 
 client_comment=[['I will not recommend this guy, poor Service.',1],
