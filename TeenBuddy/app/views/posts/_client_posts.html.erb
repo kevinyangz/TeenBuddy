@@ -24,16 +24,23 @@
             <div class="col-xs-12">
               <div class="item-block">
                 <header>
-                  <a href="company-detail.html"><img src="assets/img/logo-google.jpg" alt=""></a>
-                  <div class="hgroup">
+
+                  <div class="row">
+
+                    <span class="fa-stack fa-lg fa-3x col-xs-12 col-sm-2">
+                    <i class="fa <%= post.service_category.get_fa %> fa-stack-1x"></i>
+                  </span>
+                  <div class="hgroup  col-xs-12 col-sm-6">
+
                     <%= link_to  "#{post.title}", post, class: 'h4'%>
                     <h5>Description</h5>
                     <p><%= post.description %></p>
                   </div>
-                  <div class="header-meta">
+                  <div class="header-meta  col-xs-12 col-sm-4">
                     <span class="location"><%= post.work_address %></span>
                     <time datetime=<%= post.updated_at %>>Updated at <%= post.updated_at.in_time_zone('Eastern Time (US & Canada)').strftime("%b %d %Y %H:%M") %></time>
                   </div>
+                </div>
                 </header>
 
                 <footer>
