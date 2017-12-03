@@ -156,12 +156,16 @@
 
                 <div class="form-group">
                   <%= label_tag 'message[subject]', 'Subject' %>
-                  <%= text_field_tag 'message[subject]', nil, class: 'form-control', required: true %>
+               <p class="emoji-picker-container">
+                  <%= text_field_tag 'message[subject]', nil, class: 'form-control',  data: { emojiable: true } ,required: true %>
+                </p>
                 </div>
 
                 <div class="form-group ">
                   <%= label_tag 'message[body]', 'Message' %>
-                  <%= text_area_tag 'message[body]', nil, cols: 3, class: 'form-control', required: true %>
+                    <p class="emoji-picker-container">
+                   <%= text_area_tag 'message[body]', nil, cols: 3, class: 'form-control', data: { emojiable: true }, required: true %>
+                 </p>
                 </div>
 
                 <%= hidden_field_tag 'recipients', @post_client %>

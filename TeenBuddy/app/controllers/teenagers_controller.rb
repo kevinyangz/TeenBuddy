@@ -11,9 +11,19 @@ class TeenagersController < ApplicationController
   def index
    # @current_teenager_interest= TeenagerInterest.all
     #@current_teenager_interest=@current_teenager_interest.filter(params.slice(:servicecategory))
-    @teenagers = Teenager.all.filter(params.slice(:service_category_id, :searched_keyword, :address)).reverse.paginate(:page => params[:page], :per_page => 5)
-    #@posts = Post.all.filter(params.slice(:searched_keyword,:status ,:category_id, :type_id)).order(params[:order]).reverse.paginate(:page => params[:page], :per_page => 5)
+   if params[:order] == 'Rating'
+    @teenagers = Teenager.minimum_review 
+    @teenagers = @teenagers.all.filter(params.slice(:service_category_id, :searched_keyword, :address)).sort_by(&:get_average_rating).reverse.paginate(:page => params[:page], :per_page => 5)
 
+   # @teenagers = Teenager.all.test.filter(params.slice(:service_category_id, :searched_keyword, :address)).sort_by(&:get_average_rating).reverse.paginate(:page => params[:page], :per_page => 5)
+    #@posts = Post.all.filter(params.slice(:searched_keyword,:status ,:category_id, :type_id)).order(params[:order]).reverse.paginate(:page => params[:page], :per_page => 5)
+  elsif params[:order] == 'Number of Services'
+    @teenagers = Teenager.all.filter(params.slice(:service_category_id, :searched_keyword, :address)).sort_by(&:get_service_numbers).reverse.paginate(:page => params[:page], :per_page => 5)
+   else
+    @teenagers = Teenager.all.filter(params.slice(:service_category_id, :searched_keyword, :address)).reverse.paginate(:page => params[:page], :per_page => 5)
+
+
+  end
     # @teenagers=@current_teenager_interest.teenagers
     #puts "-----#{@current_teenager_interest.class}----"
     #Post.all.filter(params.slice(:searched_keyword,:status ,:category_id, :type_id))

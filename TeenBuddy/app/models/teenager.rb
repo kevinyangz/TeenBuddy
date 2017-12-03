@@ -1,3 +1,4 @@
+
 class Teenager < ApplicationRecord
   has_many :services, :dependent => :delete_all
   belongs_to :user
@@ -31,7 +32,16 @@ class Teenager < ApplicationRecord
                                                           "%#{searched_keyword.downcase}%", 
                                                           "%#{searched_keyword.downcase}%") }
 
-  scope :address, -> (address) {where('lower(home_address) LIKE ?', "%#{address.downcase}%")}
+  scope :address, -> (address) {
+    where('lower(home_address) LIKE ?', "%#{address.downcase}%")}
+
+  scope :minimum_review, -> {
+    test= Teenager.all.select do |teenager|
+    teenager.get_service_numbers > minimum_review_numbers
+      #(post.services.where(:status => [:enrolled, :finished, :confirmed]).count ) >= post.number_of_teenager_needed
+    end
+    Teenager.where(id: test.map(&:id))
+  }
 
 
   def self.get_age (birthdate)
@@ -58,7 +68,7 @@ class Teenager < ApplicationRecord
   def get_average_rating()
     #Filter Rating 
      if current_teenager_services= Service.where(teenager_id: self.id).where.not(teen_rating: nil)
-         avg =current_teenager_services.average(:teen_rating)
+         avg =current_teenager_services.average(:teen_rating).to_f
          #current_teenager_services.each do |service|
          #sum += service.teen_rating
          #puts "++++#{service.teen_rating}++++"
@@ -81,9 +91,14 @@ class Teenager < ApplicationRecord
 
   def get_service_numbers()
     if current_teenager_services= Service.where(teenager_id: self.id).where.not(teen_rating: nil)
-         count =current_teenager_services.count
+         count =current_teenager_services.count.to_i
     end
   end
+  
+  def self.minimum_review_numbers()
+    2
+  end
+  
   def store_interest_to_tag
     self.teenager_interests.each do |interest|
       self.tag_list.add(interest.service_category.title)

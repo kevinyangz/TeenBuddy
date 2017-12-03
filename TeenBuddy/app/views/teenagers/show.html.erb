@@ -104,7 +104,7 @@
           <% if current_user.client!=nil %>
               <%= link_to 'Invite me', '#', :class => 'btn btn-success', 'data-toggle' => 'modal', 'data-target' => '#inviteModal' %>
           <% end %>
-          <% if current_user.teenager && current_user.teenager.id = @teenager.id %>
+          <% if current_user.teenager && current_user.teenager.id == @teenager.id %>
               <%= link_to 'Edit', edit_teenager_path(@teenager), class: 'btn btn-gray' %>
           <% end %>
         </div>

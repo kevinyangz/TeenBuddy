@@ -272,6 +272,5 @@ for i in 0..200
 end
 
 AdminUser.delete_all
-
 AdminUser.create!(email: 'superadmin@example.com', password: '123456', password_confirmation: '123456', role:'superadmin') 
 AdminUser.create!(email: 'admin@example.com', password: '123456', password_confirmation: '123456', role:'admin') 
