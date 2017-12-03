@@ -16,6 +16,19 @@ RSpec.describe Teenager, type: :model do
     expect(user).to be_valid
   end
 
+  it "is not valid without birthday" do
+    user = User.create(email: Faker::Internet.free_email, password: 123456, role: 'teenager',
+                       teenager_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name,
+                                             
+                                             cell_phone: Faker::PhoneNumber.cell_phone,
+                                             description: Faker::MostInterestingManInTheWorld.quote,
+                                             home_address: '123 Bay St',
+                                             postal_code: 'M4y 1c9'}
+    )
+
+    expect(user).to_not be_valid
+  end
+
   it "is not valid without a name" do
     user = User.create(email: Faker::Internet.free_email, password: 123456, role: 'teenager',
                        teenager_attributes: {
