@@ -81,21 +81,21 @@
                     <div class="pull-right">
                       <label class= "btn btn-xs <%=status_style(service.status)%>"> <%= status_text(service.status) %> </label></div>
                   </h3>
-
-                 <% if service.teenager.selfie.present? %>
-                      <%= image_tag(service.teenager.selfie.thum.url, style: "border-radius:50%;width:60px;height:60px;", class: "thumbnail") %>
-                      <!-- user upload -->
-                  <% else %>
-                      <%= image_tag(UiFaces.face, class: "thumbnail", style: "width:60px;height:60px;border-radius:50%;") %>
-                      <!-- default picture -->
-                  <% end %>
-                  <div class="hgroup">
-                    <h4>
-
-                      <%=link_to service.teenager.fname,  teenager_path(service.teenager)%>
-
-                    </h4>
-                    <h5>Apply Message: <%= service.applyMessage %></h5>
+                  <div class="row">
+                    <div class="hgroup col-xs-12 col-sm-8">
+                      <% if service.teenager.selfie.present? %>
+                          <%= image_tag(service.teenager.selfie.thum.url, style: "border-radius:50%;width:60px;height:60px;", class: "thumbnail") %>
+                      <% else %>
+                          <%= image_tag(UiFaces.face, class: "thumbnail", style: "width:60px;height:60px;border-radius:50%;") %>
+                      <% end %>
+                      <h4>
+                        <%=link_to service.teenager.fname,  teenager_path(service.teenager)%>
+                      </h4>
+                      <h5>Apply Message: <%= service.applyMessage %></h5>
+                      <div class="header-meta col-xs-12 col-sm-4">
+                        
+                      </div>
+                    </div>
                   </div>
 
                 </header>
