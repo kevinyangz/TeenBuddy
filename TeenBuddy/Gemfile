@@ -92,4 +92,5 @@ gem 'faker'
 gem 'ui_faces'
 gem 'acts-as-taggable-on', '~> 4.0'
 
+gem 'sendgrid-ruby'
 gem 'rails_12factor', group: :production
