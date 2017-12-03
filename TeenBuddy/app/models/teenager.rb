@@ -98,6 +98,11 @@ class Teenager < ApplicationRecord
   def self.minimum_review_numbers()
     2
   end
+
+  def get_teenager_email()
+     self.user.email
+  end
+
   
   def store_interest_to_tag
     self.teenager_interests.each do |interest|

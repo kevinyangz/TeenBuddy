@@ -239,17 +239,38 @@ end
   service.update({status: [:enrolled, :finished, :confirmed].sample(1).first})
 end
 
+client_comment=[['I will not recommend this guy, poor Service.',1],
+  ['those kids are doing some wonderful jobs',4],
+  ['sbbbbb',1],
+  ['Hello World3',1],
+  ['Hello World4',1],
+  ['Hello World5',1],
+  ['Hello World6',1],
+  ['Hello World7',1],
+  ['Hello World8',1],  
+  ['Hello World1',1],
+  ['Hello World1',1]
+
+]
+client_comment_fake=[]
+client_comment.each {|record| client_comment_fake << {'comment' => record[0], 'rating' => record[1]}}
+
+
+
+
 #client rate some service
 
 @someService = Service.where(status:[:confirmed])
 
 @someService = @someService.sample(@someService.count/1.5)
 
-
 @someService.each do |service|
-  service.update(client_review: Faker::MostInterestingManInTheWorld.quote,
-  client_rating: Faker::Number.between(1, 5))
+  clientcomment_index = Faker::Number.between(0, client_comment.count()-1)
+
+  service.update(client_review: client_comment_fake[clientcomment_index]['comment'],
+  client_rating: client_comment_fake[clientcomment_index]['rating'])
 end
+
 
 
 #teenager rate some service
