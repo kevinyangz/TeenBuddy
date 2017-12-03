@@ -22,20 +22,25 @@
               <h6>Teenager Interest</h6>
             <%= select_tag :service_category_id, options_from_collection_for_select(ServiceCategory.order(:title), :id, :title, params[:service_category_id]), { include_blank: 'All', class: 'form-control '} %>
         </div>
-
+        
         <div class="form-group col-xs-12 col-sm-6">
-          <h6>Sort by</h6>
+       
+       <!--
+               <h6>Sort by</h6>
+
           <div class="radio">
-            <input type="radio" name="sortby" id="sortby1" value="option1" checked>
+            <input type="radio" name="sortby" id="sortby1"  value ="Rating" >
             <label for="sortby1">Rating</label>
           </div>
 
           <div class="radio">
-            <input type="radio" name="sortby" id="sortby2" value="option2">
+            <input type="radio" name="sortby" id="sortby1" value= "Service #">
             <label for="sortby2">Service Numbers</label>
           </div>
+       -->
+    <h6>Order By</h6>
+          <%= select_tag :order, options_for_select([["Rating"],["Number of Services"]],params[:order]), {:include_blank => 'Default', class: 'form-control selectpicker'} %>
         </div>
-
 
       </div>
 
@@ -113,6 +118,7 @@
 
                   <div class="tag-list">
                     <% teenager.tag_list.split(",") do |tag| %>
+                    <%=teenager.tag_list %>
             <span>
               <%= tag %> <%= "   " %>
             </span>
