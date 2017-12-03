@@ -51,7 +51,18 @@ ActiveAdmin.register_page "Dashboard" do
       column do
         panel "ActiveAdmin Demo" do
           div do
-                "HELLO"
+
+            category_hash = []
+
+            Post.all.group(:service_category_id).count(:id).each {|category| category_hash.push([ServiceCategory.find(category.first).title, category.second.to_s]) }
+            
+            pie_chart category_hash
+            
+
+
+         #bar_chart Teenager.group(:service_category).limit(5) ,{library: {title:'Top 5 Downloads'}}
+         #column_chart [["2016-01-01", 30], ["2016-02-01", 54]], stacked: true, library: {colors: ["#D80A5B", "#21C8A9", "#F39C12", "#A4C400"]}
+
         end
         end
       end

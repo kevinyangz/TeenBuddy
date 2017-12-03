@@ -84,6 +84,7 @@ group :test, :development do
   # database_cleaner is not required, but highly recommended
   #gem 'database_cleaner'
 end
+gem 'chartkick'
 
 gem 'omniauth-facebook','~> 4.0.0'
 gem 'omniauth-twitter'
