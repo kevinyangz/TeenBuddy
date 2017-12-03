@@ -132,7 +132,14 @@
                             <div class="stars-outer">
                               <div id=<%= post.client.get_average_rating %> class="stars-inner"></div>
                             </div>
+                          <strong> <%= "#{post.client.get_service_counts} Reviews" %></strong>
+                        <%else %>
+                          <div class="stars-outer">
+                        <div id=<%= 0 %> class="stars-inner"></div>
+                      </div>
+                          <strong>No Review</strong>
                         <% end %>
+
                       </h5>
                     </div>
                   </div>
