@@ -92,21 +92,16 @@
                   <div class="hgroup">
                 <div class="teenager_rating">
                     <h4><%= teenager.fname%> <%= teenager.lname%></h4>
-
-
                 <%if teenager.get_service_numbers > minimum_review_numbers %>
                       <div class="stars-outer">
-
                         <div id=<%= teenager.get_average_rating %> class="stars-inner"></div>
                       </div>
-
                 <strong> <%= "#{teenager.get_service_numbers} Reviews" %></strong>
                       <%else%>
                       <div class="stars-outer">
-
                         <div id=<%= 0 %> class="stars-inner"></div>
                       </div>
-                  no rating
+                   <strong>No Review</strong>
                 <%end%>
               </div>
 
