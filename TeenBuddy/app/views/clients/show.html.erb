@@ -15,6 +15,16 @@
       <div class="col-xs-12 col-sm-8 header-detail">
         <div class="hgroup">
          <h4><%= @client.fname %> <%= @client.lname %></h4>
+          <% if (endorse=Endorsement.where(liked: @client.user.id, liker: current_user.id)).any? %>
+              <%= link_to endorsement_path(endorse.first), :method => :delete do %>
+                  <i class="fa fa-heart"></i>
+              <% end %>
+
+          <% else %>
+              <%= link_to endorsements_path(:endorsement => {:liked => @client.user.id, :liker => current_user.id}), :method => :post do %>
+                  <i class="fa fa-heart-o"></i>
+              <% end %>
+          <% end %><%= Endorsement.where(liked: @client.user.id).count %>
           <% if @client.get_service_counts >minimum_review_numbers %>
           <div class="teenager_rating">
                 <div class="stars-outer">
@@ -89,7 +99,6 @@
   <section id="open-positions" class="bg-alt">
     <div class="container">
       <header class="section-header">
-
         <h2>Open Posts</h2>
       </header>
 
@@ -118,7 +127,7 @@
 
 
               <footer>
-                <p class="status"><strong>Status: </strong><%= post.status %></p>
+                <p class="status"><strong>Status: </strong><%= post.hasPosition %></p>
 
                 <div class="action-btn">
                   <%= link_to 'Edit', edit_post_path(post), class: 'btn btn-xs btn-gray' %>
@@ -139,9 +148,9 @@
 
 <div class="container">
   <div class="row">
-    <div class="col-md-8 col-lg-9">
+    <div class="col-md-12">
       <div id="comments">
-        <header>
+        <header >
           <h3>Review
             <span class=“txt-gray”><%= "(#{Service.where(client_id: @client.id).where.not("client_review like ?", "").count})" %></span>
           </h3>
@@ -150,16 +159,13 @@
 
           <% Service.where(client_id: @client.id).where.not("client_review like ?", "").each do |service| %>
               <li class="comment">
-                <% if Teenager.find(service.teenager_id).selfie.present? %>
-                    <%= image_tag(Teenager.find(service.teenager_id).selfie.thum.url, border: 0, class: "avatar") %>
-                    <!-- User upload picture -->
-                <% else %>
-                    <%= image_tag("/assets/img/teenager1.jpeg", border: 0, class: "avatar") %>
-                    <!-- default picture-->
-                <% end %>
+                
+                <img class="avatar" src="<%= [Client.find(service.client_id).selfie.thum.url, UiFaces.face].find(&:itself)%>" alt="avatar" />
+
                 <div class="comment-body">
                   <h6>
-                    <a href="#"><%= Teenager.find(service.teenager_id).fname %></a>
+                    <%=link_to "#{Teenager.find(service.teenager_id).fname}", Client.find(service.teenager_id)%> 
+
                     <time>
                       <%= service.updated_at %>
                     </time>

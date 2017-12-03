@@ -1,4 +1,13 @@
-<header class="page-header bg-img size-lg" style="background-image: url(assets/img/bg-banner2.jpg)">
+<header class="page-header bg-img size-lg" style="background-image: url(/assets/img/bg-banner1.jpg)">
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = 'https://connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.11&appId=478437375640740';
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
+
   <div class="container">
     <%if notice%>
 
@@ -27,9 +36,21 @@
       </div>
       <time datetime=<%= @post.created_at %>>Created at <%= @post.created_at %></time>
       <hr>
+      <h3>Description</h3>
       <p class="lead"><%= @post.description %></p>
+      <% if @post.requirements != "" %>
+        <h3>Requirements</h3>
+          <div class="tag-list">
+            <% @post.tag_list.split(",") do |tag| %>
+            <span>
+              <%= tag %> <%= "   " %>
+            </span>
+            <% end %>
 
-      <ul class="details cols-3">
+          </div>
+      <%end%>
+
+      <ul class="details cols-2">
         <li>
           <i class="fa fa-map-marker"></i>
           <span><%= @post.work_address %></span>
@@ -42,12 +63,17 @@
 
         <li>
           <i class="fa fa-money"></i>
-          <span><%= @post.pay %></span>
+          <span>Pay: $<%= @post.pay %></span>
+        </li>
+
+        <li>
+          <i class="fa fa-male"></i>
+          <span>Teenagers needed: <%= @post.number_of_teenager_needed %></span>
         </li>
 
         <li>
           <i class="fa fa-certificate"></i>
-          <span><%= @post.hasPosition %></span>
+          <span>Status: <%= @post.hasPosition %></span>
         </li>
       </ul>
 
@@ -59,12 +85,13 @@
         </div>
       <script>
         var show_address = "<%== escape_javascript @post.work_address %>";
+        var post_id = "<%== escape_javascript @post.id.to_s %>";
       </script>
 
       <div class="button-group">
         <ul class="social-icons">
           <li class="title">Share on</li>
-          <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+          <li><a class="fa fa-facebook fb-xfbml-parse-ignore" target="_blank" href="http://www.facebook.com/share.php?u=https%3A%2F%2Fishuhui.com&title=<%=@post.title%>"></a></li>
           <li><a class="google-plus" href="#"><i class="fa fa-google-plus"></i></a></li>
           <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
           <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
@@ -129,12 +156,16 @@
 
                 <div class="form-group">
                   <%= label_tag 'message[subject]', 'Subject' %>
-                  <%= text_field_tag 'message[subject]', nil, class: 'form-control', required: true %>
+               <p class="emoji-picker-container">
+                  <%= text_field_tag 'message[subject]', nil, class: 'form-control',  data: { emojiable: true } ,required: true %>
+                </p>
                 </div>
 
                 <div class="form-group ">
                   <%= label_tag 'message[body]', 'Message' %>
-                  <%= text_area_tag 'message[body]', nil, cols: 3, class: 'form-control', required: true %>
+                    <p class="emoji-picker-container">
+                   <%= text_area_tag 'message[body]', nil, cols: 3, class: 'form-control', data: { emojiable: true }, required: true %>
+                 </p>
                 </div>
 
                 <%= hidden_field_tag 'recipients', @post_client %>
@@ -316,7 +347,9 @@
               <div class="modal-body">
             <div class="form-group">
                   <%= form.hidden_field :teen_rating, :id=>"email_field#{service.id}" ,class: "form-control", placeholder: "Rate teenager " %>
+                  <p class="emoji-picker-container">
                   <%= form.text_area :teen_review, class: "form-control", placeholder: "Comments about your client",data: { emojiable: true }%>
+                </p>
                  </div>
             </div>
               <div class="modal-footer">

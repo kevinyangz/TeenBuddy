@@ -21,6 +21,8 @@
           </div>
         </div>
     <% end %>
+
+    <%if current_user.client %>
     <div class="container">
       <div class="row">
 
@@ -46,6 +48,7 @@
         </div>
       </div>
     </div>
+        <%end%>
     <header class="section-header">
       <h2>Transaction History</h2>
     </header>
@@ -78,6 +81,7 @@
         <!-- END Job item -->
       </div>
     </div>
+    <a id="scroll-up" href="#"><i class="ti-angle-up"></i></a>
   </section>
 
 

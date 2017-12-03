@@ -1,3 +1,7 @@
+<% if @post and @post.client and current_user.client != @post.client %>
+  <%= controller.redirect_to posts_path%>
+<% end %>
+
 <%= form_with(model: post, local: true) do |form| %>
 
 
@@ -7,7 +11,7 @@
         <p class="lead text-center"><%= @post_form_header_description %></p>
       </div>
 
-      <div class="container">
+      <div class="container" style="z-index:2;">
         <font color = 'red'> <%= post.errors.full_messages.first %></font>
 
         <div class="row">
@@ -40,7 +44,7 @@
             <h6>Wage</h6>
             <div class="input-group input-group-sm">
               <span class="input-group-addon"><i class="fa fa-money"></i></span>
-              <%= form.number_field :pay, id: :post_pay, placeholder: 'Pay', class: 'form-control input-lg' %>
+              <%= form.number_field :pay, id: :post_pay, placeholder: 'Total amount of payment for each teenager', class: 'form-control input-lg' %>
             </div>
           </div>
 
@@ -52,11 +56,20 @@
             </div>
           </div>
 
+          <% if @post %>
+            <script>
+              var post_id = "<%== escape_javascript @post.id.to_s %>";
+            </script>
+          <%else%>
+            <script>
+              var post_id = -1;
+            </script>
+          <% end %>
 
         </div>
       </div>
 
-      <div class="container">
+      <div class="container" style="z-index:1;">
       <div class="form-group col-xs-12 col-sm-12" style="height:500px;" id="post_form_map"></div>
         <div id="infowindow-content">
           <img src="" width="16" height="16" id="place-icon">
@@ -91,9 +104,13 @@
           <p>Write about the requirement, help us to match the most suitable teenage for you.</p>
         </header>
         <div class="form-group col-xs-12 col-sm-12">
-          <h6>Requirements</h6>
-          <%= form.text_area :requirements, placeholder: 'Please enter your specific requirements here. - optional', class: 'form-control input-lg',rows: "5" %>
-        </div>
+
+            <%= form.text_field :tag_list, 'data-role'=>'tagsinput',value: post.tag_list.to_s  %>
+            <span class="help-block">Type something requirement of your job for us to match perfect teenagers. </span>
+            <span class="help-block">Popular Tags: <%ActsAsTaggableOn::Tag.most_used(10).each do |tag|%>
+                                  <%=tag%>,<%end%>
+              </span>
+         </div>
       </div>
     </section>
 
@@ -116,4 +133,5 @@
         </div>
       </div>
     </section>
+    <a id="scroll-up" href="#"><i class="ti-angle-up"></i></a>
 <% end %>

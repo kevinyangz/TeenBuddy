@@ -9,31 +9,38 @@
     <%= form_tag(teenagers_path, method: :get) do %>
 
       <div class="row">
-        <div class="form-group col-xs-12 col-sm-4">
-          <input type="text" class="form-control" placeholder="Keyword: name, skills, or tags">
+        <div class="form-group col-xs-12 col-sm-6">
+          <h6>Keywords</h6>
+          <%= text_field_tag :searched_keyword, params[:searched_keyword], class: "form-control", placeholder: "Keyword: teenagers' name" %>
+        </div>
+        <div class="form-group col-xs-12 col-sm-6">
+          <h6>Address</h6>
+          <%= text_field_tag :address, params[:address], class: "form-control", placeholder: "Location: city, state or zip" %>
         </div>
 
-        <div class="form-group col-xs-12 col-sm-4">
-          <input type="text" class="form-control" placeholder="Location: city, state or zip">
+        <div class="form-group col-xs-12 col-sm-6">
+              <h6>Teenager Interest</h6>
+            <%= select_tag :service_category_id, options_from_collection_for_select(ServiceCategory.order(:title), :id, :title, params[:service_category_id]), { include_blank: 'All', class: 'form-control '} %>
         </div>
+        
+        <div class="form-group col-xs-12 col-sm-6">
+       
+       <!--
+               <h6>Sort by</h6>
 
-        <div class="form-group col-xs-12 col-sm-4">
-          <%= select_tag :servicecategory, options_from_collection_for_select(ServiceCategory.all,"id","title"),{:include_blank => 'All',class: 'form-control selectpicker'}  %>
-        </div>
-
-        <div class="form-group col-xs-12 col-sm-4">
-          <h6>Sort by</h6>
           <div class="radio">
-            <input type="radio" name="sortby" id="sortby1" value="option1" checked>
+            <input type="radio" name="sortby" id="sortby1"  value ="Rating" >
             <label for="sortby1">Rating</label>
           </div>
 
           <div class="radio">
-            <input type="radio" name="sortby" id="sortby2" value="option2">
+            <input type="radio" name="sortby" id="sortby1" value= "Service #">
             <label for="sortby2">Service Numbers</label>
           </div>
+       -->
+    <h6>Order By</h6>
+          <%= select_tag :order, options_for_select([["Rating"],["Number of Services"]],params[:order]), {:include_blank => 'Default', class: 'form-control selectpicker'} %>
         </div>
-
 
       </div>
 
@@ -55,9 +62,17 @@
   <section class="no-padding-top bg-alt">
     <div class="container">
       <div class="row">
+        <div class="row">
         <div class="col-xs-12">
           <br>
-          <h5>We found <strong><%=@teenagers.count%>mathes</strong> </h5>
+          <% if @teenagers.total_entries == 0 %>
+            <h5>Sorry, we could not find any match</h5>
+          <% elsif @teenagers.total_entries == 1 %>
+            <h5>We find 1 match for you</h5>
+          <% else %>
+            <h5>We find <strong><%= @teenagers.total_entries %></strong> matches, we are showing matches <%= (@teenagers.current_page-1) * 5 +1 %> - <%= (@teenagers.current_page-1) * 5 + @teenagers.count %>
+            </h5>
+          <% end %>
         </div>
       </div>
 
@@ -71,19 +86,27 @@
           <%= image_tag(teenager.selfie.thum.url,style:"border-radius:50%;width:60px;height:60px;",class:"thumbnail")  %>
         <!-- user upload -->
           <% else %>
-         <%= image_tag("/assets/img/teenager1.png",class:"thumbnail",style:"width:60px;height:60px;border-radius:50%;") %>
+         <%= image_tag(UiFaces.face,class:"thumbnail",style:"width:60px;height:60px;border-radius:50%;") %>
         <!-- default picture -->
            <% end %>
                   <div class="hgroup">
                 <div class="teenager_rating">
                     <h4><%= teenager.fname%> <%= teenager.lname%></h4>
+
+
                 <%if teenager.get_service_numbers > minimum_review_numbers %>
+                      <div class="stars-outer">
 
-                <div class="stars-outer">
+                        <div id=<%= teenager.get_average_rating %> class="stars-inner"></div>
+                      </div>
 
-                  <div id=<%= teenager.get_average_rating %> class="stars-inner"></div>
-                </div>
                 <strong> <%= "#{teenager.get_service_numbers} Reviews" %></strong>
+                      <%else%>
+                      <div class="stars-outer">
+
+                        <div id=<%= 0 %> class="stars-inner"></div>
+                      </div>
+                  no rating
                 <%end%>
               </div>
 
@@ -91,16 +114,16 @@
                 </header>
 
                 <div class="item-body">
-             
+                  <p><%= teenager.description %></p>
 
                   <div class="tag-list">
-           <%@current_teenager_interest= TeenagerInterest.where(teenager_id:teenager.id).all%>
-           <%@current_teenager_interest.all.each do |interest| %>
+                    <% teenager.tag_list.split(",") do |tag| %>
             <span>
-              <%=ServiceCategory.find(interest.service_category_id).title%> <%="   "%>
+              <%= tag %> <%= "   " %>
             </span>
-            <% end %>
-             </div>
+                    <% end %>
+
+                  </div>
                 </div>
 
                 <footer>
@@ -137,5 +160,6 @@
 
 
     </div>
+    <a id="scroll-up" href="#"><i class="ti-angle-up"></i></a>
   </section>
 </main>

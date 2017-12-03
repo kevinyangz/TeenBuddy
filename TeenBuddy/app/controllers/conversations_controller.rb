@@ -8,15 +8,18 @@ class ConversationsController < ApplicationController
 
   def index
   
-  if @box.eql? "inbox"
-    @conversations = @mailbox.inbox
-  elsif @box.eql? "sent"
-    @conversations = @mailbox.sentbox
-  else
-    @conversations = @mailbox.trash
-  end
 
-    @conversations = @conversations.paginate(page: params[:page], per_page: 10)
+
+    @conversations = @mailbox.conversations
+
+    if params[:conv].presence
+      @conversation = @conversations.find(params[:conv])
+    else
+      @conversation = @conversations.first if @conversations.first
+    end
+
+
+
   end
   def show
  
@@ -25,7 +28,7 @@ class ConversationsController < ApplicationController
   def reply
   current_user.reply_to_conversation(@conversation, params[:body])
   flash[:success] = 'Reply sent'
-  redirect_to conversation_path(@conversation)
+  redirect_to conversations_path(conv:@conversation.id)
   end
 
   def destroy

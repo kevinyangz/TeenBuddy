@@ -1,3 +1,6 @@
+<% if @client and @client_form_header_title == "Edit Your Information" and current_user.client != @client %>
+  <%= controller.redirect_to clients_path%>
+<% end %>
 
 <%= form_with(model: client, local: true) do |form| %>
 

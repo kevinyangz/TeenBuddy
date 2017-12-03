@@ -1,3 +1,7 @@
+<% if @teenager and @teenager_edit == "yes" and current_user.teenager != @teenager %>
+  <%= controller.redirect_to teenagers_path%>
+<% end %>
+
 <%= form_with(model: teenager, local: true) do |form| %>
     <!-- Page header -->
     <header class="page-header bg-img size-lg" style="background-image: url(/assets/img/bg-banner1.jpg)">
@@ -74,16 +78,23 @@
             </div>
 
             <hr class="hr-lg">
-
-            <h6>Interests list</h6>
             <div class="form-group">
-
-
-
+              <h6>Interest fields</h6>
               <%= form.select :service_category_ids, ServiceCategory.all.collect {|x| [x.title, x.id]}, {}, :multiple => true,
                               :prompt => 'Please select service category',  class: 'form-control selectpicker' %>
-              <span class="help-block">Select some of your favorite fileds.</span>
+              <span class="help-block">Select some of your favorite fields.</span>
             </div>
+
+            <h6>Tags</h6>
+            <div class="form-group">
+              <%= form.text_field :tag_list, 'data-role'=>'tagsinput',value: teenager.tag_list.to_s  %>
+              <span class="help-block">Type something about yourself for people to know you better. </span>
+              <h7>Popular Tags: <%ActsAsTaggableOn::Tag.most_used(5).each do |tag|%>
+                    <%="#{tag}, "%>   <%end%></h7>
+
+            </div>
+
+
 
           </div>
         </div>

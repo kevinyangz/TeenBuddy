@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   
 
+  devise_for :admin_users, ActiveAdmin::Devise.config
+  ActiveAdmin.routes(self)
   resources :messages, only: [:new, :create]
   resources :conversations, only: [:index, :show, :destroy] do
       member do
@@ -14,7 +16,9 @@ Rails.application.routes.draw do
 
   devise_for :users, controllers: { registrations: 'users/registrations',:omniauth_callbacks => "users/omniauth_callbacks"}
 
-
+devise_scope :user do
+  get "users/inactive"=> "users/registrations#inactive", :as => "users_inactive"
+end
   resources :posts
   resources :clients
 
@@ -24,7 +28,7 @@ Rails.application.routes.draw do
 
   get '/services/invitations', to: 'services#invitations'
   get '/services/applications', to: 'services#applications'
-
+  
   resources :services
 
 
@@ -35,5 +39,7 @@ Rails.application.routes.draw do
   root 'home#index'
   get  'home/index'
   get  'home/aboutus'
+  get  'home/contactus'
+  get  'home/privacypolicy'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

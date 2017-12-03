@@ -40,8 +40,10 @@
     <div class="login-footer">
       <h6>Or login with</h6>
       <ul class="social-icons">
-<%= link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
-        <li><a class="facebook" href="#"><i class="fa fa-facebook"></i></a></li>
+
+        <%= link_to user_facebook_omniauth_authorize_path, class: "facebook" do %>
+            <i class="fa fa-facebook"></i>
+        <% end %>
         <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
         <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
       </ul>

@@ -73,14 +73,14 @@
                       <label class="btn btn-xs <%= status_style2(service.status) %>"> <%= status_text2(service.status) %> </label>
                     </h5>
 
-                    <% if service.client_review %>
+                    <% if service.client_rating %>
                         <h6><strong>My Rating: </strong>
                           <% for i in 0...service.client_rating.round %>
                               <span class="icon"><font color=orange>★</font></span>
                           <% end %></h6><h6><%= service.client_review %>
                   </h6>
                     <% end %>
-                    <% if service.teen_review %>
+                    <% if service.teen_rating %>
                         <h6><strong>Client's Rating: </strong>
                           <% for i in 0...service.teen_rating.round %>
                               <span class="icon"> <font color=orange>★</font></span>
