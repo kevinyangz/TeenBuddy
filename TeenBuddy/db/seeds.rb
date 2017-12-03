@@ -81,7 +81,7 @@ for i in 0..5
                                           postal_code: real_address[address_index]['postal_code']}
   )
 
-  transaction = Transaction.create!(user: user, inout: true, comment: 'Deposit', amount: 1000 * 100)
+  transaction = Transaction.create!(user: user, inout: true, comment: 'Deposit (We charge 5% service fee.)', amount: 950 * 100)
 
 end
 

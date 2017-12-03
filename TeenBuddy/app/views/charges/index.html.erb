@@ -21,11 +21,9 @@
           </div>
         </div>
     <% end %>
-
     <%if current_user.client %>
     <div class="container">
       <div class="row">
-
         <div class="text-right">
           <%= form_tag charges_path do %>
               <airticle>
@@ -38,7 +36,7 @@
                   <%= number_field_tag :credit, class: 'form-control input-lg', id: 'charges_amount' %>
                   <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
                           data-key="<%= Rails.configuration.stripe[:publishable_key] %>"
-                          data-description="Deposit"
+                          data-description="Deposit (5% service fee)"
                           data-locale="auto"></script>
                 </h6>
               </airticle>

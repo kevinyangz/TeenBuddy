@@ -33,9 +33,9 @@ class ChargesController < ApplicationController
     )
 
     if charge
-      @transaction = Transaction.new(user: current_user, inout: true, comment: 'Deposit', amount: @amount.to_i)
+      @transaction = Transaction.new(user: current_user, inout: true, comment: 'Deposit (We charge 5% service fee.)', amount: (@amount.to_i)*0.95)
       @transaction.save
-      redirect_to charges_path, notice:"Thanks, you have successfully deposited $#{@amount/100.0}"
+      redirect_to charges_path, notice:"Thanks, you have successfully deposited $#{(@amount*0.95)/100.0}"
     end
 
   rescue Stripe::CardError => e
