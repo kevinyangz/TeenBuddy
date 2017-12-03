@@ -58,7 +58,7 @@ for i in 0..50
   address_index = Faker::Number.between(0, real_address.count()-1)
 
 
-  User.create(email: Faker::Internet.free_email, password: 123456, role: 'teenager',:confirmed_at => DateTime.now，
+  User.create(email: Faker::Internet.free_email, password: 123456, role: 'teenager',:confirmed_at => DateTime.now,
                teenager_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name, 
                                      birth_date: Faker::Date.between(18.years.ago, 8.years.ago),
                                      cell_phone: Faker::PhoneNumber.cell_phone,
@@ -73,7 +73,7 @@ end
 for i in 0..50
   address_index = Faker::Number.between(0, real_address.count()-1)
 
-  user = User.create(email: Faker::Internet.free_email, password: 123456, role: 'client',:confirmed_at => DateTime.now，
+  user = User.create(email: Faker::Internet.free_email, password: 123456, role: 'client',:confirmed_at => DateTime.now,
                       client_attributes: {fname: Faker::Name.first_name, lname: Faker::Name.last_name, 
                                           home_phone: Faker::PhoneNumber.phone_number, cell_phone: Faker::PhoneNumber.cell_phone,
                                           description: Faker::MostInterestingManInTheWorld.quote,
@@ -272,6 +272,5 @@ for i in 0..200
 end
 
 AdminUser.delete_all
-
 AdminUser.create!(email: 'superadmin@example.com', password: '123456', password_confirmation: '123456', role:'superadmin') 
 AdminUser.create!(email: 'admin@example.com', password: '123456', password_confirmation: '123456', role:'admin') 
