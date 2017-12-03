@@ -79,11 +79,12 @@ end
 gem 'activeadmin'
 gem 'draper'
 gem 'pundit'
-group :test, :development do
-  gem 'cucumber-rails', :require => false
-  # database_cleaner is not required, but highly recommended
-  #gem 'database_cleaner'
+group :test do
+  gem 'cucumber-rails'
+
 end
+
+
 
 gem 'omniauth-facebook','~> 4.0.0'
 
