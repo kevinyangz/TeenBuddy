@@ -12,11 +12,13 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
+
   if Rails.env.production?
     config.mailer_sender = "app80101197@heroku.com"
   elsif Rails.env.development?
-    config.mailer_sender = "shanwuzhen@gmail.com"
+    config.mailer_sender = "teenbuddy.donotreply@gmail.com"
   end
+
 
 
   # Configure the class responsible to send e-mails.
