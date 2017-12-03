@@ -26,6 +26,8 @@ class Client < ApplicationRecord
   	end
   end
 
+
+
   def get_total_paid()
     sum =0
      self.services.where(:status => [:finished]).all.each do |service|
@@ -34,8 +36,22 @@ class Client < ApplicationRecord
      sum
   end
 
+    def get_total_post_paid()
+    sum =0
+     self.posts.all.each do |post|
+      sum = sum+ post.pay.to_i
+     end
+     sum
+  end
+
   def get_service_counts()
     if current_client_jobs= Service.where(client_id: self.id).where.not(client_rating: nil)
+        current_client_jobs.count
+    end
+  end
+
+   def get_total_post_counts()
+    if current_client_jobs= Post.where(client_id: self.id)
         current_client_jobs.count
     end
   end
