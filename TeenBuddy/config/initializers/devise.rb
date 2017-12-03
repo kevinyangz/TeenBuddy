@@ -14,7 +14,7 @@ Devise.setup do |config|
   # with default "from" parameter.
 
   if Rails.env.production?
-    config.mailer_sender = "app80101197@heroku.com"
+    config.mailer_sender = "teenbuddy.dontreply@gmail.com"
   elsif Rails.env.development?
     config.mailer_sender = "teenbuddy.donotreply@gmail.com"
   end
