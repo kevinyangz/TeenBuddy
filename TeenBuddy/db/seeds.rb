@@ -159,8 +159,81 @@ end
 #setup some job array
 
 
+#title, description,service_category,service_type
 
+post_array=[['Need help to clean yard.','My yard has many leaves, need someone to clean them.',
+             ServiceCategory.find_by(title: "Yard Work").id,ServiceType.find_by(title: "Leaf Raking").id ],
+            ['Need someone to mow my lawn.','Need someone to help me.',
+             ServiceCategory.find_by(title: "Yard Work").id,ServiceType.find_by(title: "Lawn Mowing").id],
+            ['Need someone to mow my lawn.','Need someone to help me.',
+             ServiceCategory.find_by(title: "Yard Work").id,ServiceType.find_by(title: "Lawn Mowing").id],
+            ['Need someone to take care of my son.','Someone who can take care of our son and drop him at UTSG at 7.30 am every morning.',
+             ServiceCategory.find_by(title: "Babysitting").id,ServiceType.find_by(title: "Babysitting").id],
+            ['Need someone to take care of my son.','Someone who can take care of our son and drop him at UTSC at 7.30 am every morning.',
+             ServiceCategory.find_by(title: "Babysitting").id,ServiceType.find_by(title: "Babysitting").id],
+            ['Need someone to take care of my son.','Someone who can take care of our son and drop him at UofT at 7.30 am every morning.',
+             ServiceCategory.find_by(title: "Babysitting").id,ServiceType.find_by(title: "Babysitting").id],
+            ['Need someone to eliminate lawn weeds','Someone who can eliminate lawn weeds',
+             ServiceCategory.find_by(title: "Yard Work").id,ServiceType.find_by(title: "Weeding").id],
+            ['Need someone to clean the snow off my car','Need someone to clean the snow off my car every morning',
+             ServiceCategory.find_by(title: "Snow Shoveling").id,ServiceType.find_by(title: "Snow Shoveling").id],
+            ['Need someone to clean the snow off my truck','Need someone to clean the snow off my truck every morning',
+             ServiceCategory.find_by(title: "Snow Shoveling").id,ServiceType.find_by(title: "Snow Shoveling").id],
+            ['Move furniture','Need someone to move the piano to the basement',
+             ServiceCategory.find_by(title: "Furniture Moving").id,ServiceType.find_by(title: "Furniture Moving").id],
+            ['Move furniture','Need someone to carry the furniture i bought from ikea',
+             ServiceCategory.find_by(title: "Furniture Moving").id,ServiceType.find_by(title: "Furniture Moving").id],
+            ['Cleaning sidewalk','Need someone to clean sidewalk',
+             ServiceCategory.find_by(title: "Simple Cleaning Tasks").id,ServiceType.find_by(title: "Simple Cleaning Tasks").id],
+            ['Cleaning basement','Need someone to clean the basement',
+             ServiceCategory.find_by(title: "Simple Cleaning Tasks").id,ServiceType.find_by(title: "Simple Cleaning Tasks").id],
+            ['Cleaning kitchen','Need someone to clean the ktichen in the basement',
+             ServiceCategory.find_by(title: "Simple Cleaning Tasks").id,ServiceType.find_by(title: "Simple Cleaning Tasks").id],
+            ['Need someone to pick up mails','Leaving for vacation, need someone to pick up mails',
+             ServiceCategory.find_by(title: "Vacation Services").id,ServiceType.find_by(title: "Mail Pickup").id],
+            ['Need someone to pick up mails','Leaving for Vancover, need someone to pick up mails',
+             ServiceCategory.find_by(title: "Vacation Services").id,ServiceType.find_by(title: "Mail Pickup").id],
+            ['Need someone to pick up mails','Leaving for Seattle, need someone to pick up mails',
+             ServiceCategory.find_by(title: "Vacation Services").id,ServiceType.find_by(title: "Mail Pickup").id],
+            ['Need someone to pick up mails','Leaving for Toronto, need someone to pick up mails',
+             ServiceCategory.find_by(title: "Vacation Services").id,ServiceType.find_by(title: "Mail Pickup").id],
+            ['Need someone to feed my dog','Leaving for vacation, need someone to take care of my dog',
+             ServiceCategory.find_by(title: "Vacation Services").id,ServiceType.find_by(title: "Pet Feeding").id],
+            ['Need someone to feed my cat','Leaving for vacation, need someone to take care of my cat',
+             ServiceCategory.find_by(title: "Vacation Services").id,ServiceType.find_by(title: "Pet Feeding").id],
+            ['Need someone to walk my dog','Leaving for vacation, need someone to take care of my dog',
+             ServiceCategory.find_by(title: "Vacation Services").id,ServiceType.find_by(title: "Dog Walking").id],
+            ['Need someone to help me install Windows 10','I bought a new desktop with OS, need some help',
+             ServiceCategory.find_by(title: "Computer Help").id,ServiceType.find_by(title: "Computer Help").id],
+            ['Need someone to help me assemble desktop','Need someone to help me install new graphic card.',
+             ServiceCategory.find_by(title: "Computer Help").id,ServiceType.find_by(title: "Computer Help").id],
+            ['Math tutoring','Need someone to teach math',
+             ServiceCategory.find_by(title: "Tutoring").id,ServiceType.find_by(title: "Tutoring").id],
+            ['Science tutoring','Need someone to teach grade 10 science',
+             ServiceCategory.find_by(title: "Tutoring").id,ServiceType.find_by(title: "Tutoring").id],
+            ['Mandarin tutoring','Need someone to teach Mandarin',
+             ServiceCategory.find_by(title: "Tutoring").id,ServiceType.find_by(title: "Tutoring").id],
+            ['Cantonese tutoring','Need someone to teach Cantonese',
+             ServiceCategory.find_by(title: "Tutoring").id,ServiceType.find_by(title: "Tutoring").id],
+            ['French tutoring','Need someone to teach grade 10 French',
+             ServiceCategory.find_by(title: "Tutoring").id,ServiceType.find_by(title: "Tutoring").id],
+            ['English tutoring','Need someone to teach grade 10 English',
+             ServiceCategory.find_by(title: "Tutoring").id,ServiceType.find_by(title: "Tutoring").id],
+            ['Science tutoring','Need someone to teach grade 12 science',
+             ServiceCategory.find_by(title: "Tutoring").id,ServiceType.find_by(title: "Tutoring").id],
+            ['Reading assistant','Need someone to read news for me',
+             ServiceCategory.find_by(title: "Reading").id,ServiceType.find_by(title: "Reading").id],
+            ['Reading assistant','Need someone to read textbook for me',
+             ServiceCategory.find_by(title: "Reading").id,ServiceType.find_by(title: "Reading").id],
+            ['Reading assistant','Need someone to read history book for me',
+             ServiceCategory.find_by(title: "Reading").id,ServiceType.find_by(title: "Reading").id],
+            ['Reading assistant','Need someone to read articles for me',
+             ServiceCategory.find_by(title: "Reading").id,ServiceType.find_by(title: "Reading").id],
+           ]
 
+real_post = []
+post_array.each {|record| real_post << {'title' => record[0], 'description' => record[1],'service_category_id' => record[2],
+             'service_type_id' => record[3]}}
 
 
 #start posting jobs
@@ -176,14 +249,16 @@ for i in 0..20
     @oneServiceType = ServiceType.all.sample(1).first
 
 
-    post = Post.create(title: Faker::Job.title,
+    post_index = Faker::Number.between(0,real_post.count()-1)
+
+    post = Post.create(title: real_post[post_index]['title'],
                        client: client,
-                       description: Faker::MostInterestingManInTheWorld.quote,
+                       description: real_post[post_index]['description'],
                        work_address: real_address[address_index]['address'],
                        pay: Faker::Number.between(1, 100),
                        number_of_teenager_needed: Faker::Number.between(1, 10),
-                       service_category_id: @oneServiceType.service_category_id,
-                       service_type_id: @oneServiceType.id
+                       service_category_id: real_post[post_index]['service_category_id'],
+                       service_type_id: real_post[post_index]['service_type_id']
 
     )
 

@@ -215,11 +215,12 @@ jQuery ->
         pos = 
           lat: position.coords.latitude
           lng: position.coords.longitude
-        image = "assets/img/mylocation.png"
+        image = "assets/img/location.png"
         marker = new (google.maps.Marker)(
           map: map
           animation: google.maps.Animation.DROP,
           icon: image,
+          zIndex: google.maps.Marker.MAX_ZINDEX + 1,
           position: pos)
         infoWindow.setPosition pos
         infoWindow.setContent "<strong>You are here!</strong>"
