@@ -30,7 +30,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def google_oauth2
     generic_callback( 'google_oauth2')
   end
- 
+
   def linkedin
     @user = User.from_omniauth(request.env["omniauth.auth"])
 

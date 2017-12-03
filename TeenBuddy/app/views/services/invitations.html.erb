@@ -79,9 +79,6 @@
                     <div class="pull-right">
                       <label class= "btn btn-xs <%=status_style(service.status)%>"> <%= status_text(service.status) %> </label></div>
                   </h3>
-                  <div class="row">
-
-                  <div class="hgroup col-xs-12 col-sm-8">
 
                   <% if service.teenager.selfie.present? %>
                       <%= image_tag(service.teenager.selfie.thum.url, style: "border-radius:50%;width:60px;height:60px;", class: "thumbnail") %>
@@ -90,6 +87,7 @@
                       <%= image_tag(UiFaces.face, class: "thumbnail", style: "width:60px;height:60px;border-radius:50%;") %>
                       <!-- default picture -->
                   <% end %>
+                  <div class="hgroup">
                     <h4>
 
                       <%=link_to service.teenager.fname,  teenager_path(service.teenager)%>
@@ -97,11 +95,10 @@
                     </h4>
                     <h5>Invite Message: <%= service.inviteMessage %></h5>
                   </div>
-                  <div class="header-meta col-xs-12 col-sm-4">
+                  <div class="header-meta">
                     <span class="location"><%=service.teenager.home_address%></span>
                     <span class="rate"><%= service.post.pay%></span>
                   </div>
-                </div>
                 </header>
 
                 <footer>

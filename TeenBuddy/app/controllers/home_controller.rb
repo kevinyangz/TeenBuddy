@@ -6,7 +6,6 @@ before_action :check_user_info
     @total_posts = Post.count()
   end
 
-
 def check_user_info
 	if current_user
 		if current_user.teenager
