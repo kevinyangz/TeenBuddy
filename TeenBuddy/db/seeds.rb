@@ -332,10 +332,13 @@ client_comment=[['I will not recommend this guy, poor Service.',1],
   ['Its ok',3],
   ['Most amazing kid ever, I love him.',5],
   ['slacker',2],
-  ['He reminds me it\'s not friday everyday',3],
+  ["He reminds me it's not friday everyday",3],
   ['So annoying',2],
-  ['hard working kid',5]
-
+  ['hard working kid',5],
+  ['I would like to have him work for me again', 4],
+  ['he did a good job at my place', 5],
+  ['I will probably hire another guy next time', 1],
+  ['he is too slow', 2]
 ]
 client_comment_fake=[]
 client_comment.each {|record| client_comment_fake << {'comment' => record[0], 'rating' => record[1]}}
@@ -346,13 +349,19 @@ teenager_comment=[['Very mean',1],
                 ['give me too much work',1],
                 ['good',5],
                 ['alright',4],
-                ['It's ok,3],
+                ["It's ok",3],
     ['Most amazing client ever, I love him.',5],
     ['Always calls me a slacker',2],
-    ['it\'s not friday~',3],
+    ["it's not friday~",3],
     ['So annoying',2],
-    ['her hair smells good',5]
-
+    ['her hair smells good',5],
+    ['excellent job', 5],
+    ['just okay', 3],
+    ['not very good', 2],
+    ['he is very friendly and nice', 5],
+    ['I would like to work for him again', 5],
+    ['great place to work', 5],
+    ['fair salary', 3]
 ]
 teenager_comment_fake=[]
 teenager_comment.each {|record| teenager_comment_fake << {'comment' => record[0], 'rating' => record[1]}}
