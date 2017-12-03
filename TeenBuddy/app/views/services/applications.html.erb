@@ -3,23 +3,23 @@
   <div class="container page-name">
 
 
-    <%if current_user.teenager %>
+    <% if current_user.teenager %>
         <h1 class="text-center">Job Application</h1>
         <p class="lead text-center">Use following search box to find the status of your applications</p>
     <% elsif current_user.client %>
         <h1 class="text-center">Job Candidates</h1>
         <p class="lead text-center">Use following search box to find best candidates for your positions</p>
-    <%end%>
+    <% end %>
   </div>
 
   <div class="container">
 
-<%if notice %>
-          <div class="alert alert-info">
-            <strong>Heads up!</strong> <%= notice %>
-          </div>
+    <% if notice %>
+        <div class="alert alert-info">
+          <strong>Heads up!</strong> <%= notice %>
+        </div>
 
-<%end%>
+    <% end %>
 
     <%= form_tag(services_applications_path, method: :get) do %>
 
@@ -28,20 +28,20 @@
           <div class="form-group col-xs-12 col-sm-4">
             <h6>job title</h6>
             <% if current_user.client %>
-                <%= select_tag :post, options_from_collection_for_select(Post.where(:client_id => current_user.client.id), "id", "title", params[:post]), {:include_blank => 'All',class: 'form-control selectpicker'} %>
+                <%= select_tag :post, options_from_collection_for_select(Post.where(:client_id => current_user.client.id), "id", "title", params[:post]), {:include_blank => 'All', class: 'form-control selectpicker'} %>
             <% elsif current_user.teenager %>
-                <%= select_tag :post, options_from_collection_for_select(Service.where(:teenager_id => current_user.teenager.id), "post_id", "post_title", params[:post]), {:include_blank => 'All',class: 'form-control selectpicker'} %>
-            <%end%>
+                <%= select_tag :post, options_from_collection_for_select(Service.where(:teenager_id => current_user.teenager.id), "post_id", "post_title", params[:post]), {:include_blank => 'All', class: 'form-control selectpicker'} %>
+            <% end %>
           </div>
 
           <div class="form-group col-xs-12 col-sm-4">
             <h6>status</h6>
-            <%= select_tag :status, options_for_select([[ "Pending", :applied],["Approved", :enrolled],["Declined", :rejected]], params[:status]), {:include_blank => 'All', class: 'form-control selectpicker'} %>
+            <%= select_tag :status, options_for_select([["Pending", :applied], ["Approved", :enrolled], ["Declined", :rejected]], params[:status]), {:include_blank => 'All', class: 'form-control selectpicker'} %>
           </div>
 
           <div class="form-group col-xs-12 col-sm-4">
             <h6>Order by</h6>
-            <%= select_tag :order, options_for_select(['status','apply time'], params[:order]), {class: 'form-control selectpicker'} %>
+            <%= select_tag :order, options_for_select(['status', 'apply time'], params[:order]), {class: 'form-control selectpicker'} %>
           </div>
 
         </div>
@@ -52,7 +52,7 @@
           </div>
         </div>
 
-    <%end%>
+    <% end %>
   </div>
 </header>
 <!-- END Page header -->
@@ -69,7 +69,7 @@
 
     <div class="container">
 
-      <%@services.each do |service| %>
+      <% @services.each do |service| %>
           <div class="row">
             <!-- Candidate item -->
             <div class="col-xs-12">
@@ -77,22 +77,28 @@
 
                 <header>
                   <h3>
-                    <%=link_to service.post.title,  post_path(service.post)%>
+                    <%= link_to service.post.title, post_path(service.post) %>
                     <div class="pull-right">
-                      <label class= "btn btn-xs <%=status_style(service.status)%>"> <%= status_text(service.status) %> </label></div>
+                      <label class="btn btn-xs <%= status_style(service.status) %>"> <%= status_text(service.status) %> </label>
+                    </div>
                   </h3>
-
-                 <% if service.teenager.selfie.present? %>
-                      <%= image_tag(service.teenager.selfie.thum.url, style: "border-radius:50%;width:60px;height:60px;", class: "thumbnail") %>
-                      <!-- user upload -->
-                  <% else %>
-                      <%= image_tag(UiFaces.face, class: "thumbnail", style: "width:60px;height:60px;border-radius:50%;") %>
-                      <!-- default picture -->
+                  <% if current_user.client %>
+                      <% if service.teenager.selfie.present? %>
+                          <%= image_tag(service.teenager.selfie.thum.url, style: "border-radius:50%;width:60px;height:60px;", class: "thumbnail") %>
+                          <!-- user upload -->
+                      <% else %>
+                          <%= image_tag(UiFaces.face, class: "thumbnail", style: "width:60px;height:60px;border-radius:50%;") %>
+                          <!-- default picture -->
+                      <% end %>
+                  <% elsif current_user.teenager %>
+                  <span class="fa-stack fa-lg fa-3x col-xs-12 col-sm-2">
+          <i class="fa <%= service.post.service_category.get_fa %> fa-stack-1x"></i>
+    </span>
                   <% end %>
                   <div class="hgroup">
                     <h4>
 
-                      <%=link_to service.teenager.fname,  teenager_path(service.teenager)%>
+                      <%= link_to service.teenager.fname, teenager_path(service.teenager) %>
 
                     </h4>
                     <h5>Apply Message: <%= service.applyMessage %></h5>
@@ -102,14 +108,14 @@
 
 
                 <footer>
-                  <div class="status"><strong>Applied on: </strong><%=service.updated_at%></div>
+                  <div class="status"><strong>Applied on: </strong><%= service.updated_at %></div>
                   <div class="action-btn">
-                    <%if current_user.client && service.applied? %>
-                        <%=link_to('Approve', service_path(service, :service => {:status => :enrolled}), :method => :put, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-success')%>
-                        <%=link_to('Reject',  service_path(service, :service => {:status => :rejected}), :method => :put, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-danger')%>
-                    <%elsif current_user.teenager && service.applied?  %>
-                        <%=link_to('Delete',  service_path(service), :method => :delete, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-danger')%>
-                    <%end%>
+                    <% if current_user.client && service.applied? %>
+                        <%= link_to('Approve', service_path(service, :service => {:status => :enrolled}), :method => :put, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-success') %>
+                        <%= link_to('Reject', service_path(service, :service => {:status => :rejected}), :method => :put, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-danger') %>
+                    <% elsif current_user.teenager && service.applied? %>
+                        <%= link_to('Delete', service_path(service), :method => :delete, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-danger') %>
+                    <% end %>
                   </div>
                 </footer>
               </div>
