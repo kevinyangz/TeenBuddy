@@ -177,6 +177,7 @@ jQuery ->
       post = all_posts[i]
       geocoder.geocode { 'address': post.work_address }, displayMarkerInformation(post, map, bound, infowindow)
       i++
+    displayCurrentLocation(map)
 
   displayMarkerInformation = (post, map, bound, infowindow) ->
     (results, status) ->
@@ -193,6 +194,32 @@ jQuery ->
         map.fitBounds bound
       else
         alert 'Geocode was not successful for the following reason: ' + status
+
+  displayCurrentLocation = (map, infowindow) -> 
+    infoWindow = new (google.maps.InfoWindow)
+    # Try HTML5 geolocation.
+    if navigator.geolocation
+      navigator.geolocation.getCurrentPosition ((position) ->
+        pos = 
+          lat: position.coords.latitude
+          lng: position.coords.longitude
+        image = "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
+        marker = new (google.maps.Marker)(
+          map: map
+          animation: google.maps.Animation.DROP,
+          icon: image,
+          position: pos)
+        infoWindow.setPosition pos
+        infoWindow.setContent "<strong>You are here!</strong>"
+        infoWindow.open map, marker
+        map.setCenter pos
+        return
+      ), ->
+        handleLocationError true, infoWindow, map.getCenter()
+        return
+    else
+      # Browser doesn't support Geolocation
+      handleLocationError false, infoWindow, map.getCenter()
  
   $(document).ready ->
     currentLocation = window.location

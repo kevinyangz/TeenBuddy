@@ -14,10 +14,14 @@ Rails.application.routes.draw do
   end
   end
 
-  devise_for :users, controllers: { registrations: 'users/registrations',:omniauth_callbacks => "users/omniauth_callbacks"}
+  devise_for :users, controllers: { registrations: 'users/registrations',
+    :omniauth_callbacks => "users/omniauth_callbacks",
+    :passwords => "users/passwords" }
 
 devise_scope :user do
   get "users/inactive"=> "users/registrations#inactive", :as => "users_inactive"
+  get "users/reset_page"=> "users/passwords#reset_page", :as => "users_reset_page"
+
 end
   resources :posts
   resources :clients

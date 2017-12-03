@@ -1,0 +1,21 @@
+
+<%= render 'home/header' %>
+
+<header class="page-header bg-img size-lg" style="background-image: url(assets/img/bg-banner2.jpg)">
+  <div class="container no-shadow">
+    <h1 class="text-center">Reset Password</h1>
+    <p class="lead text-center">An instruction has been sent to your email, please check your email and follow the steps!</p>
+    <%- if devise_mapping.recoverable? && controller_name != 'passwords' && controller_name != 'registrations' %>
+  <%= link_to "Forgot your password?", new_password_path(resource_name) %><br />
+<% end -%>
+
+<%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
+<p class="lead text-center">
+  <%= link_to "Didn't receive password reset instructions?", new_password_path(resource_name) %><br />
+</p>
+<% end -%>
+  </div>
+</header>
+<br><br><br><br><br><br><br><br><br><br>
+
+<%= render 'home/footer' %>
