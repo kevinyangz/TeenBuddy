@@ -51,5 +51,16 @@ class User < ApplicationRecord
 
   end
 
+
+  def name
+    if self.teenager
+      "#{self.teenager.fname} #{self.teenager.lname}"
+    elsif self.client
+      "#{self.client.fname} #{self.client.lname}"
+    else
+      "none"
+    end
+  end
+
   
 end
