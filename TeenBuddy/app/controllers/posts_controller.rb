@@ -7,7 +7,7 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     if params[:client_id].presence
-      @posts = Post.where(client_id: params[:client_id]).order(params[:sort]).filter(params.slice(:searched_keyword, :address, :status ,:category_id, :type_id)).reverse.paginate(:page => params[:page], :per_page => 5)
+      @posts = Post.all.filter(params.slice(:searched_keyword, :address, :status)).where(client_id: params[:client_id]).order(params[:order]).reverse.paginate(:page => params[:page], :per_page => 5)
       @state = 'client_posts'
     elsif params[:teenager_id].presence
       @posts = Service.where(teenager_id: params[:teenager_id]).reverse.paginate(:page => params[:page], :per_page => 5)
