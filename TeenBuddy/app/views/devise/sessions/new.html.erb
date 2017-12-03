@@ -44,8 +44,12 @@
         <%= link_to user_facebook_omniauth_authorize_path, class: "facebook" do %>
             <i class="fa fa-facebook"></i>
         <% end %>
-        <li><a class="twitter" href="#"><i class="fa fa-twitter"></i></a></li>
-        <li><a class="linkedin" href="#"><i class="fa fa-linkedin"></i></a></li>
+        <%= link_to user_twitter_omniauth_authorize_path, class: "twitter" do %>
+            <i class="fa fa-twitter"></i>
+        <% end %>
+        <%= link_to user_linkedin_omniauth_authorize_path, class: "linkedin" do %>
+            <i class="fa fa-linkedin"></i>
+        <% end %>
       </ul>
     </div>
 

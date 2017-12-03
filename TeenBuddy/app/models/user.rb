@@ -3,7 +3,7 @@ class User < ApplicationRecord
   #  :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, :omniauth_providers => [:facebook]
+         :omniauthable, :omniauth_providers => [:facebook,:twitter,:linkedin]
   has_one :teenager, :dependent => :delete
   has_one :client, :dependent => :delete
   has_many :transactions, :dependent => :delete_all
@@ -28,8 +28,19 @@ class User < ApplicationRecord
         user.provider = data["provider"]
         user.uid = data["uid"]
         user.password = Devise.friendly_token[0,20]
-        puts 'here is the provider'
         puts( session["devise.facebook_data"].map{ |k,v| "#{k} => #{v}" }.sort )
+      elsif data = session["devise.twitter_data"]
+        user.email = data["info"]["email"] if user.email.blank?
+        user.provider = data["provider"]
+        user.uid = data["uid"]
+        user.password = Devise.friendly_token[0,20]
+        puts( session["devise.twitter_data"].map{ |k,v| "#{k} => #{v}" }.sort )
+      elsif data = session["devise.linkedin_data"]
+        user.email = data["info"]["email"] if user.email.blank?
+        user.provider = data["provider"]
+        user.uid = data["uid"]
+        user.password = Devise.friendly_token[0,20]
+        puts( session["devise.linkedin_data"].map{ |k,v| "#{k} => #{v}" }.sort )
       end
     end
   end

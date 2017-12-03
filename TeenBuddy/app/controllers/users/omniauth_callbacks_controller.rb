@@ -1,25 +1,30 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # You should configure your model like this:
   # devise :omniauthable, omniauth_providers: [:twitter]
-  def generic_callback(provider)
-    # You need to implement the method below in your model (e.g. app/models/user.rb)
+
+  # You should also create an action method in this controller like this:
+  def twitter
     @user = User.from_omniauth(request.env["omniauth.auth"])
 
     if @user
       sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
-      set_flash_message(:notice, :success, :kind => provider.capitalize) if is_navigational_format?
+      set_flash_message(:notice, :success, :kind => "Twitter") if is_navigational_format?
     else
-      session["devise.#{provider}_data"] = request.env["omniauth.auth"]
+      session["devise.twitter_data"] = request.env["omniauth.auth"].except("extra")
       redirect_to new_user_registration_url
     end
   end
-  # You should also create an action method in this controller like this:
-  def twitter
-    generic_callback( 'twitter')
-  end
 
   def facebook
-    generic_callback('facebook')
+    @user = User.from_omniauth(request.env["omniauth.auth"])
+
+    if @user
+      sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
+      set_flash_message(:notice, :success, :kind => "Facebook") if is_navigational_format?
+    else
+      session["devise.facebook_data"] = request.env["omniauth.auth"]
+      redirect_to new_user_registration_url
+    end
   end
 
   def google_oauth2
@@ -27,7 +32,15 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
  
   def linkedin
-    generic_callback( 'linkedin')
+    @user = User.from_omniauth(request.env["omniauth.auth"])
+
+    if @user
+      sign_in_and_redirect @user, :event => :authentication #this will throw if @user is not activated
+      set_flash_message(:notice, :success, :kind => "Linkedin") if is_navigational_format?
+    else
+      session["devise.linkedin_data"] = request.env["omniauth.auth"].except("extra")
+      redirect_to new_user_registration_url
+    end
   end
   # More info at:
   # https://github.com/plataformatec/devise#omniauth
