@@ -160,11 +160,11 @@
           <% Service.where(client_id: @client.id).where.not("client_review like ?", "").each do |service| %>
               <li class="comment">
                 
-                <img class="avatar" src="<%= [Client.find(service.client_id).selfie.thum.url, UiFaces.face].find(&:itself)%>" alt="avatar" />
+                <img class="avatar" src="<%= [Teenager.find(service.teenager_id).selfie.thum.url, UiFaces.face].find(&:itself)%>" alt="avatar" />
 
                 <div class="comment-body">
                   <h6>
-                    <%=link_to "#{Teenager.find(service.teenager_id).fname}", Client.find(service.teenager_id)%> 
+                    <%=link_to "#{Teenager.find(service.teenager_id).fname}", Teenager.find(service.teenager_id)%> 
 
                     <time>
                       <%= service.updated_at %>
