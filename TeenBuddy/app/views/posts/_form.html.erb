@@ -59,10 +59,12 @@
           <% if @post %>
             <script>
               var post_id = "<%== escape_javascript @post.id.to_s %>";
+              var post_address = "<%== escape_javascript @post.work_address %>";
             </script>
           <%else%>
             <script>
               var post_id = -1;
+              var post_address = "";
             </script>
           <% end %>
 

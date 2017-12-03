@@ -24,7 +24,7 @@
         <div class="row">
 
           <div class="form-group col-xs-12 col-sm-4">
-            <h6>job title</h6>
+            <h6>Job Title</h6>
             <% if current_user.client %>
                 <%= select_tag :post, options_from_collection_for_select(Post.where(:client_id => current_user.client.id), "id", "title", params[:post]), {:include_blank => 'All',class: 'form-control selectpicker'} %>
             <% elsif current_user.teenager %>
@@ -33,7 +33,7 @@
           </div>
 
           <div class="form-group col-xs-12 col-sm-4">
-            <h6>status</h6>
+            <h6>Status</h6>
             <%= select_tag :status, options_for_select([[ "Pending", :beingInvited],["Approved", :enrolled],["Declined", :rejected]], params[:status]), {:include_blank => 'All', class: 'form-control selectpicker'} %>
           </div>
 
@@ -121,5 +121,6 @@
           </div>
       <% end %>
     </div>
+    <a id="scroll-up" href="#"><i class="ti-angle-up"></i></a>
   </section>
 </main>

@@ -76,6 +76,17 @@ jQuery ->
         lat: 43.6629
         lng: -79.3957
       zoom: 11)
+    if post_address != ""
+      geocoder = new (google.maps.Geocoder)
+      geocoder.geocode { 'address': post_address }, (results, status) ->
+        if status == google.maps.GeocoderStatus.OK
+          map.setCenter results[0].geometry.location
+          map.setZoom 17
+          marker = new (google.maps.Marker)(
+            map: map
+            position: results[0].geometry.location)
+        else
+          alert 'Geocode was not successful for the following reason: ' + status
     input = document.getElementById('post_work_address')
     autocomplete = new (google.maps.places.Autocomplete)(input)
     autocomplete.bindTo 'bounds', map
@@ -175,18 +186,19 @@ jQuery ->
     i = 0
     while i < all_posts.length
       post = all_posts[i]
-      geocoder.geocode { 'address': post.work_address }, displayMarkerInformation(post, map, bound, infowindow)
+      post_route = all_posts_routes[i]
+      geocoder.geocode { 'address': post.work_address }, displayMarkerInformation(post, post_route, map, bound, infowindow)
       i++
     displayCurrentLocation(map)
 
-  displayMarkerInformation = (post, map, bound, infowindow) ->
+  displayMarkerInformation = (post, post_route, map, bound, infowindow) ->
     (results, status) ->
       if status == google.maps.GeocoderStatus.OK
         marker = new (google.maps.Marker)(
           map: map
           position: results[0].geometry.location)
         google.maps.event.addListener marker, 'click', ->
-          post_information = "<h5>" + post.title + "</h5>\n" + "<p><strong>Description: </strong>" + post.description + "</p>" + "<p><strong>Address: </strong>" + post.work_address + "</p>"
+          post_information = "<h5>" + post.title + "</h5>\n" + "<p><strong>Description: </strong>" + post.description + "</p>" + "<p><strong>Address: </strong>" + post.work_address + "</p>" + "<a href=\"" + post_route + "\">View Job Post Deatils</a>";
           infowindow.setContent post_information
           infowindow.open map, marker
         #bound map to cover all the posts in the map
@@ -203,11 +215,12 @@ jQuery ->
         pos = 
           lat: position.coords.latitude
           lng: position.coords.longitude
-        image = "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
+        image = "assets/img/location.png"
         marker = new (google.maps.Marker)(
           map: map
           animation: google.maps.Animation.DROP,
           icon: image,
+          zIndex: google.maps.Marker.MAX_ZINDEX + 1,
           position: pos)
         infoWindow.setPosition pos
         infoWindow.setContent "<strong>You are here!</strong>"
