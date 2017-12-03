@@ -5,6 +5,7 @@ class Service < ApplicationRecord
   validate :position_filled
   validate :service_exists
   after_update :set_transaction
+  after_save :send_message
 
   enum status: [:open, :beingInvited, :applied, :rejected, :enrolled, :finished, :confirmed]
 
@@ -62,6 +63,25 @@ end
 
   def post_title
     self.post.title
+  end
+
+
+  def send_message
+    case self.status.to_sym
+      when :applied then
+        self.teenager.user.send_message(self.post.client.user,  "#{self.applyMessage}","#{self.teenager.user.name} has applied your post #{self.post.title}")
+      when :beingInvited then
+        self.post.client.user.send_message(self.teenager.user,  "#{self.inviteMessage}","#{self.post.client.user.name} invites you to job #{self.post.title}")
+      when :enrolled then
+        self.teenager.user.send_message(self.post.client.user,  "#{self.applyMessage}", "#{self.teenager.user.name} has enrolled to your post #{self.post.title}")
+        self.post.client.user.send_message(self.teenager.user,  "#{self.inviteMessage}", "you have enrolled to job #{self.post.title}")
+      when :finished then
+        self.teenager.user.send_message(self.post.client.user,  "#{self.applyMessage}","#{self.teenager.user.name} has finished job #{self.post.title}")
+      when :confirmed then
+        self.post.client.user.send_message(self.teenager.user, "#{self.inviteMessage}",  "#{self.post.client.user.name} has confirmed your work for #{self.post.title}")
+      else puts 'did not enter any'
+
+    end
   end
 
 

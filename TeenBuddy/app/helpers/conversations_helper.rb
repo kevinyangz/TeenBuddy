@@ -16,7 +16,7 @@ module ConversationsHelper
     else
       other_person = participants.first
     end
-    content_tag :li, link_to(other_person.name.capitalize, conversations_path(conv: conversation.id)), opts
+    content_tag :li, link_to(conversation.subject, conversations_path(conv: conversation.id)), opts
 
   end
 end

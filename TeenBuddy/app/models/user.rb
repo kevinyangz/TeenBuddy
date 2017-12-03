@@ -61,5 +61,17 @@ class User < ApplicationRecord
     end
   end
 
+  def send_a_message(receiver, message)
+    conversations = self.mailbox.conversations
+
+    conversations.each do |conversatoin|
+      if conversation.participants.first == self && conversatoin.pa
+      end
+
+    end
+
+
+  end
+
   
 end
