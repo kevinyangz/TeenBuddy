@@ -1,9 +1,15 @@
-
-<header class="page-header bg-img" style="background-image: url(assets/img/bg-banner1.jpg);">
+<header class="page-header bg-img size-lg" style="background-image: url(/assets/img/bg-banner1.jpg)">
   <div class="container page-name">
     <h1 class="text-center">Manage your posted jobs</h1>
     <p class="lead text-center">Here's the list of your submitted jobs. You can edit or delete them, or even add a new one.</p>
   </div>
+  <% if notice %>
+    <div class="container">
+      <p id="notice"><%= notice %></p>
+    </div>
+  <% end %>
+
+
   <div class="container">
     <%= form_tag(posts_path, method: :get) do %>
 
@@ -36,56 +42,7 @@
             <h6>Order By</h6>
             <%= select_tag :order, options_for_select([["update time", "updated_at"], ["create time", "created_at"]], params[:order]), {:include_blank => 'Default', class: 'form-control selectpicker'} %>
           </div>
-
-          <div id="infowindow-content">
-            <img src="" width="16" height="16" id="place-icon">
-            <span id="place-name" class="title"></span><br>
-            <span id="place-address"></span>
-          </div>
-          <%= javascript_tag "all_posts = #{@posts.to_json};" %>
-          <script>
-              var post_id = -1;
-          </script>
-
-          <!--
-        <div class="form-group col-xs-12 col-sm-6">
-          <h6>Job Category</h6>
-          <div class="checkall-group">
-            <div class="checkbox">
-              <input type="checkbox" id="service_category_all" name="service_category" checked>
-              <label for="service_category_all">All types</label>
-            </div>
-
-            <% ServiceCategory.all.each do |category| %>
-              <div class="checkbox">
-                <input type="checkbox" id=<%= "service_category_#{category.id}" %> name="service_category" value=<%= category.title.parameterize.underscore %>>
-                <label for=<%= "service_category_#{category.id}" %>><%= category.title %></label>
-              </div>
-            <% end %>
-          </div>
         </div>
-
-        <div class="form-group col-xs-12 col-sm-6">
-          <h6>Job Type</h6>
-          <div class="checkall-group">
-            <div class="checkbox">
-              <input type="checkbox" id="service_type_all" name="service_type" checked>
-              <label for="service_type_all">All types</label>
-            </div>
-
-            <% ServiceType.all.each do |type| %>
-              <div class="checkbox">
-                <input type="checkbox" id=<%= "service_type_#{type.id}" %> value=<%= type.service_category.title.parameterize.underscore %> name="service_type">
-                <label for=<%= "service_type_#{type.id}" %>><%= type.title %></label>
-              </div>
-            <% end %>
-          </div>
-        </div>
-      -->
-        </div>
-
-
-
 
         <div class="button-group">
 
@@ -109,8 +66,6 @@
   <section class="no-padding-top bg-alt">
     <div class="container">
       <div class="row">
-
-
 
         <% @posts.each do |post| %>
             <div class="col-xs-12">
