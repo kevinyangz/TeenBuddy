@@ -14,13 +14,13 @@ class ServiceCategory < ApplicationRecord
 			when"Babysitting" then'fa-child'
 			when  "Yard Work" then 'fa-leaf'
 			when "Snow Shoveling" then 'fa-snowflake-o'
-			when "Furniture Moving"then
-			when "Simple Cleaning Tasks"then
-			when "Vacation Services"then
-			when "Dog Walking"then
-			when "Computer Help"then
-			when "Tutoring" then
-			when "Reading"then
+			when "Furniture Moving"then 'fa-truck'
+			when "Simple Cleaning Tasks"then 'fa-trash'
+			when "Vacation Services"then 'fa-plane'
+			when "Dog Walking"then 'fa-paw'
+			when "Computer Help"then 'fa-laptop'
+			when "Tutoring" then 'fa-group'
+			when "Reading"then 'fa-book'
 		end
 	end
 end
