@@ -20,7 +20,7 @@
 
           <div class="form-group col-xs-12 col-sm-4">
             <h6>status</h6>
-            <%= select_tag :status, options_for_select([["Pending", :applied], ["Approved", :enrolled], ["Declined", :rejected]], params[:status]), {:include_blank => 'All', class: 'form-control selectpicker'} %>
+            <%= select_tag :status, options_for_select([["In Progress", :enrolled], ["Completed", :finished], ["Confirmed", :confirmed]], params[:status]), {:include_blank => 'All', class: 'form-control selectpicker'} %>
           </div>
 
           <div class="form-group col-xs-12 col-sm-4">
