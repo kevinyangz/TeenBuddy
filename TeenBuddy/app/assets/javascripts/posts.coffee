@@ -175,18 +175,19 @@ jQuery ->
     i = 0
     while i < all_posts.length
       post = all_posts[i]
-      geocoder.geocode { 'address': post.work_address }, displayMarkerInformation(post, map, bound, infowindow)
+      post_route = all_posts_routes[i]
+      geocoder.geocode { 'address': post.work_address }, displayMarkerInformation(post, post_route, map, bound, infowindow)
       i++
     displayCurrentLocation(map)
 
-  displayMarkerInformation = (post, map, bound, infowindow) ->
+  displayMarkerInformation = (post, post_route, map, bound, infowindow) ->
     (results, status) ->
       if status == google.maps.GeocoderStatus.OK
         marker = new (google.maps.Marker)(
           map: map
           position: results[0].geometry.location)
         google.maps.event.addListener marker, 'click', ->
-          post_information = "<h5>" + post.title + "</h5>\n" + "<p><strong>Description: </strong>" + post.description + "</p>" + "<p><strong>Address: </strong>" + post.work_address + "</p>"
+          post_information = "<h5>" + post.title + "</h5>\n" + "<p><strong>Description: </strong>" + post.description + "</p>" + "<p><strong>Address: </strong>" + post.work_address + "</p>" + "<a href=\"" + post_route + "\">View Deatils</a>";
           infowindow.setContent post_information
           infowindow.open map, marker
         #bound map to cover all the posts in the map

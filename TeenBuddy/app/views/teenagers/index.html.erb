@@ -42,6 +42,13 @@
           <%= select_tag :order, options_for_select([["Rating"],["Number of Services"]],params[:order]), {:include_blank => 'Default', class: 'form-control selectpicker'} %>
         </div>
 
+
+        <div class="form-group col-xs-12 col-sm-12" style="height:500px;" id="teenager_all_map"></div>
+        <%= javascript_tag "all_teenagers = #{@teenagers.to_json};" %>
+        <script>
+            var teenager_id = -1;
+        </script>
+
       </div>
 
       <div class="button-group">
