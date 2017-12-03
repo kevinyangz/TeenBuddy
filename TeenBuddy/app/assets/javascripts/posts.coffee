@@ -203,7 +203,7 @@ jQuery ->
         pos = 
           lat: position.coords.latitude
           lng: position.coords.longitude
-        image = "https://developers.google.com/maps/documentation/javascript/examples/full/images/beachflag.png"
+        image = "assets/img/mylocation.png"
         marker = new (google.maps.Marker)(
           map: map
           animation: google.maps.Animation.DROP,
