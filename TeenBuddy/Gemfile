@@ -87,7 +87,9 @@ end
 
 
 gem 'omniauth-facebook','~> 4.0.0'
-
+gem 'omniauth-twitter'
+gem 'omniauth-linkedin'
+gem "omniauth-google-oauth2"
 gem 'faker'
 gem 'ui_faces'
 gem 'acts-as-taggable-on', '~> 4.0'

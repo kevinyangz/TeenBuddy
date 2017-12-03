@@ -1,68 +1,109 @@
-<header class="site-header size-lg text-center" style="background-image: url(/assets/img/bg-banner1.jpg)">  
+<header class="page-header bg-img size-lg" style="background-image: url(/assets/img/mail.jpeg)">
   <div class="container no-shadow">
-    <h1 class="text-center">Your Messages</h1>
-    <p class="lead text-center">Check out your messages here!</p>
+    <h1 class="text-center">Messages</h1>
+    <p class="text-center">Here you can check your conversations with other members on <strong>TennBuddy!</strong></p>
   </div>
-</header>
 
 
-<main>
-  <section>
+
+
+
+
     <div class="container">
-      <div class="container page-name">
         <div class="col-sm-3">
-          <ul class="nav nav-pills nav-stacked">
-          <p> <%= link_to 'Start conversation', '#', :class => 'btn btn-lg btn-primary', 'data-toggle' => 'modal', 'data-target' => '#applyModal' %></p>
-          <%= mailbox_section 'inbox', @box %>
-          <%= mailbox_section 'sent', @box %>
-          <%= mailbox_section 'trash', @box %>
-          </ul>
+          <div class="widget widget_categories">
+            <ul class="widget-body">
+              <% @conversations.each do |conversation| %>
+                  <%= conv_section conversation, class: 'cat-item' %>
+              <% end %>
+            </ul>
+          </div>
+
         </div>
 
         <div class="col-sm-9">
-          <% if @box == 'trash' %>
-            <p><%= link_to 'Empty trash', empty_trash_conversations_path, class: 'btn btn-danger', method: :delete,
-                           data: {confirm: 'Are you sure?'} %></p>
+
+
+          <% if @conversation %>
+
+              <h3>Chatting with
+                <%= render 'conversations/participants', conversation: @conversation %>
+              </h3>
+              <hi> <%= flash[:success] %></hi>
+
+              <div class="panel panel-default">
+                <div class="panel-heading"><%= "subject: #{@conversation.subject}" %></div>
+
+                <div class="panel-body">
+                  <div class="messages">
+                    <% @conversation.receipts_for(current_user).each do |receipt| %>
+                        <% message = receipt.message %>
+                        <div class="media">
+                          <% if current_user == message.sender %>
+                              <div class="text-right">
+                                <p><strong>Me at <%= message.created_at.strftime("%-d %B %Y, %H:%M:%S") %></strong></p>
+                                <p><%= message.body %></p>
+                              </div>
+                          <% else %>
+                              <div class="text-left">
+                                <p><strong><%= message.sender.name %>says
+                                  at <%= message.created_at.strftime("%-d %B %Y, %H:%M:%S") %></strong></p>
+                                <p><%= message.body %></p>
+                              </div>
+                          <% end %>
+                        </div>
+                    <% end %>
+                  </div>
+                </div>
+              </div>
+
+              <%= form_tag reply_conversation_path(@conversation), method: :post do %>
+                  <div class="form-group">
+                    <p class="emoji-picker-container">
+                      <%= text_area_tag 'body', nil, cols: 3, class: 'form-control', placeholder: 'Type something...', data: {emojiable: true}, required: true %>
+                    </p>
+                  </div>
+                  <div class="pull-right">
+                  <%= submit_tag "Send Message", class: 'btn btn-primary' %></div>
+              <% end %>
+          <% else %>
+              <h3>You do not have any conversation yet.</h3>
           <% end %>
-          <ul class="list-group">
-            <%= render partial: 'conversations/conversation', collection: @conversations %>
-          </ul>
         </div>
       </div>
-    </div>
-  </section>
-</main>
+
+</header>
 
 
 <!-- pop out window for start conversation -->
 <div id="applyModal" class="modal fade" role="dialog">
-  <div class="modal-dialog" >
+  <div class="modal-dialog">
     <div class="modal-content">
       <%= form_tag messages_path, method: :post do %>
-        <div class="modal-body">
-          <div class="form-group">
-            <%= label_tag 'message[subject]', 'Subject' %>
-            <p class="emoji-picker-container">
-            <%= text_field_tag 'message[subject]', nil, class: 'form-control', data: { emojiable: true },required: true %>
-            </p>
-          </div>
+          <div class="modal-body">
+            <div class="form-group">
+              <%= label_tag 'message[subject]', 'Subject' %>
+              <p class="emoji-picker-container">
+                <%= text_field_tag 'message[subject]', nil, class: 'form-control', data: {emojiable: true}, required: true %>
+              </p>
+            </div>
 
-          <div class="form-group ">
-            <%= label_tag 'message[body]', 'Message' %>
-            <p class="emoji-picker-container">
-            <%= text_area_tag 'message[body]', nil, cols: 3, class: 'form-control', data: { emojiable: true },required: true %>
-            </p>
-          </div>
+            <div class="form-group ">
+              <%= label_tag 'message[body]', 'Message' %>
+              <p class="emoji-picker-container">
+                <%= text_area_tag 'message[body]', nil, cols: 3, class: 'form-control', data: {emojiable: true}, required: true %>
+              </p>
+            </div>
 
-          <div class="form-group">
-            <%= label_tag 'recipients', 'Choose recipients' %>
-            <%= select_tag 'recipients', recipients_options, multiple: true, class: 'form-control' %>
+            <div class="form-group">
+              <%= label_tag 'recipients', 'Choose recipients' %>
+              <%= select_tag 'recipients', recipients_options, multiple: true, class: 'form-control' %>
+            </div>
           </div>
-        </div>
-        <div class="modal-footer">
-          <%= submit_tag 'Send', class: 'btn btn-primary' %>
-          <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
-        </div>
+          <div class="modal-footer">
+            <%= submit_tag 'Send', class: 'btn btn-primary' %>
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+          </div>
       <% end %>
     </div>
   </div>

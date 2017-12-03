@@ -1,9 +1,7 @@
 <% conversation.participants.each do |participant| %>
   <% unless participant == current_user %>
-   <%if participant.teenager%>
-    <strong  class="text-muted"><%=Teenager.find_by(user_id: participant.id).fname%> </strong>
-    <%else%>
-    <strong  class="text-muted"><%=Client.find_by(user_id: participant.id).fname%> </strong>
-    <%end%>
+
+    <strong  class="text-muted"><%=participant.name%> </strong>
+
        <% end %>
 <% end %>

@@ -1,6 +1,6 @@
 class User < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  #  :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, :omniauth_providers => [:facebook]
@@ -49,5 +49,17 @@ class User < ApplicationRecord
     end
 
   end
+
+
+  def name
+    if self.teenager
+      "#{self.teenager.fname} #{self.teenager.lname}"
+    elsif self.client
+      "#{self.client.fname} #{self.client.lname}"
+    else
+      "none"
+    end
+  end
+
   
 end

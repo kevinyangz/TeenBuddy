@@ -17,8 +17,9 @@
 
     <%end%>
     <div class="header-detail">
-      <img class="logo" src="assets/img/logo-google.jpg" alt="">
-
+    <span class="fa-stack fa-lg fa-3x col-xs-12 col-sm-2">
+          <i class="fa <%= @post.service_category.get_fa %> fa-stack-1x"></i>
+    </span>
       <div class="hgroup">
         <h1><%= @post.title %></h1>
 
@@ -99,7 +100,7 @@
 
         <div class="action-buttons">
           <% if current_user.teenager %>
-              <%= link_to 'Chat with Client', '#', :class => 'btn btn-success', 'data-toggle' => 'modal', 'data-target' => '#messageModal' %>
+              <%= link_to "Chat with #{@post.client.fname}", '#', :class => 'btn btn-primary', 'data-toggle' => 'modal', 'data-target' => '#messageModal' %>
               <% if (teenager_service=@post.applicable(current_user.teenager)) == 'applicable' %>
                   <%= link_to 'Apply now', '#', :class => 'btn btn-success', 'data-toggle' => 'modal', 'data-target' => '#applyModal' %>
               <% else %>
@@ -153,15 +154,19 @@
         <div class="modal-content">
           <%= form_tag messages_path, method: :post do %>
               <div class="modal-body">
-
+                 <h4 class="text-center">Send to <strong><%=" #{@post.client.fname} #{@post.client.lname}"%></strong></h4>
                 <div class="form-group">
                   <%= label_tag 'message[subject]', 'Subject' %>
-                  <%= text_field_tag 'message[subject]', nil, class: 'form-control', required: true %>
+               <p class="emoji-picker-container">
+                  <%= text_field_tag 'message[subject]', nil, class: 'form-control',  data: { emojiable: true } ,required: true %>
+                </p>
                 </div>
 
                 <div class="form-group ">
                   <%= label_tag 'message[body]', 'Message' %>
-                  <%= text_area_tag 'message[body]', nil, cols: 3, class: 'form-control', required: true %>
+                    <p class="emoji-picker-container">
+                   <%= text_area_tag 'message[body]', nil, cols: 3, class: 'form-control', data: { emojiable: true }, required: true %>
+                 </p>
                 </div>
 
                 <%= hidden_field_tag 'recipients', @post_client %>
@@ -239,7 +244,7 @@
       </section>
   <% end %>
 
-<% if current_user.client == @post.client && (post_service = Service.where(:client_id => current_user.client, :post_id => @post.id, :status => [ :applied, :beingInvited])).any? %>
+<% if current_user.client == @post.client && (@post.hasPosition == 'open')&& (post_service = Service.where(:client_id => current_user.client, :post_id => @post.id, :status => [ :applied, :beingInvited])).any? %>
 
     <section class="no-padding-top bg-alt">
         <header class="section-header">
