@@ -63,7 +63,7 @@ ActiveAdmin.register_page "Dashboard" do
         end #panel
     end #column
       column do
-        panel "Financial Status" do
+        panel "Operational Status" do
         attributes_table_for Client do
             row("Total Profit")  { number_to_currency Transaction.getTotalProfit }
             row ("Total Transactions")  {Transaction.all.count}

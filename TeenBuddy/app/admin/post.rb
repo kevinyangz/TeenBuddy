@@ -59,11 +59,11 @@ permit_params :list, :of, :attributes, :on, :model, :description, :pay, :number_
   if current_admin_user.role == 'admin'
   actions  defaults: false do |resource|
   #	destroy_admin_user_path
-  item "Show", admin_client_path(resource.client)
+  item "Show", admin_post_path(resource)
   end
   elsif current_admin_user.role =='superadmin'
   actions defaults: false do |post|
-    item "Show", admin_client_path(post)
+    item "Show", admin_post_path(post)
     text_node "&nbsp".html_safe
     item "Edit", edit_admin_post_path(post) 
     text_node "&nbsp".html_safe
