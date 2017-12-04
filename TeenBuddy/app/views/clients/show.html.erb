@@ -130,8 +130,6 @@
               <footer>
                 <p class="status"><strong>Status: </strong><%= post.hasPosition %></p>
                 <% if current_user.client == @client%>
-                <%= current_user.client.id%>
-                <%= @client.id%>
 
                 <div class="action-btn">
                   <%= link_to 'Edit', edit_post_path(post), class: 'btn btn-xs btn-gray' %>
