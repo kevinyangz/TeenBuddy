@@ -81,7 +81,7 @@ for i in 0..30
                                           postal_code: real_address[address_index]['postal_code']}
   )
 
-  transaction = Transaction.create!(user: user, inout: true, comment: 'Deposit (We charge 5% service fee.)', amount: 2000 * 100)
+  transaction = Transaction.create!(user: user, inout: true, comment: 'Deposit (We charge 5% service fee.)', amount: 1500 * 100)
 
 end
 
@@ -243,7 +243,7 @@ post_array.each {|record| real_post << {'title' => record[0], 'description' => r
 
 #start posting jobs
 
-for i in 0..20
+for i in 0..15
 
   @SomeClients = Client.all.sample(Client.count/2)
 
