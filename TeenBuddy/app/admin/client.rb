@@ -94,7 +94,7 @@ end
     attributes_table_for client do 
     row ("Rating") {"#{client.get_average_rating.round} out of 5"}
      row ("Totay Paid") {	number_to_currency client.get_total_paid}
-     row("Total Jobs#") { "#{client.services.where(:status => [:finished]).count} Jobs" }
+     row("Total Jobs#") { "#{client.posts.count} Jobs" }
 #
    # :fname, :lname, teenager.get_average_rating
 end

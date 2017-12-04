@@ -52,7 +52,7 @@ ActiveAdmin.register_page "Dashboard" do
 
     columns do
          column do
-        panel "Teenager Interest" do
+        panel "Teenager Interests" do
          div do
 
             category_hash = []
@@ -71,7 +71,6 @@ ActiveAdmin.register_page "Dashboard" do
             row("Total Clients")  {  Client.all.count }
             row ("Total Posts")  {Post.all.count}
             row ("Total Application"){Service.all.where(:status =>[:applied]).count}
-
             row ("Total Job Done"){Service.all.where(:status =>[:finished]).count}
 
             # row("Dollar Value"){ number_to_currency LineItem.where(:product_id => resource.id).sum(:price) }
