@@ -12,9 +12,8 @@ ActiveAdmin.register Client do
 #   permitted
 # end
  permit_params do
-   permitted = [:list, :of, :attributes, :on, :model,:home_address,:postal_code,:cell_phone,:selfie,:description,:home_phone]
+   permitted = [:list, :of, :attributes, :on, :model,:home_address,:cell_phone,:selfie,:description,:home_phone]
    permitted << [:fnmae,:lname] if current_admin_user.role =='superadmin'
-
    permitted
  end
 

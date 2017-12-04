@@ -128,14 +128,7 @@ end
 
 
 
-sidebar :help do
-  "Need help? Email us at help@teenBudy.com"
-end
 
-sidebar :Admin, if: proc{ current_admin_user.role=='admin' } do
-  "Only for admin!"
-
-end
 sidebar :Superadmin, if: proc{ current_admin_user.role=='superadmin'} do
   "Only for superadmin"
 end
