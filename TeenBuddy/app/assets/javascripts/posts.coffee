@@ -71,7 +71,6 @@ jQuery ->
 
 #auto complete google map API javascripts
   initializeFormMap = ->
-    console.log("hidddd")
     map = new (google.maps.Map)(document.getElementById('post_form_map'),
       center:
         lat: 43.6629
@@ -86,8 +85,6 @@ jQuery ->
           marker = new (google.maps.Marker)(
             map: map
             position: results[0].geometry.location)
-        else
-          alert 'Geocode was not successful for the following reason: ' + status
     input = document.getElementById('post_work_address')
     autocomplete = new (google.maps.places.Autocomplete)(input)
     autocomplete.bindTo 'bounds', map
@@ -159,9 +156,6 @@ jQuery ->
           post_information = "<h5>Work Location: " + show_address + "</h5>\n"
           infowindow.setContent post_information
           infowindow.open map, marker
-      else
-        alert 'Geocode was not successful for the following reason: ' + status
-    return
 
   $(document).ready ->
     currentLocation = window.location
@@ -205,8 +199,6 @@ jQuery ->
         #bound map to cover all the posts in the map
         bound.extend marker.getPosition()
         map.fitBounds bound
-      else
-        alert 'Geocode was not successful for the following reason: ' + status
 
   displayCurrentLocation = (map, infowindow) -> 
     infoWindow = new (google.maps.InfoWindow)
