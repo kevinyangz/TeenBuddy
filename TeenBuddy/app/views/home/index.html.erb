@@ -48,7 +48,7 @@
           <h5 class="font-alt">Find your desire one in a minute</h5>
           <br><br><br>
 
-          <%= form_tag(posts_path, method: :get, class: 'header-job-search') do %>
+          <%= form_tag(posts_path(status:"open", updated_at:"updated time", per_page:5), method: :get, class: 'header-job-search') do %>
 
               <div class="input-keyword">
                 <%= text_field_tag :searched_keyword, params[:searched_keyword], class: "form-control", placeholder: "Job title, description, or requirements" %>

@@ -7,14 +7,14 @@ class PostsController < ApplicationController
   # GET /posts.json
   def index
     if params[:client_id].presence
-      @posts = Post.all.filter(params.slice(:searched_keyword, :address, :status)).where(client_id: params[:client_id]).order(params[:order]).reverse.paginate(:page => params[:page], :per_page => 5)
+      @posts = Post.all.filter(params.slice(:searched_keyword, :address, :status)).where(client_id: params[:client_id]).order(params[:order]).reverse.paginate(:page => params[:page], :per_page => params[:per_page])
       @state = 'client_posts'
     elsif params[:teenager_id].presence
-      @posts = Service.where(teenager_id: params[:teenager_id]).reverse.paginate(:page => params[:page], :per_page => 5)
+      @posts = Service.where(teenager_id: params[:teenager_id]).reverse.paginate(:page => params[:page], :per_page => params[:per_page])
       @state = 'teenager_posts'
     else
       #get the array and then use where to transform back to activerecord_relation
-      @posts = Post.all.filter(params.slice(:searched_keyword, :address, :status ,:category_id, :type_id)).order(params[:order]).reverse.paginate(:page => params[:page], :per_page => 5)
+      @posts = Post.all.filter(params.slice(:searched_keyword, :address, :status ,:category_id, :type_id)).order(params[:order]).reverse.paginate(:page => params[:page], :per_page => params[:per_page])
       @state = 'all'
     end
   end
@@ -58,7 +58,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
-        format.html { redirect_to posts_path {client_id} }
+        format.html { redirect_to @post }
         format.json { render :show, status: :created, location: @post }
       else
         format.html { render :new }
@@ -86,7 +86,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     respond_to do |format|
-      format.html { redirect_to posts_path(client_id:current_user.client.id), notice: 'Post was successfully destroyed.' }
+      format.html { redirect_to posts_path(client_id:current_user.client.id, per_page:5), notice: 'Post was successfully destroyed.' }
       format.json { head :no_content }
     end
   end
