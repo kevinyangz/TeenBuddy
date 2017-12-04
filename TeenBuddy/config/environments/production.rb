@@ -96,8 +96,8 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { :host => 'grim-labyrinth-68930.herokuapp.com' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = {
-  user_name:      'teenbuddy.donotreply@gmail.com',
-  password:       'teenbuddy123456',
+  user_name:      'shanwuzhen@gmail.com',
+  password:       'swz199561',
   domain:         'gmail.com',
   address:       'smtp.gmail.com',
   port:          "587",

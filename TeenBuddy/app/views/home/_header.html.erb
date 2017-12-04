@@ -74,7 +74,7 @@
           <li><%= link_to 'About' , home_aboutus_path%></li>
           <li><%=link_to 'Contact Us', home_contactus_path%></li>
           <li>
-            <a>My Center</a>
+            <a>Job Center</a>
             <ul>
               <li><%= link_to 'My Jobs', services_path %></li>
               <li><%= link_to 'Offers' ,  services_invitations_path%></li>
@@ -93,7 +93,7 @@
               <li><%= link_to 'About' , home_aboutus_path%></li>
               <li><%=link_to 'Contact Us', home_contactus_path%></li>
               <li>
-                <a>My Center</a>
+                <a>Job Center</a>
                 <ul>
                   <li><%= link_to 'My Posts', posts_path(client_id: current_user.client.id, per_page:5, updated_at:"updated time") %></li>
                   <li><%= link_to 'Invitations' ,  services_invitations_path%></li>
