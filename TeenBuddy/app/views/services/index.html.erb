@@ -119,7 +119,7 @@
   </section>
 </main>
 
-<% @services.each do |service| %>
+<% @services.order("updated_at DESC").each do |service| %>
 
     <div id=<%= "messageModal#{service.id}" %> class="modal fade" role="dialog">
 
