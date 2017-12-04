@@ -60,7 +60,7 @@
 
     <% if !current_user %>
         <ul class="nav-menu">
-          <li><%= link_to 'Job Market' , posts_path(status:"open", updated_at:"updated time")%></li>
+          <li><%= link_to 'Job Market' , posts_path(status:"open", updated_at:"updated time", per_page:5)%></li>
           <li><%= link_to 'Clients' , clients_path%></li>
           <li><%= link_to 'Teenagers' , teenagers_path%></li>
           <li><%= link_to 'About' , home_aboutus_path%></li>
@@ -69,7 +69,7 @@
 
     <% elsif current_user.teenager %>
         <ul class="nav-menu">
-          <li><%= link_to 'Job Market' , posts_path(status:"open", order:"updated_at")%></li>
+          <li><%= link_to 'Job Market' , posts_path(status:"open", order:"updated_at", per_page:5)%></li>
           <li><%= link_to 'Clients' , clients_path%></li>
           <li><%= link_to 'About' , home_aboutus_path%></li>
           <li><%=link_to 'Contact Us', home_contactus_path%></li>
@@ -84,9 +84,9 @@
         </ul>
         <% elsif current_user.client %>
             <ul class="nav-menu">
-              <li><a><%= link_to 'Job Market' , posts_path(status:"open", updated_at:"updated time")%></a>
+              <li><a><%= link_to 'Job Market' , posts_path(status:"open", updated_at:"updated time", per_page:5)%></a>
               <ul>
-                <li><%= link_to 'All Posts' , posts_path(status:"open", updated_at:"updated time")%></li>
+                <li><%= link_to 'All Posts' , posts_path(status:"open", updated_at:"updated time", per_page:5)%></li>
                 <li><%= link_to 'Write a new Post' , new_post_path%></li>
               </ul></li>
               <li><%= link_to 'Teenagers' , teenagers_path%></li>
