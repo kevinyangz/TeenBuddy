@@ -11,6 +11,78 @@ ActiveAdmin.register_page "Dashboard" do
     #end
 
     columns do
+      column do
+        panel "Average Salary" do
+          div do
+           # category_hash = []
+            #Post.all.group(:service_category_id).count(:id).each {|category| category_hash.push([ServiceCategory.find(category.first).title, category.second.to_s]) }   
+            #Post.all.group(:status).count
+            category_hash = []
+
+           Post.all.group(:service_category_id).average(:pay).each{
+            |category|
+            category_hash.push([ServiceCategory.find(category.first).title, category.second.to_s])
+          }
+
+         # .average(:pay)
+        column_chart  category_hash ,label: "Avg Salary",xtitle: "Job Category", ytitle: "Average Pay" 
+         #bar_chart Teenager.group(:service_category).limit(5) ,{library: {title:'Top 5 Downloads'}}
+         #column_chart [["2016-01-01", 30], ["2016-02-01", 54]], stacked: true, library: {colors: ["#D80A5B", "#21C8A9", "#F39C12", "#A4C400"]}
+        end
+        end
+      end
+
+      column do
+        panel "Job Category Distribution" do
+          div do
+
+            category_hash = []
+
+            Post.all.group(:service_category_id).count(:id).each {|category| category_hash.push([ServiceCategory.find(category.first).title, category.second.to_s]) }   
+            pie_chart category_hash
+            
+         #bar_chart Teenager.group(:service_category).limit(5) ,{library: {title:'Top 5 Downloads'}}
+         #column_chart [["2016-01-01", 30], ["2016-02-01", 54]], stacked: true, library: {colors: ["#D80A5B", "#21C8A9", "#F39C12", "#A4C400"]}
+        end
+        end
+      end 
+
+    end # columns
+
+
+    columns do
+         column do
+        panel "Teenager Interest" do
+         div do
+
+            category_hash = []
+
+            TeenagerInterest.all.group(:service_category_id).count(:id).each {|category| category_hash.push([ServiceCategory.find(category.first).title, category.second.to_s]) }   
+            pie_chart category_hash
+        end
+        end #panel
+    end #column
+      column do
+        panel "Financial Status" do
+        attributes_table_for Client do
+            row("Total Profit")  { number_to_currency Transaction.getTotalProfit }
+            row ("Total Transactions")  {Transaction.all.count}
+            row("Total Teenagers")  {  Teenager.all.count }
+            row("Total Clients")  {  Client.all.count }
+            row ("Total Posts")  {Post.all.count}
+            row ("Total Application"){Service.all.where(:status =>[:applied]).count}
+
+            row ("Total Job Done"){Service.all.where(:status =>[:finished]).count}
+
+            # row("Dollar Value"){ number_to_currency LineItem.where(:product_id => resource.id).sum(:price) }
+             end
+        
+        end #panel
+    end #column
+    
+    end #columns
+
+      columns do
      column do
         panel "Top 10 Teenagers" do
           table_for Teenager.all.sort_by(&:get_all_service_numbers).last(10).reverse.each do |teenager|
@@ -37,37 +109,6 @@ ActiveAdmin.register_page "Dashboard" do
         end #panel
     end #column
     end # columns
-
-    columns do
-      column do
-        div do
-          br
-          text_node %{<iframe src="https://rpm.newrelic.com/public/charts/6VooNO2hKWB"
-                              width="500" height="300" scrolling="no" frameborder="no">
-                      </iframe>}.html_safe
-        end
-      end
-
-      column do
-        panel "ActiveAdmin Demo" do
-          div do
-
-            category_hash = []
-
-            Post.all.group(:service_category_id).count(:id).each {|category| category_hash.push([ServiceCategory.find(category.first).title, category.second.to_s]) }
-            
-            pie_chart category_hash
-            
-
-
-         #bar_chart Teenager.group(:service_category).limit(5) ,{library: {title:'Top 5 Downloads'}}
-         #column_chart [["2016-01-01", 30], ["2016-02-01", 54]], stacked: true, library: {colors: ["#D80A5B", "#21C8A9", "#F39C12", "#A4C400"]}
-
-        end
-        end
-      end
-    end # columns
-
 
 
 
