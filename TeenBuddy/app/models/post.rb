@@ -8,7 +8,7 @@ class Post < ApplicationRecord
   
   # getter and setter
   # validations
-  validates :title, :description, :work_address, :pay, presence:true
+  validates :title, :description, :work_address, :number_of_teenager_needed, :pay, presence:true
   validates :number_of_teenager_needed, numericality:{greater_than:0}
   validates :pay, numericality:{greater_than:0}
   validates :number_of_teenager_needed, format:{with: /[0-9]+/}
@@ -49,7 +49,7 @@ class Post < ApplicationRecord
   end
 
   def have_enough_money
-    if self.client.user.balance < (self.pay.to_i * self.number_of_teenager_needed * 100)
+    if self.client.user.balance < (self.pay.to_i * self.number_of_teenager_needed.to_i * 100)
       errors.add(:client,"You do not have sufficient fund for your post, please make a deposit.")
     end
   end

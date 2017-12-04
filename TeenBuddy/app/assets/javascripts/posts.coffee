@@ -71,6 +71,7 @@ jQuery ->
 
 #auto complete google map API javascripts
   initializeFormMap = ->
+    console.log("hidddd")
     map = new (google.maps.Map)(document.getElementById('post_form_map'),
       center:
         lat: 43.6629
@@ -127,9 +128,9 @@ jQuery ->
       infowindow.open map, marker
 
   $(document).ready ->
-    currentLocation = window.location
-    if currentLocation.pathname == "/posts/new" or currentLocation.pathname == "/posts/"+post_id+"/edit"
-      initializeFormMap()
+    #currentLocation = window.location
+    #if currentLocation.pathname == "/posts/new" or currentLocation.pathname == "/posts/"+post_id+"/edit"
+    initializeFormMap()
 
 
 
