@@ -4,12 +4,14 @@
     <div class="row">
       <div class="col-xs-12 col-sm-4">
     <% if @client.selfie.present? %>
-          <%= image_tag(@client.selfie.thum.url,style:"border-radius:50%;",class:"thumbnail center-block ")  %>
+          <%= image_tag(@client.selfie.thum.url)  %>
         <!-- User upload picture -->
           <% else %> 
-         <%= image_tag("/assets/img/client1.jpeg",class:"thumbnail center-block",style:"width:100px;height:100px;border-radius:50%;") %>
+         <%= image_tag("/assets/img/client.jpg") %>
         <!-- default picture-->
-           <% end %>          
+           <% end %>
+
+
         </div>
 
       <div class="col-xs-12 col-sm-8 header-detail">
