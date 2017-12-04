@@ -238,7 +238,7 @@ post_array.each {|record| real_post << {'title' => record[0], 'description' => r
 
 #start posting jobs
 
-for i in 0..20
+for i in 0..60
 
   @SomeClients = Client.all.sample(Client.count/2)
 
@@ -398,7 +398,7 @@ end
 
 @someService = Service.where(status:[:confirmed])
 
-@someService = @someService.sample(@someService.count)
+@someService = @someService.sample(@someService.count/1.5)
 
 
 @someService.each do |service|
