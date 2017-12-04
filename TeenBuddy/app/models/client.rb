@@ -1,7 +1,7 @@
 class Client < ApplicationRecord
   has_many :posts, :dependent => :delete_all
 
-  belongs_to :user, :dependent => :delete
+  belongs_to :user
   validates :fname, :lname, presence: true
   validates :fname, :lname, length: { minimum: 2 }
   validates :cell_phone, presence: true, on: :update

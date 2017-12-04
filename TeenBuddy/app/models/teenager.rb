@@ -1,7 +1,7 @@
 
 class Teenager < ApplicationRecord
   has_many :services, :dependent => :delete_all
-  belongs_to :user, :dependent => :delete
+  belongs_to :user
   has_many :teenager_interests, :dependent => :delete_all
   has_many :service_categories, through: :teenager_interests #Not sure about this relationship
   after_save :store_interest_to_tag
