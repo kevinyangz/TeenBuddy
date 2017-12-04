@@ -90,8 +90,6 @@ jQuery ->
           infowindow.open map, marker
         bound.extend marker.getPosition()
         map.fitBounds bound
-      else
-        alert 'Geocode was not successful for the following reason: ' + status
 
   displayCurrentLocation = (map, infowindow) -> 
     infoWindow = new (google.maps.InfoWindow)
