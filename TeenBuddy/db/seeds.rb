@@ -54,7 +54,7 @@ address_array.each {|record| real_address << {'address' => record[0], 'postal_co
 # two constant account for testing
 
 
-for i in 0..30
+for i in 0..20
   address_index = Faker::Number.between(0, real_address.count()-1)
 
 
@@ -70,7 +70,7 @@ for i in 0..30
 
 end
 
-for i in 0..30
+for i in 0..20
   address_index = Faker::Number.between(0, real_address.count()-1)
 
   user = User.create(email: Faker::Internet.free_email, password: 123456, role: 'client',:confirmed_at => DateTime.now,
@@ -238,7 +238,7 @@ post_array.each {|record| real_post << {'title' => record[0], 'description' => r
 
 #start posting jobs
 
-for i in 0..60
+for i in 0..80
 
   @SomeClients = Client.all.sample(Client.count/2)
 
