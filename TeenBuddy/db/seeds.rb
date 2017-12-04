@@ -302,7 +302,7 @@ for i in 0..4
     Service.create(teenager: Teenager.all.sample(1).first,
                    post: post,
                    status: :beingInvited,
-                   
+
                    enrollType: false,
                    inviteMessage: Faker::MostInterestingManInTheWorld.quote
 
