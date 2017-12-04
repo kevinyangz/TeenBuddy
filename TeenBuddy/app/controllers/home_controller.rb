@@ -14,7 +14,7 @@ def check_user_info
 			end
 		elsif current_user.client
 			if !current_user.client.home_address
-			    redirect_to edit_client_path(currnet_user.client), notice:'Please fill up your detailed information'
+			    redirect_to edit_client_path(current_user.client), notice:'Please fill up your detailed information'
 
 	        end
 	   end

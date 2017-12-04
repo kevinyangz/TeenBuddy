@@ -3,16 +3,14 @@
   <div class="container">
     <div class="row">
       <div class="col-xs-12 col-sm-4">
-    <% if @client.selfie.present? %>
+        <% if @client.selfie.present? %>
           <%= image_tag(@client.selfie.thum.url)  %>
         <!-- User upload picture -->
           <% else %> 
-         <%= image_tag("/assets/img/client.jpg") %>
+            <%= image_tag("/assets/img/client.jpg") %>
         <!-- default picture-->
-           <% end %>
-
-
-        </div>
+        <% end %>
+      </div>
 
       <div class="col-xs-12 col-sm-8 header-detail">
         <div class="hgroup">
