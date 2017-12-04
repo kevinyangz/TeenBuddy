@@ -29,7 +29,7 @@ class Client < ApplicationRecord
 
   def get_total_paid()
     sum =0
-     self.services.where(:status => [:finished]).all.each do |service|
+     Service.where(client_id: self.id, :status => [:finished]).all.each do |service|
       sum = sum+ service.post.pay.to_i
      end
      sum
