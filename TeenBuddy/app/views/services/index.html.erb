@@ -9,7 +9,7 @@
 
         <div class="row">
 
-          <div class="form-group col-xs-12 col-sm-4">
+          <div class="form-group col-xs-12 col-sm-6">
             <h6>job title</h6>
             <% if current_user.client %>
                 <%= select_tag :post, options_from_collection_for_select(Post.where(:client_id => current_user.client.id), "id", "title", params[:post]), {:include_blank => 'All', class: 'form-control selectpicker'} %>
@@ -18,15 +18,11 @@
             <% end %>
           </div>
 
-          <div class="form-group col-xs-12 col-sm-4">
+          <div class="form-group col-xs-12 col-sm-6">
             <h6>status</h6>
             <%= select_tag :status, options_for_select([["In Progress", :enrolled], ["Completed", :finished], ["Confirmed", :confirmed]], params[:status]), {:include_blank => 'All', class: 'form-control selectpicker'} %>
           </div>
 
-          <div class="form-group col-xs-12 col-sm-4">
-            <h6>Order by</h6>
-            <%= select_tag :order, options_for_select(['status', 'apply time'], params[:order]), {class: 'form-control selectpicker'} %>
-          </div>
 
         </div>
 
@@ -58,8 +54,7 @@
     <div class="container">
       <div class="row">
 
-
-        <% @services.each do |service| %>
+        <%@services.order("updated_at DESC").each do |service| %>
             <%= javascript_tag do %>
                 productsURL = '<%= "rating-0#{service.id}" %>';
             <% end %>

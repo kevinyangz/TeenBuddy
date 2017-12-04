@@ -6,7 +6,7 @@ class ServicesController < ApplicationController
   # GET /services.json
   def index
     if current_user.teenager
-      @services = Service.where(teenager_id: current_user.teenager.id, status: [:enrolled, :finished, :confirmed]).reverse.paginate(:page => params[:page], :per_page => 5)
+      @services = Service.where(teenager_id: current_user.teenager.id, status: [:enrolled, :finished, :confirmed]).paginate(:page => params[:page], :per_page => 5)
     end
 
 
@@ -18,7 +18,7 @@ class ServicesController < ApplicationController
     elsif current_user.client
       @services = Service.where(client_id: current_user.client.id, enrollType: true)
     end
-    @services = @services.filter(params.slice(:status, :post)).order(params[:sort])
+    @services = @services.filter(params.slice(:status, :post))
   end
 
   def invitations
@@ -27,7 +27,7 @@ class ServicesController < ApplicationController
     elsif current_user.client
       @services = Service.where(client_id: current_user.client.id, enrollType: false)
     end
-    @services = @services.filter(params.slice(:status, :post)).order(params[:sort])
+    @services = @services.filter(params.slice(:status, :post))
   end
 
 

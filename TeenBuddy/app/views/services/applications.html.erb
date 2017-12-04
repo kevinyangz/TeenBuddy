@@ -25,7 +25,7 @@
 
         <div class="row">
 
-          <div class="form-group col-xs-12 col-sm-4">
+          <div class="form-group col-xs-12 col-sm-6">
             <h6>Job Title</h6>
             <% if current_user.client %>
                 <%= select_tag :post, options_from_collection_for_select(Post.where(:client_id => current_user.client.id), "id", "title", params[:post]), {:include_blank => 'All',class: 'form-control selectpicker'} %>
@@ -34,15 +34,11 @@
             <%end%>
           </div>
 
-          <div class="form-group col-xs-12 col-sm-4">
+          <div class="form-group col-xs-12 col-sm-6">
             <h6>Status</h6>
             <%= select_tag :status, options_for_select([[ "Pending", :applied],["Approved", :enrolled],["Declined", :rejected]], params[:status]), {:include_blank => 'All', class: 'form-control selectpicker'} %>
           </div>
 
-          <div class="form-group col-xs-12 col-sm-4">
-            <h6>Order by</h6>
-            <%= select_tag :order, options_for_select(['status','apply time'], params[:order]), {class: 'form-control selectpicker'} %>
-          </div>
 
         </div>
 
@@ -69,7 +65,7 @@
 
     <div class="container">
 
-      <%@services.each do |service| %>
+      <%@services.order("updated_at DESC").each do |service| %>
           <div class="row">
             <!-- Candidate item -->
             <div class="col-xs-12">
@@ -102,7 +98,7 @@
 
 
                 <footer>
-                  <div class="status"><strong>Applied on: </strong><%=service.updated_at%></div>
+                  <div class="status"><strong>Updated on: </strong><%=service.updated_at%></div>
                   <div class="action-btn">
                     <%if current_user.client && service.applied? %>
                         <%=link_to('Approve', service_path(service, :service => {:status => :enrolled}), :method => :put, data: {confirm: "Are you sure?"}, class: 'btn btn-xs btn-success')%>
