@@ -383,7 +383,7 @@ teenager_comment.each {|record| teenager_comment_fake << {'comment' => record[0]
 
 @someService = Service.where(status:[:confirmed])
 
-@someService = @someService.sample(@someService.count)
+@someService = @someService.sample(@someService.count/1.5)
 
 @someService.each do |service|
   clientcomment_index = Faker::Number.between(0, client_comment.count()-1)

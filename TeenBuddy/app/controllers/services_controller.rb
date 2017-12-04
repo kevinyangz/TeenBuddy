@@ -7,6 +7,8 @@ class ServicesController < ApplicationController
   def index
     if current_user.teenager
       @services = Service.where(teenager_id: current_user.teenager.id, status: [:enrolled, :finished, :confirmed]).paginate(:page => params[:page], :per_page => 5)
+
+      @services = @services.filter(params.slice(:status, :post))
     end
 
 
