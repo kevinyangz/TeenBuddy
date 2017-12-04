@@ -146,7 +146,9 @@
 
                 <div class="form-group">
                   <h6>Message</h6>
-                  <%= form.text_area :inviteMessage, class: "form-control", placeholder: "Leave some Message to convince him." %>
+                      <p class="emoji-picker-container">
+                    <%= form.text_area :inviteMessage, class: "form-control",  data: { emojiable: true },placeholder: "Leave some Message to convince him." %>
+                 </p>
                 </div>
               </div>
               <div class="modal-footer">
