@@ -324,27 +324,7 @@ end
   service.update({status: [:finished, :confirmed].sample(1).first})
 end
 
-client_comment=[['I will not recommend this guy, poor Service.',1],
-  ['those kids are doing some wonderful jobs',4],
-  ['This guy is very lazy, he eat during working hour',1],
-  ['good',5],
-  ['alright',4],
-  ['Its ok',3],
-  ['Most amazing kid ever, I love him.',5],
-  ['slacker',2],
-  ["He reminds me it's not friday everyday",3],
-  ['So annoying',2],
-  ['hard working kid',5],
-  ['I would like to have him work for me again', 4],
-  ['he did a good job at my place', 5],
-  ['I will probably hire another guy next time', 1],
-  ['he is too slow', 2]
-]
-client_comment_fake=[]
-client_comment.each {|record| client_comment_fake << {'comment' => record[0], 'rating' => record[1]}}
-
-
-teenager_comment=[['Very mean',1],
+client_comment=[['Very mean',1],
                 ['Very nice man',4],
                 ['give me too much work',1],
                 ['good',5],
@@ -360,8 +340,41 @@ teenager_comment=[['Very mean',1],
     ['not very good', 2],
     ['he is very friendly and nice', 5],
     ['I would like to work for him again', 5],
-    ['great place to work', 5],
-    ['fair salary', 3]
+    ['great place to work and nice employer', 5],
+    ['Good Boss!', 5],
+    ['This client is a rude mand, he yield to me because I came late. Do not want to work for this guy', 1],
+    ['The job is pretty easy and my client was so nice. High recommend', 4],
+    ['I Hate working with this Rude man. Please do not work for this guy', 1],
+    ['fair salary but bad guy', 3]]
+
+client_comment_fake=[]
+client_comment.each {|record| client_comment_fake << {'comment' => record[0], 'rating' => record[1]}}
+
+
+teenager_comment=[['I will not recommend this guy, poor Service.',1],
+  ['those kids are doing some wonderful jobs',4],
+  ['This guy is very lazy, he eat during working hour',1],
+  ['good',5],
+  ['alright',4],
+  ['Its ok',3],
+  ['Most amazing kid ever, I love him.',5],
+  ['slacker',2],
+  ["He reminds me it's not friday everyday",3],
+  ['So annoying',2],
+  ['hard working kid',5],
+  ['I would like to have him work for me again', 4],
+  ['he did a good job at my place', 5],
+  ['I will probably hire another guy next time', 1],
+  ['This kid make my life easier!', 5],
+  ['I wish to hire this kid again ', 5],
+  ['Poor Service !', 2],
+  ['Very Good Job!', 5],
+  ['5 Star Review', 5],
+  ['Professional service', 5],
+  ['Highly recommend', 5],
+  ['Amazing Kid, You could not image that how good he is ', 5],
+    ['Why your website hire this guy, poor service ', 1]
+
 ]
 teenager_comment_fake=[]
 teenager_comment.each {|record| teenager_comment_fake << {'comment' => record[0], 'rating' => record[1]}}
@@ -370,7 +383,7 @@ teenager_comment.each {|record| teenager_comment_fake << {'comment' => record[0]
 
 @someService = Service.where(status:[:confirmed])
 
-@someService = @someService.sample(@someService.count/1.5)
+@someService = @someService.sample(@someService.count)
 
 @someService.each do |service|
   clientcomment_index = Faker::Number.between(0, client_comment.count()-1)
@@ -385,12 +398,13 @@ end
 
 @someService = Service.where(status:[:confirmed])
 
-@someService = @someService.sample(@someService.count/2)
+@someService = @someService.sample(@someService.count)
 
 
 @someService.each do |service|
-  service.update(teen_review: Faker::MostInterestingManInTheWorld.quote,
-                 teen_rating: Faker::Number.between(1, 5))
+    teen_comment_index = Faker::Number.between(0, teenager_comment.count()-1)
+  service.update(teen_review: teenager_comment_fake[teen_comment_index]['comment'],
+                 teen_rating: teenager_comment_fake[teen_comment_index]['rating'])
 end
 
 #endorsements
