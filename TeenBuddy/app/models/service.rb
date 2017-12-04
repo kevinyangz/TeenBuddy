@@ -5,7 +5,7 @@ class Service < ApplicationRecord
   validate :position_filled
   validate :service_exists
   after_update :set_transaction
- #  after_save :send_message
+  after_save :send_message
 
   enum status: [:open, :beingInvited, :applied, :rejected, :enrolled, :finished, :confirmed]
 
