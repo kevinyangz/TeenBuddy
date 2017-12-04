@@ -85,8 +85,13 @@ for i in 0..30
 
 end
 
-Client.first.user.update(email: 'client@ut.com')
-Teenager.first.user.update(email: 'teenager@ut.com')
+@myclient = Client.first
+@myclient.user.update(email: 'client@ut.com')
+@myclient.update(fname:'client', lname:'li')
+
+@myteenager= Teenager.first
+@myteenager.user.update(email: 'teenager@ut.com')
+@myteenager.update( fname:'teenager', lname:'li')
 
 
 # initialize Service types and category
@@ -277,6 +282,7 @@ for i in 0..30
                    post: Post.all.sample(1).first,
                    status: :applied,
                    enrollType: true,
+
                    applyMessage: Faker::MostInterestingManInTheWorld.quote
 
     )
@@ -296,6 +302,7 @@ for i in 0..4
     Service.create(teenager: Teenager.all.sample(1).first,
                    post: post,
                    status: :beingInvited,
+
                    enrollType: false,
                    inviteMessage: Faker::MostInterestingManInTheWorld.quote
 

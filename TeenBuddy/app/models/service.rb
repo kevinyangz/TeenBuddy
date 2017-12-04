@@ -67,6 +67,7 @@ end
 
 
   def send_message
+    if self.messageble
     case self.status.to_sym
       when :applied then
         self.teenager.user.send_message(self.post.client.user,  "#{self.applyMessage}","#{self.teenager.user.name} has applied your post #{self.post.title}")
@@ -82,6 +83,7 @@ end
       else puts 'did not enter any'
 
     end
+      end
   end
 
 
