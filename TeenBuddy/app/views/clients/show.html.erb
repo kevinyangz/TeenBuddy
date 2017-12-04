@@ -38,7 +38,7 @@
         <hr>
         <p class="lead"><%= @client.description %> </p>
 
-        <ul class="details cols-3">
+        <ul class="details cols-2">
           <li>
             <i class="fa fa-map-marker"></i>
             <span><%= @client.home_address %></span>
@@ -57,7 +57,7 @@
 
           <li>
             <i class="fa fa-envelope"></i>
-            <a href="#"><%= @client.user.email %></a>
+            <span><%= @client.user.email %></span>
           </li>
         </ul>
       </div>
