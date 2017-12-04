@@ -103,6 +103,7 @@
       </header>
 
       <% @client.posts.order(:updated_at).reverse.each do |post| %>
+        <% if post.hasPosition == "open" %>
           <div class="col-xs-12">
             <div class="item-block">
               <header>
@@ -111,7 +112,7 @@
                    <span class="fa-stack fa-lg fa-3x col-xs-12 col-sm-2">
                <i class="fa <%= post.service_category.get_fa %> fa-stack-1x"></i>
          </span>    
-              <h4><%= post.title %></h4>
+              <h4><%= link_to  "#{post.title}", post, class: 'h4'%></h4>
                  <p><%= post.description %></p>
                 </div>
                 
@@ -129,16 +130,17 @@
               
               <footer>
                 <p class="status"><strong>Status: </strong><%= post.hasPosition %></p>
+                <!--
                 <% if current_user.client == @client%>
-
-                <div class="action-btn">
-                  <%= link_to 'Edit', edit_post_path(post), class: 'btn btn-xs btn-gray' %>
-                  <%= link_to 'Destroy', {action: :destroy, id: post.id}, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-xs btn-danger' %>
-                </div>
-                <%end%>
+                  <div class="action-btn">
+                    <%= link_to 'Edit', edit_post_path(post), class: 'btn btn-xs btn-gray' %>
+                    <%= link_to 'Destroy', {action: :destroy, id: post.id}, method: :delete, data: {confirm: 'Are you sure?'}, class: 'btn btn-xs btn-danger' %>
+                  </div>
+                <%end%>-->
               </footer>
             </div>
           </div>
+        <%end%>
       <% end %>
     </div>
   </section>
