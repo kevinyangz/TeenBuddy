@@ -54,7 +54,7 @@ address_array.each {|record| real_address << {'address' => record[0], 'postal_co
 # two constant account for testing
 
 
-for i in 0..20
+for i in 0..30
   address_index = Faker::Number.between(0, real_address.count()-1)
 
 
@@ -70,7 +70,7 @@ for i in 0..20
 
 end
 
-for i in 0..20
+for i in 0..30
   address_index = Faker::Number.between(0, real_address.count()-1)
 
   user = User.create(email: Faker::Internet.free_email, password: 123456, role: 'client',:confirmed_at => DateTime.now,
@@ -81,7 +81,7 @@ for i in 0..20
                                           postal_code: real_address[address_index]['postal_code']}
   )
 
-  transaction = Transaction.create!(user: user, inout: true, comment: 'Deposit (We charge 5% service fee.)', amount: 950 * 100)
+  transaction = Transaction.create!(user: user, inout: true, comment: 'Deposit (We charge 5% service fee.)', amount: 2000 * 100)
 
 end
 
@@ -238,7 +238,7 @@ post_array.each {|record| real_post << {'title' => record[0], 'description' => r
 
 #start posting jobs
 
-for i in 0..80
+for i in 0..20
 
   @SomeClients = Client.all.sample(Client.count/2)
 
@@ -255,7 +255,7 @@ for i in 0..80
                        client: client,
                        description: real_post[post_index]['description'],
                        work_address: real_address[address_index]['address'],
-                       pay: Faker::Number.between(1, 100),
+                       pay: Faker::Number.between(1, 50),
                        number_of_teenager_needed: Faker::Number.between(1, 10),
                        service_category_id: real_post[post_index]['service_category_id'],
                        service_type_id: real_post[post_index]['service_type_id']
@@ -267,7 +267,7 @@ end
 
 #teenager apply jobs
 
-for i in 0..20
+for i in 0..30
   @someTeenagers = Teenager.all.sample(Teenager.count/2)
 
   @someTeenagers.each do |teenager|
