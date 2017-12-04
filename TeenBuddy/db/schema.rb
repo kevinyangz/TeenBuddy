@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171203200458) do
+ActiveRecord::Schema.define(version: 20171204175435) do
 
   create_table "active_admin_comments", force: :cascade do |t|
     t.string "namespace"
@@ -175,6 +175,7 @@ ActiveRecord::Schema.define(version: 20171203200458) do
     t.string "applyMessage"
     t.string "inviteMessage"
     t.boolean "enrollType"
+    t.boolean "messageble", default: true
     t.index ["post_id"], name: "index_services_on_post_id"
     t.index ["teenager_id"], name: "index_services_on_teenager_id"
   end
