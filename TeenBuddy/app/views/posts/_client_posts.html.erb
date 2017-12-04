@@ -13,6 +13,7 @@
   <div class="container">
     <%= form_tag(posts_path, method: :get) do %>
         <%= hidden_field_tag :client_id , current_user.client.id %>
+        <%= hidden_field_tag :per_page , 5 %>
         <div class="row">
           <div class="form-group col-xs-12 col-sm-6">
             <h6>Keywords</h6>
@@ -66,7 +67,7 @@
               <h5>We find 1 match for you</h5>
           <% else %>
               <h5>We find <strong><%= @posts.total_entries %></strong> matches, we are showing
-                matches <%= (@posts.current_page-1) * 5 +1 %> - <%= (@posts.current_page-1) * 5 + @posts.count %>
+                matches <%= (@posts.current_page-1) * @posts.per_page + 1 %> - <%= (@posts.current_page-1) * @posts.per_page + @posts.count %>
               </h5>
           <% end %>
         </div>
