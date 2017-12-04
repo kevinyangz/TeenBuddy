@@ -16,6 +16,7 @@ ActiveAdmin.register Client do
    permitted << [:fnmae,:lname] if current_admin_user.role =='superadmin'
    permitted
  end
+ actions :all, :except => [:destroy]
 
  index do
 		column "Name" do |client|
@@ -33,7 +34,13 @@ ActiveAdmin.register Client do
 	    	client.home_address
 	    end
 
-	actions
+	actions defaults: false do |post|
+    item "Show", admin_client_path(post)
+    text_node "&nbsp".html_safe
+    item "Edit", edit_admin_client_path(post) 
+    text_node "&nbsp".html_safe
+    item "Delete"
+  end
 end
 
 

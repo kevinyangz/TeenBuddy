@@ -14,8 +14,6 @@ ActiveAdmin.register Teenager do
  permit_params do
    permitted = [:list, :of, :attributes, :on, :model,:home_address,:postal_code]
    permitted << [:lname,:birth_date,:fname] if current_admin_user.role =='superadmin'
-   permitted << [:postal_code,:home_address,:cell_phone,:selfie,:description] if current_admin_user.role == "admin"
-
    permitted
  end
 
@@ -55,7 +53,7 @@ end
     	#paginated_collection(teenager.services.page(params[:page]).per_page_kaminari(5), download_links: false) do
     	paginated_collection(teenager.services.paginate(:page => params[:page], :per_page => 15	).order('status DESC'), download_links: false) do
     	table_for(collection) do |service|
-    	column "Post" do |service|
+    	column "Jobs" do |service|
 			link_to "#{service.post.title}", admin_post_path(service.post) 
 		end
 	
