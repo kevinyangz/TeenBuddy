@@ -96,7 +96,7 @@ ActiveAdmin.register_page "Dashboard" do
     end #column
 
         column do
-        panel "Top 10 Teenagers" do
+        panel "Top 10 Clients" do
           table_for Client.all.sort_by(&:get_total_post_counts).last(10).reverse.each do |client|
             column("Name")    { |client| link_to(client.client_name, admin_client_path(client)) }
             column("Posts")    { |client|client.get_total_post_counts }

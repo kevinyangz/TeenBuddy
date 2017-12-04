@@ -125,11 +125,4 @@ end
  end
 ################################################################################
 
-
-
-
-
-sidebar :Superadmin, if: proc{ current_admin_user.role=='superadmin'} do
-  "Only for superadmin"
-end
 end
