@@ -1,8 +1,8 @@
-﻿# CSC444
+# Our website:  www.teenbuddy.ca
 # This is the project for CSC444 Software Engineering I.
 # We are going to design a teenager job service website.
-# This project is coded in Ruby.
-#test test
+# This project is coded in Ruby on Rails,Jquery and CSS.
+
 Group Members
 Ze Yang        kevinze.yang@mail.utoronto.ca
 Chengchen Yang alphonse.yang@mail.utoronto.ca
